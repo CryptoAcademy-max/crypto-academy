@@ -271,6 +271,354 @@ a{color:var(--navy-2)}
   }
 </style>
 
+
+<style id="mobile-linebreak-optimization">
+  /* Additional mobile/PC text-flow optimization */
+  :root{
+    --measure: 72ch;
+  }
+  .content-area{max-width: min(1120px, calc(100vw - var(--sidebar-w)));}
+
+  .lc-intro,
+  .home-desc,
+  .lesson-body p,
+  .example-body,
+  .mistake-body,
+  .faq-a,
+  .quiz-a,
+  .source-body,
+  .glossary-meaning,
+  .source-library-item p,
+  .home-card-desc,
+  .home-panel-card p,
+  .home-panel-card li,
+  .step-desc,
+  .helper-note{
+    max-width: var(--measure);
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  .lc-title,
+  .home-title,
+  .home-card-title,
+  .source-library-item h3,
+  .role-name,
+  .nav-title,
+  .glossary-term,
+  .def-term{
+    overflow-wrap: anywhere;
+    word-break: normal;
+    text-wrap: balance;
+  }
+
+  .step-item,
+  .lesson-nav-item,
+  .home-card,
+  .home-panel-card,
+  .glossary-card,
+  .source-library-item,
+  .def-block,
+  .role-card,
+  .risk-card,
+  .example-card,
+  .mistake-card,
+  .faq-item,
+  .checkpoint-item,
+  .quiz-card,
+  .source-card{
+    min-width: 0;
+  }
+
+  .quickbar{row-gap: 8px;}
+  .quick-chip{
+    max-width: 100%;
+    line-height: 1.35;
+  }
+
+  .lesson-nav-bar{
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 900px){
+    .content-area{
+      width: 100%;
+      max-width: 100%;
+      padding-inline: 18px;
+    }
+    .def-grid,
+    .risk-grid,
+    .glossary-grid,
+    .source-library-grid,
+    .home-grid,
+    .home-mini-grid{
+      grid-template-columns: 1fr;
+    }
+    .roles-grid{
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 768px){
+    html{
+      font-size: 14px;
+    }
+    #topbar{
+      padding-right: 8px;
+    }
+    .brand{
+      min-width: 0;
+      max-width: calc(100vw - 170px);
+      padding-inline: 12px;
+      gap: 8px;
+    }
+    .brand-title{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      font-size: .82rem;
+    }
+    .brand-sub{
+      display: none;
+    }
+    .topbar-right{
+      gap: 6px;
+      padding-right: 6px;
+      flex-shrink: 0;
+    }
+    .lang-toggle{
+      max-width: 72px;
+      padding: 6px 8px;
+      font-size: .72rem;
+    }
+    .lang-menu{
+      right: 0;
+      max-width: min(86vw, 240px);
+      min-width: 176px;
+    }
+
+    .content-area{
+      padding: 18px 14px 54px;
+    }
+    .quickbar{
+      flex-wrap: wrap;
+      overflow: visible;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .quick-chip{
+      white-space: normal;
+      flex: 1 1 calc(50% - 8px);
+      min-width: 120px;
+      text-align: center;
+      padding: 8px 10px;
+    }
+
+    .lc-header{
+      padding-bottom: 18px;
+      margin-bottom: 20px;
+    }
+    .lc-title{
+      font-size: clamp(1.28rem, 5.8vw, 1.7rem);
+      line-height: 1.22;
+      margin-bottom: 10px;
+    }
+    .lc-intro,
+    .home-desc{
+      font-size: .94rem;
+      line-height: 1.72;
+    }
+    .lesson-body h2{
+      font-size: 1rem;
+      line-height: 1.35;
+      margin: 24px 0 8px;
+    }
+    .lesson-body h3{
+      font-size: .74rem;
+      line-height: 1.45;
+      margin: 20px 0 8px;
+      white-space: normal;
+    }
+    .lesson-body p,
+    .glossary-meaning,
+    .source-library-item p,
+    .faq-a,
+    .quiz-a,
+    .source-body,
+    .example-body,
+    .mistake-body,
+    .step-desc{
+      font-size: .92rem;
+      line-height: 1.72;
+    }
+
+    .callout{
+      padding: 12px 14px;
+      margin: 14px 0;
+      font-size: .88rem;
+      line-height: 1.65;
+    }
+
+    .step-item,
+    .checkpoint-item{
+      align-items: flex-start;
+    }
+    .steps-list{
+      gap: 8px;
+    }
+    .step-item{
+      padding: 12px 13px;
+    }
+    .step-title{
+      font-size: .88rem;
+      line-height: 1.4;
+    }
+    .step-desc{
+      margin-right: 0;
+    }
+
+    .roles-grid{
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .role-card{
+      padding: 12px 13px;
+    }
+    .role-name{
+      font-size: .86rem;
+    }
+    .role-desc{
+      font-size: .8rem;
+      line-height: 1.62;
+    }
+
+    .home-title{
+      font-size: clamp(1.42rem, 6vw, 1.9rem);
+      line-height: 1.18;
+    }
+    .home-card,
+    .home-panel-card,
+    .glossary-card,
+    .source-library-item,
+    .def-block,
+    .risk-card,
+    .example-card,
+    .mistake-card,
+    .faq-item,
+    .checkpoint-item,
+    .quiz-card,
+    .source-card{
+      padding: 13px 14px;
+    }
+
+    .glossary-term,
+    .def-term,
+    .source-library-meta{
+      font-size: .72rem;
+      line-height: 1.45;
+      white-space: normal;
+      text-transform: none;
+      letter-spacing: .03em;
+    }
+
+    .source-cats{
+      gap: 8px;
+      margin: 12px 0 16px;
+    }
+    .source-cat{
+      white-space: normal;
+      line-height: 1.35;
+      text-align: center;
+      padding: 7px 10px;
+    }
+
+    .lesson-nav-bar,
+    .complete-row{
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+    }
+    .nav-action,
+    .complete-btn{
+      width: 100%;
+      justify-content: center;
+      min-height: 42px;
+    }
+
+    #sidebar{
+      width: min(90vw, 360px);
+    }
+  }
+
+  @media (max-width: 480px){
+    html{
+      font-size: 13.5px;
+    }
+    .brand{
+      max-width: calc(100vw - 150px);
+      padding-inline: 10px;
+    }
+    .brand-badge{
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+    }
+    .brand-badge svg{
+      width: 14px;
+      height: 14px;
+    }
+    .mobile-toggle{
+      width: 36px;
+      height: 36px;
+    }
+    .lang-toggle{
+      max-width: 68px;
+      font-size: .7rem;
+    }
+    .lang-item{
+      font-size: .78rem;
+      padding: 9px 12px;
+    }
+    .content-area{
+      padding: 16px 12px 50px;
+    }
+    .quick-chip{
+      flex-basis: 100%;
+    }
+    .sidebar-arrow-note{
+      padding: 10px 11px;
+      gap: 8px;
+    }
+    .sidebar-arrow-note p{
+      font-size: .75rem;
+      line-height: 1.45;
+    }
+    .home-card-title,
+    .source-library-item h3{
+      font-size: .92rem;
+      line-height: 1.35;
+    }
+    .lc-title{
+      font-size: clamp(1.2rem, 6.4vw, 1.55rem);
+    }
+    .lc-intro,
+    .lesson-body p,
+    .glossary-meaning,
+    .source-library-item p,
+    .faq-a,
+    .quiz-a,
+    .source-body,
+    .example-body,
+    .mistake-body,
+    .step-desc{
+      font-size: .9rem;
+    }
+  }
+</style>
+
 </head>
 <body>
 <header id="topbar">
