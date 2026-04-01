@@ -641,7 +641,9 @@ a{color:var(--navy-2)}
         <div class="lang-item" data-lang="ko"><span>🇰🇷</span><span>한국어</span><span class="native">KO</span></div>
         <div class="lang-item" data-lang="th"><span>🇹🇭</span><span>ภาษาไทย</span><span class="native">TH</span></div>
         <div class="lang-item" data-lang="id"><span>🇮🇩</span><span>Bahasa Indonesia</span><span class="native">ID</span></div>
-        <div class="lang-item" data-lang="pt"><span>🇧🇷</span><span>Português</span><span class="native">PT</span></div>
+        <div class="lang-item" data-lang="pt"><span>🇵🇹</span><span>Português</span><span class="native">PT</span></div>
+        <div class="lang-item" data-lang="br"><span>🇧🇷</span><span>Português (Brasil)</span><span class="native">BR</span></div>
+        <div class="lang-item" data-lang="tr"><span>🇹🇷</span><span>Türkçe</span><span class="native">TR</span></div>
         <div class="lang-item" data-lang="es"><span>🇪🇸</span><span>Español</span><span class="native">ES</span></div>
       </div>
     </div>
@@ -670,7 +672,10 @@ a{color:var(--navy-2)}
       <div class="lesson-nav-item" data-lesson="2" onclick="showLesson(2)"><div class="nav-num">3</div><div><div class="nav-title" data-i18n="nav.l3"></div><div class="nav-sub" data-i18n="nav.l3sub"></div></div></div>
       <div class="lesson-nav-item" data-lesson="3" onclick="showLesson(3)"><div class="nav-num">4</div><div><div class="nav-title" data-i18n="nav.l4"></div><div class="nav-sub" data-i18n="nav.l4sub"></div></div></div>
       <div class="lesson-nav-item" data-lesson="4" onclick="showLesson(4)"><div class="nav-num">5</div><div><div class="nav-title" data-i18n="nav.l5"></div><div class="nav-sub" data-i18n="nav.l5sub"></div></div></div>
-      <div class="lesson-nav-item" data-page="glossary" onclick="showPage('glossary')"><div class="nav-num">G</div><div><div class="nav-title" data-i18n="nav.glossary"></div><div class="nav-sub" data-i18n="nav.glossarysub"></div></div></div>
+            <div class="lesson-nav-item" data-page="start" onclick="showPage('start')"><div class="nav-num">S</div><div><div class="nav-title" data-i18n="nav.start"></div><div class="nav-sub" data-i18n="nav.startsub"></div></div></div>
+      <div class="lesson-nav-item" data-page="faq" onclick="showPage('faq')"><div class="nav-num">F</div><div><div class="nav-title" data-i18n="nav.faqPage"></div><div class="nav-sub" data-i18n="nav.faqsub"></div></div></div>
+      <div class="lesson-nav-item" data-page="safety" onclick="showPage('safety')"><div class="nav-num">!</div><div><div class="nav-title" data-i18n="nav.safety"></div><div class="nav-sub" data-i18n="nav.safetysub"></div></div></div>
+<div class="lesson-nav-item" data-page="glossary" onclick="showPage('glossary')"><div class="nav-num">G</div><div><div class="nav-title" data-i18n="nav.glossary"></div><div class="nav-sub" data-i18n="nav.glossarysub"></div></div></div>
       <div class="lesson-nav-item" data-page="sources" onclick="showPage('sources')"><div class="nav-num">S</div><div><div class="nav-title" data-i18n="nav.sources"></div><div class="nav-sub" data-i18n="nav.sourcesub"></div></div></div>
     </div>
     <div class="sidebar-divider"></div>
@@ -694,6 +699,9 @@ a{color:var(--navy-2)}
       </div>
 
       <section class="page-content" id="homePanel"></section>
+      <section class="page-content" id="startPanel"></section>
+      <section class="page-content" id="faqPanel"></section>
+      <section class="page-content" id="safetyPanel"></section>
       <section class="page-content" id="glossaryPanel"></section>
       <section class="page-content" id="sourcesPanel"></section>
       <section class="lesson-content" id="lesson0"></section>
@@ -705,8 +713,21 @@ a{color:var(--navy-2)}
   </main>
 </div>
 
+
+<script id="predefine-extra-pages">
+if (typeof renderStartHere !== 'function') {
+  function renderStartHere(){ return ''; }
+}
+if (typeof renderFAQPage !== 'function') {
+  function renderFAQPage(){ return ''; }
+}
+if (typeof renderSafetyPage !== 'function') {
+  function renderSafetyPage(){ return ''; }
+}
+</script>
+
 <script>
-const langLabels={en:'EN',ko:'KO',th:'TH',id:'ID',pt:'PT',es:'ES'};
+const langLabels={en:'EN',ko:'KO',th:'TH',id:'ID',pt:'PT',br:'BR',tr:'TR',es:'ES'};
 
 const ui = {
   en:{
@@ -718,7 +739,9 @@ const ui = {
     "quiz.reveal":"Show answer","source.title":"Source","check.title":"Beginner checkpoints","faq.title":"FAQ","mistakes.title":"Common mistakes","quiz.title":"Mini quiz","example.title":"Easy example","sources.title":"Related sources",
     "visual.title":"Visual explanation","complete.note":"Your progress is saved in this browser."
   ,
-    "nav.home":"Home","nav.homesub":"Start here first","nav.glossary":"Glossary","nav.glossarysub":"Simple key terms","nav.sources":"Source Library","nav.sourcesub":"Articles and official references","home.arrowNote":"Use the left menu as your learning map.","home.title":"Learn crypto step by step","home.desc":"Use this page as your starting point. You can jump straight to Lessons 1–5, open the Glossary for key terms, or visit the Source Library for real articles and official materials.","home.start":"Where to start","home.useMenu":"Use the left menu as your learning map","home.lessonGuide":"If you are new, begin with Lesson 1 and move in order. Each lesson is written in simple language, with examples, common mistakes, and checkpoints.","home.glossaryTitle":"Glossary","home.glossaryDesc":"Open the Glossary to learn core terms such as gas fee, public key, explorer, smart contract, custody, and bridge in easy words.","home.sourceTitle":"Source Library","home.sourceDesc":"Open the Source Library to read real articles and official references grouped by topic such as scams, exchanges, stablecoins, and wallet safety.","home.openLesson":"Open lesson","home.openGlossary":"Open Glossary","home.openSources":"Open Source Library","glossary.title":"Glossary","glossary.desc":"Simple meanings for key crypto words. Read these first if a lesson feels unfamiliar.","sources.pageTitle":"Source Library","sources.pageDesc":"A reading list of real articles and official references. Use it to connect lesson ideas with real-world cases.","sources.catScams":"Scams","sources.catExchanges":"Exchanges","sources.catStable":"Stablecoins","sources.catWallet":"Wallet Safety","glossary.address.term":"Address","glossary.address.body":"The public location where assets can be received.","glossary.private.term":"Private key","glossary.private.body":"The secret key that gives control over a wallet.","glossary.seed.term":"Seed phrase","glossary.seed.body":"A recovery backup for the wallet. Never share it.","glossary.gas.term":"Gas fee","glossary.gas.body":"A network fee paid to process a transaction.","glossary.public.term":"Public key","glossary.public.body":"A cryptographic key connected to your wallet identity. It helps create addresses.","glossary.explorer.term":"Explorer","glossary.explorer.body":"A website or tool that lets you view blockchain transactions and addresses.","glossary.contract.term":"Smart contract","glossary.contract.body":"Code on a blockchain that follows programmed rules automatically.","glossary.custody.term":"Custody","glossary.custody.body":"Who controls the keys and access to the assets.","glossary.bridge.term":"Bridge","glossary.bridge.body":"A tool used to move assets or messages between different blockchains.","callout.quick":"Quick idea"},
+    "nav.home":"Home","nav.homesub":"Start here first","nav.glossary":"Glossary","nav.glossarysub":"Simple key terms","nav.sources":"Source Library","nav.sourcesub":"Articles and official references","home.arrowNote":"Use the left menu as your learning map.","home.title":"Learn crypto step by step","home.desc":"Use this page as your starting point. You can jump straight to Lessons 1–5, open the Glossary for key terms, or visit the Source Library for real articles and official materials.","home.start":"Where to start","home.useMenu":"Use the left menu as your learning map","home.lessonGuide":"If you are new, begin with Lesson 1 and move in order. Each lesson is written in simple language, with examples, common mistakes, and checkpoints.","home.glossaryTitle":"Glossary","home.glossaryDesc":"Open the Glossary to learn core terms such as gas fee, public key, explorer, smart contract, custody, and bridge in easy words.","home.sourceTitle":"Source Library","home.sourceDesc":"Open the Source Library to read real articles and official references grouped by topic such as scams, exchanges, stablecoins, and wallet safety.","home.openLesson":"Open lesson","home.openGlossary":"Open Glossary","home.openSources":"Open Source Library","glossary.title":"Glossary","glossary.desc":"Simple meanings for key crypto words. Read these first if a lesson feels unfamiliar.","sources.pageTitle":"Source Library","sources.pageDesc":"A reading list of real articles and official references. Use it to connect lesson ideas with real-world cases.","sources.catScams":"Scams","sources.catExchanges":"Exchanges","sources.catStable":"Stablecoins","sources.catWallet":"Wallet Safety","glossary.address.term":"Address","glossary.address.body":"The public location where assets can be received.","glossary.private.term":"Private key","glossary.private.body":"The secret key that gives control over a wallet.","glossary.seed.term":"Seed phrase","glossary.seed.body":"A recovery backup for the wallet. Never share it.","glossary.gas.term":"Gas fee","glossary.gas.body":"A network fee paid to process a transaction.","glossary.public.term":"Public key","glossary.public.body":"A cryptographic key connected to your wallet identity. It helps create addresses.","glossary.explorer.term":"Explorer","glossary.explorer.body":"A website or tool that lets you view blockchain transactions and addresses.","glossary.contract.term":"Smart contract","glossary.contract.body":"Code on a blockchain that follows programmed rules automatically.","glossary.custody.term":"Custody","glossary.custody.body":"Who controls the keys and access to the assets.","glossary.bridge.term":"Bridge","glossary.bridge.body":"A tool used to move assets or messages between different blockchains.","callout.quick":"Quick idea",
+    "nav.start":"Start Here","nav.startsub":"Beginner path","nav.faqPage":"FAQ","nav.faqsub":"Common questions","nav.safety":"Safety","nav.safetysub":"Scam prevention",
+    "home.startCardTitle":"Start Here","home.startCardDesc":"Know exactly where to begin if this is your first time here.","home.faqCardTitle":"FAQ","home.faqCardDesc":"Read the most common beginner questions in one place.","home.safetyCardTitle":"Safety","home.safetyCardDesc":"Learn practical scam prevention and wallet safety habits.","home.openStart":"Open Start Here","home.openFaq":"Open FAQ","home.openSafety":"Open Safety"},
   ko:{
     "brand.name":"크립토 아카데미","brand.sub":"초보자를 위한 쉬운 강의","sidebar.lessons":"강의 목록","sidebar.topics":"빠른 주제 찾기",
     "nav.l1":"블록체인","nav.l1sub":"공유 원장 기초","nav.l2":"지갑","nav.l2sub":"키와 접근 권한","nav.l3":"안전한 전송","nav.l3sub":"실수 없이 보내기","nav.l4":"암호화폐의 5가지 역할","nav.l4sub":"토큰 역할 쉽게 이해하기","nav.l5":"실제 교훈","nav.l5sub":"구조를 알아야 하는 이유",
@@ -728,7 +751,9 @@ const ui = {
     "quiz.reveal":"정답 보기","source.title":"출처","check.title":"초보자 체크포인트","faq.title":"자주 묻는 질문","mistakes.title":"자주 하는 실수","quiz.title":"미니 퀴즈","example.title":"쉬운 예시","sources.title":"관련 출처",
     "visual.title":"시각 설명","complete.note":"학습 진행 상태는 이 브라우저에 저장됩니다."
   ,
-    "nav.home":"홈","nav.homesub":"여기서 시작","nav.glossary":"용어사전","nav.glossarysub":"핵심 용어 쉽게 보기","nav.sources":"Source Library","nav.sourcesub":"기사와 공식 참고자료","home.arrowNote":"왼쪽 메뉴를 학습 지도처럼 활용해보세요.","home.title":"처음부터 차근차근 배우는 크립토","home.desc":"이 페이지를 시작점으로 사용하세요. 강의 1~5로 바로 이동할 수 있고, 용어사전에서 핵심 용어를 확인하거나 Source Library에서 실제 기사와 공식 자료를 읽을 수 있습니다.","home.start":"어디서 시작하면 좋을까요?","home.useMenu":"왼쪽 메뉴를 학습 지도처럼 사용하세요","home.lessonGuide":"처음이라면 1강부터 순서대로 보는 것이 가장 좋습니다. 각 강의는 쉬운 설명, 예시, 자주 하는 실수, 체크포인트로 구성되어 있습니다.","home.glossaryTitle":"용어사전","home.glossaryDesc":"gas fee, public key, explorer, smart contract, custody, bridge 같은 핵심 용어를 쉬운 말로 확인할 수 있습니다.","home.sourceTitle":"Source Library","home.sourceDesc":"사기, 거래소, 스테이블코인, 지갑 보안처럼 실제 사례와 연결되는 기사·공식 자료를 주제별로 볼 수 있습니다.","home.openLesson":"강의 열기","home.openGlossary":"용어사전 열기","home.openSources":"Source Library 열기","glossary.title":"용어사전","glossary.desc":"강의를 읽다가 낯선 단어가 나오면 여기서 먼저 뜻을 확인해보세요.","sources.pageTitle":"Source Library","sources.pageDesc":"실제 기사와 공식 참고자료를 모아둔 페이지입니다. 강의 내용을 현실 사례와 연결해서 볼 수 있습니다.","sources.catScams":"사기","sources.catExchanges":"거래소","sources.catStable":"스테이블코인","sources.catWallet":"지갑 보안","glossary.address.term":"주소","glossary.address.body":"자산을 받을 때 사용하는 공개 가능한 위치입니다.","glossary.private.term":"개인키","glossary.private.body":"지갑을 통제할 수 있게 해주는 비밀 키입니다.","glossary.seed.term":"시드 문구","glossary.seed.body":"지갑 복구를 위한 백업 문구입니다. 절대 공유하면 안 됩니다.","glossary.gas.term":"가스비","glossary.gas.body":"거래를 처리하기 위해 네트워크에 내는 수수료입니다.","glossary.public.term":"공개키","glossary.public.body":"지갑 정체성과 연결되는 암호학적 키로, 주소 생성에 활용됩니다.","glossary.explorer.term":"익스플로러","glossary.explorer.body":"블록체인 거래와 주소를 조회할 수 있는 웹 도구입니다.","glossary.contract.term":"스마트 컨트랙트","glossary.contract.body":"정해진 규칙에 따라 자동으로 실행되는 블록체인 위의 코드입니다.","glossary.custody.term":"커스터디","glossary.custody.body":"누가 키와 자산 접근 권한을 통제하는지를 뜻합니다.","glossary.bridge.term":"브리지","glossary.bridge.body":"서로 다른 블록체인 사이에서 자산이나 메시지를 이동시키는 도구입니다.","callout.quick":"한 줄 핵심"},
+    "nav.home":"홈","nav.homesub":"여기서 시작","nav.glossary":"용어사전","nav.glossarysub":"핵심 용어 쉽게 보기","nav.sources":"Source Library","nav.sourcesub":"기사와 공식 참고자료","home.arrowNote":"왼쪽 메뉴를 학습 지도처럼 활용해보세요.","home.title":"처음부터 차근차근 배우는 크립토","home.desc":"이 페이지를 시작점으로 사용하세요. 강의 1~5로 바로 이동할 수 있고, 용어사전에서 핵심 용어를 확인하거나 Source Library에서 실제 기사와 공식 자료를 읽을 수 있습니다.","home.start":"어디서 시작하면 좋을까요?","home.useMenu":"왼쪽 메뉴를 학습 지도처럼 사용하세요","home.lessonGuide":"처음이라면 1강부터 순서대로 보는 것이 가장 좋습니다. 각 강의는 쉬운 설명, 예시, 자주 하는 실수, 체크포인트로 구성되어 있습니다.","home.glossaryTitle":"용어사전","home.glossaryDesc":"gas fee, public key, explorer, smart contract, custody, bridge 같은 핵심 용어를 쉬운 말로 확인할 수 있습니다.","home.sourceTitle":"Source Library","home.sourceDesc":"사기, 거래소, 스테이블코인, 지갑 보안처럼 실제 사례와 연결되는 기사·공식 자료를 주제별로 볼 수 있습니다.","home.openLesson":"강의 열기","home.openGlossary":"용어사전 열기","home.openSources":"Source Library 열기","glossary.title":"용어사전","glossary.desc":"강의를 읽다가 낯선 단어가 나오면 여기서 먼저 뜻을 확인해보세요.","sources.pageTitle":"Source Library","sources.pageDesc":"실제 기사와 공식 참고자료를 모아둔 페이지입니다. 강의 내용을 현실 사례와 연결해서 볼 수 있습니다.","sources.catScams":"사기","sources.catExchanges":"거래소","sources.catStable":"스테이블코인","sources.catWallet":"지갑 보안","glossary.address.term":"주소","glossary.address.body":"자산을 받을 때 사용하는 공개 가능한 위치입니다.","glossary.private.term":"개인키","glossary.private.body":"지갑을 통제할 수 있게 해주는 비밀 키입니다.","glossary.seed.term":"시드 문구","glossary.seed.body":"지갑 복구를 위한 백업 문구입니다. 절대 공유하면 안 됩니다.","glossary.gas.term":"가스비","glossary.gas.body":"거래를 처리하기 위해 네트워크에 내는 수수료입니다.","glossary.public.term":"공개키","glossary.public.body":"지갑 정체성과 연결되는 암호학적 키로, 주소 생성에 활용됩니다.","glossary.explorer.term":"익스플로러","glossary.explorer.body":"블록체인 거래와 주소를 조회할 수 있는 웹 도구입니다.","glossary.contract.term":"스마트 컨트랙트","glossary.contract.body":"정해진 규칙에 따라 자동으로 실행되는 블록체인 위의 코드입니다.","glossary.custody.term":"커스터디","glossary.custody.body":"누가 키와 자산 접근 권한을 통제하는지를 뜻합니다.","glossary.bridge.term":"브리지","glossary.bridge.body":"서로 다른 블록체인 사이에서 자산이나 메시지를 이동시키는 도구입니다.","callout.quick":"한 줄 핵심",
+    "nav.start":"시작 가이드","nav.startsub":"입문 순서 안내","nav.faqPage":"자주 묻는 질문","nav.faqsub":"핵심 질문 정리","nav.safety":"안전 가이드","nav.safetysub":"사기 예방",
+    "home.startCardTitle":"시작 가이드","home.startCardDesc":"처음 온 사람이 어디부터 봐야 하는지 바로 알 수 있게 도와줍니다.","home.faqCardTitle":"자주 묻는 질문","home.faqCardDesc":"초보자가 가장 많이 헷갈리는 질문을 한 번에 볼 수 있습니다.","home.safetyCardTitle":"안전 가이드","home.safetyCardDesc":"실제로 도움이 되는 사기 예방과 지갑 보안 습관을 배울 수 있습니다.","home.openStart":"시작 가이드 열기","home.openFaq":"자주 묻는 질문 열기","home.openSafety":"안전 가이드 열기"},
   th:{
     "brand.name":"Crypto Academy","brand.sub":"บทเรียนที่เข้าใจง่ายสำหรับผู้เริ่มต้น","sidebar.lessons":"บทเรียน","sidebar.topics":"หัวข้อด่วน",
     "nav.l1":"บล็อกเชน","nav.l1sub":"พื้นฐานของบัญชีแยกประเภทแบบแชร์","nav.l2":"วอลเล็ต","nav.l2sub":"คีย์และสิทธิ์การเข้าถึง","nav.l3":"การโอนอย่างปลอดภัย","nav.l3sub":"ส่งอย่างปลอดภัย","nav.l4":"5 บทบาทของคริปโต","nav.l4sub":"เข้าใจบทบาทของโทเคน","nav.l5":"บทเรียนจากโลกจริง","nav.l5sub":"ทำไมโครงสร้างจึงสำคัญ",
@@ -738,7 +763,9 @@ const ui = {
     "quiz.reveal":"แสดงคำตอบ","source.title":"แหล่งอ้างอิง","check.title":"จุดตรวจสอบสำหรับผู้เริ่มต้น","faq.title":"คำถามที่พบบ่อย","mistakes.title":"ข้อผิดพลาดที่พบบ่อย","quiz.title":"แบบทดสอบสั้น","example.title":"ตัวอย่างง่ายๆ","sources.title":"แหล่งข้อมูลที่เกี่ยวข้อง",
     "visual.title":"คำอธิบายด้วยภาพ","complete.note":"ความคืบหน้าของคุณจะถูกบันทึกไว้ในเบราว์เซอร์นี้"
   ,
-    "nav.home":"หน้าหลัก","nav.homesub":"เริ่มจากตรงนี้","nav.glossary":"อภิธานศัพท์","nav.glossarysub":"คำสำคัญแบบเข้าใจง่าย","nav.sources":"คลังแหล่งอ้างอิง","nav.sourcesub":"บทความและเอกสารทางการ","home.arrowNote":"ใช้เมนูด้านซ้ายเป็นแผนที่การเรียนรู้ของคุณ","home.title":"เรียนคริปโตทีละขั้นอย่างเข้าใจง่าย","home.desc":"ใช้หน้านี้เป็นจุดเริ่มต้น คุณสามารถเปิดบทเรียน 1–5 ไปยังอภิธานศัพท์ หรืออ่านบทความจริงและเอกสารทางการใน Source Library ได้ทันที","home.start":"ควรเริ่มจากตรงไหน","home.useMenu":"ใช้เมนูด้านซ้ายเป็นลำดับการเรียน","home.lessonGuide":"ถ้าเพิ่งเริ่ม แนะนำให้เรียนตามลำดับตั้งแต่บทที่ 1 แต่ละบทใช้ภาษาง่าย มีตัวอย่าง ข้อผิดพลาดที่พบบ่อย และจุดตรวจสอบความเข้าใจ","home.glossaryTitle":"อภิธานศัพท์","home.glossaryDesc":"ดูคำสำคัญอย่าง gas fee, public key, explorer, smart contract, custody และ bridge ในคำอธิบายที่เข้าใจง่าย","home.sourceTitle":"Source Library","home.sourceDesc":"อ่านบทความจริงและแหล่งอ้างอิงทางการ แยกตามหัวข้อ เช่น การหลอกลวง ตลาดแลกเปลี่ยน สเตเบิลคอยน์ และความปลอดภัยของวอลเล็ต","home.openLesson":"เปิดบทเรียน","home.openGlossary":"เปิดอภิธานศัพท์","home.openSources":"เปิด Source Library","glossary.title":"อภิธานศัพท์","glossary.desc":"ความหมายง่าย ๆ ของคำสำคัญในโลกคริปโต ถ้าคำไหนไม่คุ้น ให้เปิดหน้านี้ก่อน","sources.pageTitle":"Source Library","sources.pageDesc":"รวมบทความจริงและเอกสารอ้างอิงทางการ เพื่อเชื่อมโยงบทเรียนกับเหตุการณ์จริง","sources.catScams":"การหลอกลวง","sources.catExchanges":"ตลาดแลกเปลี่ยน","sources.catStable":"สเตเบิลคอยน์","sources.catWallet":"ความปลอดภัยของวอลเล็ต","glossary.address.term":"Address","glossary.address.body":"ตำแหน่งสาธารณะที่ใช้รับสินทรัพย์ดิจิทัล","glossary.private.term":"Private key","glossary.private.body":"คีย์ลับที่ใช้ควบคุมวอลเล็ต","glossary.seed.term":"Seed phrase","glossary.seed.body":"ชุดคำสำรองสำหรับกู้คืนวอลเล็ต ห้ามแชร์เด็ดขาด","glossary.gas.term":"Gas fee","glossary.gas.body":"ค่าธรรมเนียมเครือข่ายที่ใช้ประมวลผลธุรกรรม","glossary.public.term":"Public key","glossary.public.body":"คีย์เข้ารหัสที่เชื่อมกับตัวตนของวอลเล็ต และใช้สร้าง address","glossary.explorer.term":"Explorer","glossary.explorer.body":"เว็บไซต์หรือเครื่องมือที่ใช้ดูธุรกรรมและ address บนบล็อกเชน","glossary.contract.term":"Smart contract","glossary.contract.body":"โค้ดบนบล็อกเชนที่ทำงานอัตโนมัติตามกฎที่ตั้งไว้","glossary.custody.term":"Custody","glossary.custody.body":"ใครเป็นผู้ถือคีย์และควบคุมการเข้าถึงสินทรัพย์","glossary.bridge.term":"Bridge","glossary.bridge.body":"เครื่องมือสำหรับย้ายสินทรัพย์หรือข้อมูลระหว่างบล็อกเชนต่าง ๆ","callout.quick":"แนวคิดสั้น ๆ"},
+    "nav.home":"หน้าหลัก","nav.homesub":"เริ่มจากตรงนี้","nav.glossary":"อภิธานศัพท์","nav.glossarysub":"คำสำคัญแบบเข้าใจง่าย","nav.sources":"คลังแหล่งอ้างอิง","nav.sourcesub":"บทความและเอกสารทางการ","home.arrowNote":"ใช้เมนูด้านซ้ายเป็นแผนที่การเรียนรู้ของคุณ","home.title":"เรียนคริปโตทีละขั้นอย่างเข้าใจง่าย","home.desc":"ใช้หน้านี้เป็นจุดเริ่มต้น คุณสามารถเปิดบทเรียน 1–5 ไปยังอภิธานศัพท์ หรืออ่านบทความจริงและเอกสารทางการใน Source Library ได้ทันที","home.start":"ควรเริ่มจากตรงไหน","home.useMenu":"ใช้เมนูด้านซ้ายเป็นลำดับการเรียน","home.lessonGuide":"ถ้าเพิ่งเริ่ม แนะนำให้เรียนตามลำดับตั้งแต่บทที่ 1 แต่ละบทใช้ภาษาง่าย มีตัวอย่าง ข้อผิดพลาดที่พบบ่อย และจุดตรวจสอบความเข้าใจ","home.glossaryTitle":"อภิธานศัพท์","home.glossaryDesc":"ดูคำสำคัญอย่าง gas fee, public key, explorer, smart contract, custody และ bridge ในคำอธิบายที่เข้าใจง่าย","home.sourceTitle":"Source Library","home.sourceDesc":"อ่านบทความจริงและแหล่งอ้างอิงทางการ แยกตามหัวข้อ เช่น การหลอกลวง ตลาดแลกเปลี่ยน สเตเบิลคอยน์ และความปลอดภัยของวอลเล็ต","home.openLesson":"เปิดบทเรียน","home.openGlossary":"เปิดอภิธานศัพท์","home.openSources":"เปิด Source Library","glossary.title":"อภิธานศัพท์","glossary.desc":"ความหมายง่าย ๆ ของคำสำคัญในโลกคริปโต ถ้าคำไหนไม่คุ้น ให้เปิดหน้านี้ก่อน","sources.pageTitle":"Source Library","sources.pageDesc":"รวมบทความจริงและเอกสารอ้างอิงทางการ เพื่อเชื่อมโยงบทเรียนกับเหตุการณ์จริง","sources.catScams":"การหลอกลวง","sources.catExchanges":"ตลาดแลกเปลี่ยน","sources.catStable":"สเตเบิลคอยน์","sources.catWallet":"ความปลอดภัยของวอลเล็ต","glossary.address.term":"Address","glossary.address.body":"ตำแหน่งสาธารณะที่ใช้รับสินทรัพย์ดิจิทัล","glossary.private.term":"Private key","glossary.private.body":"คีย์ลับที่ใช้ควบคุมวอลเล็ต","glossary.seed.term":"Seed phrase","glossary.seed.body":"ชุดคำสำรองสำหรับกู้คืนวอลเล็ต ห้ามแชร์เด็ดขาด","glossary.gas.term":"Gas fee","glossary.gas.body":"ค่าธรรมเนียมเครือข่ายที่ใช้ประมวลผลธุรกรรม","glossary.public.term":"Public key","glossary.public.body":"คีย์เข้ารหัสที่เชื่อมกับตัวตนของวอลเล็ต และใช้สร้าง address","glossary.explorer.term":"Explorer","glossary.explorer.body":"เว็บไซต์หรือเครื่องมือที่ใช้ดูธุรกรรมและ address บนบล็อกเชน","glossary.contract.term":"Smart contract","glossary.contract.body":"โค้ดบนบล็อกเชนที่ทำงานอัตโนมัติตามกฎที่ตั้งไว้","glossary.custody.term":"Custody","glossary.custody.body":"ใครเป็นผู้ถือคีย์และควบคุมการเข้าถึงสินทรัพย์","glossary.bridge.term":"Bridge","glossary.bridge.body":"เครื่องมือสำหรับย้ายสินทรัพย์หรือข้อมูลระหว่างบล็อกเชนต่าง ๆ","callout.quick":"แนวคิดสั้น ๆ",
+    "nav.start":"เริ่มตรงนี้","nav.startsub":"เส้นทางสำหรับผู้เริ่มต้น","nav.faqPage":"คำถามพบบ่อย","nav.faqsub":"คำถามที่พบบ่อย","nav.safety":"ความปลอดภัย","nav.safetysub":"ป้องกันการหลอกลวง",
+    "home.startCardTitle":"เริ่มตรงนี้","home.startCardDesc":"ช่วยให้ผู้มาใหม่รู้ชัดว่าควรเริ่มจากตรงไหนก่อน","home.faqCardTitle":"คำถามพบบ่อย","home.faqCardDesc":"รวมคำถามที่มือใหม่สับสนบ่อยไว้ในที่เดียว","home.safetyCardTitle":"ความปลอดภัย","home.safetyCardDesc":"เรียนรู้นิสัยการป้องกันกลโกงและการปกป้องวอลเล็ตที่ใช้ได้จริง","home.openStart":"เปิดหน้าเริ่มต้น","home.openFaq":"เปิดคำถามพบบ่อย","home.openSafety":"เปิดหน้าความปลอดภัย"},
   id:{
     "brand.name":"Crypto Academy","brand.sub":"Pelajaran mudah untuk pemula","sidebar.lessons":"Daftar pelajaran","sidebar.topics":"Topik cepat",
     "nav.l1":"Blockchain","nav.l1sub":"Dasar buku besar bersama","nav.l2":"Wallet","nav.l2sub":"Kunci dan akses","nav.l3":"Transfer Aman","nav.l3sub":"Kirim dengan aman","nav.l4":"5 Peran Crypto","nav.l4sub":"Memahami peran token","nav.l5":"Pelajaran Dunia Nyata","nav.l5sub":"Mengapa struktur penting",
@@ -748,7 +775,9 @@ const ui = {
     "quiz.reveal":"Lihat jawaban","source.title":"Sumber","check.title":"Checkpoint pemula","faq.title":"FAQ","mistakes.title":"Kesalahan umum","quiz.title":"Kuis mini","example.title":"Contoh mudah","sources.title":"Sumber terkait",
     "visual.title":"Penjelasan visual","complete.note":"Progres Anda disimpan di browser ini."
   ,
-    "nav.home":"Beranda","nav.homesub":"Mulai dari sini","nav.glossary":"Glosarium","nav.glossarysub":"Istilah inti dengan bahasa sederhana","nav.sources":"Source Library","nav.sourcesub":"Artikel dan referensi resmi","home.arrowNote":"Gunakan menu kiri sebagai peta belajar Anda.","home.title":"Belajar crypto langkah demi langkah","home.desc":"Gunakan halaman ini sebagai titik awal. Anda bisa langsung membuka Pelajaran 1–5, membaca Glosarium, atau membuka Source Library untuk artikel nyata dan referensi resmi.","home.start":"Mulai dari mana?","home.useMenu":"Gunakan menu kiri sebagai peta belajar","home.lessonGuide":"Jika Anda benar-benar baru, mulailah dari Pelajaran 1 dan ikuti urutannya. Setiap pelajaran ditulis dengan bahasa sederhana, contoh, kesalahan umum, dan checkpoint.","home.glossaryTitle":"Glosarium","home.glossaryDesc":"Pelajari istilah penting seperti gas fee, public key, explorer, smart contract, custody, dan bridge dengan penjelasan yang mudah.","home.sourceTitle":"Source Library","home.sourceDesc":"Baca artikel nyata dan referensi resmi berdasarkan topik seperti penipuan, bursa, stablecoin, dan keamanan wallet.","home.openLesson":"Buka pelajaran","home.openGlossary":"Buka Glosarium","home.openSources":"Buka Source Library","glossary.title":"Glosarium","glossary.desc":"Arti sederhana dari istilah crypto yang penting. Jika sebuah kata terasa asing, buka halaman ini terlebih dahulu.","sources.pageTitle":"Source Library","sources.pageDesc":"Daftar artikel nyata dan referensi resmi untuk menghubungkan pelajaran dengan kasus dunia nyata.","sources.catScams":"Penipuan","sources.catExchanges":"Bursa","sources.catStable":"Stablecoin","sources.catWallet":"Keamanan Wallet","glossary.address.term":"Address","glossary.address.body":"Lokasi publik tempat aset dapat diterima.","glossary.private.term":"Private key","glossary.private.body":"Kunci rahasia yang memberi kendali atas wallet.","glossary.seed.term":"Seed phrase","glossary.seed.body":"Cadangan pemulihan wallet. Jangan pernah membagikannya.","glossary.gas.term":"Gas fee","glossary.gas.body":"Biaya jaringan untuk memproses transaksi.","glossary.public.term":"Public key","glossary.public.body":"Kunci kriptografi yang terkait dengan identitas wallet dan membantu membuat address.","glossary.explorer.term":"Explorer","glossary.explorer.body":"Situs atau alat untuk melihat transaksi dan address di blockchain.","glossary.contract.term":"Smart contract","glossary.contract.body":"Kode di blockchain yang berjalan otomatis mengikuti aturan yang diprogram.","glossary.custody.term":"Custody","glossary.custody.body":"Siapa yang memegang kunci dan mengontrol akses ke aset.","glossary.bridge.term":"Bridge","glossary.bridge.body":"Alat untuk memindahkan aset atau pesan antar blockchain yang berbeda.","callout.quick":"Gagasan singkat"},
+    "nav.home":"Beranda","nav.homesub":"Mulai dari sini","nav.glossary":"Glosarium","nav.glossarysub":"Istilah inti dengan bahasa sederhana","nav.sources":"Source Library","nav.sourcesub":"Artikel dan referensi resmi","home.arrowNote":"Gunakan menu kiri sebagai peta belajar Anda.","home.title":"Belajar crypto langkah demi langkah","home.desc":"Gunakan halaman ini sebagai titik awal. Anda bisa langsung membuka Pelajaran 1–5, membaca Glosarium, atau membuka Source Library untuk artikel nyata dan referensi resmi.","home.start":"Mulai dari mana?","home.useMenu":"Gunakan menu kiri sebagai peta belajar","home.lessonGuide":"Jika Anda benar-benar baru, mulailah dari Pelajaran 1 dan ikuti urutannya. Setiap pelajaran ditulis dengan bahasa sederhana, contoh, kesalahan umum, dan checkpoint.","home.glossaryTitle":"Glosarium","home.glossaryDesc":"Pelajari istilah penting seperti gas fee, public key, explorer, smart contract, custody, dan bridge dengan penjelasan yang mudah.","home.sourceTitle":"Source Library","home.sourceDesc":"Baca artikel nyata dan referensi resmi berdasarkan topik seperti penipuan, bursa, stablecoin, dan keamanan wallet.","home.openLesson":"Buka pelajaran","home.openGlossary":"Buka Glosarium","home.openSources":"Buka Source Library","glossary.title":"Glosarium","glossary.desc":"Arti sederhana dari istilah crypto yang penting. Jika sebuah kata terasa asing, buka halaman ini terlebih dahulu.","sources.pageTitle":"Source Library","sources.pageDesc":"Daftar artikel nyata dan referensi resmi untuk menghubungkan pelajaran dengan kasus dunia nyata.","sources.catScams":"Penipuan","sources.catExchanges":"Bursa","sources.catStable":"Stablecoin","sources.catWallet":"Keamanan Wallet","glossary.address.term":"Address","glossary.address.body":"Lokasi publik tempat aset dapat diterima.","glossary.private.term":"Private key","glossary.private.body":"Kunci rahasia yang memberi kendali atas wallet.","glossary.seed.term":"Seed phrase","glossary.seed.body":"Cadangan pemulihan wallet. Jangan pernah membagikannya.","glossary.gas.term":"Gas fee","glossary.gas.body":"Biaya jaringan untuk memproses transaksi.","glossary.public.term":"Public key","glossary.public.body":"Kunci kriptografi yang terkait dengan identitas wallet dan membantu membuat address.","glossary.explorer.term":"Explorer","glossary.explorer.body":"Situs atau alat untuk melihat transaksi dan address di blockchain.","glossary.contract.term":"Smart contract","glossary.contract.body":"Kode di blockchain yang berjalan otomatis mengikuti aturan yang diprogram.","glossary.custody.term":"Custody","glossary.custody.body":"Siapa yang memegang kunci dan mengontrol akses ke aset.","glossary.bridge.term":"Bridge","glossary.bridge.body":"Alat untuk memindahkan aset atau pesan antar blockchain yang berbeda.","callout.quick":"Gagasan singkat",
+    "nav.start":"Mulai di sini","nav.startsub":"Jalur pemula","nav.faqPage":"FAQ","nav.faqsub":"Pertanyaan umum","nav.safety":"Keamanan","nav.safetysub":"Pencegahan penipuan",
+    "home.startCardTitle":"Mulai di sini","home.startCardDesc":"Membantu pengunjung baru tahu persis dari mana harus memulai.","home.faqCardTitle":"FAQ","home.faqCardDesc":"Lihat pertanyaan yang paling sering membingungkan pemula di satu tempat.","home.safetyCardTitle":"Keamanan","home.safetyCardDesc":"Pelajari kebiasaan praktis untuk mencegah penipuan dan melindungi dompet.","home.openStart":"Buka Mulai di sini","home.openFaq":"Buka FAQ","home.openSafety":"Buka Keamanan"},
   pt:{
     "brand.name":"Crypto Academy","brand.sub":"Lições claras para iniciantes","sidebar.lessons":"Lições do curso","sidebar.topics":"Tópicos rápidos",
     "nav.l1":"Blockchain","nav.l1sub":"Base do livro-razão compartilhado","nav.l2":"Carteiras","nav.l2sub":"Chaves e acesso","nav.l3":"Transferências Seguras","nav.l3sub":"Enviar com segurança","nav.l4":"5 Papéis do Cripto","nav.l4sub":"Entendendo o papel dos tokens","nav.l5":"Lições do Mundo Real","nav.l5sub":"Por que a estrutura importa",
@@ -758,7 +787,37 @@ const ui = {
     "quiz.reveal":"Mostrar resposta","source.title":"Fonte","check.title":"Pontos de verificação para iniciantes","faq.title":"Perguntas frequentes","mistakes.title":"Erros comuns","quiz.title":"Mini quiz","example.title":"Exemplo simples","sources.title":"Fontes relacionadas",
     "visual.title":"Explicação visual","complete.note":"Seu progresso é salvo neste navegador."
   ,
-    "nav.home":"Início","nav.homesub":"Comece por aqui","nav.glossary":"Glossário","nav.glossarysub":"Termos essenciais em linguagem simples","nav.sources":"Source Library","nav.sourcesub":"Artigos e referências oficiais","home.arrowNote":"Use o menu à esquerda como seu mapa de aprendizagem.","home.title":"Aprenda cripto passo a passo","home.desc":"Use esta página como ponto de partida. Você pode abrir as Lições 1–5, consultar o Glossário ou visitar a Source Library para ler artigos reais e materiais oficiais.","home.start":"Por onde começar","home.useMenu":"Use o menu à esquerda como seu mapa de estudo","home.lessonGuide":"Se você está começando agora, o ideal é seguir a ordem a partir da Lição 1. Cada lição foi escrita em linguagem simples, com exemplos, erros comuns e pontos de verificação.","home.glossaryTitle":"Glossário","home.glossaryDesc":"Consulte termos-chave como gas fee, public key, explorer, smart contract, custody e bridge em explicações fáceis.","home.sourceTitle":"Source Library","home.sourceDesc":"Leia artigos reais e referências oficiais separados por tema, como golpes, exchanges, stablecoins e segurança de carteiras.","home.openLesson":"Abrir lição","home.openGlossary":"Abrir Glossário","home.openSources":"Abrir Source Library","glossary.title":"Glossário","glossary.desc":"Significados simples para palavras importantes do universo cripto. Se um termo parecer estranho, veja esta página primeiro.","sources.pageTitle":"Source Library","sources.pageDesc":"Uma lista de leitura com artigos reais e referências oficiais para ligar as lições a casos do mundo real.","sources.catScams":"Golpes","sources.catExchanges":"Exchanges","sources.catStable":"Stablecoins","sources.catWallet":"Segurança de Carteiras","glossary.address.term":"Address","glossary.address.body":"O local público para receber ativos.","glossary.private.term":"Private key","glossary.private.body":"A chave secreta que dá controle sobre a carteira.","glossary.seed.term":"Seed phrase","glossary.seed.body":"Um backup de recuperação da carteira. Nunca compartilhe.","glossary.gas.term":"Gas fee","glossary.gas.body":"A taxa de rede paga para processar uma transação.","glossary.public.term":"Public key","glossary.public.body":"Uma chave criptográfica ligada à identidade da carteira e usada na criação de endereços.","glossary.explorer.term":"Explorer","glossary.explorer.body":"Um site ou ferramenta para ver transações e endereços na blockchain.","glossary.contract.term":"Smart contract","glossary.contract.body":"Código na blockchain que executa regras programadas automaticamente.","glossary.custody.term":"Custody","glossary.custody.body":"Quem controla as chaves e o acesso aos ativos.","glossary.bridge.term":"Bridge","glossary.bridge.body":"Ferramenta usada para mover ativos ou mensagens entre blockchains diferentes.","callout.quick":"Ideia rápida"},
+    "nav.home":"Início","nav.homesub":"Comece por aqui","nav.glossary":"Glossário","nav.glossarysub":"Termos essenciais em linguagem simples","nav.sources":"Source Library","nav.sourcesub":"Artigos e referências oficiais","home.arrowNote":"Use o menu à esquerda como seu mapa de aprendizagem.","home.title":"Aprenda cripto passo a passo","home.desc":"Use esta página como ponto de partida. Você pode abrir as Lições 1–5, consultar o Glossário ou visitar a Source Library para ler artigos reais e materiais oficiais.","home.start":"Por onde começar","home.useMenu":"Use o menu à esquerda como seu mapa de estudo","home.lessonGuide":"Se você está começando agora, o ideal é seguir a ordem a partir da Lição 1. Cada lição foi escrita em linguagem simples, com exemplos, erros comuns e pontos de verificação.","home.glossaryTitle":"Glossário","home.glossaryDesc":"Consulte termos-chave como gas fee, public key, explorer, smart contract, custody e bridge em explicações fáceis.","home.sourceTitle":"Source Library","home.sourceDesc":"Leia artigos reais e referências oficiais separados por tema, como golpes, exchanges, stablecoins e segurança de carteiras.","home.openLesson":"Abrir lição","home.openGlossary":"Abrir Glossário","home.openSources":"Abrir Source Library","glossary.title":"Glossário","glossary.desc":"Significados simples para palavras importantes do universo cripto. Se um termo parecer estranho, veja esta página primeiro.","sources.pageTitle":"Source Library","sources.pageDesc":"Uma lista de leitura com artigos reais e referências oficiais para ligar as lições a casos do mundo real.","sources.catScams":"Golpes","sources.catExchanges":"Exchanges","sources.catStable":"Stablecoins","sources.catWallet":"Segurança de Carteiras","glossary.address.term":"Address","glossary.address.body":"O local público para receber ativos.","glossary.private.term":"Private key","glossary.private.body":"A chave secreta que dá controle sobre a carteira.","glossary.seed.term":"Seed phrase","glossary.seed.body":"Um backup de recuperação da carteira. Nunca compartilhe.","glossary.gas.term":"Gas fee","glossary.gas.body":"A taxa de rede paga para processar uma transação.","glossary.public.term":"Public key","glossary.public.body":"Uma chave criptográfica ligada à identidade da carteira e usada na criação de endereços.","glossary.explorer.term":"Explorer","glossary.explorer.body":"Um site ou ferramenta para ver transações e endereços na blockchain.","glossary.contract.term":"Smart contract","glossary.contract.body":"Código na blockchain que executa regras programadas automaticamente.","glossary.custody.term":"Custody","glossary.custody.body":"Quem controla as chaves e o acesso aos ativos.","glossary.bridge.term":"Bridge","glossary.bridge.body":"Ferramenta usada para mover ativos ou mensagens entre blockchains diferentes.","callout.quick":"Ideia rápida",
+    "nav.start":"Comece aqui","nav.startsub":"Caminho para iniciantes","nav.faqPage":"FAQ","nav.faqsub":"Perguntas comuns","nav.safety":"Segurança","nav.safetysub":"Prevenção de golpes",
+    "home.startCardTitle":"Comece aqui","home.startCardDesc":"Ajuda quem chegou agora a saber exatamente por onde começar.","home.faqCardTitle":"FAQ","home.faqCardDesc":"Veja em um só lugar as dúvidas mais comuns de iniciantes.","home.safetyCardTitle":"Segurança","home.safetyCardDesc":"Aprenda hábitos práticos para evitar golpes e proteger a carteira.","home.openStart":"Abrir Comece aqui","home.openFaq":"Abrir FAQ","home.openSafety":"Abrir Segurança"},
+  br:{
+    "brand.name":"Crypto Academy","brand.sub":"Lições claras para iniciantes","sidebar.lessons":"Lições do curso","sidebar.topics":"Tópicos rápidos",
+    "nav.l1":"Blockchain","nav.l1sub":"Base do livro-razão compartilhado","nav.l2":"Carteiras","nav.l2sub":"Chaves e acesso","nav.l3":"Transferências Seguras","nav.l3sub":"Enviar com segurança","nav.l4":"5 Papéis do Cripto","nav.l4sub":"Entendendo o papel dos tokens","nav.l5":"Lições do Mundo Real","nav.l5sub":"Por que a estrutura importa",
+    "topic.blockchain":"O que é blockchain?","topic.wallet":"O que é uma carteira?","topic.transfer":"Como funcionam transferências seguras?","topic.roles":"Como os papéis dos tokens diferem?","topic.real":"Por que casos reais importam?",
+    "footer.byline":"Recurso educacional gratuito da Bee Network Korea","overview.chip1":"Foco em iniciantes","overview.chip2":"Multilíngue","overview.chip3":"Aprendizado visual",
+    "progress.done":"concluído","btn.prev":"Lição anterior","btn.next":"Próxima lição","btn.mark":"Marcar como concluída","btn.completed":"Concluída","btn.restart":"Começar novamente","breadcrumb.prefix":"Lição",
+    "quiz.reveal":"Mostrar resposta","source.title":"Fonte","check.title":"Checkpoints para iniciantes","faq.title":"Perguntas frequentes","mistakes.title":"Erros comuns","quiz.title":"Mini quiz","example.title":"Exemplo fácil","sources.title":"Fontes relacionadas",
+    "visual.title":"Explicação visual","complete.note":"Seu progresso é salvo neste navegador.",
+    "nav.home":"Início","nav.homesub":"Comece por aqui","nav.glossary":"Glossário","nav.glossarysub":"Termos essenciais","nav.sources":"Biblioteca de Fontes","nav.sourcesub":"Artigos e referências oficiais",
+    "home.arrowNote":"Use o menu à esquerda como seu mapa de aprendizado.","home.title":"Aprenda cripto passo a passo","home.desc":"Use esta página como ponto de partida. Você pode ir direto para as Lições 1–5, abrir o Glossário para termos importantes ou visitar a Biblioteca de Fontes para ler artigos e materiais oficiais.","home.start":"Por onde começar","home.useMenu":"Use o menu à esquerda como seu mapa de aprendizado","home.lessonGuide":"Se você está começando agora, siga as lições em ordem. Cada página traz explicações simples, exemplos, erros comuns e checkpoints.","home.glossaryTitle":"Glossário","home.glossaryDesc":"Abra o Glossário para entender termos como gas fee, chave pública, explorer, contrato inteligente, custódia e bridge em linguagem fácil.","home.sourceTitle":"Biblioteca de Fontes","home.sourceDesc":"Abra a Biblioteca de Fontes para ler artigos reais e referências oficiais agrupadas por tema, como golpes, corretoras, stablecoins e segurança da carteira.","home.openLesson":"Abrir lição","home.openGlossary":"Abrir Glossário","home.openSources":"Abrir Biblioteca de Fontes",
+    "glossary.title":"Glossário","glossary.desc":"Significados simples para palavras importantes do universo cripto. Leia esta seção primeiro se algum termo parecer estranho.",
+    "sources.pageTitle":"Biblioteca de Fontes","sources.pageDesc":"Uma lista de leitura com artigos reais e referências oficiais. Use-a para ligar as ideias das lições a casos do mundo real.","sources.catScams":"Golpes","sources.catExchanges":"Corretoras","sources.catStable":"Stablecoins","sources.catWallet":"Segurança da carteira",
+    "glossary.address.body":"Local público usado para receber ativos digitais.","glossary.private.body":"Chave secreta usada para controlar a carteira.","glossary.seed.body":"Conjunto de palavras de recuperação para restaurar a carteira. Nunca compartilhe.","glossary.gas.body":"Taxa de rede paga para processar uma transação.","glossary.public.body":"Chave criptográfica ligada à identidade da carteira e usada para ajudar a criar endereços.","glossary.explorer.body":"Site ou ferramenta usada para ver transações e endereços na blockchain.","glossary.contract.body":"Código na blockchain que executa automaticamente regras predefinidas.","glossary.custody.body":"Quem controla as chaves e o acesso aos ativos.","glossary.bridge.body":"Ferramenta para mover ativos ou mensagens entre blockchains diferentes."
+  },
+  tr:{
+    "brand.name":"Crypto Academy","brand.sub":"Yeni başlayanlar için anlaşılır dersler","sidebar.lessons":"Dersler","sidebar.topics":"Hızlı konular",
+    "nav.l1":"Blockchain","nav.l1sub":"Paylaşılan defter temeli","nav.l2":"Cüzdanlar","nav.l2sub":"Anahtarlar ve erişim","nav.l3":"Güvenli Transferler","nav.l3sub":"Güvenli gönderim","nav.l4":"Kriptonun 5 Rolü","nav.l4sub":"Token rollerini anlama","nav.l5":"Gerçek Dünya Dersleri","nav.l5sub":"Yapının neden önemli olduğu",
+    "topic.blockchain":"Blockchain nedir?","topic.wallet":"Cüzdan nedir?","topic.transfer":"Güvenli transfer nasıl yapılır?","topic.roles":"Token rolleri nasıl farklıdır?","topic.real":"Gerçek örnekler neden önemlidir?",
+    "footer.byline":"Bee Network Korea tarafından sunulan ücretsiz eğitim kaynağı","overview.chip1":"Yeni başlayan odaklı","overview.chip2":"Çok dilli","overview.chip3":"Görsel öğrenme",
+    "progress.done":"tamamlandı","btn.prev":"Önceki ders","btn.next":"Sonraki ders","btn.mark":"Tamamlandı olarak işaretle","btn.completed":"Tamamlandı","btn.restart":"Baştan başla","breadcrumb.prefix":"Ders",
+    "quiz.reveal":"Cevabı göster","source.title":"Kaynak","check.title":"Başlangıç kontrol noktaları","faq.title":"SSS","mistakes.title":"Yaygın hatalar","quiz.title":"Mini test","example.title":"Kolay örnek","sources.title":"İlgili kaynaklar",
+    "visual.title":"Görsel açıklama","complete.note":"İlerlemeniz bu tarayıcıda kaydedilir.",
+    "nav.home":"Ana sayfa","nav.homesub":"Buradan başla","nav.glossary":"Sözlük","nav.glossarysub":"Temel terimler","nav.sources":"Kaynak Kütüphanesi","nav.sourcesub":"Makaleler ve resmi kaynaklar",
+    "home.arrowNote":"Sol menüyü öğrenme haritanız olarak kullanın.","home.title":"Kriptoyu adım adım öğrenin","home.desc":"Bu sayfayı başlangıç noktası olarak kullanın. Doğrudan 1–5. derslere gidebilir, temel terimler için Sözlük'ü açabilir veya gerçek makaleler ve resmi materyaller için Kaynak Kütüphanesi'ni ziyaret edebilirsiniz.","home.start":"Nereden başlamalı","home.useMenu":"Sol menüyü öğrenme haritanız olarak kullanın","home.lessonGuide":"Yeni başlıyorsanız dersleri sırayla takip edin. Her sayfada basit açıklamalar, örnekler, yaygın hatalar ve kontrol noktaları bulunur.","home.glossaryTitle":"Sözlük","home.glossaryDesc":"Gas fee, açık anahtar, explorer, akıllı sözleşme, custody ve bridge gibi terimleri kolay bir dille öğrenmek için Sözlük'ü açın.","home.sourceTitle":"Kaynak Kütüphanesi","home.sourceDesc":"Dolandırıcılık, borsalar, stablecoin'ler ve cüzdan güvenliği gibi başlıklarda gruplanmış gerçek makaleleri ve resmi kaynakları okumak için Kaynak Kütüphanesi'ni açın.","home.openLesson":"Dersi aç","home.openGlossary":"Sözlüğü aç","home.openSources":"Kaynak Kütüphanesi'ni aç",
+    "glossary.title":"Sözlük","glossary.desc":"Önemli kripto terimleri için basit anlamlar. Bir ders size yabancı geliyorsa önce burayı okuyun.",
+    "sources.pageTitle":"Kaynak Kütüphanesi","sources.pageDesc":"Gerçek makaleler ve resmi kaynaklardan oluşan okuma listesi. Derslerdeki fikirleri gerçek dünya örnekleriyle bağlamak için kullanın.","sources.catScams":"Dolandırıcılık","sources.catExchanges":"Borsalar","sources.catStable":"Stablecoin'ler","sources.catWallet":"Cüzdan Güvenliği",
+    "glossary.address.body":"Dijital varlık almak için kullanılan herkese açık konum.","glossary.private.body":"Cüzdanı kontrol etmeyi sağlayan gizli anahtar.","glossary.seed.body":"Cüzdanı kurtarmak için kullanılan yedek kelime grubu. Asla paylaşmayın.","glossary.gas.body":"Bir işlemi işlemek için ödenen ağ ücreti.","glossary.public.body":"Cüzdan kimliğine bağlı kriptografik anahtar; adres oluşturmaya yardımcı olur.","glossary.explorer.body":"Blockchain üzerindeki işlemleri ve adresleri görüntülemek için kullanılan site veya araç.","glossary.contract.body":"Önceden belirlenen kuralları otomatik uygulayan blockchain kodu.","glossary.custody.body":"Anahtarları ve varlıklara erişimi kimin kontrol ettiğini ifade eder.","glossary.bridge.body":"Farklı blockchain'ler arasında varlık veya mesaj taşımayı sağlayan araç."
+  },
   es:{
     "brand.name":"Crypto Academy","brand.sub":"Lecciones claras para principiantes","sidebar.lessons":"Lecciones del curso","sidebar.topics":"Temas rápidos",
     "nav.l1":"Blockchain","nav.l1sub":"Base del libro mayor compartido","nav.l2":"Billeteras","nav.l2sub":"Claves y acceso","nav.l3":"Transferencias Seguras","nav.l3sub":"Enviar con seguridad","nav.l4":"5 Roles del Cripto","nav.l4sub":"Entender el papel de los tokens","nav.l5":"Lecciones del Mundo Real","nav.l5sub":"Por qué importa la estructura",
@@ -978,8 +1037,8 @@ const localizedLessonOverrides = {
 };
 for (const [lang, arr] of Object.entries(localizedLessonOverrides)) {
   arr.forEach((ov,i)=>Object.assign(lessons[lang][i],ov));
-}
 
+}
 
 const homeContent = {
   en:{title:"Learn crypto step by step — and know where to go next",desc:"Start from the basics, then move through wallets, safe transfers, token roles, and real-world lessons. You can also use the Glossary and Source Library anytime.",start:"Where should you begin?",guide:"If you are completely new, follow the lessons in order. Each page is written in simple language, with examples, common mistakes, checkpoints, and sources."},
@@ -987,6 +1046,8 @@ const homeContent = {
   th:{title:"เรียนคริปโตทีละขั้น และรู้ว่าควรดูอะไรต่อ",desc:"เริ่มจากพื้นฐาน แล้วไปต่อที่วอลเล็ต การโอนอย่างปลอดภัย บทบาทของโทเคน และบทเรียนจากโลกจริง คุณยังเปิดอภิธานศัพท์หรือ Source Library ได้ทุกเมื่อ",start:"ควรเริ่มจากตรงไหน?",guide:"ถ้าคุณเป็นมือใหม่จริง ๆ ให้เรียนตามลำดับ แต่ละหน้ามีคำอธิบายง่าย ๆ ตัวอย่าง ข้อผิดพลาดที่พบบ่อย จุดตรวจสอบ และแหล่งอ้างอิง"},
   id:{title:"Pelajari crypto langkah demi langkah dan tahu harus melihat apa selanjutnya",desc:"Mulai dari dasar, lalu lanjut ke wallet, transfer aman, peran token, dan pelajaran dari dunia nyata. Anda juga bisa membuka Glosarium dan Source Library kapan saja.",start:"Mulai dari mana?",guide:"Jika Anda benar-benar baru, ikuti pelajaran secara berurutan. Setiap halaman berisi penjelasan sederhana, contoh, kesalahan umum, checkpoint, dan sumber."},
   pt:{title:"Aprenda cripto passo a passo e saiba o que ver depois",desc:"Comece pelo básico e siga para carteiras, transferências seguras, papéis dos tokens e lições do mundo real. Você também pode abrir o Glossário e a Source Library a qualquer momento.",start:"Por onde começar?",guide:"Se você está começando agora, siga as lições em ordem. Cada página traz explicações simples, exemplos, erros comuns, checkpoints e fontes."},
+  br:{title:"Aprenda cripto passo a passo e saiba o que ver depois",desc:"Comece pelo básico e siga para carteiras, transferências seguras, papéis dos tokens e lições do mundo real. Você também pode abrir o Glossário e a Biblioteca de Fontes a qualquer momento.",start:"Por onde começar?",guide:"Se você está começando agora, siga as lições em ordem. Cada página traz explicações simples, exemplos, erros comuns, checkpoints e fontes."},
+  tr:{title:"Kriptoyu adım adım öğrenin ve sonra neye bakmanız gerektiğini bilin",desc:"Temelden başlayın, ardından cüzdanlar, güvenli transferler, token rolleri ve gerçek dünya derslerine geçin. İstediğiniz zaman Sözlük ve Kaynak Kütüphanesi'ni de açabilirsiniz.",start:"Nereden başlamalı?",guide:"Yeni başlıyorsanız dersleri sırayla takip edin. Her sayfada basit açıklamalar, örnekler, yaygın hatalar, kontrol noktaları ve kaynaklar bulunur."},
   es:{title:"Aprende cripto paso a paso y sabe qué mirar después",desc:"Empieza por lo básico y luego sigue con billeteras, transferencias seguras, roles de los tokens y lecciones del mundo real. También puedes abrir el Glosario y la Source Library en cualquier momento.",start:"¿Por dónde empezar?",guide:"Si eres principiante, sigue las lecciones en orden. Cada página incluye explicaciones simples, ejemplos, errores comunes, puntos de verificación y fuentes."}
 };
 
@@ -1052,24 +1113,34 @@ function renderHome(){
       <div class="home-grid">
         ${[0,1,2,3,4].map(i=>`<div class="home-card" onclick="showLesson(${i})"><div class="home-card-num">${i+1}</div><div class="home-card-title">${t('nav.l'+(i+1))}</div><div class="home-card-desc">${t('nav.l'+(i+1)+'sub')}</div><div style="margin-top:10px;font-size:.82rem;font-weight:700;color:var(--navy-2)">${t('home.openLesson')} →</div></div>`).join('')}
       </div>
+      <div class="home-grid" style="margin-top:14px;">
+        <div class="home-card" onclick="showPage('start')">
+          <div class="home-card-num">S</div>
+          <div class="home-card-title">${t('home.startCardTitle')}</div>
+          <div class="home-card-desc">${t('home.startCardDesc')}</div>
+          <div style="margin-top:10px;font-size:.82rem;font-weight:700;color:var(--navy-2)">${t('home.openStart')} →</div>
+        </div>
+        <div class="home-card" onclick="showPage('faq')">
+          <div class="home-card-num">F</div>
+          <div class="home-card-title">${t('home.faqCardTitle')}</div>
+          <div class="home-card-desc">${t('home.faqCardDesc')}</div>
+          <div style="margin-top:10px;font-size:.82rem;font-weight:700;color:var(--navy-2)">${t('home.openFaq')} →</div>
+        </div>
+        <div class="home-card" onclick="showPage('safety')">
+          <div class="home-card-num">!</div>
+          <div class="home-card-title">${t('home.safetyCardTitle')}</div>
+          <div class="home-card-desc">${t('home.safetyCardDesc')}</div>
+          <div style="margin-top:10px;font-size:.82rem;font-weight:700;color:var(--navy-2)">${t('home.openSafety')} →</div>
+        </div>
+      </div>
       <div class="home-mini-grid">
         <div class="home-panel-card">
           <h3>${t('home.start')}</h3>
           <p>${hc.guide}</p>
         </div>
         <div class="home-panel-card">
-          <h3>${t('home.useMenu')}</h3>
-          <p>${t('home.arrowNote')}</p>
-        </div>
-        <div class="home-panel-card">
-          <h3>${t('home.glossaryTitle')}</h3>
-          <p>${t('home.glossaryDesc')}</p>
-          <div style="margin-top:10px;font-size:.82rem;font-weight:700;color:var(--navy-2);cursor:pointer" onclick="showPage('glossary')">${t('home.openGlossary')} →</div>
-        </div>
-        <div class="home-panel-card">
-          <h3>${t('home.sourceTitle')}</h3>
-          <p>${t('home.sourceDesc')}</p>
-          <div style="margin-top:10px;font-size:.82rem;font-weight:700;color:var(--navy-2);cursor:pointer" onclick="showPage('sources')">${t('home.openSources')} →</div>
+          <h3>${t('nav.glossary')}</h3>
+          <p>${t('glossary.desc')}</p>
         </div>
       </div>
     </div>`;
@@ -1330,6 +1401,86 @@ const extraUi = {
     "glossary.desc": "Significados simples para palavras-chave do mundo cripto. Leia primeiro se alguma lição parecer desconhecida.",
     "sources.pageTitle": "Biblioteca de Fontes",
     "sources.pageDesc": "Uma lista de leitura com artigos reais e referências oficiais. Use-a para ligar as lições a casos do mundo real."
+  },
+    "br": {
+    "v.ledger": "Livro-razão",
+    "v.node": "Nó",
+    "v.wallet": "Carteira",
+    "v.interface": "interface",
+    "v.address": "Endereço",
+    "v.shareable": "compartilhável",
+    "v.private": "Chave privada",
+    "v.secret": "segredo",
+    "v.seed": "Frase de recuperação",
+    "v.backup": "backup de recuperação",
+    "v.network": "Rede",
+    "v.test": "Transferência de teste",
+    "v.txid": "TxID",
+    "v.match": "deve corresponder",
+    "v.check": "verificar",
+    "v.smallfirst": "valor pequeno",
+    "v.verify": "confirmar",
+    "v.defi": "Finanças descentralizadas",
+    "v.utility": "Token de utilidade",
+    "v.governance": "Token de governança",
+    "v.nft": "NFT",
+    "v.stablecoin": "Stablecoin",
+    "v.bank": "Banco",
+    "v.access": "Acesso",
+    "v.voting": "Votação",
+    "v.ownership": "Propriedade",
+    "v.cash": "Dinheiro digital",
+    "v.roleDesc1": "Funções financeiras feitas com código.",
+    "v.roleDesc2": "Uso, benefícios e funções de serviço.",
+    "v.roleDesc3": "Participação em propostas e decisões.",
+    "v.roleDesc4": "Prova ligada a um item digital específico.",
+    "v.roleDesc5": "Projetada para ficar perto de um valor de referência.",
+    "v.phishing": "Phishing",
+    "v.custody": "Custódia",
+    "v.designrisk": "Risco de estrutura",
+    "v.riskDesc1": "Sites falsos ou aprovações perigosas podem drenar ativos.",
+    "v.riskDesc2": "Se outra pessoa controla as chaves, você depende do sistema dela.",
+    "v.riskDesc3": "Mesmo parecendo estável, a estrutura ainda importa."
+  },
+    "tr": {
+    "v.ledger": "Defter",
+    "v.node": "Düğüm",
+    "v.wallet": "Cüzdan",
+    "v.interface": "arayüz",
+    "v.address": "Adres",
+    "v.shareable": "paylaşılabilir",
+    "v.private": "Özel anahtar",
+    "v.secret": "gizli",
+    "v.seed": "Kurtarma ifadesi",
+    "v.backup": "yedek",
+    "v.network": "Ağ",
+    "v.test": "Test transferi",
+    "v.txid": "TxID",
+    "v.match": "eşleşmeli",
+    "v.check": "kontrol et",
+    "v.smallfirst": "önce küçük miktar",
+    "v.verify": "doğrula",
+    "v.defi": "Merkeziyetsiz finans",
+    "v.utility": "Yardımcı token",
+    "v.governance": "Yönetişim tokeni",
+    "v.nft": "NFT",
+    "v.stablecoin": "Stablecoin",
+    "v.bank": "Banka",
+    "v.access": "Erişim",
+    "v.voting": "Oylama",
+    "v.ownership": "Mülkiyet",
+    "v.cash": "Dijital nakit",
+    "v.roleDesc1": "Kodla çalışan finansal işlevler.",
+    "v.roleDesc2": "Kullanım, fayda ve hizmet işlevleri.",
+    "v.roleDesc3": "Tekliflere ve kararlara katılım.",
+    "v.roleDesc4": "Belirli bir dijital öğeye bağlı sahiplik kanıtı.",
+    "v.roleDesc5": "Referans değere yakın kalacak şekilde tasarlanır.",
+    "v.phishing": "Phishing",
+    "v.custody": "Custody",
+    "v.designrisk": "Tasarım riski",
+    "v.riskDesc1": "Sahte siteler veya zararlı onaylar varlıkları boşaltabilir.",
+    "v.riskDesc2": "Anahtarları başkası tutuyorsa onun sistemine bağımlı olursunuz.",
+    "v.riskDesc3": "İstikrarlı görünse bile yapı yine de önemlidir."
   },
   "es": {
     "v.ledger": "Libro mayor",
@@ -3095,6 +3246,28 @@ const lessonOverrides = {
   ]
 };
 const glossaryOverrides = {
+    "br": [
+    ["Endereço da carteira","Local público usado para receber ativos digitais."],
+    ["Chave privada","Chave secreta usada para controlar a carteira."],
+    ["Frase de recuperação","Conjunto de palavras de recuperação para restaurar a carteira. Nunca compartilhe."],
+    ["Taxa de gas","Taxa de rede paga para processar a transação."],
+    ["Chave pública","Chave criptográfica ligada à identidade da carteira e usada para ajudar a criar endereços."],
+    ["Explorador de blockchain","Site ou ferramenta usada para ver transações e endereços na blockchain."],
+    ["Contrato inteligente","Código na blockchain que executa automaticamente regras predefinidas."],
+    ["Custódia","Quem controla as chaves e o acesso aos ativos."],
+    ["Ponte entre blockchains","Ferramenta para mover ativos ou mensagens entre blockchains diferentes."]
+  ],
+    "tr": [
+    ["Cüzdan adresi","Dijital varlık almak için kullanılan herkese açık konum."],
+    ["Özel anahtar","Cüzdanı kontrol etmeyi sağlayan gizli anahtar."],
+    ["Kurtarma ifadesi","Cüzdanı kurtarmak için kullanılan yedek kelime grubu. Asla paylaşmayın."],
+    ["Gas ücreti","Bir işlemi işlemek için ödenen ağ ücreti."],
+    ["Açık anahtar","Cüzdan kimliğine bağlı kriptografik anahtar; adres oluşturmaya yardımcı olur."],
+    ["Blockchain gezgini","Blockchain üzerindeki işlemleri ve adresleri görüntülemek için kullanılan site veya araç."],
+    ["Akıllı sözleşme","Önceden belirlenen kuralları otomatik uygulayan blockchain kodu."],
+    ["Custody","Anahtarları ve varlıklara erişimi kimin kontrol ettiğini ifade eder."],
+    ["Köprü","Farklı blockchain'ler arasında varlık veya mesaj taşımayı sağlayan araç."]
+  ],
   "th": [
     ["ที่อยู่กระเป๋า","ตำแหน่งสาธารณะที่ใช้รับสินทรัพย์ดิจิทัล"],
     ["คีย์ส่วนตัว","คีย์ลับที่ใช้ควบคุมวอลเล็ต"],
@@ -3141,6 +3314,18 @@ const glossaryOverrides = {
   ]
 };
 const sourceOverrides = {
+    "br": [
+    ["Golpes","Alerta ao consumidor da FTC","Orientação da FTC sobre golpes com cripto e proteção do consumidor.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams"],
+    ["Corretoras","Artigo da Reuters sobre a FTX","O caso da FTX ajuda a entender riscos de corretoras e custódia.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/"],
+    ["Stablecoins","Material explicativo do ECB","Explica como uma instituição de política vê a estrutura e os riscos das stablecoins.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html"],
+    ["Segurança da carteira","Alerta de pagamento da FTC","Mostra por que pedidos de pagamento em cripto são um sinal de alerta.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem"]
+  ],
+    "tr": [
+    ["Dolandırıcılık","FTC tüketici uyarısı","FTC'nin kripto dolandırıcılığı ve tüketici güvenliğiyle ilgili rehberi.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams"],
+    ["Borsalar","Reuters FTX haberi","FTX örneği, borsa ve custody risklerini anlamaya yardımcı olur.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/"],
+    ["Stablecoin'ler","ECB açıklama metni","Bir politika kurumunun stablecoin yapısını ve risklerini nasıl gördüğünü açıklar.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html"],
+    ["Cüzdan güvenliği","FTC ödeme uyarısı","Kripto ile ödeme istenmesinin neden bir tehlike işareti olduğunu gösterir.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem"]
+  ],
   "th": [
     [
       "การหลอกลวง",
@@ -3395,6 +3580,9 @@ function renderLesson(i){
 function renderAllLessons(){
   for(let i=0;i<5;i++) document.getElementById(`lesson${i}`).innerHTML = renderLesson(i);
   document.getElementById('homePanel').innerHTML = renderHome();
+  document.getElementById('startPanel').innerHTML = renderStartHere();
+  document.getElementById('faqPanel').innerHTML = renderFAQPage();
+  document.getElementById('safetyPanel').innerHTML = renderSafetyPage();
   document.getElementById('glossaryPanel').innerHTML = renderGlossary();
   document.getElementById('sourcesPanel').innerHTML = renderSources();
 }
@@ -3422,6 +3610,9 @@ function showPage(page){
   localStorage.setItem('cryptoAcademyPage', page);
   document.querySelectorAll('.lesson-content, .page-content').forEach(el=>el.classList.remove('active'));
   if(page==='home'){ document.getElementById('homePanel').classList.add('active'); setBreadcrumb(t('nav.home')); activateSidebar('home', null); }
+  if(page==='start'){ document.getElementById('startPanel').classList.add('active'); setBreadcrumb(t('nav.start')); activateSidebar('start', null); }
+  if(page==='faq'){ document.getElementById('faqPanel').classList.add('active'); setBreadcrumb(t('nav.faqPage')); activateSidebar('faq', null); }
+  if(page==='safety'){ document.getElementById('safetyPanel').classList.add('active'); setBreadcrumb(t('nav.safety')); activateSidebar('safety', null); }
   if(page==='glossary'){ document.getElementById('glossaryPanel').classList.add('active'); setBreadcrumb(t('nav.glossary')); activateSidebar('glossary', null); }
   if(page==='sources'){ document.getElementById('sourcesPanel').classList.add('active'); setBreadcrumb(t('nav.sources')); activateSidebar('sources', null); }
   updateProgress();
@@ -3525,6 +3716,843 @@ if(currentPage==='home'||currentPage==='glossary'||currentPage==='sources') show
   }
   window.addEventListener('resize', syncSidebarState);
   syncSidebarState();
+})();
+</script>
+
+
+<script id="section-polish-patch">
+const polishedSectionContent = {
+  en: {
+    startTitle: "Start Here",
+    startIntro: "This page helps first-time visitors know exactly where to begin. Follow a simple order first, then branch out when the basic ideas feel clear.",
+    startSteps: [
+      ["Step 1 — Blockchain", "Start with Lesson 1 to understand what a blockchain is and why shared records matter."],
+      ["Step 2 — Wallets", "Move to Lesson 2 next so you understand keys, addresses, and access before you move assets."],
+      ["Step 3 — Glossary", "Open the Glossary after Lessons 1 and 2 if unfamiliar terms still feel confusing."],
+      ["Step 4 — Safe Transfers", "Then go to Lesson 3 to learn the practical safety routine: network, address, test transfer, and TxID."],
+      ["Step 5 — Roles and real-world lessons", "After the basics feel clear, continue to token roles, risk patterns, and real examples."]
+    ],
+    startTip: "A good beginner route is: 1 → 2 → Glossary → 3 → 4 → Safety → Source Library.",
+    faqTitle: "FAQ",
+    faqIntro: "These are the questions beginners ask most often. Read them in simple language before you worry about advanced details.",
+    faqItems: [
+      ["Do I really need a wallet?", "If you only buy and sell inside an exchange, you may not use a self-custody wallet immediately. But to understand ownership properly, you should still learn what a wallet is and how keys work."],
+      ["What is the difference between an exchange and a wallet?", "An exchange is a service for trading and account management. A wallet is a tool that manages keys and access. They are related, but not the same thing."],
+      ["Why do I pay gas fees?", "Gas fees are network fees. They help process and record transactions on a blockchain."],
+      ["Is it safe to share my wallet address?", "Yes, a wallet address is meant to receive assets. But private keys and seed phrases must never be shared."],
+      ["Why should I send a small test first?", "Because one small test can catch address or network mistakes before a larger transfer is at risk."]
+    ],
+    safetyTitle: "Safety / Scam Prevention",
+    safetyIntro: "This is one of the most practical sections in the whole platform. These habits can prevent beginner mistakes before they become real losses.",
+    safetyItems: [
+      ["Never share your seed phrase", "A seed phrase is recovery access. Anyone who gets it may control the wallet."],
+      ["Be careful with fake airdrops", "Scammers often use free-token offers to push users toward fake websites or approvals."],
+      ["Check links before connecting", "Phishing links often look almost correct. Slow down and verify the domain carefully."],
+      ["Send a small test amount first", "Especially on a new network or new address, a small test can prevent a larger mistake."],
+      ["Treat urgency as a warning sign", "Pressure, countdowns, threats, and forced payment requests are common scam patterns."]
+    ]
+  },
+  ko: {
+    startTitle: "Start Here",
+    startIntro: "처음 들어온 사람이 어디부터 보면 되는지 바로 이해할 수 있도록 정리한 입문 안내 페이지입니다. 기초 개념부터 차근차근 보는 것이 가장 좋습니다.",
+    startSteps: [
+      ["1단계 — 블록체인", "먼저 1강에서 블록체인이 무엇인지, 왜 공유 기록 구조가 중요한지 이해해보세요."],
+      ["2단계 — 지갑", "그다음 2강으로 넘어가 주소, 키, 접근 권한의 차이를 익히는 것이 좋습니다."],
+      ["3단계 — 용어사전", "1강과 2강을 본 뒤에도 낯선 단어가 있다면 용어사전을 함께 보세요."],
+      ["4단계 — 안전한 전송", "이후 3강에서 네트워크, 주소, 테스트 전송, TxID 확인 순서를 익히세요."],
+      ["5단계 — 역할과 실제 교훈", "기초가 잡히면 토큰 역할, 위험 패턴, 실제 사례까지 이어서 보시면 됩니다."]
+    ],
+    startTip: "처음이라면 1 → 2 → 용어사전 → 3 → 4 → Safety → Source Library 순서가 가장 좋습니다.",
+    faqTitle: "FAQ",
+    faqIntro: "초보자가 가장 자주 헷갈리는 질문을 한 번에 정리한 섹션입니다. 어려운 내용보다 먼저 기본적인 차이를 이해하는 데 집중하세요.",
+    faqItems: [
+      ["지갑이 꼭 필요한가요?", "거래소 안에서만 사고파는 경우 당장 자체 지갑을 쓰지 않을 수도 있습니다. 하지만 자산 통제 구조를 이해하려면 지갑과 키의 개념은 꼭 알아두는 것이 좋습니다."],
+      ["거래소와 지갑의 차이는 무엇인가요?", "거래소는 거래와 계정 관리를 위한 서비스이고, 지갑은 키와 접근 권한을 관리하는 도구입니다. 서로 관련은 있지만 같은 것은 아닙니다."],
+      ["가스비는 왜 내나요?", "가스비는 블록체인 네트워크가 거래를 처리하고 기록하는 데 필요한 수수료입니다."],
+      ["지갑 주소는 공유해도 되나요?", "네, 지갑 주소는 자산을 받기 위한 공개 가능한 정보입니다. 하지만 개인키와 시드 문구는 절대 공유하면 안 됩니다."],
+      ["왜 소액 테스트 전송을 먼저 해야 하나요?", "작은 실수는 작은 금액으로 확인할 수 있지만, 큰 금액은 되돌리기 어렵기 때문입니다."]
+    ],
+    safetyTitle: "Safety / Scam Prevention",
+    safetyIntro: "실제 도움을 가장 많이 주는 섹션입니다. 아래 습관만 익혀도 초보자 실수를 크게 줄일 수 있습니다.",
+    safetyItems: [
+      ["시드 문구는 절대 공유하지 마세요", "시드 문구는 복구 권한입니다. 누군가 이 문구를 알게 되면 지갑을 통제할 수 있습니다."],
+      ["가짜 에어드랍을 조심하세요", "무료 토큰을 준다는 말로 가짜 사이트 접속이나 위험한 승인을 유도하는 경우가 많습니다."],
+      ["연결 전에 링크를 먼저 확인하세요", "피싱 링크는 거의 비슷하게 보이기 때문에 도메인을 천천히 다시 확인해야 합니다."],
+      ["가능하면 소액 테스트 전송부터 하세요", "새 네트워크나 새 주소로 보낼 때는 작은 금액으로 먼저 확인하는 습관이 중요합니다."],
+      ["과도한 긴급성은 경고 신호로 보세요", "압박, 카운트다운, 위협, 즉시 결제 요구는 사기에서 자주 보이는 패턴입니다."]
+    ]
+  },
+  th: {
+    startTitle: "Start Here",
+    startIntro: "หน้านี้ช่วยให้ผู้ที่เพิ่งเข้ามาครั้งแรกเห็นชัดเจนว่าควรเริ่มจากตรงไหนก่อน เรียนพื้นฐานให้เข้าใจก่อน แล้วค่อยขยายไปหัวข้ออื่นจะง่ายที่สุด",
+    startSteps: [
+      ["ขั้นที่ 1 — บล็อกเชน", "เริ่มจากบทเรียนที่ 1 เพื่อเข้าใจว่าบล็อกเชนคืออะไร และทำไมบันทึกแบบแชร์จึงสำคัญ"],
+      ["ขั้นที่ 2 — วอลเล็ต", "จากนั้นไปบทเรียนที่ 2 เพื่อเข้าใจคีย์ ที่อยู่ และสิทธิ์การเข้าถึงก่อนขยับไปเรื่องการย้ายสินทรัพย์"],
+      ["ขั้นที่ 3 — อภิธานศัพท์", "ถ้าหลังจากบทที่ 1 และ 2 ยังมีคำที่ไม่คุ้น ให้เปิดอภิธานศัพท์ประกอบทันที"],
+      ["ขั้นที่ 4 — การโอนอย่างปลอดภัย", "ต่อด้วยบทเรียนที่ 3 เพื่อฝึกขั้นตอนใช้งานจริง: เครือข่าย ที่อยู่ การโอนทดลอง และการตรวจสอบด้วย TxID"],
+      ["ขั้นที่ 5 — บทบาทและบทเรียนจากโลกจริง", "เมื่อพื้นฐานเริ่มชัดแล้ว ค่อยไปต่อที่บทบาทของโทเคน รูปแบบความเสี่ยง และกรณีจริง"]
+    ],
+    startTip: "เส้นทางสำหรับผู้เริ่มต้นที่แนะนำคือ 1 → 2 → อภิธานศัพท์ → 3 → 4 → Safety → Source Library",
+    faqTitle: "FAQ",
+    faqIntro: "นี่คือคำถามที่มือใหม่สับสนบ่อยที่สุด อ่านเวอร์ชันที่อธิบายด้วยภาษาง่ายก่อน แล้วค่อยไปต่อรายละเอียดขั้นสูง",
+    faqItems: [
+      ["จำเป็นต้องมีวอลเล็ตไหม?", "ถ้าคุณซื้อขายอยู่ใน exchange เท่านั้น คุณอาจยังไม่ใช้วอลเล็ตแบบดูแลคีย์เองทันที แต่ถ้าต้องการเข้าใจเรื่องการถือครองให้ถูกต้อง คุณควรรู้ว่าวอลเล็ตและคีย์ทำงานอย่างไร"],
+      ["exchange กับวอลเล็ตต่างกันอย่างไร?", "exchange คือบริการสำหรับซื้อขายและจัดการบัญชี ส่วนวอลเล็ตคือเครื่องมือที่จัดการคีย์และสิทธิ์การเข้าถึง ทั้งสองอย่างเกี่ยวข้องกัน แต่ไม่ใช่สิ่งเดียวกัน"],
+      ["ทำไมต้องจ่าย gas fee?", "gas fee คือค่าธรรมเนียมของเครือข่าย ใช้สำหรับประมวลผลและบันทึกธุรกรรมบนบล็อกเชน"],
+      ["แชร์ที่อยู่กระเป๋าได้ไหม?", "ได้ ที่อยู่กระเป๋าใช้สำหรับรับสินทรัพย์ แต่คีย์ส่วนตัวและวลีสำรองต้องไม่แชร์เด็ดขาด"],
+      ["ทำไมควรโอนทดลองก่อน?", "เพราะการโอนทดลองจำนวนเล็กน้อยช่วยจับความผิดพลาดของที่อยู่หรือเครือข่ายก่อนที่เงินก้อนใหญ่จะเสี่ยง"]
+    ],
+    safetyTitle: "Safety / Scam Prevention",
+    safetyIntro: "นี่คือหนึ่งในส่วนที่ใช้งานได้จริงที่สุดของทั้งแพลตฟอร์ม แค่นิสัยพื้นฐานไม่กี่ข้อก็ช่วยลดความผิดพลาดของมือใหม่ได้มาก",
+    safetyItems: [
+      ["อย่าแชร์วลีสำรองเด็ดขาด", "วลีสำรองคือสิทธิ์ในการกู้คืน หากใครได้วลีนี้ไป เขาอาจควบคุมวอลเล็ตได้"],
+      ["ระวัง airdrop ปลอม", "มิจฉาชีพมักใช้ข้อเสนอแจกโทเคนฟรีเพื่อล่อให้ผู้ใช้เข้าเว็บปลอมหรือกดยืนยันที่อันตราย"],
+      ["ตรวจสอบลิงก์ก่อนเชื่อมต่อ", "ลิงก์ฟิชชิงมักดูคล้ายของจริงมาก ควรหยุดและตรวจสอบโดเมนอย่างละเอียด"],
+      ["โอนทดลองจำนวนเล็กน้อยก่อน", "โดยเฉพาะเมื่อใช้เครือข่ายใหม่หรือที่อยู่ใหม่ การลองส่งเล็กน้อยก่อนช่วยลดความเสี่ยงจากความผิดพลาดใหญ่"],
+      ["ถ้าถูกเร่งให้รีบ ให้มองว่าเป็นสัญญาณเตือน", "การกดดัน การนับถอยหลัง การขู่ หรือการบังคับให้จ่ายทันที เป็นรูปแบบที่พบได้บ่อยในกลโกง"]
+    ]
+  },
+  id: {
+    startTitle: "Start Here",
+    startIntro: "Halaman ini membantu pengunjung baru memahami dengan jelas harus mulai dari mana. Pahami dasarnya dulu, lalu lanjutkan ke topik berikutnya secara bertahap.",
+    startSteps: [
+      ["Langkah 1 — Blockchain", "Mulailah dari Pelajaran 1 untuk memahami apa itu blockchain dan mengapa catatan bersama itu penting."],
+      ["Langkah 2 — Wallet", "Lanjutkan ke Pelajaran 2 agar Anda memahami kunci, alamat, dan akses sebelum memindahkan aset."],
+      ["Langkah 3 — Glosarium", "Jika setelah Pelajaran 1 dan 2 masih ada istilah yang terasa asing, buka Glosarium sebagai pendamping."],
+      ["Langkah 4 — Transfer Aman", "Berikutnya buka Pelajaran 3 untuk mempelajari urutan praktis: jaringan, alamat, transfer uji, dan verifikasi TxID."],
+      ["Langkah 5 — Peran dan pelajaran dunia nyata", "Setelah fondasinya jelas, lanjutkan ke peran token, pola risiko, dan contoh nyata."]
+    ],
+    startTip: "Urutan yang paling disarankan untuk pemula adalah 1 → 2 → Glosarium → 3 → 4 → Safety → Source Library.",
+    faqTitle: "FAQ",
+    faqIntro: "Ini adalah pertanyaan yang paling sering membingungkan pemula. Baca jawaban sederhananya dulu sebelum memikirkan detail yang lebih teknis.",
+    faqItems: [
+      ["Apakah saya benar-benar perlu wallet?", "Jika Anda hanya membeli dan menjual di dalam exchange, Anda mungkin belum memakai wallet self-custody sekarang juga. Tetapi untuk memahami kepemilikan dengan benar, Anda tetap perlu memahami wallet dan cara kerja kunci."],
+      ["Apa perbedaan exchange dan wallet?", "Exchange adalah layanan untuk trading dan pengelolaan akun. Wallet adalah alat untuk mengelola kunci dan akses. Keduanya berhubungan, tetapi bukan hal yang sama."],
+      ["Mengapa saya harus membayar gas fee?", "Gas fee adalah biaya jaringan. Biaya ini membantu memproses dan mencatat transaksi di blockchain."],
+      ["Apakah aman membagikan alamat wallet?", "Ya, alamat wallet memang digunakan untuk menerima aset. Tetapi kunci privat dan frasa pemulihan tidak boleh pernah dibagikan."],
+      ["Mengapa saya perlu mengirim transfer uji dulu?", "Karena satu transfer kecil dapat menangkap kesalahan alamat atau jaringan sebelum jumlah yang lebih besar ikut berisiko."]
+    ],
+    safetyTitle: "Safety / Scam Prevention",
+    safetyIntro: "Ini adalah salah satu bagian paling praktis di seluruh platform. Kebiasaan ini bisa mencegah banyak kesalahan pemula sebelum berubah menjadi kerugian nyata.",
+    safetyItems: [
+      ["Jangan pernah membagikan frasa pemulihan", "Frasa pemulihan adalah akses pemulihan. Siapa pun yang mendapatkannya bisa mengambil alih wallet."],
+      ["Waspadai airdrop palsu", "Penipu sering memakai janji token gratis untuk mendorong pengguna membuka situs palsu atau memberikan persetujuan berbahaya."],
+      ["Periksa tautan sebelum menghubungkan wallet", "Tautan phishing sering terlihat hampir benar. Perlambat dan periksa domain dengan teliti."],
+      ["Kirim jumlah kecil terlebih dahulu", "Terutama pada jaringan baru atau alamat baru, transfer uji kecil bisa mencegah kesalahan yang lebih besar."],
+      ["Anggap desakan dan kepanikan sebagai sinyal bahaya", "Tekanan, hitung mundur, ancaman, dan permintaan pembayaran mendadak adalah pola penipuan yang sangat umum."]
+    ]
+  },
+  pt: {
+    startTitle: "Start Here",
+    startIntro: "Esta página ajuda quem chegou agora a entender com clareza por onde começar. Primeiro construa a base, depois avance com calma para os outros tópicos.",
+    startSteps: [
+      ["Passo 1 — Blockchain", "Comece pela Lição 1 para entender o que é blockchain e por que um registro compartilhado importa."],
+      ["Passo 2 — Carteiras", "Depois siga para a Lição 2 para entender chaves, endereços e acesso antes de mover ativos."],
+      ["Passo 3 — Glossário", "Se depois das Lições 1 e 2 ainda houver termos confusos, abra o Glossário como apoio."],
+      ["Passo 4 — Transferências seguras", "Em seguida, vá para a Lição 3 e aprenda a rotina prática: rede, endereço, transferência de teste e verificação por TxID."],
+      ["Passo 5 — Papéis e lições do mundo real", "Quando a base estiver clara, avance para papéis dos tokens, padrões de risco e exemplos reais."]
+    ],
+    startTip: "Uma boa ordem para iniciantes é 1 → 2 → Glossário → 3 → 4 → Safety → Source Library.",
+    faqTitle: "FAQ",
+    faqIntro: "Estas são as dúvidas mais comuns de quem está começando. Leia as respostas em linguagem simples antes de se preocupar com detalhes avançados.",
+    faqItems: [
+      ["Eu realmente preciso de uma carteira?", "Se você só compra e vende dentro de uma exchange, talvez ainda não use uma carteira de autocustódia imediatamente. Mesmo assim, para entender posse e controle corretamente, vale aprender como carteiras e chaves funcionam."],
+      ["Qual é a diferença entre exchange e carteira?", "A exchange é um serviço para negociar e administrar conta. A carteira é uma ferramenta que gerencia chaves e acesso. Elas se relacionam, mas não são a mesma coisa."],
+      ["Por que eu pago gas fee?", "Gas fee é a taxa da rede. Ela ajuda a processar e registrar transações na blockchain."],
+      ["É seguro compartilhar meu endereço de carteira?", "Sim, o endereço serve para receber ativos. Mas chave privada e frase de recuperação nunca devem ser compartilhadas."],
+      ["Por que devo enviar um teste pequeno primeiro?", "Porque um teste pequeno pode revelar erro de endereço ou rede antes que um valor maior fique em risco."]
+    ],
+    safetyTitle: "Safety / Scam Prevention",
+    safetyIntro: "Esta é uma das partes mais úteis de toda a plataforma. Esses hábitos ajudam a evitar erros básicos antes que eles virem perdas reais.",
+    safetyItems: [
+      ["Nunca compartilhe sua frase de recuperação", "A frase de recuperação é acesso de recuperação. Quem a obtiver pode controlar a carteira."],
+      ["Cuidado com airdrops falsos", "Golpistas usam promessas de tokens grátis para levar usuários a sites falsos ou aprovações perigosas."],
+      ["Verifique links antes de conectar", "Links de phishing costumam parecer quase corretos. Vá devagar e confira o domínio com cuidado."],
+      ["Envie um pequeno teste primeiro", "Especialmente em uma rede nova ou para um endereço novo, um teste pequeno evita erros maiores."],
+      ["Urgência excessiva é sinal de alerta", "Pressão, contagem regressiva, ameaça e pedido de pagamento imediato aparecem com frequência em golpes."]
+    ]
+  },
+  es: {
+    startTitle: "Start Here",
+    startIntro: "Esta página ayuda a quien llega por primera vez a entender con claridad por dónde empezar. Primero construye la base y luego avanza poco a poco.",
+    startSteps: [
+      ["Paso 1 — Blockchain", "Empieza con la Lección 1 para entender qué es blockchain y por qué importa un registro compartido."],
+      ["Paso 2 — Billeteras", "Después sigue con la Lección 2 para entender claves, direcciones y acceso antes de mover activos."],
+      ["Paso 3 — Glosario", "Si después de las Lecciones 1 y 2 aún hay términos confusos, abre el Glosario como apoyo."],
+      ["Paso 4 — Transferencias seguras", "Luego pasa a la Lección 3 y aprende la rutina práctica: red, dirección, transferencia de prueba y verificación con TxID."],
+      ["Paso 5 — Roles y lecciones del mundo real", "Cuando la base esté clara, continúa con roles de tokens, patrones de riesgo y ejemplos reales."]
+    ],
+    startTip: "Un buen orden para principiantes es 1 → 2 → Glosario → 3 → 4 → Safety → Source Library.",
+    faqTitle: "FAQ",
+    faqIntro: "Estas son las preguntas que más confunden a los principiantes. Lee primero las respuestas en lenguaje simple antes de preocuparte por detalles avanzados.",
+    faqItems: [
+      ["¿Realmente necesito una billetera?", "Si solo compras y vendes dentro de un exchange, quizá todavía no uses una billetera de autocustodia. Aun así, para entender la propiedad correctamente, conviene aprender cómo funcionan las billeteras y las claves."],
+      ["¿Cuál es la diferencia entre exchange y billetera?", "Un exchange es un servicio para operar y gestionar la cuenta. Una billetera es una herramienta para gestionar claves y acceso. Están relacionadas, pero no son lo mismo."],
+      ["¿Por qué pago gas fee?", "La gas fee es una comisión de red. Sirve para procesar y registrar transacciones en la blockchain."],
+      ["¿Es seguro compartir mi dirección de billetera?", "Sí, la dirección se usa para recibir activos. Pero la clave privada y la frase semilla nunca deben compartirse."],
+      ["¿Por qué debo enviar primero una pequeña prueba?", "Porque una prueba pequeña puede detectar un error de dirección o red antes de que una cantidad mayor quede en riesgo."]
+    ],
+    safetyTitle: "Safety / Scam Prevention",
+    safetyIntro: "Esta es una de las secciones más útiles de toda la plataforma. Estos hábitos pueden evitar errores de principiante antes de que se conviertan en pérdidas reales.",
+    safetyItems: [
+      ["Nunca compartas tu frase semilla", "La frase semilla es acceso de recuperación. Quien la obtenga puede controlar la billetera."],
+      ["Ten cuidado con los airdrops falsos", "Los estafadores suelen usar promesas de tokens gratis para llevar a los usuarios a sitios falsos o aprobaciones peligrosas."],
+      ["Revisa los enlaces antes de conectar", "Los enlaces de phishing suelen parecer casi correctos. Ve despacio y comprueba bien el dominio."],
+      ["Envía primero una pequeña prueba", "Especialmente en una red nueva o a una dirección nueva, una pequeña prueba puede evitar un error mayor."],
+      ["La urgencia excesiva es una señal de alerta", "La presión, la cuenta regresiva, la amenaza y la exigencia de pago inmediato son patrones muy comunes en estafas."]
+    ]
+  }
+};
+
+function renderStartHere(){
+  const c = polishedSectionContent[currentLang] || polishedSectionContent.en;
+  return `
+    <div class="lc-header">
+      <div class="lc-meta"><span class="meta-pill">${t('nav.start') || 'Start Here'}</span><span class="meta-cat">${c.startTitle}</span></div>
+      <h1 class="lc-title">${c.startTitle}</h1>
+      <p class="lc-intro">${c.startIntro}</p>
+    </div>
+    <div class="lesson-body">
+      <div class="steps-list">
+        ${c.startSteps.map((item, i)=>`<div class="step-item"><div class="step-n">${i+1}</div><div><div class="step-title">${item[0]}</div><div class="step-desc">${item[1]}</div></div></div>`).join('')}
+      </div>
+      <div class="callout success"><strong>${t('callout.quick')}:</strong> ${c.startTip}</div>
+    </div>`;
+}
+
+function renderFAQPage(){
+  const c = polishedSectionContent[currentLang] || polishedSectionContent.en;
+  return `
+    <div class="lc-header">
+      <div class="lc-meta"><span class="meta-pill">${t('nav.faqPage') || 'FAQ'}</span><span class="meta-cat">${c.faqTitle}</span></div>
+      <h1 class="lc-title">${c.faqTitle}</h1>
+      <p class="lc-intro">${c.faqIntro}</p>
+    </div>
+    <div class="lesson-body">
+      ${c.faqItems.map(([q,a])=>`<div class="faq-item"><div class="faq-q">${q}</div><div class="faq-a">${a}</div></div>`).join('')}
+    </div>`;
+}
+
+function renderSafetyPage(){
+  const c = polishedSectionContent[currentLang] || polishedSectionContent.en;
+  return `
+    <div class="lc-header">
+      <div class="lc-meta"><span class="meta-pill">${t('nav.safety') || 'Safety'}</span><span class="meta-cat">${c.safetyTitle}</span></div>
+      <h1 class="lc-title">${c.safetyTitle}</h1>
+      <p class="lc-intro">${c.safetyIntro}</p>
+    </div>
+    <div class="lesson-body">
+      ${c.safetyItems.map(([title,body])=>`<div class="mistake-card"><div class="mistake-label">${title}</div><div class="mistake-body">${body}</div></div>`).join('')}
+    </div>`;
+}
+
+if (typeof renderAllLessons === 'function') {
+  const __origRenderAllLessons = renderAllLessons;
+  renderAllLessons = function(){
+    __origRenderAllLessons();
+    document.getElementById('startPanel').innerHTML = renderStartHere();
+    document.getElementById('faqPanel').innerHTML = renderFAQPage();
+    document.getElementById('safetyPanel').innerHTML = renderSafetyPage();
+  };
+}
+</script>
+
+
+<script id="add-tr-br-languages">
+(function(){
+  if (!window.langLabels || !window.ui) return;
+
+  // Add language labels
+  langLabels.tr = 'TR';
+  langLabels.br = 'BR';
+
+  // Add menu items if missing
+  const langMenu = document.getElementById('langMenu');
+  if (langMenu && !langMenu.querySelector('[data-lang="tr"]')) {
+    const tr = document.createElement('div');
+    tr.className = 'lang-item';
+    tr.dataset.lang = 'tr';
+    tr.innerHTML = '<span>🇹🇷</span><span>Türkçe</span><span class="native">TR</span>';
+    langMenu.appendChild(tr);
+
+    const br = document.createElement('div');
+    br.className = 'lang-item';
+    br.dataset.lang = 'br';
+    br.innerHTML = '<span>🇧🇷</span><span>Português (Brasil)</span><span class="native">BR</span>';
+    langMenu.appendChild(br);
+
+    // bind click handlers for newly added items
+    langMenu.querySelectorAll('.lang-item').forEach(item => {
+      if (!item.dataset.boundLang) {
+        item.addEventListener('click', () => setLang(item.dataset.lang));
+        item.dataset.boundLang = '1';
+      }
+    });
+  }
+
+  // Brazilian Portuguese: clone pt and slightly localize labels
+  ui.br = JSON.parse(JSON.stringify(ui.pt || ui.en));
+  extraUi.br = JSON.parse(JSON.stringify(extraUi.pt || extraUi.en));
+  homeContent.br = JSON.parse(JSON.stringify(homeContent.pt || homeContent.en));
+  sourceLibrary.br = JSON.parse(JSON.stringify(sourceLibrary.pt || sourceLibrary.en));
+  if (window.sourceOverrides && sourceOverrides.pt) sourceOverrides.br = JSON.parse(JSON.stringify(sourceOverrides.pt));
+  if (window.glossaryOverrides && glossaryOverrides.pt) glossaryOverrides.br = JSON.parse(JSON.stringify(glossaryOverrides.pt));
+  if (window.lessonOverrides && lessonOverrides.pt) lessonOverrides.br = JSON.parse(JSON.stringify(lessonOverrides.pt));
+  if (window.lessons && lessons.pt) lessons.br = JSON.parse(JSON.stringify(lessons.pt));
+
+  // Small Brazilian Portuguese label tweaks
+  Object.assign(ui.br, {
+    "brand.sub":"Lições claras para iniciantes",
+    "overview.chip2":"Multilíngue",
+    "nav.l2":"Carteiras",
+    "topic.wallet":"O que é uma carteira?",
+    "home.title":"Aprenda cripto passo a passo — e saiba o que ver depois",
+    "home.desc":"Comece pelo básico e avance por carteiras, transferências seguras, papéis dos tokens e lições do mundo real. Você também pode abrir o Glossário e a Biblioteca de Fontes a qualquer momento."
+  });
+
+  // Turkish UI/core translations
+  ui.tr = {
+    "brand.name":"Kripto Akademi",
+    "brand.sub":"Yeni başlayanlar için anlaşılır dersler",
+    "sidebar.lessons":"Dersler",
+    "sidebar.topics":"Hızlı konular",
+    "nav.home":"Ana Sayfa",
+    "nav.homesub":"Buradan başlayın",
+    "nav.l1":"Blokzincir",
+    "nav.l1sub":"Paylaşılan defterin temelleri",
+    "nav.l2":"Cüzdanlar",
+    "nav.l2sub":"Anahtarlar ve erişim",
+    "nav.l3":"Güvenli Transferler",
+    "nav.l3sub":"Güvenli gönderim",
+    "nav.l4":"Kriptonun 5 Rolü",
+    "nav.l4sub":"Token rollerini anlamak",
+    "nav.l5":"Gerçek Dünya Dersleri",
+    "nav.l5sub":"Yapı neden önemlidir",
+    "nav.glossary":"Sözlük",
+    "nav.glossarysub":"Temel terimleri kolayca görün",
+    "nav.sources":"Kaynak Kütüphanesi",
+    "nav.sourcesub":"Makaleler ve resmi kaynaklar",
+    "topic.blockchain":"Blokzincir nedir?",
+    "topic.wallet":"Cüzdan nedir?",
+    "topic.transfer":"Güvenli transfer nasıl çalışır?",
+    "topic.roles":"Token rolleri nasıl farklıdır?",
+    "topic.real":"Gerçek vakalar neden önemlidir?",
+    "footer.byline":"Bee Network Korea tarafından sunulan ücretsiz eğitim kaynağı",
+    "overview.chip1":"Yeni başlayan odaklı",
+    "overview.chip2":"Çok dilli",
+    "overview.chip3":"Görsel öğrenme",
+    "progress.done":"tamamlandı",
+    "btn.prev":"Önceki ders",
+    "btn.next":"Sonraki ders",
+    "btn.mark":"Tamamlandı olarak işaretle",
+    "btn.completed":"Tamamlandı",
+    "btn.restart":"Baştan başla",
+    "breadcrumb.prefix":"Ders",
+    "quiz.reveal":"Cevabı göster",
+    "source.title":"Kaynak",
+    "check.title":"Başlangıç kontrol noktaları",
+    "faq.title":"SSS",
+    "mistakes.title":"Yaygın hatalar",
+    "quiz.title":"Mini test",
+    "example.title":"Kolay örnek",
+    "sources.title":"İlgili kaynaklar",
+    "visual.title":"Görsel açıklama",
+    "complete.note":"İlerlemeniz bu tarayıcıda kaydedilir.",
+    "home.title":"Kriptoyu adım adım öğrenin — ve sonra nereye bakacağınızı bilin",
+    "home.desc":"Temelden başlayın; cüzdanlar, güvenli transferler, token rolleri ve gerçek dünya dersleriyle devam edin. İstediğiniz zaman Sözlük ve Kaynak Kütüphanesi bölümlerini de açabilirsiniz.",
+    "home.start":"Nereden başlamalısınız?",
+    "home.openLesson":"Dersi aç",
+    "glossary.title":"Sözlük",
+    "glossary.desc":"Temel kripto terimlerinin basit anlamları. Bir ders yabancı geliyorsa önce burayı okuyun.",
+    "sources.pageTitle":"Kaynak Kütüphanesi",
+    "sources.pageDesc":"Gerçek makaleler ve resmi kaynaklardan oluşan okuma listesi. Derslerdeki fikirleri gerçek dünyadaki örneklerle bağlamak için kullanın.",
+    "sources.catScams":"Dolandırıcılıklar",
+    "sources.catExchanges":"Borsalar",
+    "sources.catStable":"Stablecoinler",
+    "sources.catWallet":"Cüzdan Güvenliği"
+  };
+
+  extraUi.tr = {
+    "v.ledger":"Defter",
+    "v.node":"Düğüm",
+    "v.wallet":"Cüzdan",
+    "v.interface":"arayüz",
+    "v.address":"Cüzdan adresi",
+    "v.shareable":"paylaşılabilir",
+    "v.private":"Özel anahtar",
+    "v.secret":"gizli",
+    "v.seed":"Kurtarma ifadesi",
+    "v.backup":"yedek",
+    "v.network":"Ağ",
+    "v.test":"Test transferi",
+    "v.txid":"TxID",
+    "v.match":"eşleşmeli",
+    "v.check":"kontrol et",
+    "v.smallfirst":"önce küçük tutar",
+    "v.verify":"doğrula",
+    "v.bank":"Banka gibi",
+    "v.access":"Erişim",
+    "v.voting":"Oylama",
+    "v.ownership":"Sahiplik",
+    "v.cash":"Dijital nakit",
+    "v.roleDesc1":"Kod ve cüzdanlarla çalışan finansal işlevler.",
+    "v.roleDesc2":"Hizmet içi erişim, fayda ve işlevler için kullanılır.",
+    "v.roleDesc3":"Teklif ve kararlara katılım için kullanılır.",
+    "v.roleDesc4":"Belirli bir dijital varlığın sahiplik kanıtı.",
+    "v.roleDesc5":"Bir referans değere yakın kalacak şekilde tasarlanır.",
+    "v.phishing":"Oltalama",
+    "v.custody":"Saklama",
+    "v.designrisk":"Tasarım riski",
+    "v.riskDesc1":"Sahte siteler veya kötü niyetli onaylar varlıkları boşaltabilir.",
+    "v.riskDesc2":"Anahtarlar başkasındaysa onun sistemine bağımlı olursunuz.",
+    "v.riskDesc3":"Durağan görünse bile yapı hâlâ önemlidir."
+  };
+
+  homeContent.tr = {
+    title:"Kriptoyu adım adım öğrenin — ve sonra neye bakacağınızı bilin",
+    desc:"Temelden başlayın; cüzdanlar, güvenli transferler, token rolleri ve gerçek dünya dersleriyle ilerleyin. İstediğiniz zaman Sözlük ve Kaynak Kütüphanesi bölümlerini de kullanabilirsiniz.",
+    start:"Nereden başlamalısınız?",
+    guide:"Tamamen yeniyseniz dersleri sırayla izleyin. Her sayfa basit bir dille; örnekler, yaygın hatalar, kontrol noktaları ve kaynaklarla yazılmıştır."
+  };
+
+  // Turkish glossary and sources
+  glossaryOverrides.tr = [
+    ["Cüzdan adresi","Dijital varlık almak için kullanılan herkese açık konum."],
+    ["Özel anahtar","Cüzdanı kontrol etmenizi sağlayan gizli anahtar."],
+    ["Kurtarma ifadesi","Cüzdanı geri yüklemek için kullanılan yedek kelime dizisi. Asla paylaşmayın."],
+    ["Gas ücreti","İşlemi gerçekleştirmek için ödenen ağ ücreti."],
+    ["Açık anahtar","Cüzdan kimliğine bağlı kriptografik anahtar; adres oluşturmaya yardımcı olur."],
+    ["Blokzincir gezgini","Blokzincirdeki işlemleri ve adresleri görüntülemek için kullanılan site veya araç."],
+    ["Akıllı sözleşme","Önceden tanımlı kuralları otomatik çalıştıran blokzincir kodu."],
+    ["Saklama","Anahtarları ve varlıklara erişimi kimin kontrol ettiği."],
+    ["Blokzincir köprüsü","Farklı blokzincirler arasında varlık veya mesaj taşımaya yarayan araç."]
+  ];
+
+  sourceOverrides.tr = [
+    ["Dolandırıcılık","FTC tüketici uyarısı","FTC'nin kripto dolandırıcılıkları ve tüketici koruması hakkındaki rehberi.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams"],
+    ["Borsalar","FTX hakkında Reuters makalesi","FTX vakası, borsa ve saklama risklerini anlamaya yardımcı olur.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/"],
+    ["Stablecoinler","ECB açıklama metni","Bir politika kurumunun stablecoin yapısını ve risklerini nasıl gördüğünü açıklar.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html"],
+    ["Cüzdan güvenliği","FTC ödeme uyarısı","Kriptoyla ödeme talebinin neden güçlü bir uyarı sinyali olduğunu gösterir.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem"]
+  ];
+
+  // Turkish lessons currently fall back to English lesson bodies if a localized override is missing.
+  // To keep the site stable, rely on English lesson content until a full Turkish lesson set is added.
+  lessons.tr = JSON.parse(JSON.stringify(lessons.en));
+
+  // Add Turkish/BR labels to language selector current display
+  const origSetLang = window.setLang;
+  window.setLang = function(lang){
+    origSetLang(lang);
+    document.documentElement.lang = (lang === 'br') ? 'pt-BR' : lang;
+  };
+
+  // Re-render now that new languages exist
+  if (typeof applyUI === 'function') applyUI();
+  if (typeof renderAllLessons === 'function') renderAllLessons();
+  if (typeof currentPage !== 'undefined' && ['home','glossary','sources','start','faq','safety'].includes(currentPage)) showPage(currentPage);
+  else if (typeof currentLesson !== 'undefined') showLesson(currentLesson);
+})();
+</script>
+
+
+<script id="final-tr-br-stability-patch">
+(function(){
+  function deepClone(obj){ return JSON.parse(JSON.stringify(obj)); }
+  function bindLanguageMenu(){
+    var menu = document.getElementById('langMenu');
+    if (!menu) return;
+    menu.querySelectorAll('.lang-item').forEach(function(item){
+      item.onclick = function(e){
+        e.stopPropagation();
+        if (typeof setLang === 'function') setLang(item.dataset.lang);
+        menu.classList.remove('open');
+      };
+    });
+  }
+
+  langLabels.br = 'BR';
+  langLabels.tr = 'TR';
+
+  ui.br = Object.assign({}, ui.pt || ui.en || {}, ui.br || {}, {
+    "brand.sub":"Lições claras para iniciantes",
+    "nav.start":"Comece aqui",
+    "nav.startsub":"Rota recomendada para iniciantes",
+    "nav.faqPage":"FAQ",
+    "nav.faqsub":"Dúvidas comuns de iniciantes",
+    "nav.safety":"Segurança / Prevenção de golpes",
+    "nav.safetysub":"Hábitos práticos de proteção",
+    "home.title":"Aprenda cripto passo a passo — e saiba para onde ir depois",
+    "home.desc":"Comece pelo básico e avance por carteiras, transferências seguras, papéis dos tokens e lições do mundo real. Você também pode abrir o Glossário e a Biblioteca de Fontes a qualquer momento.",
+    "home.start":"Por onde começar?",
+    "home.openLesson":"Abrir lição",
+    "home.startCardTitle":"Comece aqui",
+    "home.startCardDesc":"Veja a ordem mais simples para começar sem se perder.",
+    "home.openStart":"Abrir guia",
+    "home.faqCardTitle":"FAQ",
+    "home.faqCardDesc":"Leia respostas curtas para as dúvidas mais comuns.",
+    "home.openFaq":"Abrir FAQ",
+    "home.safetyCardTitle":"Segurança / Prevenção de golpes",
+    "home.safetyCardDesc":"Aprenda hábitos simples para reduzir erros e fraudes.",
+    "home.openSafety":"Abrir segurança",
+    "home.arrowNote":"Siga na ordem se você estiver começando agora.",
+    "glossary.title":"Glossário",
+    "glossary.desc":"Significados simples para os termos mais importantes de cripto. Abra esta seção sempre que uma palavra parecer confusa.",
+    "sources.pageTitle":"Biblioteca de Fontes",
+    "sources.pageDesc":"Coleção de artigos reais e fontes oficiais para conectar as aulas a exemplos do mundo real.",
+    "sources.catScams":"Golpes",
+    "sources.catExchanges":"Corretoras",
+    "sources.catStable":"Stablecoins",
+    "sources.catWallet":"Segurança da carteira",
+    "sidebar.lessons":"Lições",
+    "sidebar.topics":"Tópicos rápidos",
+    "topic.blockchain":"O que é blockchain?",
+    "topic.wallet":"O que é uma carteira?",
+    "topic.transfer":"Como funciona uma transferência segura?",
+    "topic.roles":"Como os papéis dos tokens são diferentes?",
+    "topic.real":"Por que casos reais importam?",
+    "visual.title":"Explicação visual",
+    "callout.quick":"Resumo rápido",
+    "complete.note":"Seu progresso é salvo neste navegador."
+  });
+
+  extraUi.br = Object.assign({}, extraUi.pt || extraUi.en || {}, extraUi.br || {}, {
+    "v.network":"Rede",
+    "v.address":"Endereço",
+    "v.test":"Transferência de teste",
+    "v.txid":"TxID",
+    "v.defi":"DeFi",
+    "v.utility":"Utilidade",
+    "v.governance":"Governança",
+    "v.nft":"NFT",
+    "v.stablecoin":"Stablecoin",
+    "v.phishing":"Phishing",
+    "v.custody":"Custódia",
+    "v.designrisk":"Risco de design",
+    "v.networkDesc":"Confirme a rede antes de enviar.",
+    "v.addressDesc":"Revise o início e o fim do endereço.",
+    "v.testDesc":"Envie primeiro um valor pequeno.",
+    "v.txidDesc":"Use o TxID para verificar o registro real."
+  });
+
+  polishedSectionContent.br = deepClone(polishedSectionContent.pt || polishedSectionContent.en || {});
+  if (polishedSectionContent.br) {
+    polishedSectionContent.br.startTitle = "Comece aqui";
+    polishedSectionContent.br.startIntro = "Esta página ajuda quem acabou de chegar a saber exatamente por onde começar. Siga uma ordem simples primeiro e depois abra outras seções quando a base já estiver clara.";
+    polishedSectionContent.br.startTip = "Uma boa rota para iniciantes é: 1 → 2 → Glossário → 3 → 4 → Segurança → Biblioteca de Fontes.";
+    polishedSectionContent.br.faqTitle = "FAQ";
+    polishedSectionContent.br.safetyTitle = "Segurança / Prevenção de golpes";
+  }
+
+  if (!glossaryOverrides.br && glossaryOverrides.pt) glossaryOverrides.br = deepClone(glossaryOverrides.pt);
+  if (!sourceOverrides.br && sourceOverrides.pt) sourceOverrides.br = deepClone(sourceOverrides.pt);
+  if (!lessonOverrides.br && lessonOverrides.pt) lessonOverrides.br = deepClone(lessonOverrides.pt);
+  if (!sourceLibrary.br && sourceOverrides.br) sourceLibrary.br = deepClone(sourceOverrides.br);
+  if (!glossaryData.br && glossaryOverrides.br) glossaryData.br = deepClone(glossaryOverrides.br);
+  if (lessonOverrides.br) {
+    lessonOverrides.br = deepClone(lessonOverrides.br);
+    lessonOverrides.br[0].cat = "Base";
+    lessonOverrides.br[1].cat = "Acesso";
+    lessonOverrides.br[2].cat = "Segurança";
+    lessonOverrides.br[3].cat = "Papéis";
+    lessonOverrides.br[4].cat = "Mundo real";
+  }
+
+  ui.tr = Object.assign({}, ui.en || {}, ui.tr || {}, {
+    "brand.name":"Crypto Academy",
+    "brand.sub":"Yeni başlayanlar için net ve sade dersler",
+    "sidebar.lessons":"Dersler",
+    "sidebar.topics":"Hızlı konular",
+    "nav.home":"Ana Sayfa",
+    "nav.homesub":"Önce buradan başlayın",
+    "nav.l1":"Blokzincir",
+    "nav.l1sub":"Paylaşılan defterin temelleri",
+    "nav.l2":"Cüzdanlar",
+    "nav.l2sub":"Anahtarlar ve erişim",
+    "nav.l3":"Güvenli Transferler",
+    "nav.l3sub":"Güvenli gönderim rutini",
+    "nav.l4":"Kriptonun 5 Rolü",
+    "nav.l4sub":"Token rollerini anlamak",
+    "nav.l5":"Gerçek Dünya Dersleri",
+    "nav.l5sub":"Riskin nerede oluştuğunu görün",
+    "nav.start":"Başlangıç Rehberi",
+    "nav.startsub":"İlk izlenecek yol haritası",
+    "nav.faqPage":"SSS",
+    "nav.faqsub":"Yeni başlayanların en sık soruları",
+    "nav.safety":"Güvenlik / Dolandırıcılıktan Korunma",
+    "nav.safetysub":"Pratik güvenlik alışkanlıkları",
+    "nav.glossary":"Sözlük",
+    "nav.glossarysub":"Temel terimleri kolayca görün",
+    "nav.sources":"Kaynak Kütüphanesi",
+    "nav.sourcesub":"Makaleler ve resmi kaynaklar",
+    "topic.blockchain":"Blokzincir nedir?",
+    "topic.wallet":"Cüzdan nedir?",
+    "topic.transfer":"Güvenli transfer nasıl yapılır?",
+    "topic.roles":"Token rolleri neden farklıdır?",
+    "topic.real":"Gerçek vakalar neden önemlidir?",
+    "footer.byline":"Bee Network Korea tarafından sunulan ücretsiz eğitim kaynağı",
+    "overview.chip1":"Yeni başlayan odaklı",
+    "overview.chip2":"Çok dilli",
+    "overview.chip3":"Görsel öğrenme",
+    "progress.done":"tamamlandı",
+    "btn.prev":"Önceki ders",
+    "btn.next":"Sonraki ders",
+    "btn.mark":"Tamamlandı olarak işaretle",
+    "btn.completed":"Tamamlandı",
+    "btn.restart":"Başa dön",
+    "breadcrumb.prefix":"Ders",
+    "quiz.reveal":"Cevabı göster",
+    "source.title":"Kaynak",
+    "check.title":"Başlangıç kontrol noktaları",
+    "faq.title":"SSS",
+    "mistakes.title":"Yaygın hatalar",
+    "quiz.title":"Mini test",
+    "example.title":"Kolay örnek",
+    "sources.title":"İlgili kaynaklar",
+    "visual.title":"Görsel açıklama",
+    "complete.note":"İlerlemeniz bu tarayıcıda saklanır.",
+    "callout.quick":"Hızlı özet",
+    "home.title":"Kriptoyu adım adım öğrenin — sonra neye bakacağınızı bilin",
+    "home.desc":"Temelden başlayın; cüzdanlar, güvenli transferler, token rolleri ve gerçek dünya dersleriyle devam edin. İstediğiniz zaman Sözlük ve Kaynak Kütüphanesi bölümlerini de açabilirsiniz.",
+    "home.start":"Nereden başlamalısınız?",
+    "home.openLesson":"Dersi aç",
+    "home.startCardTitle":"Başlangıç Rehberi",
+    "home.startCardDesc":"Kaybolmadan başlamak için en basit sırayı görün.",
+    "home.openStart":"Rehberi aç",
+    "home.faqCardTitle":"SSS",
+    "home.faqCardDesc":"En sık sorulan yeni başlayan sorularını kısa cevaplarla okuyun.",
+    "home.openFaq":"SSS'yi aç",
+    "home.safetyCardTitle":"Güvenlik / Dolandırıcılıktan Korunma",
+    "home.safetyCardDesc":"Hataları ve dolandırıcılık riskini azaltan basit alışkanlıkları öğrenin.",
+    "home.openSafety":"Güvenliği aç",
+    "home.arrowNote":"Tamamen yeniyseniz sıralı ilerleyin.",
+    "glossary.title":"Sözlük",
+    "glossary.desc":"En önemli kripto terimlerinin basit açıklamaları. Bir kelime yabancı gelirse önce burayı açın.",
+    "sources.pageTitle":"Kaynak Kütüphanesi",
+    "sources.pageDesc":"Derslerdeki fikirleri gerçek dünyadaki örneklerle bağlamak için hazırlanmış makale ve resmi kaynak listesi.",
+    "sources.catScams":"Dolandırıcılıklar",
+    "sources.catExchanges":"Borsalar",
+    "sources.catStable":"Stablecoin'ler",
+    "sources.catWallet":"Cüzdan güvenliği"
+  });
+
+  extraUi.tr = Object.assign({}, extraUi.en || {}, extraUi.tr || {}, {
+    "v.ledger":"Defter",
+    "v.node":"Düğüm",
+    "v.wallet":"Cüzdan",
+    "v.interface":"arayüz",
+    "v.address":"Adres",
+    "v.shareable":"paylaşılabilir",
+    "v.private":"Özel anahtar",
+    "v.secret":"gizli",
+    "v.seed":"Kurtarma ifadesi",
+    "v.backup":"yedek",
+    "v.network":"Ağ",
+    "v.test":"Test transferi",
+    "v.txid":"TxID",
+    "v.match":"eşleşmeli",
+    "v.check":"kontrol et",
+    "v.smallfirst":"önce küçük tutar",
+    "v.verify":"doğrula",
+    "v.defi":"DeFi",
+    "v.utility":"Yardımcı token",
+    "v.governance":"Yönetişim",
+    "v.nft":"NFT",
+    "v.stablecoin":"Stablecoin",
+    "v.bank":"Banka gibi",
+    "v.access":"Erişim",
+    "v.voting":"Oylama",
+    "v.ownership":"Sahiplik",
+    "v.cash":"Dijital nakit",
+    "v.roleDesc1":"Kod ve cüzdanlarla çalışan finansal işlevler.",
+    "v.roleDesc2":"Hizmet içi kullanım, erişim ve faydalar.",
+    "v.roleDesc3":"Tekliflere ve kararlara katılım.",
+    "v.roleDesc4":"Belirli bir dijital varlığa bağlı sahiplik kanıtı.",
+    "v.roleDesc5":"Bir referans değere yakın kalacak şekilde tasarlanır.",
+    "v.phishing":"Oltalama",
+    "v.custody":"Saklama",
+    "v.designrisk":"Tasarım riski",
+    "v.riskDesc1":"Sahte siteler veya kötü niyetli izinler varlıkları boşaltabilir.",
+    "v.riskDesc2":"Anahtarlar başkasındaysa onun sistemine bağımlı olursunuz.",
+    "v.riskDesc3":"Kararlı görünse bile yapı ve tasarım yine önemlidir.",
+    "v.networkDesc":"Göndermeden önce ağın doğru olduğundan emin olun.",
+    "v.addressDesc":"Adresin başını ve sonunu gözle tekrar kontrol edin.",
+    "v.testDesc":"Mümkünse önce küçük bir test gönderimi yapın.",
+    "v.txidDesc":"Gerçek kayıt durumunu TxID ile doğrulayın."
+  });
+
+  homeContent.tr = {
+    title:"Kriptoyu adım adım öğrenin — sonra neye bakacağınızı bilin",
+    desc:"Temelden başlayın; cüzdanlar, güvenli transferler, token rolleri ve gerçek dünya dersleriyle devam edin. İstediğiniz zaman Sözlük ve Kaynak Kütüphanesi bölümlerini de açabilirsiniz.",
+    start:"Nereden başlamalısınız?",
+    guide:"Tamamen yeniyseniz dersleri sırayla takip edin. Her sayfa basit açıklamalar, örnekler, yaygın hatalar, kontrol noktaları ve kaynaklar içerir."
+  };
+
+  glossaryOverrides.tr = [
+    ["Cüzdan adresi","Dijital varlık almak için kullanılan herkese açık adres."],
+    ["Özel anahtar","Cüzdanı kontrol etmeyi sağlayan gizli anahtar."],
+    ["Kurtarma ifadesi","Cüzdanı geri yüklemek için kullanılan yedek kelime dizisi. Asla paylaşmayın."],
+    ["Gas ücreti","Bir işlemi işlemek için ödenen ağ ücreti."],
+    ["Açık anahtar","Cüzdan kimliğiyle bağlantılı kriptografik anahtar; adres oluşturmaya yardımcı olur."],
+    ["Blokzincir gezgini","Blokzincir üzerindeki işlemleri ve adresleri görüntülemek için kullanılan site veya araç."],
+    ["Akıllı sözleşme","Önceden belirlenmiş kuralları otomatik uygulayan blokzincir kodu."],
+    ["Saklama","Anahtarları ve varlıklara erişimi kimin kontrol ettiğini ifade eder."],
+    ["Blokzincir köprüsü","Farklı blokzincirler arasında varlık veya mesaj taşımayı sağlayan araç."]
+  ];
+  glossaryData.tr = deepClone(glossaryOverrides.tr);
+
+  sourceOverrides.tr = [
+    ["Dolandırıcılık","FTC tüketici uyarısı","FTC'nin kripto dolandırıcılıkları ve tüketici güvenliği hakkındaki rehberi.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams"],
+    ["Borsalar","FTX hakkında Reuters haberi","FTX vakası, borsa ve saklama risklerini anlamaya yardımcı olur.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/"],
+    ["Stablecoin'ler","ECB açıklama metni","Bir politika kurumunun stablecoin yapısını ve risklerini nasıl gördüğünü açıklar.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html"],
+    ["Cüzdan güvenliği","FTC ödeme uyarısı","Kripto ile ödeme talebinin neden güçlü bir uyarı sinyali olduğunu gösterir.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem"]
+  ];
+  sourceLibrary.tr = deepClone(sourceOverrides.tr);
+
+  polishedSectionContent.tr = {
+    startTitle: "Başlangıç Rehberi",
+    startIntro: "Bu sayfa, siteye ilk kez gelen kişilerin tam olarak nereden başlaması gerektiğini görmesi için hazırlandı. Önce basit bir sırayı izleyin, temel oturduktan sonra diğer bölümlere geçin.",
+    startSteps: [
+      ["1. Adım — Blokzincir", "Önce 1. derste blokzincirin ne olduğunu ve paylaşılan kayıt mantığının neden önemli olduğunu anlayın."],
+      ["2. Adım — Cüzdanlar", "Sonra 2. derse geçin. Anahtar, adres ve erişim farkını öğrenmeden varlık taşımak kafa karıştırıcı olabilir."],
+      ["3. Adım — Sözlük", "1. ve 2. dersten sonra hâlâ yabancı gelen terimler varsa Sözlük bölümünü açın."],
+      ["4. Adım — Güvenli transfer", "Ardından 3. derste şu pratik rutini öğrenin: ağ, adres, test transferi ve TxID kontrolü."],
+      ["5. Adım — Roller ve gerçek örnekler", "Temel kavramlar oturunca token rolleri, risk kalıpları ve gerçek vakalar bölümüne geçin."]
+    ],
+    startTip: "Yeni başlayanlar için iyi rota: 1 → 2 → Sözlük → 3 → 4 → Güvenlik → Kaynak Kütüphanesi.",
+    faqTitle: "SSS",
+    faqIntro: "Bunlar yeni başlayanların en çok sorduğu sorular. İleri detaylara girmeden önce kısa ve açık cevapları okuyun.",
+    faqItems: [
+      ["Gerçekten cüzdana ihtiyacım var mı?", "Sadece bir borsa içinde alım satım yapıyorsanız hemen kendi saklama cüzdanı kullanmayabilirsiniz. Yine de sahipliğin nasıl çalıştığını anlamak için cüzdan ve anahtar mantığını öğrenmeniz önemlidir."],
+      ["Borsa ile cüzdan arasındaki fark nedir?", "Borsa; alım satım ve hesap yönetimi için bir hizmettir. Cüzdan ise anahtarları ve erişimi yönetir. Birbirine bağlıdırlar ama aynı şey değildirler."],
+      ["Neden gas ücreti ödüyorum?", "Gas ücreti ağ ücretidir. İşlemlerin blokzincirde işlenmesine ve kaydedilmesine yardımcı olur."],
+      ["Cüzdan adresimi paylaşmak güvenli mi?", "Evet. Cüzdan adresi varlık almak için paylaşılabilir. Ama özel anahtar ve kurtarma ifadesi asla paylaşılmamalıdır."],
+      ["Neden önce küçük bir test gönderimi yapmalıyım?", "Çünkü küçük bir test, büyük tutarı riske atmadan önce adres veya ağ hatasını yakalayabilir."]
+    ],
+    safetyTitle: "Güvenlik / Dolandırıcılıktan Korunma",
+    safetyIntro: "Bu, platformdaki en pratik bölümlerden biridir. Bu alışkanlıklar gerçek kayba dönüşmeden önce başlangıç hatalarını önleyebilir.",
+    safetyItems: [
+      ["Kurtarma ifadenizi asla paylaşmayın", "Kurtarma ifadesi cüzdana geri erişim sağlar. Bunu ele geçiren biri cüzdanı kontrol edebilir."],
+      ["Sahte airdrop'lara dikkat edin", "Dolandırıcılar ücretsiz token vaadiyle insanları sahte sitelere veya tehlikeli izinlere yönlendirir."],
+      ["Bağlanmadan önce bağlantıyı kontrol edin", "Oltalama bağlantıları neredeyse doğru görünebilir. Alan adını dikkatle yeniden kontrol edin."],
+      ["Önce küçük bir test tutarı gönderin", "Özellikle yeni bir ağda veya yeni bir adreste küçük test, büyük bir hatayı önleyebilir."],
+      ["Aşırı aciliyeti uyarı işareti sayın", "Baskı, geri sayım, tehdit ve anında ödeme isteği dolandırıcılıkta sık görülen kalıplardır."]
+    ]
+  };
+
+  lessonOverrides.tr = [
+    {
+      cat:"Temel",
+      title:"Blokzincir, basit dille",
+      intro:"Blokzincir paylaşılan bir defterdir. Tek bir şirketin tek kaydı tutması yerine, birçok bilgisayar aynı kaydı birlikte korur ve doğrular.",
+      sections:[
+        {h:"En basit fikirle başlayın", ps:["Kimin kime değer gönderdiğini yazan bir defter düşünün. Banka sisteminde bu defteri banka kontrol eder. Blokzincirde ise birçok katılımcı aynı kaydın doğru kalmasına yardım eder.", "Bu, bütün blokzincirlerin tamamen aynı çalıştığı anlamına gelmez. Yeni başlayanlar için önemli fikir, paylaşılan doğrulamadır. Birçok taraf aynı kaydı onayladığında geçmişi tek başına değiştirmek çok daha zorlaşır."]},
+        {h:"Yeni başlayanlar neden önemsemeli?", ps:["Birçok kişi kripto alırken önce fiyatı, logosu veya uygulamayı görür. Fakat bunun arkasındaki kayıt sistemini anlamadan risk, güvenlik ve sahiplik hakkında sağlıklı karar vermek zordur.", "Blokzincir önemlidir çünkü işlemler, bakiyeler ve sahiplik burada kaydedilir. Bu kısım netleşince cüzdanlar ve token rolleri de daha anlaşılır olur."]},
+        {h:"Bloklar, zincir ve düğümler", ps:["İşlemler bloklar hâlinde gruplanır. Her yeni blok önceki bloğa bağlanır; bu yüzden buna blok zinciri denir.", "Düğüm, defteri okumaya, saklamaya veya doğrulamaya yardım eden bilgisayardır. Başlangıçta tüm teknik ayrıntıları ezberlemeniz gerekmez; birçok düğümün kaydı korumaya yardım ettiğini anlamanız yeterlidir."]},
+        {h:"Sisteme güç veren şey", ps:["Blokzincir, tek bir merkezi veri tabanına bağımlılığı azaltabilir. Bu yüzden dijital varlıklar ve sahiplik kayıtlarında kullanılır.", "Ama aynı yapı hataları geri almayı da zorlaştırabilir. Yanlış yere gönderim yaparsanız bunu geri çevirecek merkezi bir destek olmayabilir. Bu yüzden önce yapıyı anlamak, sonra hız düşünmek daha güvenlidir."]}
+      ],
+      defs:[["Defter","İşlemlerin veya bakiyelerin kaydı."],["Düğüm","Kaydı tutmaya veya doğrulamaya yardım eden bilgisayar."],["Blok","Zincire eklenen işlem grubu."],["Zincir","Bir bloğun bir sonrakine sıralı biçimde bağlanması."]],
+      example:"Banka transferi genelde bankanın veri tabanına bağlıdır. Blokzincir transferi ise ağın paylaşılan kaydına bağlıdır.",
+      mistakes:["Blokzincirin her durumda otomatik güvenlik sağladığını sanmak.","Her işlemin kart ödemesi gibi geri alınabileceğini varsaymak.","Blokzinciri gizemli bir kelime gibi görüp kayıt sistemi olarak düşünmemek."],
+      faqs:[["Tek bir şirket blokzinciri değiştirebilir mi?","Açık blokzincirlerde tek bir aktör genelde bütün paylaşılan kaydı tek başına değiştiremez."],["Blokzincire neden şeffaf denir?","Çünkü işlem kayıtları çoğu zaman bir gezgin üzerinden açıkça incelenebilir; gerçek isimler görünmese bile kayıt yapısı görülebilir."],["Önce programlama öğrenmem gerekir mi?","Hayır. Yeni başlayanların önce paylaşılan kayıt, paylaşılan doğrulama ve değişmesi daha zor bir geçmiş fikrini anlaması yeterlidir."]],
+      checkpoints:["Blokzinciri paylaşılan bir defter olarak açıklayabilirim.","Paylaşılan doğrulamanın neden önemli olduğunu anlıyorum.","Onaylanmış işlemlerin neden zor geri alındığını biliyorum."],
+      quiz:[["Yeni başlayanlar için blokzincirin en basit tanımı nedir?","Birçok taraf tarafından doğrulanan paylaşılan bir defterdir."],["Yeni başlayanlar neden blokzincir yapısını anlamalı?","Çünkü sahiplik, bakiyeler ve işlemler burada kaydedilir."]]
+    },
+    {
+      cat:"Erişim",
+      title:"Cüzdanlar, basit dille",
+      intro:"Bir cüzdan, öncelikle coin saklayan bir kutu değildir. Blokzincirde kayıtlı dijital varlıklara erişmenizi ve onları kontrol etmenizi sağlayan anahtarları yöneten araçtır.",
+      sections:[
+        {h:"En büyük başlangıç yanılgısı", ps:["Birçok kişi cüzdanı fiziksel cüzdan gibi, coinlerin içinde durduğu bir kap sanır. Bu benzetme anlaşılırdır ama eksiktir.", "Varlıklarınız blokzincirde kayıtlıdır. Cüzdan, bu varlıklar üzerindeki kontrolünüzü kanıtlamanıza yardım eder. Bu yüzden birçok eğitimci cüzdanı, bir anahtar yöneticisi olarak düşünmenin daha doğru olduğunu söyler."]},
+        {h:"Adres, özel anahtar ve kurtarma ifadesi", ps:["Cüzdan adresi varlık almak için kullanılır ve paylaşılabilir.", "Özel anahtar kontrol sağlayan bilgidir; asla paylaşılmamalıdır.", "Kurtarma ifadesi cüzdanı geri yükleyen yedektir. Birisi bu ifadeyi alırsa varlıklarınıza erişebilir."]},
+        {h:"Custodial ve self-custody farkı", ps:["Bir borsa veya hizmet anahtarları sizin yerinize tutuyorsa buna saklama hizmeti denir. Bu daha kolay görünebilir ama güvenlik ve kararlar açısından o platforma bağımlı olursunuz.", "Anahtarları siz kontrol ediyorsanız buna self-custody denir. Daha fazla doğrudan kontrol verir ama sorumluluğu da artırır. Yeni başlayanlar seçim yapmadan önce iki modeli de anlamalıdır."]},
+        {h:"Cüzdan bilgisi pratikte neden önemlidir?", ps:["Cüzdan bilgisi sadece teknik teori değildir. Varlık alma, gönderme, saklama, yedekleme ve koruma biçiminizi doğrudan etkiler.", "Başlangıç kayıplarının çoğu, kurtarma ifadesinin paylaşılması, sahte destek mesajına güvenilmesi veya cüzdanın neye izin verdiği anlaşılmadan onay verilmesi yüzünden olur."]}
+      ],
+      defs:[["Cüzdan adresi","Varlık almak için kullanılan herkese açık adres."],["Özel anahtar","Erişimi kontrol eden gizli anahtar."],["Kurtarma ifadesi","Cüzdanı geri getirmek için kullanılan yedek ifade."],["Saklamalı cüzdan","Anahtarların bir hizmet tarafından tutulduğu cüzdan."]],
+      example:"Adresi bir posta kutusunun adresi gibi düşünün. Özel anahtarı da o kutuyu açan gizli anahtar gibi hayal edin.",
+      mistakes:["Kurtarma ifadesini sözde destek ekibiyle paylaşmak.","Kurtarma ifadesini yalnızca riskli bir ekran görüntüsü klasöründe saklamak.","Borsa hesabı ile self-custody cüzdanın aynı şekilde çalıştığını sanmak."],
+      faqs:[["Cüzdan adresimi paylaşabilir miyim?","Evet. Adres, varlık almak için kullanılır."],["Özel anahtarımı veya kurtarma ifademi paylaşabilir miyim?","Hayır. Bunlara sahip olan biri cüzdan üzerinde kontrol kazanabilir."],["Self-custody her zaman daha mı iyidir?","Daha fazla doğrudan kontrol verir; fakat güvenlik ve yedekleme sorumluluğu da size geçer."]],
+      checkpoints:["Adres ile özel anahtar arasındaki farkı biliyorum.","Kurtarma ifadesinin neden gizli kalması gerektiğini anlıyorum.","Saklama hizmeti ile self-custody arasındaki farkı kavrıyorum."],
+      quiz:[["Güvenle paylaşılabilecek bilgi nedir?","Cüzdan adresinizdir."],["Asla paylaşılmaması gereken şey nedir?","Özel anahtarınız ve kurtarma ifadenizdir."]]
+    },
+    {
+      cat:"Güvenlik",
+      title:"Güvenli kripto transferleri",
+      intro:"Kripto transferleri korkutucu görünmek zorunda değildir; fakat tekrar edilebilir bir güvenlik rutini ister. En basit kontrol listesi şudur: ağ, adres, küçük test ve TxID doğrulaması.",
+      sections:[
+        {h:"İnsanlar transferlerde neden hata yapar?", ps:["Yeni başlayanlar çoğu zaman fazla hızlı davranır. Yapıştırılan adresin doğru olduğunu varsayar, ağı önemsemez veya test yapmadan tüm tutarı gönderir.", "Sorun şu ki blokzincir transferlerini geri almak zor olabilir. Bu yüzden güvenli alışkanlık, özgüvenden daha önemlidir."]},
+        {h:"4 adımlı temel rutin", ps:["Birinci adım: ağı doğrulayın. Bazı varlıklar birden fazla ağda dolaşır ve doğru hedef ağı seçmek önemlidir.", "İkinci adım: adresi dikkatle kontrol edin. Sırf alana yapıştırıldı diye doğru kabul etmeyin.", "Üçüncü adım: mümkünse önce küçük bir test tutarı gönderin. Test doğru ulaşırsa daha büyük tutarı sonra gönderin.", "Dördüncü adım: TxID ile gerçek işlem kaydını kontrol edin."]},
+        {h:"TxID neden yararlıdır?", ps:["TxID'yi bir takip numarası gibi düşünebilirsiniz. İşlemin beklemede mi, onaylandı mı, başarısız mı olduğunu görmekte yardımcı olur.", "Başlangıçta bütün gezgin araçlarını ezberlemeniz gerekmez. TxID'nin, işlem kaydını doğrulamak için kullanılan referans numarası olduğunu anlamanız yeterlidir."]},
+        {h:"Yavaş olmak neden daha güvenlidir?", ps:["Kriptoda hızlı elden çok doğru rutin önemlidir.", "Ağı bir kez daha kontrol etmek, adresin başını ve sonunu görmek ve önce küçük test göndermek büyük hataları önleyebilir."]}
+      ],
+      defs:[["Ağ","Varlığın hareket ettiği blokzincir sistemi."],["Adres","Varlığın gönderildiği hedef konum."],["Test transferi","Önce küçük tutar göndererek doğrulama yapma adımı."],["TxID","İşlemi kontrol etmeye yarayan benzersiz kimlik."]],
+      example:"Alice, USDT göndermeden önce ağı doğrular, adresi tekrar kontrol eder, küçük bir test gönderir ve TxID ile kayıt durumunu gördükten sonra kalan tutarı yollar.",
+      mistakes:["İlk denemede tüm tutarı göndermek.","Sadece token adına bakıp ağı yok saymak.","Yapıştırılan adresin otomatik olarak doğru olduğunu sanmak."],
+      faqs:[["Ağ neden bu kadar önemli?","Aynı isimli varlık farklı ağlarda bulunabilir; yanlış ağ seçimi soruna yol açabilir."],["Neden küçük test yapmalıyım?","Çünkü hata maliyetini çok düşürür."],["Gönderimden sonra ne yapmalıyım?","TxID ile gerçek işlem durumunu kontrol etmelisiniz."]],
+      checkpoints:["Güvenli transferin dört adımını söyleyebilirim.","Test transferinin neden önemli olduğunu biliyorum.","TxID'nin ne işe yaradığını anlıyorum."],
+      quiz:[["Tam tutarı göndermeden önce ne yapmalısınız?","Ağı ve adresi kontrol etmeli, mümkünse küçük bir test transferi yapmalısınız."],["TxID size nasıl yardımcı olur?","İşlemin blokzincir kaydındaki durumunu doğrulamanızı sağlar."]]
+    },
+    {
+      cat:"Roller",
+      title:"Kriptonun 5 temel rolü",
+      intro:"Kriptoyu isimlerden çok rolleri üzerinden anlamak daha kolaydır. Bazı varlıklar dijital nakit gibi çalışır; bazıları erişim, oylama veya sahiplik kanıtı sunar.",
+      sections:[
+        {h:"Role bakınca tablo sadeleşir", ps:["Yeni başlayanların kafasının karışmasının bir nedeni proje isimlerinin çok fazla olmasıdır.", "Ama önce isme değil role bakarsanız yapı daha basit görünür. Soru şudur: Bu token gerçekte ne işe yarıyor?"]},
+        {h:"Yeni başlayanlar için 5 kategori", ps:["DeFi; borç verme, borç alma veya takas gibi finansal işlevleri temsil eder.", "Yardımcı token'ler bir ürün veya hizmet içinde erişim ve kullanım sağlar.", "Yönetişim token'leri teklif ve kararlarda oy vermeye yarar.", "NFT'ler belirli bir dijital öğe için sahiplik kanıtı gibi düşünülebilir.", "Stablecoin'ler ise değer ölçüsü ve transfer aracı olarak dijital nakde benzer."]},
+        {h:"Bu ayrım neden önemlidir?", ps:["Stablecoin ile NFT aynı rolü oynamaz. İkisine de sadece 'coin' gibi bakarsanız kullanım amacı ve risk yapısını karıştırırsınız.", "Role odaklanınca hangi sorunun çözülmeye çalışıldığını ve nerede risk oluşabileceğini daha net görmeye başlarsınız."]},
+        {h:"Daha iyi soru", ps:["'Adı ne?' yerine 'Ne rol oynuyor?' diye sormak daha güçlü bir başlangıçtır.", "Bu alışkanlık, sadece modayı takip etmekten daha iyi karar vermeye yardım eder."]}
+      ],
+      example:"Stablecoin'in ana rolü fiyat referansı ve transfer kolaylığıdır; NFT'nin rolü ise belirli bir dijital öğe için sahiplik kanıtı sunmaktır.",
+      mistakes:["Bütün token'leri aynı tür varlık sanmak.","Önce sadece fiyata bakıp rolü sonradan düşünmek.","Token'in gerçekten ne için kullanıldığını kontrol etmemek."],
+      faqs:[["DeFi bankayla tamamen aynı mıdır?","Bazı işlevleri benzer görünse de yapı ve koruma mekanizmaları çok farklı olabilir."],["NFT sadece resim midir?","Başlangıç açısından daha önemli fikir, onun bir sahiplik kanıtı gibi çalışabilmesidir."],["Stablecoin'ler neden popüler?","Çünkü birçok kullanıcı için fiyat referansı ve transfer aracı olarak pratik görünürler."]],
+      checkpoints:["DeFi'yi çok basit şekilde açıklayabilirim.","Yardımcı token ile yönetişim tokeni arasındaki farkı biliyorum.","Role odaklanmanın neden yararlı olduğunu anlıyorum."],
+      quiz:[["Stablecoin'i en kolay neye benzetebilirsiniz?","Dijital nakde."],["Yeni başlayan biri token'e bakarken önce hangi soruyu sormalı?","Bu token hangi rolü oynuyor?"]]
+    },
+    {
+      cat:"Gerçek dünya",
+      title:"Gerçek vakalardan çıkarılan dersler",
+      intro:"Kripto eğitimi sadece tanımlarla bitmemelidir. Gerçek örnekler, yeni başlayanların riskin nerede ortaya çıktığını ve hangi hataların tekrarlandığını daha iyi görmesini sağlar.",
+      sections:[
+        {h:"Gerçek örnekler neden önemlidir?", ps:["Gerçek olaylar, soyut uyarıları somut derse dönüştürür.", "Örneğin 'kurtarma ifadenizi paylaşmayın' cümlesi önemlidir; ama bunu gerçek bir oltalama vakasıyla birlikte görmek dersi daha kalıcı yapar."]},
+        {h:"Tekrarlanan üç risk kalıbı", ps:["Birincisi oltalama dolandırıcılıklarıdır. İnsanları aceleye getirir ve cüzdan bağlama ya da kurtarma ifadesi girme baskısı kurarlar.", "İkincisi saklama riskidir. Kolaylık ile gerçek kontrol aynı şey değildir.", "Üçüncüsü tasarım riskidir. 'Kararlı' gibi görünen bir yapı bile sorunsuz olmak zorunda değildir."]},
+        {h:"Haberleri daha iyi okuma yöntemi", ps:["Sadece çarpıcı başlığa bakmak yerine, önce neyin başarısız olduğunu sorun. Sorun saklama yapısı mı, dolandırıcılık mı, yoksa tasarım mı?", "Bu soru alışkanlığı gelişirse korku yerine yapıyı, söylenti yerine mekanizmayı öğrenmeye başlarsınız."]},
+        {h:"Hatırlanması gereken tek cümle", ps:["ABD FTC tüketici rehberinde şu uyarı yer alır: 'Only scammers demand payment in cryptocurrency.'", "Yani birisi baskı, tehdit veya aşırı aciliyetle sizden kripto ödeme istiyorsa, bu tek başına güçlü bir uyarı işaretidir."]}
+      ],
+      example:"Bir borsa çöküşü haberi gördüğünüzde, 'bütün kripto başarısız oldu' demek yerine önce saklama yapısında ve kontrol modelinde neyin kırıldığını sormak daha öğreticidir.",
+      mistakes:["Tüm olumsuz haberleri aynı tür problem sanmak.","Acil baskı kuran mesajlara hemen güvenmek.","Sadece isim veya markaya bakıp güvenli olduğunu düşünmek."],
+      faqs:[["Eğitim platformunda neden gerçek haberler ve kaynaklar var?","Çünkü gerçek örnekler kavramların daha uzun süre akılda kalmasına yardım eder."],["Olumsuz bir olay tüm sektörün başarısız olduğu anlamına gelir mi?","Hayır. Çoğu zaman belirli bir yapısal sorunu gösterir."],["Korkutucu bir başlık görünce önce neye bakmalıyım?","Bunun dolandırıcılık mı, saklama sorunu mu, yoksa tasarım sorunu mu olduğunu ayırmaya çalışın."]],
+      checkpoints:["Üç büyük risk kalıbını sayabilirim.","Kararlı görünen bir yapının risksiz olmadığını anlıyorum.","Resmî dolandırıcılık uyarılarının neden önemli olduğunu biliyorum."],
+      quiz:[["Başarısızlık haberini okurken ilk sormanız gereken iyi soru nedir?","Tam olarak ne başarısız oldu ve yapının hangi kısmı kırıldı?"],["Acil baskı neden risk işaretidir?","Çünkü dolandırıcılar insanların ayrıntıları kontrol etmesine fırsat vermemek için baskı ve acele duygusunu sık kullanır."]],
+      sources:[
+        ["FTC tüketici uyarısı","Önemli cümle: 'Only scammers demand payment in cryptocurrency.'","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams"],
+        ["FTX hakkında Reuters haberi","Reuters haberi, yeni başlayanların saklama riski ile fiyat hareketini birbirinden ayırmasına yardımcı olur.","https://www.reuters.com/technology/ftx-reaches-settlement-with-blockfi-may-pay-up-874-million-2024-03-07/"]
+      ]
+    }
+  ];
+
+  var allowedPages = ['home','glossary','sources','start','faq','safety'];
+  window.setLang = function(lang){
+    if (!ui[lang] && !extraUi[lang]) lang = 'en';
+    currentLang = lang;
+    localStorage.setItem('cryptoAcademyLang', lang);
+    document.documentElement.lang = lang === 'br' ? 'pt-BR' : lang;
+    document.querySelectorAll('.lang-item').forEach(function(el){ el.classList.toggle('active', el.dataset.lang === lang); });
+    if (typeof applyUI === 'function') applyUI();
+    if (typeof renderAllLessons === 'function') renderAllLessons();
+    if (allowedPages.indexOf(currentPage) !== -1) showPage(currentPage);
+    else showLesson(Number.isFinite(currentLesson) ? currentLesson : 0);
+  };
+
+  if (allowedPages.indexOf(currentPage) === -1 && !/^lesson[0-4]$/.test(String(currentPage || ''))) {
+    currentPage = 'home';
+    localStorage.setItem('cryptoAcademyPage', 'home');
+  }
+
+  bindLanguageMenu();
+
+  if (typeof applyUI === 'function') applyUI();
+  if (typeof renderAllLessons === 'function') renderAllLessons();
+  if (allowedPages.indexOf(currentPage) !== -1) showPage(currentPage);
+  else showLesson(Number.isFinite(currentLesson) ? currentLesson : 0);
 })();
 </script>
 
