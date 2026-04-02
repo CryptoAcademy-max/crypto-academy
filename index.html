@@ -5756,5 +5756,345 @@ if (typeof renderAllLessons === 'function') {
 })();
 </script>
 
+
+<style id="new-features-css">
+/* Search Modal */
+.search-overlay{position:fixed;inset:0;z-index:100;background:rgba(24,28,33,.45);display:none;align-items:flex-start;justify-content:center;padding-top:min(18vh,120px)}
+.search-overlay.open{display:flex}
+.search-box{width:min(94vw,580px);background:var(--panel);border:1px solid var(--line-strong);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.18);overflow:hidden;animation:fade .2s var(--ease)}
+.search-input-wrap{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.search-input-wrap svg{width:18px;height:18px;color:var(--text-3);flex-shrink:0}
+.search-input{flex:1;border:none;outline:none;background:transparent;font-size:.95rem;color:var(--text);font-family:inherit}
+.search-input::placeholder{color:var(--text-3)}
+.search-close{background:none;border:1px solid var(--line);border-radius:6px;padding:3px 8px;font-size:.7rem;color:var(--text-3);cursor:pointer;font-family:"IBM Plex Mono",monospace}
+.search-results{max-height:min(50vh,400px);overflow-y:auto;padding:8px}
+.search-results:empty::after{content:attr(data-empty);display:block;padding:20px;text-align:center;color:var(--text-3);font-size:.88rem}
+.search-result-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:10px;cursor:pointer;transition:background .12s}
+.search-result-item:hover{background:var(--sidebar)}
+.search-result-badge{flex-shrink:0;width:24px;height:24px;border-radius:6px;display:grid;place-items:center;font-size:.65rem;font-weight:700;font-family:"IBM Plex Mono",monospace;color:#fff}
+.search-result-badge.lesson{background:var(--navy)}
+.search-result-badge.glossary{background:var(--gold)}
+.search-result-badge.faq{background:var(--green)}
+.search-result-badge.source{background:var(--text-3)}
+.search-result-title{font-size:.88rem;font-weight:700;color:var(--text)}
+.search-result-desc{font-size:.78rem;color:var(--text-3);margin-top:2px}
+/* Search trigger button in topbar */
+.search-trigger{display:flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:.77rem;font-weight:600;color:var(--text-3);cursor:pointer}
+.search-trigger svg{width:14px;height:14px}
+@media(max-width:768px){.search-trigger span{display:none}.search-trigger{padding:7px 8px}}
+
+/* Continue Learning card */
+.continue-card{background:linear-gradient(135deg,#eef3fa 0%,#f6edd8 100%);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:transform .16s var(--ease),box-shadow .16s var(--ease)}
+.continue-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.continue-icon{width:40px;height:40px;border-radius:12px;background:var(--navy);display:grid;place-items:center;flex-shrink:0}
+.continue-icon svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2}
+.continue-title{font-size:.92rem;font-weight:800;color:var(--text);margin-bottom:2px}
+.continue-sub{font-size:.78rem;color:var(--text-2)}
+
+/* Beginner Roadmap */
+.roadmap-section{margin:22px 0}
+.roadmap-section h2{font-size:1rem;font-weight:800;margin-bottom:12px;letter-spacing:-.01em}
+.roadmap-grid{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px}
+.roadmap-card{flex:0 0 auto;width:150px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer;transition:transform .16s var(--ease),box-shadow .16s var(--ease)}
+.roadmap-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.roadmap-day{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+.roadmap-label{font-size:.86rem;font-weight:700;color:var(--text)}
+@media(max-width:768px){.roadmap-card{width:135px;padding:12px}.roadmap-grid{gap:8px}}
+
+/* Top 5 Mistakes */
+.mistakes-section{margin:22px 0}
+.mistakes-section h2{font-size:1rem;font-weight:800;margin-bottom:12px;letter-spacing:-.01em}
+.mistakes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mistake-summary-card{background:#fff;border:1px solid var(--line);border-left:3px solid var(--red);border-radius:12px;padding:12px 14px}
+.mistake-summary-num{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--red);font-weight:700;margin-bottom:4px}
+.mistake-summary-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:4px}
+.mistake-summary-desc{font-size:.8rem;color:var(--text-2)}
+@media(max-width:520px){.mistakes-grid{grid-template-columns:1fr}}
+
+/* Language Notice */
+.lang-notice{background:var(--blue-bg);border:1px solid rgba(38,65,99,.12);border-radius:12px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;font-size:.82rem;color:var(--text-2)}
+.lang-notice-icon{flex-shrink:0;font-size:1.1rem}
+.lang-notice-close{margin-left:auto;background:none;border:none;color:var(--text-3);cursor:pointer;font-size:.9rem;padding:2px 6px}
+</style>
+
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
+    <div class="search-input-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search lessons, glossary, FAQ, sources..." autocomplete="off"/>
+      <button class="search-close" onclick="closeSearch()">ESC</button>
+    </div>
+    <div class="search-results" id="searchResults" data-empty="Type to search..."></div>
+  </div>
+</div>
+
+<script id="new-features-script">
+(function(){
+  // ========== 1. SEARCH ==========
+  // Add search button to topbar
+  var topbarRight = document.querySelector('.topbar-right');
+  var progressPill = topbarRight.querySelector('.progress-pill');
+  var searchBtn = document.createElement('button');
+  searchBtn.className = 'search-trigger';
+  searchBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>Search</span>';
+  searchBtn.onclick = function(){ openSearch(); };
+  topbarRight.insertBefore(searchBtn, progressPill);
+
+  window.openSearch = function(){
+    document.getElementById('searchOverlay').classList.add('open');
+    document.getElementById('searchInput').value = '';
+    document.getElementById('searchResults').innerHTML = '';
+    setTimeout(function(){ document.getElementById('searchInput').focus(); }, 100);
+  };
+  window.closeSearch = function(){
+    document.getElementById('searchOverlay').classList.remove('open');
+  };
+  document.getElementById('searchOverlay').addEventListener('click', function(e){
+    if(e.target === this) closeSearch();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeSearch();
+    if((e.ctrlKey || e.metaKey) && e.key === 'k'){ e.preventDefault(); openSearch(); }
+  });
+
+  function getSearchableItems(){
+    var items = [];
+    // Lessons
+    var lessonData = typeof lessons !== 'undefined' ? (lessons[currentLang] || lessons.en) : [];
+    for(var i = 0; i < lessonData.length; i++){
+      items.push({type:'lesson',badge:'L'+(i+1),title:lessonData[i].title,desc:lessonData[i].intro ? lessonData[i].intro.substring(0,80)+'...' : '',action:function(idx){return function(){showLesson(idx);closeSearch();};}(i)});
+    }
+    // Glossary
+    var gItems = typeof getGlossaryItems === 'function' ? getGlossaryItems() : [];
+    for(var g = 0; g < gItems.length; g++){
+      var term = gItems[g][0];
+      var body = typeof gItems[g][1] === 'function' ? gItems[g][1](t) : gItems[g][1];
+      items.push({type:'glossary',badge:'G',title:term,desc:body,action:function(){showPage('glossary');closeSearch();}});
+    }
+    // FAQ
+    var faqData = typeof polishedSectionContent !== 'undefined' ? (polishedSectionContent[currentLang] || polishedSectionContent.en) : null;
+    if(faqData && faqData.faqItems){
+      for(var f = 0; f < faqData.faqItems.length; f++){
+        items.push({type:'faq',badge:'F',title:faqData.faqItems[f][0],desc:faqData.faqItems[f][1].substring(0,80)+'...',action:function(){showPage('faq');closeSearch();}});
+      }
+    }
+    // Sources
+    var srcItems = typeof getSourceItems === 'function' ? getSourceItems() : [];
+    for(var s = 0; s < srcItems.length; s++){
+      items.push({type:'source',badge:'S',title:srcItems[s][1],desc:srcItems[s][2],action:function(){showPage('sources');closeSearch();}});
+    }
+    return items;
+  }
+
+  document.getElementById('searchInput').addEventListener('input', function(){
+    var q = this.value.trim().toLowerCase();
+    var container = document.getElementById('searchResults');
+    if(!q){ container.innerHTML = ''; return; }
+    var items = getSearchableItems();
+    var results = items.filter(function(item){
+      return item.title.toLowerCase().indexOf(q) !== -1 || item.desc.toLowerCase().indexOf(q) !== -1;
+    });
+    if(results.length === 0){
+      container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-3);font-size:.88rem">No results found</div>';
+      return;
+    }
+    container.innerHTML = results.slice(0,12).map(function(r){
+      return '<div class="search-result-item" data-idx="'+items.indexOf(r)+'"><div class="search-result-badge '+r.type+'">'+r.badge+'</div><div><div class="search-result-title">'+r.title+'</div><div class="search-result-desc">'+r.desc+'</div></div></div>';
+    }).join('');
+    container.querySelectorAll('.search-result-item').forEach(function(el){
+      var idx = parseInt(el.dataset.idx);
+      el.addEventListener('click', function(){ items[idx].action(); });
+    });
+  });
+
+  // ========== 2. CONTINUE LEARNING (localStorage tracking) ==========
+  var LAST_VISIT_KEY = 'cryptoAcademyLastVisit';
+
+  // Patch showLesson to track
+  var _origShowLesson2 = window.showLesson;
+  window.showLesson = function(i){
+    _origShowLesson2(i);
+    localStorage.setItem(LAST_VISIT_KEY, JSON.stringify({type:'lesson',index:i}));
+  };
+  // Patch showPage to track
+  var _origShowPage2 = window.showPage;
+  window.showPage = function(page){
+    _origShowPage2(page);
+    if(page !== 'home') localStorage.setItem(LAST_VISIT_KEY, JSON.stringify({type:'page',name:page}));
+  };
+
+  // ========== 3-5. MODIFY renderHome ==========
+  var _origRenderHome = window.renderHome;
+  window.renderHome = function(){
+    var base = _origRenderHome();
+    var extra = '';
+
+    // Language Update Notice
+    var noticeDismissed = localStorage.getItem('cryptoAcademyNoticeDismissed');
+    if(!noticeDismissed){
+      var noticeTexts = {
+        en: '🌐 Turkish, Brazilian Portuguese, Arabic, and Vietnamese are now available.',
+        ko: '🌐 터키어, 브라질 포르투갈어, 아랍어, 베트남어가 추가되었습니다.',
+        th: '🌐 ภาษาตุรกี โปรตุเกสบราซิล อาหรับ และเวียดนาม พร้อมใช้งานแล้ว',
+        id: '🌐 Bahasa Turki, Portugis Brasil, Arab, dan Vietnam sekarang tersedia.',
+        pt: '🌐 Turco, Português Brasileiro, Árabe e Vietnamita agora estão disponíveis.',
+        br: '🌐 Turco, Português Brasileiro, Árabe e Vietnamita agora estão disponíveis.',
+        tr: '🌐 Türkçe, Brezilya Portekizcesi, Arapça ve Vietnamca artık mevcut.',
+        es: '🌐 Turco, Portugués Brasileño, Árabe y Vietnamita ya están disponibles.',
+        ar: '🌐 التركية والبرتغالية البرازيلية والعربية والفيتنامية متوفرة الآن.',
+        vi: '🌐 Tiếng Thổ Nhĩ Kỳ, Bồ Đào Nha Brazil, Ả Rập và Việt Nam hiện đã có sẵn.'
+      };
+      var noticeText = noticeTexts[currentLang] || noticeTexts.en;
+      extra += '<div class="lang-notice" id="langNotice"><span class="lang-notice-icon">🌍</span><span>'+noticeText+'</span><button class="lang-notice-close" onclick="document.getElementById(\'langNotice\').style.display=\'none\';localStorage.setItem(\'cryptoAcademyNoticeDismissed\',\'1\')">✕</button></div>';
+    }
+
+    // Continue Learning card
+    var lastVisit = null;
+    try { lastVisit = JSON.parse(localStorage.getItem(LAST_VISIT_KEY)); } catch(e){}
+    var continueTexts = {
+      en:['Continue Learning','Pick up where you left off'],
+      ko:['이어서 학습하기','마지막으로 본 곳에서 이어보세요'],
+      th:['เรียนต่อ','กลับไปที่คุณค้างไว้'],
+      id:['Lanjutkan Belajar','Kembali ke tempat terakhir'],
+      pt:['Continuar aprendendo','Volte de onde você parou'],
+      br:['Continuar aprendendo','Volte de onde você parou'],
+      tr:['Öğrenmeye devam et','Kaldığınız yerden devam edin'],
+      es:['Seguir aprendiendo','Vuelve donde lo dejaste'],
+      ar:['واصل التعلّم','ارجع إلى حيث توقفت'],
+      vi:['Tiếp tục học','Quay lại nơi bạn đã dừng']
+    };
+    var ct = continueTexts[currentLang] || continueTexts.en;
+    var continueLabel = '';
+    var continueAction = "showLesson(0)";
+    if(lastVisit){
+      if(lastVisit.type === 'lesson'){
+        var ld = (typeof lessons !== 'undefined' ? (lessons[currentLang] || lessons.en) : []);
+        continueLabel = ld[lastVisit.index] ? ld[lastVisit.index].title : ('Lesson '+(lastVisit.index+1));
+        continueAction = 'showLesson('+lastVisit.index+')';
+      } else {
+        continueLabel = t('nav.'+lastVisit.name) || lastVisit.name;
+        continueAction = "showPage('"+lastVisit.name+"')";
+      }
+    } else {
+      var ld2 = (typeof lessons !== 'undefined' ? (lessons[currentLang] || lessons.en) : []);
+      continueLabel = ld2[0] ? ld2[0].title : 'Lesson 1';
+    }
+    extra += '<div class="continue-card" onclick="'+continueAction+'"><div class="continue-icon"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21" fill="#fff" stroke="none"/></svg></div><div><div class="continue-title">'+ct[0]+'</div><div class="continue-sub">'+ct[1]+' → '+continueLabel+'</div></div></div>';
+
+    // Beginner Roadmap
+    var roadmapTexts = {
+      en:{h:'Beginner Roadmap',days:['Day 1','Day 2','Day 3','Day 4','Day 5'],labels:['Blockchain','Wallets','Safe Transfers','Token Roles','Real-world Lessons']},
+      ko:{h:'초보자 로드맵',days:['1일차','2일차','3일차','4일차','5일차'],labels:['블록체인','지갑','안전한 전송','토큰 역할','실제 교훈']},
+      th:{h:'แผนการเรียนสำหรับผู้เริ่มต้น',days:['วันที่ 1','วันที่ 2','วันที่ 3','วันที่ 4','วันที่ 5'],labels:['บล็อกเชน','วอลเล็ต','การโอนอย่างปลอดภัย','บทบาทของโทเคน','บทเรียนจากโลกจริง']},
+      id:{h:'Roadmap Pemula',days:['Hari 1','Hari 2','Hari 3','Hari 4','Hari 5'],labels:['Blockchain','Wallet','Transfer Aman','Peran Token','Pelajaran Dunia Nyata']},
+      pt:{h:'Roteiro para Iniciantes',days:['Dia 1','Dia 2','Dia 3','Dia 4','Dia 5'],labels:['Blockchain','Carteiras','Transferências Seguras','Papéis dos Tokens','Lições do Mundo Real']},
+      br:{h:'Roteiro para Iniciantes',days:['Dia 1','Dia 2','Dia 3','Dia 4','Dia 5'],labels:['Blockchain','Carteiras','Transferências Seguras','Papéis dos Tokens','Lições do Mundo Real']},
+      tr:{h:'Başlangıç Yol Haritası',days:['1. Gün','2. Gün','3. Gün','4. Gün','5. Gün'],labels:['Blockchain','Cüzdanlar','Güvenli Transferler','Token Rolleri','Gerçek Dünya Dersleri']},
+      es:{h:'Ruta para Principiantes',days:['Día 1','Día 2','Día 3','Día 4','Día 5'],labels:['Blockchain','Billeteras','Transferencias Seguras','Roles de Tokens','Lecciones del Mundo Real']},
+      ar:{h:'خارطة طريق المبتدئين',days:['اليوم 1','اليوم 2','اليوم 3','اليوم 4','اليوم 5'],labels:['البلوكشين','المحافظ','التحويلات الآمنة','أدوار الرموز','دروس من الواقع']},
+      vi:{h:'Lộ trình cho người mới',days:['Ngày 1','Ngày 2','Ngày 3','Ngày 4','Ngày 5'],labels:['Blockchain','Ví tiền','Chuyển tiền an toàn','Vai trò Token','Bài học thực tế']}
+    };
+    var rm = roadmapTexts[currentLang] || roadmapTexts.en;
+    extra += '<div class="roadmap-section"><h2>📚 '+rm.h+'</h2><div class="roadmap-grid">';
+    for(var r=0;r<5;r++){
+      extra += '<div class="roadmap-card" onclick="showLesson('+r+')"><div class="roadmap-day">'+rm.days[r]+'</div><div class="roadmap-label">'+rm.labels[r]+'</div></div>';
+    }
+    extra += '</div></div>';
+
+    // Top 5 Beginner Mistakes
+    var mistakeTexts = {
+      en:{h:'Top 5 Beginner Mistakes',items:[
+        ['Sharing your seed phrase','Anyone with your seed phrase can take control of your wallet.'],
+        ['Wrong network transfer','Sending to the right address on the wrong network can cause permanent loss.'],
+        ['Clicking fake links / phishing','Scam sites look almost identical to real ones. Always verify the URL.'],
+        ['Skipping test transfer','One small test can save you from a costly mistake.'],
+        ['Confusing exchange and wallet','An exchange account is not the same as owning a wallet with your own keys.']
+      ]},
+      ko:{h:'초보자가 가장 자주 하는 실수 Top 5',items:[
+        ['시드 문구 공유','시드 문구를 가진 사람은 지갑을 완전히 통제할 수 있습니다.'],
+        ['잘못된 네트워크로 전송','올바른 주소라도 잘못된 네트워크로 보내면 영구 손실될 수 있습니다.'],
+        ['가짜 링크 클릭 / 피싱','사기 사이트는 실제와 거의 동일하게 보입니다. 항상 URL을 확인하세요.'],
+        ['테스트 전송 건너뛰기','한 번의 소액 테스트로 큰 실수를 방지할 수 있습니다.'],
+        ['거래소와 지갑 혼동','거래소 계정과 자신의 키로 된 지갑은 같은 것이 아닙니다.']
+      ]},
+      th:{h:'5 ข้อผิดพลาดที่ผู้เริ่มต้นทำบ่อย',items:[
+        ['แชร์วลีสำรอง','ใครก็ตามที่มีวลีสำรองสามารถควบคุมวอลเล็ตได้'],
+        ['โอนผิดเครือข่าย','ส่งไปที่อยู่ถูกแต่เครือข่ายผิดอาจสูญเสียถาวร'],
+        ['คลิกลิงก์ปลอม / ฟิชชิง','เว็บไซต์หลอกลวงดูเหมือนจริงมาก ตรวจสอบ URL เสมอ'],
+        ['ข้ามการโอนทดสอบ','การทดสอบเล็กน้อยหนึ่งครั้งช่วยป้องกันความผิดพลาดใหญ่'],
+        ['สับสนระหว่าง exchange กับวอลเล็ต','บัญชี exchange ไม่ใช่สิ่งเดียวกับวอลเล็ตที่คุณถือคีย์เอง']
+      ]},
+      id:{h:'5 Kesalahan Pemula Teratas',items:[
+        ['Membagikan frasa pemulihan','Siapa pun yang memiliki frasa pemulihan bisa mengendalikan dompet Anda.'],
+        ['Transfer ke jaringan yang salah','Mengirim ke alamat benar di jaringan salah bisa menyebabkan kehilangan permanen.'],
+        ['Mengklik tautan palsu / phishing','Situs penipuan terlihat hampir identik dengan aslinya. Selalu verifikasi URL.'],
+        ['Melewatkan transfer uji','Satu tes kecil bisa menyelamatkan Anda dari kesalahan yang mahal.'],
+        ['Bingung antara exchange dan dompet','Akun exchange tidak sama dengan memiliki dompet dengan kunci sendiri.']
+      ]},
+      pt:{h:'5 Erros Mais Comuns de Iniciantes',items:[
+        ['Compartilhar a frase de recuperação','Qualquer pessoa com sua frase de recuperação pode controlar sua carteira.'],
+        ['Transferência para a rede errada','Enviar para o endereço certo na rede errada pode causar perda permanente.'],
+        ['Clicar em links falsos / phishing','Sites de golpe parecem quase idênticos aos reais. Sempre verifique a URL.'],
+        ['Pular a transferência de teste','Um pequeno teste pode salvar você de um erro custoso.'],
+        ['Confundir exchange e carteira','Uma conta em exchange não é o mesmo que ter uma carteira com suas próprias chaves.']
+      ]},
+      br:{h:'5 Erros Mais Comuns de Iniciantes',items:[
+        ['Compartilhar a frase de recuperação','Qualquer pessoa com sua frase de recuperação pode controlar sua carteira.'],
+        ['Transferência para a rede errada','Enviar para o endereço certo na rede errada pode causar perda permanente.'],
+        ['Clicar em links falsos / phishing','Sites de golpe parecem quase idênticos aos reais. Sempre verifique a URL.'],
+        ['Pular a transferência de teste','Um pequeno teste pode salvar você de um erro custoso.'],
+        ['Confundir exchange e carteira','Uma conta em exchange não é o mesmo que ter uma carteira com suas próprias chaves.']
+      ]},
+      tr:{h:'En Sık Yapılan 5 Başlangıç Hatası',items:[
+        ['Kurtarma ifadesini paylaşmak','Kurtarma ifadesine sahip olan herkes cüzdanınızı kontrol edebilir.'],
+        ['Yanlış ağa transfer','Doğru adrese yanlış ağdan göndermek kalıcı kayba yol açabilir.'],
+        ['Sahte bağlantılara tıklamak / phishing','Dolandırıcı siteler neredeyse gerçeklerle aynı görünür. URL\'yi her zaman doğrulayın.'],
+        ['Test transferini atlamak','Küçük bir test sizi maliyetli bir hatadan kurtarabilir.'],
+        ['Borsa ile cüzdanı karıştırmak','Borsa hesabı, kendi anahtarlarınızla bir cüzdan sahibi olmakla aynı şey değildir.']
+      ]},
+      es:{h:'Los 5 Errores Más Comunes de Principiantes',items:[
+        ['Compartir la frase semilla','Cualquier persona con tu frase semilla puede controlar tu billetera.'],
+        ['Transferencia a la red equivocada','Enviar a la dirección correcta en la red equivocada puede causar pérdida permanente.'],
+        ['Hacer clic en enlaces falsos / phishing','Los sitios de estafa parecen casi idénticos a los reales. Siempre verifica la URL.'],
+        ['Saltarse la transferencia de prueba','Una pequeña prueba puede salvarte de un error costoso.'],
+        ['Confundir exchange y billetera','Una cuenta en un exchange no es lo mismo que tener una billetera con tus propias claves.']
+      ]},
+      ar:{h:'أكثر 5 أخطاء شائعة للمبتدئين',items:[
+        ['مشاركة عبارة الاسترداد','أي شخص يملك عبارة الاسترداد يمكنه التحكم في محفظتك.'],
+        ['التحويل إلى شبكة خاطئة','الإرسال إلى العنوان الصحيح على شبكة خاطئة قد يسبب خسارة دائمة.'],
+        ['النقر على روابط مزيفة / تصيد','مواقع الاحتيال تبدو شبه مطابقة للحقيقية. تحقق من الرابط دائماً.'],
+        ['تخطي التحويل التجريبي','اختبار صغير واحد يمكن أن ينقذك من خطأ مكلف.'],
+        ['الخلط بين البورصة والمحفظة','حساب البورصة ليس نفس امتلاك محفظة بمفاتيحك الخاصة.']
+      ]},
+      vi:{h:'5 Sai Lầm Phổ Biến Nhất Của Người Mới',items:[
+        ['Chia sẻ cụm từ khôi phục','Bất kỳ ai có cụm từ khôi phục đều có thể kiểm soát ví của bạn.'],
+        ['Chuyển sang mạng sai','Gửi đến địa chỉ đúng trên mạng sai có thể gây mất mát vĩnh viễn.'],
+        ['Nhấp vào liên kết giả / phishing','Trang web lừa đảo trông gần giống thật. Luôn xác minh URL.'],
+        ['Bỏ qua chuyển thử','Một lần thử nhỏ có thể cứu bạn khỏi sai lầm tốn kém.'],
+        ['Nhầm lẫn sàn giao dịch và ví','Tài khoản sàn giao dịch không giống với việc sở hữu ví với khóa riêng.']
+      ]}
+    };
+    var mt = mistakeTexts[currentLang] || mistakeTexts.en;
+    extra += '<div class="mistakes-section"><h2>⚠️ '+mt.h+'</h2><div class="mistakes-grid">';
+    for(var m=0;m<mt.items.length;m++){
+      extra += '<div class="mistake-summary-card"><div class="mistake-summary-num">#'+(m+1)+'</div><div class="mistake-summary-title">'+mt.items[m][0]+'</div><div class="mistake-summary-desc">'+mt.items[m][1]+'</div></div>';
+    }
+    extra += '</div></div>';
+
+    // Insert after hero, before the first home-grid
+    var insertPoint = base.indexOf('<div class="home-grid">');
+    if(insertPoint > -1){
+      return base.substring(0, insertPoint) + extra + base.substring(insertPoint);
+    }
+    return extra + base;
+  };
+
+  // Re-render home if currently on home
+  if(typeof renderAllLessons === 'function'){
+    renderAllLessons();
+    if(typeof showPage === 'function' && currentPage === 'home') showPage('home');
+  }
+})();
+</script>
 </body>
 </html>
