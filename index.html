@@ -166,6 +166,16 @@ a{color:var(--navy-2)}
 .source-library-meta{font-size:.72rem;font-family:"IBM Plex Mono",monospace;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
 .source-library-item p{font-size:.84rem;color:var(--text-2);margin-bottom:10px}
 .source-library-item a{font-size:.82rem;word-break:break-word}
+.src-publisher-row{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.src-publisher{display:inline-flex;align-items:center;gap:5px;font-size:.71rem;font-family:"IBM Plex Mono",monospace;font-weight:700;background:var(--sidebar);border:1px solid var(--line);padding:3px 8px;border-radius:6px;color:var(--text-2)}
+.src-section-tag{display:inline-flex;align-items:center;font-size:.71rem;font-family:"IBM Plex Mono",monospace;font-weight:700;background:var(--blue-bg);border:1px solid rgba(38,65,99,.15);padding:3px 8px;border-radius:6px;color:var(--navy-2)}
+.src-why{font-size:.78rem;color:var(--text-3);border-top:1px solid var(--line);padding-top:8px;margin-top:8px;font-style:italic}
+.src-why strong{color:var(--text-3);font-weight:700;font-style:normal}
+.src-section-heading{font-size:.98rem;font-weight:800;color:var(--text);padding:14px 0 8px;border-bottom:2px solid var(--line);margin:28px 0 14px;display:flex;align-items:center;gap:10px}
+.src-section-heading .src-section-count{font-size:.7rem;font-family:"IBM Plex Mono",monospace;background:var(--sidebar);border:1px solid var(--line);padding:2px 7px;border-radius:999px;color:var(--text-3);font-weight:700;margin-left:auto}
+.src-section-block{margin-bottom:10px}
+.source-library-item a.src-link{display:inline-block;margin-top:8px;font-size:.78rem;color:var(--navy-2);font-weight:600;text-decoration:none;word-break:break-all}
+.source-library-item a.src-link:hover{text-decoration:underline}
 .page-content{display:none;animation:fade .25s var(--ease)}
 .page-content.active{display:block}
 @media(max-width:980px){.home-grid,.glossary-grid,.source-library-grid{grid-template-columns:1fr}.home-mini-grid{grid-template-columns:1fr}}
@@ -1086,25 +1096,140 @@ const glossaryData = {
   ]
 };
 
+// Enhanced Source Library — structured with category, publisher, title, desc, url, related section, why it matters
+// Format: [category_key, publisher, title, desc, url, relatedSection, whyMatters]
+const sourceLibraryCats = {
+  en: [
+    { key:"scams",    label:"Scams / Consumer Warnings" },
+    { key:"exchanges",label:"Exchanges / Custody Risk" },
+    { key:"stable",   label:"Stablecoins / Policy & Structure" },
+    { key:"wallet",   label:"Wallet Safety / Payments" },
+    { key:"cases",    label:"Real-world Cases / Lessons" },
+    { key:"basics",   label:"Blockchain Basics / Education" },
+    { key:"defi",     label:"DeFi / Token Roles" },
+    { key:"reg",      label:"Regulation / Official Guidance" }
+  ],
+  ko: [
+    { key:"scams",    label:"사기 / 소비자 경고" },
+    { key:"exchanges",label:"거래소 / 커스터디 위험" },
+    { key:"stable",   label:"스테이블코인 / 정책 & 구조" },
+    { key:"wallet",   label:"지갑 보안 / 결제" },
+    { key:"cases",    label:"실제 사례 / 교훈" },
+    { key:"basics",   label:"블록체인 기초 / 교육" },
+    { key:"defi",     label:"DeFi / 토큰 역할" },
+    { key:"reg",      label:"규제 / 공식 가이던스" }
+  ],
+  th: [
+    { key:"scams",    label:"การหลอกลวง / คำเตือนผู้บริโภค" },
+    { key:"exchanges",label:"ตลาดแลกเปลี่ยน / ความเสี่ยง Custody" },
+    { key:"stable",   label:"สเตเบิลคอยน์ / นโยบายและโครงสร้าง" },
+    { key:"wallet",   label:"ความปลอดภัยวอลเล็ต / การชำระเงิน" },
+    { key:"cases",    label:"กรณีจริง / บทเรียน" },
+    { key:"basics",   label:"พื้นฐานบล็อกเชน / การศึกษา" },
+    { key:"defi",     label:"DeFi / บทบาทโทเคน" },
+    { key:"reg",      label:"กฎระเบียบ / คำแนะนำทางการ" }
+  ],
+  id: [
+    { key:"scams",    label:"Penipuan / Peringatan Konsumen" },
+    { key:"exchanges",label:"Bursa / Risiko Custody" },
+    { key:"stable",   label:"Stablecoin / Kebijakan & Struktur" },
+    { key:"wallet",   label:"Keamanan Wallet / Pembayaran" },
+    { key:"cases",    label:"Kasus Nyata / Pelajaran" },
+    { key:"basics",   label:"Dasar Blockchain / Edukasi" },
+    { key:"defi",     label:"DeFi / Peran Token" },
+    { key:"reg",      label:"Regulasi / Panduan Resmi" }
+  ]
+};
+// Default cats for other langs
+['pt','br','tr','es','ar','vi','de','fr','ja','zh'].forEach(l=>{sourceLibraryCats[l]=sourceLibraryCats.en;});
+
+// Source items: [cat_key, publisher, title, desc, url, relatedSection, whyMatters]
 const sourceLibrary = {
   en:[
-    ["Scams","FTC consumer warning","Crypto scam warning and consumer safety basics.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams"],
-    ["Exchanges","Reuters on FTX","Reporting on FTX and why custody and exchange risk matter.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/"],
-    ["Stablecoins","ECB explainer","How central banks and policymakers describe stablecoin risk and structure.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html"],
-    ["Wallet Safety","FTC payment warning","Why asking for crypto payments is often a scam signal.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem"]
+    // Scams / Consumer Warnings
+    ["scams","FTC","FTC: What To Know About Cryptocurrency Scams","Overview of the most common crypto scam types and how to protect yourself.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams","Safety","Helps beginners identify scam patterns before they lose money."],
+    ["scams","FTC","FTC: Don't Pay Anyone Who Contacts You and Asks for Crypto","Why unsolicited contact asking for crypto payments is almost always a scam.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem","Safety","Shows why crypto payment requests can be a scam warning signal."],
+    ["scams","Chainalysis","Crypto Scam Revenue Report","Data-driven look at how much money scammers collect and which tactics work best.","https://www.chainalysis.com/blog/2023-crypto-scam-revenue/","Lesson 5 — Real-world Lessons","Shows the real scale of scam activity so beginners can understand the risk level."],
+    ["scams","TRM Labs","Romance Scams and Pig Butchering","How long-term trust-building scams work and why they are so effective.","https://www.trmlabs.com/post/trm-labs-2023-report-reveals-pig-butchering-scammers-target-victims-for-months","Safety","Explains how social engineering scams operate over weeks or months."],
+    // Exchanges / Custody Risk
+    ["exchanges","Reuters","FTX Begins Paying Customers — What Happened","Reporting on FTX collapse, why custody and exchange risk matter for users.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/","Lesson 5 — Real-world Lessons","Helps beginners understand custody risk through a real exchange collapse case."],
+    ["exchanges","Reuters","Binance Pays $4.3 Billion in US Settlement","Coverage of the largest crypto compliance case and what it revealed about exchange operations.","https://www.reuters.com/technology/binance-pay-43-billion-settle-us-money-laundering-case-2023-11-21/","Lesson 5 — Real-world Lessons","Shows how even large exchanges face regulatory and compliance failures."],
+    ["exchanges","CoinDesk","Not Your Keys, Not Your Coins — Explained","Why holding assets on an exchange is different from holding them in your own wallet.","https://www.coindesk.com/learn/not-your-keys-not-your-coins-the-meaning-behind-the-adage/","Lesson 2 — Wallets","Core custody concept every beginner must understand before using any exchange."],
+    ["exchanges","Chainalysis","Exchange Hack Reports 2022–2023","Summary of major exchange hacks and what users lost when platforms were compromised.","https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2023/","Lesson 5 — Real-world Lessons","Illustrates real hack patterns and why exchange custody carries risk."],
+    // Stablecoins / Policy & Structure
+    ["stable","ECB","ECB: Stablecoin Risk and Structure Explainer","How central banks and policymakers describe stablecoin risk and backing mechanisms.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html","Lesson 4 — Token Types","Helps explain how regulators view stablecoin risk and policy."],
+    ["stable","BIS","BIS Working Paper: Stablecoins — Use Cases and Risks","Bank for International Settlements analysis of stablecoin models and systemic risk.","https://www.bis.org/publ/work905.htm","Lesson 4 — Token Types","Shows how international financial institutions understand stablecoin mechanics."],
+    ["stable","Reuters","TerraUSD Collapse Explained","Reporting on how the UST/LUNA collapse wiped out billions and what went wrong.","https://www.reuters.com/markets/currencies/how-stablecoin-terra-collapsed-2022-05-12/","Lesson 5 — Real-world Lessons","Real case showing how an algorithmic stablecoin can lose its peg catastrophically."],
+    // Wallet Safety / Payments
+    ["wallet","Ledger","Ledger Academy: What Is a Seed Phrase?","Official explanation of what a seed phrase does and why it must be protected.","https://www.ledger.com/academy/crypto/what-is-a-recovery-phrase","Lesson 2 — Wallets","Core concept for anyone setting up a wallet — protect your seed phrase."],
+    ["wallet","Binance Academy","Hot Wallet vs Cold Wallet — Binance Academy","Difference between internet-connected and offline wallets and when to use each.","https://academy.binance.com/en/articles/hot-vs-cold-wallet-whats-the-difference","Lesson 2 — Wallets","Helps beginners choose the right wallet type based on their security needs."],
+    ["wallet","FTC","FTC: Crypto ATM and QR Code Scams","How scammers use crypto ATMs and QR codes to steal money from victims.","https://consumer.ftc.gov/consumer-alerts/2023/04/crypto-atm-scam","Safety","Shows a specific real-world payment scam pattern to avoid."],
+    ["wallet","Coinbase","How to Verify a Crypto Address Before Sending","Step-by-step guide to checking addresses before confirming any transfer.","https://www.coinbase.com/learn/crypto-basics/how-to-send-crypto","Lesson 3 — Transfers","Directly supports learning the safe transfer steps taught in Lesson 3."],
+    // Real-world Cases / Lessons
+    ["cases","Reuters","Mt. Gox: A Timeline of the World's Biggest Crypto Hack","History of the Mt. Gox exchange failure — a foundational case for custody understanding.","https://www.reuters.com/technology/mt-gox-creditors-set-receive-bitcoin-repayments-10-years-after-hack-2024-07-05/","Lesson 5 — Real-world Lessons","Shows the longest-running exchange collapse and what it means for user funds."],
+    ["cases","TRM Labs","TRM Blockchain Intelligence: On-chain Forensics Explained","How blockchain transactions can be traced and what that means for security.","https://www.trmlabs.com/post/what-is-blockchain-analytics","Glossary","Helps explain how public blockchain data is analyzed and traced."],
+    ["cases","Chainalysis","How Hackers Launder Stolen Crypto","Patterns used to move and obscure stolen funds — and how they get caught.","https://www.chainalysis.com/blog/how-hackers-launder-cryptocurrency/","Lesson 5 — Real-world Lessons","Shows what happens after a hack and why blockchain is traceable."],
+    // Blockchain Basics / Education
+    ["basics","Binance Academy","What Is a Blockchain? — Binance Academy","Beginner-level explanation of how a blockchain stores and verifies data.","https://academy.binance.com/en/articles/what-is-blockchain-technology","Lesson 1 — Crypto Basics","Core conceptual foundation needed before any other lesson."],
+    ["basics","CoinDesk","What Is Crypto? A Beginner's Guide","Plain-language introduction to what cryptocurrency is and how it works.","https://www.coindesk.com/learn/what-is-cryptocurrency/","Lesson 1 — Crypto Basics","Best starting point for complete beginners before reading the lessons."],
+    ["basics","Etherscan","How to Read an Etherscan Transaction","Official guide to understanding what each field on a blockchain explorer means.","https://info.etherscan.com/understanding-an-ethereum-transaction/","Glossary","Supports the Glossary concepts: TxID, address, gas fee, block number."],
+    ["basics","Binance Academy","What Is a Gas Fee?","Clear explanation of why network fees exist and how they vary by demand.","https://academy.binance.com/en/articles/what-are-gas-fees-in-crypto","Glossary","Helps beginners understand gas fees before making their first transfer."],
+    // DeFi / Token Roles
+    ["defi","Binance Academy","What Is DeFi? — Binance Academy","Introduction to decentralized finance, what it replaces, and the risks involved.","https://academy.binance.com/en/articles/the-complete-beginners-guide-to-decentralized-finance-defi","Lesson 4 — Token Types","Foundation for understanding DeFi token roles covered in Lesson 4."],
+    ["defi","CoinDesk","What Is a Smart Contract?","Plain explanation of what smart contracts do and why they can carry risks.","https://www.coindesk.com/learn/what-is-a-smart-contract/","Glossary","Supports the Glossary definition and the smart contract concept in DeFi."],
+    ["defi","Chainalysis","DeFi Hacks and Protocol Exploits 2023","How DeFi protocols get exploited and what makes smart contracts vulnerable.","https://www.chainalysis.com/blog/defi-hacks-2023/","Lesson 5 — Real-world Lessons","Shows the specific risk that comes with DeFi vs. centralized exchanges."],
+    // Regulation / Official Guidance
+    ["reg","SEC","SEC: Investor Bulletin on Crypto Asset Securities","Official US SEC guidance on what crypto assets may qualify as securities.","https://www.sec.gov/oiea/investor-alerts-and-bulletins/investor-bulletin-initial-coin-offerings","Regulation","Helps users understand how US regulators classify crypto assets."],
+    ["reg","FSB","FSB: Global Regulatory Framework for Crypto Assets","Financial Stability Board overview of how international regulators are approaching crypto.","https://www.fsb.org/work-of-the-fsb/financial-innovation-and-structural-change/crypto-assets/","Regulation","Shows the global policy direction so beginners understand regulation's role."],
+    ["reg","ECB","ECB: MiCA Regulation Overview — What It Means","How the EU's Markets in Crypto-Assets regulation changes the landscape for users and issuers.","https://www.ecb.europa.eu/explainers/tell-me/html/what-is-mica.en.html","Regulation","Shows how major economies are building rules around crypto markets."]
   ],
   ko:[
-    ["사기","FTC 소비자 경고","암호화폐 사기와 소비자 보호에 관한 FTC 안내입니다.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams"],
-    ["거래소","Reuters의 FTX 기사","FTX 사례를 통해 거래소와 커스터디 위험을 이해할 수 있습니다.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/"],
-    ["스테이블코인","ECB 설명 자료","정책기관이 스테이블코인의 구조와 위험을 어떻게 보는지 설명합니다.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html"],
-    ["지갑 보안","FTC 결제 경고","암호화폐 결제를 요구하는 접근이 왜 위험 신호인지 보여줍니다.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem"]
+    // 사기 / 소비자 경고
+    ["scams","FTC","FTC: 암호화폐 사기 알아야 할 것들","가장 흔한 암호화폐 사기 유형과 자신을 보호하는 방법을 다룹니다.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams","Safety","초보자가 돈을 잃기 전에 사기 패턴을 파악하는 데 도움이 됩니다."],
+    ["scams","FTC","FTC: 연락해서 암호화폐 요구하면 무조건 사기","갑작스럽게 연락해 암호화폐 결제를 요구하는 행위가 왜 항상 사기인지 설명합니다.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem","Safety","암호화폐 결제 요청이 사기 신호임을 보여줍니다."],
+    ["scams","Chainalysis","암호화폐 사기 수익 보고서 2023","사기꾼들이 얼마나 많은 돈을 벌고 어떤 수법이 가장 효과적인지 데이터로 보여줍니다.","https://www.chainalysis.com/blog/2023-crypto-scam-revenue/","강의 5 — 실제 교훈","실제 사기 규모를 이해해 위험 수준을 인식하는 데 도움이 됩니다."],
+    ["scams","TRM Labs","로맨스 스캠과 돼지도살 사기 설명","장기간 신뢰를 쌓다가 사기 치는 수법과 왜 효과적인지 분석합니다.","https://www.trmlabs.com/post/trm-labs-2023-report-reveals-pig-butchering-scammers-target-victims-for-months","Safety","몇 주, 몇 달에 걸쳐 진행되는 소셜 엔지니어링 사기 수법을 설명합니다."],
+    // 거래소 / 커스터디 위험
+    ["exchanges","Reuters","FTX 파산과 고객 보상 — 무슨 일이 있었나","FTX 붕괴 경위와 거래소 커스터디 위험이 왜 중요한지 다룹니다.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/","강의 5 — 실제 교훈","실제 거래소 붕괴 사례를 통해 커스터디 위험을 이해하는 데 도움이 됩니다."],
+    ["exchanges","Reuters","바이낸스 43억 달러 미국 합의금 사건","역대 최대 규모의 암호화폐 규정 위반 사건과 거래소 운영 실태를 보여줍니다.","https://www.reuters.com/technology/binance-pay-43-billion-settle-us-money-laundering-case-2023-11-21/","강의 5 — 실제 교훈","대형 거래소도 규제 준수에 실패할 수 있음을 보여줍니다."],
+    ["exchanges","CoinDesk","'네 키가 아니면 네 코인이 아니다' — 설명","거래소에 자산을 두는 것과 내 지갑에 보관하는 것의 차이를 설명합니다.","https://www.coindesk.com/learn/not-your-keys-not-your-coins-the-meaning-behind-the-adage/","강의 2 — 지갑","거래소를 사용하기 전에 모든 초보자가 반드시 이해해야 하는 커스터디 개념입니다."],
+    ["exchanges","Chainalysis","거래소 해킹 보고서 2022–2023","주요 거래소 해킹 사례와 사용자들이 얼마나 피해를 입었는지 정리합니다.","https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2023/","강의 5 — 실제 교훈","실제 해킹 패턴과 거래소 커스터디의 위험성을 보여줍니다."],
+    // 스테이블코인 / 정책 & 구조
+    ["stable","ECB","ECB: 스테이블코인 위험과 구조 설명","중앙은행이 스테이블코인의 위험성과 담보 방식을 어떻게 보는지 설명합니다.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html","강의 4 — 토큰 유형","규제 기관이 스테이블코인을 어떻게 바라보는지 이해하는 데 도움이 됩니다."],
+    ["stable","BIS","BIS: 스테이블코인 활용 사례와 위험 분석","국제결제은행(BIS)이 스테이블코인 모델과 시스템 리스크를 분석한 보고서입니다.","https://www.bis.org/publ/work905.htm","강의 4 — 토큰 유형","국제 금융기관이 스테이블코인 구조를 어떻게 이해하는지 보여줍니다."],
+    ["stable","Reuters","테라USD 붕괴 전말","UST/LUNA 붕괴로 수조 원이 사라진 경위와 무엇이 잘못됐는지를 다룹니다.","https://www.reuters.com/markets/currencies/how-stablecoin-terra-collapsed-2022-05-12/","강의 5 — 실제 교훈","알고리즘 스테이블코인이 어떻게 페그를 잃을 수 있는지 보여주는 실제 사례입니다."],
+    // 지갑 보안 / 결제
+    ["wallet","Ledger","Ledger Academy: 시드 문구란 무엇인가?","시드 문구의 역할과 반드시 보호해야 하는 이유를 공식 설명합니다.","https://www.ledger.com/academy/crypto/what-is-a-recovery-phrase","강의 2 — 지갑","지갑을 처음 만드는 사람이라면 반드시 알아야 하는 핵심 개념입니다."],
+    ["wallet","Binance Academy","핫 월렛 vs 콜드 월렛 — Binance Academy","인터넷 연결 지갑과 오프라인 지갑의 차이와 언제 각각을 사용해야 하는지 설명합니다.","https://academy.binance.com/en/articles/hot-vs-cold-wallet-whats-the-difference","강의 2 — 지갑","초보자가 보안 필요에 맞는 지갑 유형을 선택하는 데 도움이 됩니다."],
+    ["wallet","FTC","FTC: 암호화폐 ATM과 QR코드 사기","사기꾼이 ATM과 QR코드를 통해 피해자 돈을 훔치는 방식을 설명합니다.","https://consumer.ftc.gov/consumer-alerts/2023/04/crypto-atm-scam","Safety","피해야 할 구체적인 실제 결제 사기 패턴을 보여줍니다."],
+    ["wallet","Coinbase","전송 전 암호화폐 주소 확인하는 방법","전송 확인 전에 주소를 검증하는 단계별 안내입니다.","https://www.coinbase.com/learn/crypto-basics/how-to-send-crypto","강의 3 — 전송","강의 3에서 배운 안전한 전송 단계를 직접 지원하는 자료입니다."],
+    // 실제 사례 / 교훈
+    ["cases","Reuters","마운트곡스: 세계 최대 암호화폐 해킹 타임라인","마운트곡스 거래소 파산의 역사 — 커스터디 이해를 위한 핵심 사례입니다.","https://www.reuters.com/technology/mt-gox-creditors-set-receive-bitcoin-repayments-10-years-after-hack-2024-07-05/","강의 5 — 실제 교훈","가장 오래된 거래소 붕괴 사례와 사용자 자산이 어떻게 위험에 처하는지 보여줍니다."],
+    ["cases","TRM Labs","온체인 포렌식이란 무엇인가","블록체인 거래가 어떻게 추적되는지, 그것이 보안에 무슨 의미인지 설명합니다.","https://www.trmlabs.com/post/what-is-blockchain-analytics","용어사전","공개 블록체인 데이터가 어떻게 분석되는지 이해하는 데 도움이 됩니다."],
+    ["cases","Chainalysis","해커들이 훔친 암호화폐를 세탁하는 방법","도난 자산이 어떻게 이동하고 감추어지며 어떻게 적발되는지 다룹니다.","https://www.chainalysis.com/blog/how-hackers-launder-cryptocurrency/","강의 5 — 실제 교훈","해킹 이후 무슨 일이 일어나는지, 블록체인이 왜 추적 가능한지 보여줍니다."],
+    // 블록체인 기초 / 교육
+    ["basics","Binance Academy","블록체인이란 무엇인가? — Binance Academy","블록체인이 데이터를 저장하고 검증하는 방식을 초보자 수준으로 설명합니다.","https://academy.binance.com/en/articles/what-is-blockchain-technology","강의 1 — 크립토 기초","다른 강의를 이해하기 위해 필요한 핵심 개념적 기초입니다."],
+    ["basics","CoinDesk","암호화폐란? 초보자 가이드","암호화폐가 무엇이고 어떻게 작동하는지 쉬운 언어로 소개합니다.","https://www.coindesk.com/learn/what-is-cryptocurrency/","강의 1 — 크립토 기초","강의를 읽기 전에 완전 초보자를 위한 최고의 출발점입니다."],
+    ["basics","Etherscan","이더스캔 거래 읽는 방법","블록체인 익스플로러의 각 항목이 무엇을 의미하는지 공식 안내합니다.","https://info.etherscan.com/understanding-an-ethereum-transaction/","용어사전","TxID, 주소, 가스비, 블록 번호 등 용어사전 개념을 지원합니다."],
+    ["basics","Binance Academy","가스비란 무엇인가?","네트워크 수수료가 왜 존재하고 수요에 따라 어떻게 달라지는지 설명합니다.","https://academy.binance.com/en/articles/what-are-gas-fees-in-crypto","용어사전","초보자가 첫 전송을 하기 전에 가스비를 이해하는 데 도움이 됩니다."],
+    // DeFi / 토큰 역할
+    ["defi","Binance Academy","DeFi란 무엇인가? — Binance Academy","탈중앙화 금융이 무엇을 대체하는지, 어떤 위험이 있는지 소개합니다.","https://academy.binance.com/en/articles/the-complete-beginners-guide-to-decentralized-finance-defi","강의 4 — 토큰 유형","강의 4에서 다루는 DeFi 토큰 역할을 이해하기 위한 기초입니다."],
+    ["defi","CoinDesk","스마트 컨트랙트란 무엇인가?","스마트 컨트랙트의 역할과 위험 요소를 쉽게 설명합니다.","https://www.coindesk.com/learn/what-is-a-smart-contract/","용어사전","용어사전 정의와 DeFi의 스마트 컨트랙트 개념을 지원합니다."],
+    ["defi","Chainalysis","DeFi 해킹과 프로토콜 익스플로잇 2023","DeFi 프로토콜이 어떻게 악용되고 스마트 컨트랙트가 어디서 취약한지 다룹니다.","https://www.chainalysis.com/blog/defi-hacks-2023/","강의 5 — 실제 교훈","중앙화 거래소와 DeFi의 위험 차이를 보여줍니다."],
+    // 규제 / 공식 가이던스
+    ["reg","SEC","SEC: 암호화폐 증권 관련 투자자 안내","미국 SEC가 어떤 암호화폐가 증권으로 분류될 수 있는지에 대한 공식 지침입니다.","https://www.sec.gov/oiea/investor-alerts-and-bulletins/investor-bulletin-initial-coin-offerings","규제","미국 규제 기관이 암호화폐를 어떻게 분류하는지 이해하는 데 도움이 됩니다."],
+    ["reg","FSB","FSB: 암호화폐 글로벌 규제 프레임워크","금융안정위원회(FSB)의 국제적 암호화폐 규제 접근 방식 개요입니다.","https://www.fsb.org/work-of-the-fsb/financial-innovation-and-structural-change/crypto-assets/","규제","글로벌 정책 방향을 이해해 규제의 역할을 파악하는 데 도움이 됩니다."],
+    ["reg","ECB","ECB: MiCA 규정 개요 — 사용자에게 무슨 의미인가","EU의 암호화폐 시장 규정(MiCA)이 사용자와 발행자에게 어떤 변화를 가져오는지 설명합니다.","https://www.ecb.europa.eu/explainers/tell-me/html/what-is-mica.en.html","규제","주요 경제권이 암호화폐 시장 규칙을 어떻게 구축하는지 보여줍니다."]
   ]
 };
 function getGlossaryItems(){
   return glossaryOverrides[currentLang] || glossaryData[currentLang] || glossaryData.ko || glossaryData.en;
 }
 function getSourceItems(){
-  return sourceOverrides[currentLang] || sourceLibrary[currentLang] || sourceLibrary.ko || sourceLibrary.en;
+  return sourceOverrides[currentLang] || sourceLibrary[currentLang] || sourceLibrary.en;
+}
+function getSourceCats(){
+  return (sourceLibraryCats[currentLang] || sourceLibraryCats.en);
 }
 function renderHome(){
   const hc = homeContent[currentLang] || homeContent.en;
@@ -1161,21 +1286,60 @@ function renderGlossary(){
 }
 function renderSources(){
   const items = getSourceItems();
+  const cats = getSourceCats();
+  // Build a map of cat_key -> items
+  const byCategory = {};
+  items.forEach(item=>{
+    const key = item[0];
+    if(!byCategory[key]) byCategory[key] = [];
+    byCategory[key].push(item);
+  });
+  // Section labels from i18n or cats list
+  const catLabelMap = {};
+  cats.forEach(c=>{ catLabelMap[c.key] = c.label; });
+  // Cat keys that have items, in defined order
+  const orderedKeys = cats.map(c=>c.key).filter(k=>byCategory[k] && byCategory[k].length>0);
+  // Fallback: also include any extra keys not in cats list
+  Object.keys(byCategory).forEach(k=>{ if(!orderedKeys.includes(k)) orderedKeys.push(k); });
+
+  // Build category filter chips
+  const chipHtml = orderedKeys.map(k=>{
+    const label = catLabelMap[k] || k;
+    const count = (byCategory[k]||[]).length;
+    return `<div class="source-cat">${label} <span style="font-size:.65rem;opacity:.6;margin-left:3px">(${count})</span></div>`;
+  }).join('');
+
+  // Build category sections
+  const sectionsHtml = orderedKeys.map(k=>{
+    const label = catLabelMap[k] || k;
+    const catItems = byCategory[k] || [];
+    const cardsHtml = catItems.map(([_cat, publisher, title, body, url, relatedSection, whyMatters])=>{
+      return `<div class="source-library-item">
+        <div class="source-library-meta">${catLabelMap[_cat]||_cat}</div>
+        <div class="src-publisher-row">
+          <span class="src-publisher">&#9654; ${publisher}</span>
+          ${relatedSection ? `<span class="src-section-tag">&#8594; ${relatedSection}</span>` : ''}
+        </div>
+        <h3>${title}</h3>
+        <p>${body}</p>
+        ${whyMatters ? `<div class="src-why"><strong>Why this matters:</strong> ${whyMatters}</div>` : ''}
+        <a class="src-link" href="${url}" target="_blank" rel="noopener">&#128279; ${url.replace(/^https?:\/\//,'').replace(/\/$/,'').substring(0,55)}${url.length>60?'…':''}</a>
+      </div>`;
+    }).join('');
+    return `<div class="src-section-block">
+      <div class="src-section-heading">${label}<span class="src-section-count">${catItems.length}</span></div>
+      <div class="source-library-grid">${cardsHtml}</div>
+    </div>`;
+  }).join('');
+
   return `
     <div class="lc-header">
       <div class="lc-meta"><span class="meta-pill">S</span><span class="meta-cat">${t('nav.sources')}</span></div>
       <h1 class="lc-title">${t('sources.pageTitle')}</h1>
       <p class="lc-intro">${t('sources.pageDesc')}</p>
     </div>
-    <div class="source-cats">
-      <div class="source-cat">${t('sources.catScams')}</div>
-      <div class="source-cat">${t('sources.catExchanges')}</div>
-      <div class="source-cat">${t('sources.catStable')}</div>
-      <div class="source-cat">${t('sources.catWallet')}</div>
-    </div>
-    <div class="source-library-grid">
-      ${items.map(([cat,title,body,url])=>`<div class="source-library-item"><div class="source-library-meta">${cat}</div><h3>${title}</h3><p>${body}</p><a href="${url}" target="_blank" rel="noopener">${url}</a></div>`).join('')}
-    </div>`;
+    <div class="source-cats">${chipHtml}</div>
+    ${sectionsHtml}`;
 }
 let currentPage = 'home';
 let currentLang = localStorage.getItem('cryptoAcademyLang') || 'en';
@@ -6092,8 +6256,1151 @@ if (typeof renderAllLessons === 'function') {
   // Re-render home if currently on home
   if(typeof renderAllLessons === 'function'){
     renderAllLessons();
-    if(typeof showPage === 'function' && currentPage === 'home') showPage('home');
+   if(typeof showPage === 'function' && currentPage === 'home') showPage('home');
   }
+})();
+</script>
+
+<!-- ========== ICON SYSTEM: Lucide-style minimal outline SVGs ========== -->
+<style>
+.sec-icon{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;flex-shrink:0;vertical-align:middle;margin-right:6px;opacity:.72}
+.sec-icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav-num .sec-icon{width:13px;height:13px;margin:0;opacity:1}
+.nav-num .sec-icon svg{stroke:#fff;stroke-width:2.2}
+.lesson-nav-item:not(.active) .nav-num .sec-icon svg{stroke:var(--text-3)}
+.home-card-num .sec-icon{width:16px;height:16px;margin:0;opacity:1}
+.home-card-num .sec-icon svg{stroke:var(--navy)}
+.lc-header .sec-icon{width:22px;height:22px;margin-right:8px;opacity:.7}
+.roadmap-section h2 .sec-icon,.mistakes-section h2 .sec-icon{width:20px;height:20px;margin-right:6px;opacity:.65}
+.continue-icon .sec-icon{width:20px;height:20px;margin:0;opacity:1}
+.continue-icon .sec-icon svg{stroke:#fff;stroke-width:2}
+.lang-notice .sec-icon{width:18px;height:18px;margin-right:6px;opacity:.75}
+.meta-pill .sec-icon{width:12px;height:12px;margin-right:3px;margin-left:0;opacity:.8}
+.roadmap-card .sec-icon{width:18px;height:18px;margin-bottom:4px;opacity:.55}
+.roadmap-card .sec-icon svg{stroke:var(--navy)}
+.mistake-summary-card .sec-icon{width:16px;height:16px;margin-right:4px;opacity:.6}
+[lang="ar"] .sec-icon{margin-right:0;margin-left:6px}
+</style>
+<script>
+(function(){
+  // Lucide-style SVG icons (24x24 viewBox, stroke-based)
+  var ICONS = {
+    home:'<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+    blockchain:'<svg viewBox="0 0 24 24"><rect x="1" y="4" width="8" height="7" rx="1.5"/><rect x="15" y="13" width="8" height="7" rx="1.5"/><path d="M9 7.5h2.5a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2H15"/></svg>',
+    wallet:'<svg viewBox="0 0 24 24"><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5z"/><path d="M16 12a1 1 0 1 0 0 .01"/><path d="M3 7l9-4 9 4"/></svg>',
+    transfer:'<svg viewBox="0 0 24 24"><path d="M7 17l-4-4 4-4"/><path d="M3 13h13"/><path d="M17 7l4 4-4 4"/><path d="M21 11H8"/></svg>',
+    layers:'<svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+    filetext:'<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+    compass:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>',
+    faq:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+    shield:'<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+    book:'<svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
+    library:'<svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="13" y2="11"/></svg>',
+    map:'<svg viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>',
+    alert:'<svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+    play:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>',
+    globe:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+    search:'<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+    key:'<svg viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>',
+    link:'<svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
+    send:'<svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>',
+    shieldx:'<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="9.5" y1="9" x2="14.5" y2="14"/><line x1="14.5" y1="9" x2="9.5" y2="14"/></svg>',
+    extalert:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'
+  };
+
+  function ic(name){return '<span class="sec-icon">'+ICONS[name]+'</span>';}
+
+  // Lesson index → icon mapping
+  var lessonIcons = ['blockchain','wallet','transfer','layers','filetext'];
+  // Page → icon mapping
+  var pageIcons = {home:'home',start:'compass',faq:'faq',safety:'shield',glossary:'book',sources:'library'};
+  // Mistake card icons
+  var mistakeCardIcons = ['key','link','shieldx','send','extalert'];
+
+  // 1. Replace sidebar nav-num content with SVG icons
+  var sidebarItems = document.querySelectorAll('#sidebar .lesson-nav-item');
+  sidebarItems.forEach(function(item){
+    var numEl = item.querySelector('.nav-num');
+    if(!numEl) return;
+    var lessonIdx = item.getAttribute('data-lesson');
+    var pageAttr = item.getAttribute('data-page');
+    if(lessonIdx !== null){
+      var idx = parseInt(lessonIdx);
+      if(lessonIcons[idx]) numEl.innerHTML = ic(lessonIcons[idx]);
+    } else if(pageAttr && pageIcons[pageAttr]){
+      numEl.innerHTML = ic(pageIcons[pageAttr]);
+    }
+  });
+
+  // 2. Patch renderHome to use SVG icons in home-card-num
+  var __prevRenderHome = window.renderHome;
+  window.renderHome = function(){
+    var html = __prevRenderHome();
+    // Replace home-card-num numbers with icons for lessons 1-5
+    for(var i=0;i<5;i++){
+      html = html.replace(
+        new RegExp('<div class="home-card-num">'+(i+1)+'</div>'),
+        '<div class="home-card-num">'+ic(lessonIcons[i])+'</div>'
+      );
+    }
+    // Replace Start (S), FAQ (F), Safety (!)
+    html = html.replace('<div class="home-card-num">S</div>','<div class="home-card-num">'+ic('compass')+'</div>');
+    html = html.replace('<div class="home-card-num">F</div>','<div class="home-card-num">'+ic('faq')+'</div>');
+    html = html.replace('<div class="home-card-num">!</div>','<div class="home-card-num">'+ic('shield')+'</div>');
+
+    // Replace emoji in roadmap heading
+    html = html.replace(/📚\s*/g, ic('map')+' ');
+    // Replace emoji in mistakes heading
+    html = html.replace(/⚠️\s*/g, ic('alert')+' ');
+    // Replace emoji in language notice
+    html = html.replace(/<span class="lang-notice-icon">🌍<\/span>/g, '<span class="lang-notice-icon">'+ic('globe')+'</span>');
+    html = html.replace(/🌐\s*/g, ic('globe')+' ');
+
+    // Add icons to continue card
+    html = html.replace(/<div class="continue-icon"><svg/g, '<div class="continue-icon">'+ic('play')+'<svg style="display:none"');
+
+    // Add icons to each roadmap-card
+    for(var r=0;r<5;r++){
+      html = html.replace(
+        new RegExp('<div class="roadmap-card" onclick="showLesson\\('+r+'\\)">'),
+        '<div class="roadmap-card" onclick="showLesson('+r+')">'+ic(lessonIcons[r])
+      );
+    }
+
+    // Add icons to mistake summary cards
+    html = html.replace(/<div class="mistake-summary-card">/g, (function(){
+      var idx = 0;
+      return function(match){
+        var icon = mistakeCardIcons[idx] || 'alert';
+        idx++;
+        return '<div class="mistake-summary-card">'+ic(icon);
+      };
+    })());
+
+    return html;
+  };
+
+  // 3. Patch section renderers to add icons to headers
+  var __prevGlossary = window.renderGlossary;
+  window.renderGlossary = function(){
+    var html = __prevGlossary();
+    html = html.replace('<span class="meta-pill">G</span>','<span class="meta-pill">'+ic('book')+'</span>');
+    return html;
+  };
+
+  var __prevSources = window.renderSources;
+  window.renderSources = function(){
+    var html = __prevSources();
+    html = html.replace('<span class="meta-pill">S</span>','<span class="meta-pill">'+ic('library')+'</span>');
+    return html;
+  };
+
+  var __prevStartHere = window.renderStartHere;
+  window.renderStartHere = function(){
+    var html = __prevStartHere();
+    // Add compass icon to start here meta pill
+    var startPill = html.match(/<span class="meta-pill">[^<]+<\/span>/);
+    if(startPill){
+      html = html.replace(startPill[0], '<span class="meta-pill">'+ic('compass')+startPill[0].replace(/<span class="meta-pill">/,'').replace(/<\/span>/,'')+'</span>');
+    }
+    return html;
+  };
+
+  var __prevFAQPage = window.renderFAQPage;
+  window.renderFAQPage = function(){
+    var html = __prevFAQPage();
+    var faqPill = html.match(/<span class="meta-pill">[^<]+<\/span>/);
+    if(faqPill){
+      html = html.replace(faqPill[0], '<span class="meta-pill">'+ic('faq')+faqPill[0].replace(/<span class="meta-pill">/,'').replace(/<\/span>/,'')+'</span>');
+    }
+    return html;
+  };
+
+  var __prevSafetyPage = window.renderSafetyPage;
+  window.renderSafetyPage = function(){
+    var html = __prevSafetyPage();
+    var safetyPill = html.match(/<span class="meta-pill">[^<]+<\/span>/);
+    if(safetyPill){
+      html = html.replace(safetyPill[0], '<span class="meta-pill">'+ic('shield')+safetyPill[0].replace(/<span class="meta-pill">/,'').replace(/<\/span>/,'')+'</span>');
+    }
+    return html;
+  };
+
+  // 4. Patch renderLesson to add lesson-specific icon to meta pill
+  var __prevRenderLesson = window.renderLesson;
+  window.renderLesson = function(i){
+    var html = __prevRenderLesson(i);
+    var iconName = lessonIcons[i] || 'filetext';
+    // Insert icon into meta-pill
+    html = html.replace(/<span class="meta-pill">/, '<span class="meta-pill">'+ic(iconName)+' ');
+    return html;
+  };
+
+  // Re-render
+  if(typeof renderAllLessons === 'function') renderAllLessons();
+  if(typeof showPage === 'function' && typeof currentPage !== 'undefined' && currentPage === 'home') showPage('home');
+})();
+</script>
+
+<!-- ========== COMPARISON CARDS & SUMMARY BOXES ========== -->
+<style id="compare-summary-css">
+/* Comparison Card */
+.compare-card{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:20px 0;background:#fff}
+.compare-side{padding:16px 18px}
+.compare-side:first-child{border-right:1px solid var(--line)}
+.compare-side-label{font-family:"IBM Plex Mono",monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:8px;padding:3px 8px;border-radius:5px;display:inline-block}
+.compare-side:first-child .compare-side-label{color:var(--navy);background:var(--blue-bg)}
+.compare-side:last-child .compare-side-label{color:var(--gold);background:var(--gold-bg)}
+.compare-side-title{font-size:.95rem;font-weight:800;color:var(--text);margin-bottom:6px}
+.compare-side-desc{font-size:.84rem;color:var(--text-2);line-height:1.65}
+.compare-vs{display:flex;align-items:center;justify-content:center;position:relative}
+.compare-header{font-size:.78rem;font-family:"IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);font-weight:700;text-align:center;margin-bottom:8px}
+@media(max-width:640px){
+  .compare-card{grid-template-columns:1fr}
+  .compare-side:first-child{border-right:none;border-bottom:1px solid var(--line)}
+}
+
+/* Summary / Takeaway Box */
+.summary-box{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-radius:10px;margin:16px 0;font-size:.88rem;line-height:1.6;color:var(--text-2)}
+.summary-box.takeaway{background:var(--green-bg);border:1px solid rgba(45,107,73,.14);border-left:3px solid var(--green)}
+.summary-box.note{background:var(--blue-bg);border:1px solid rgba(38,65,99,.12);border-left:3px solid var(--navy-2)}
+.summary-box.mistake{background:var(--red-bg);border:1px solid rgba(138,55,49,.12);border-left:3px solid var(--red)}
+.summary-box.idea{background:var(--gold-bg);border:1px solid rgba(152,118,47,.14);border-left:3px solid var(--gold)}
+.summary-box-icon{flex-shrink:0;width:18px;height:18px;margin-top:1px;opacity:.7}
+.summary-box-icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.summary-box-label{font-family:"IBM Plex Mono",monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:3px}
+.summary-box.takeaway .summary-box-label{color:var(--green)}
+.summary-box.note .summary-box-label{color:var(--navy-2)}
+.summary-box.mistake .summary-box-label{color:var(--red)}
+.summary-box.idea .summary-box-label{color:var(--gold)}
+[lang="ar"] .summary-box{border-left:none;border-right-width:3px;border-right-style:solid}
+[lang="ar"] .summary-box.takeaway{border-right-color:var(--green)}
+[lang="ar"] .summary-box.note{border-right-color:var(--navy-2)}
+[lang="ar"] .summary-box.mistake{border-right-color:var(--red)}
+[lang="ar"] .summary-box.idea{border-right-color:var(--gold)}
+</style>
+
+<script id="compare-summary-script">
+(function(){
+  // ===== SVG ICONS FOR BOXES =====
+  var boxIcons = {
+    takeaway:'<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>',
+    note:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
+    mistake:'<svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+    idea:'<svg viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>'
+  };
+
+  function summaryBox(type, label, text){
+    return '<div class="summary-box '+type+'"><span class="summary-box-icon">'+boxIcons[type]+'</span><div><div class="summary-box-label">'+label+'</div>'+text+'</div></div>';
+  }
+
+  function compareCard(titleA, descA, titleB, descB){
+    return '<div class="compare-card"><div class="compare-side"><div class="compare-side-label">A</div><div class="compare-side-title">'+titleA+'</div><div class="compare-side-desc">'+descA+'</div></div><div class="compare-side"><div class="compare-side-label">B</div><div class="compare-side-title">'+titleB+'</div><div class="compare-side-desc">'+descB+'</div></div></div>';
+  }
+
+  // ===== MULTILINGUAL CONTENT =====
+  var compareData = {
+    en: {
+      walletExchange: {
+        header: 'Wallet vs Exchange',
+        a: ['Wallet','A tool that manages your keys. You control access to your assets directly. Requires you to keep your seed phrase safe.'],
+        b: ['Exchange','A platform where you trade. The exchange holds your keys for you. Convenient, but you depend on their security.']
+      },
+      seedPrivate: {
+        header: 'Seed Phrase vs Private Key',
+        a: ['Seed Phrase','A set of recovery words (usually 12 or 24). It can restore your entire wallet. If someone gets it, they get full control.'],
+        b: ['Private Key','A single cryptographic key tied to one address. It signs transactions. Losing it means losing access to that address.']
+      },
+      defiStable: {
+        header: 'DeFi vs Stablecoin',
+        a: ['DeFi','Financial functions built with code — lending, swapping, earning — without a traditional bank. Higher flexibility, but also higher risk.'],
+        b: ['Stablecoin','A token designed to stay close to a reference value (like $1 USD). Used for transfers and pricing with lower daily volatility.']
+      }
+    },
+    ko: {
+      walletExchange: {
+        header: '지갑 vs 거래소',
+        a: ['지갑 (Wallet)','키를 직접 관리하는 도구입니다. 자산에 대한 접근 권한을 본인이 통제합니다. 시드 문구를 안전하게 보관해야 합니다.'],
+        b: ['거래소 (Exchange)','거래하는 플랫폼입니다. 거래소가 키를 대신 보관합니다. 편리하지만 거래소의 보안에 의존하게 됩니다.']
+      },
+      seedPrivate: {
+        header: '시드 문구 vs 개인키',
+        a: ['시드 문구 (Seed Phrase)','복구용 단어 모음(보통 12개 또는 24개)입니다. 지갑 전체를 복원할 수 있습니다. 누군가 얻으면 완전한 통제권을 가집니다.'],
+        b: ['개인키 (Private Key)','하나의 주소에 연결된 암호학적 키입니다. 거래에 서명합니다. 잃어버리면 해당 주소에 접근할 수 없습니다.']
+      },
+      defiStable: {
+        header: 'DeFi vs 스테이블코인',
+        a: ['DeFi (탈중앙 금융)','코드로 구현된 금융 기능 — 대출, 교환, 수익 창출 — 전통 은행 없이 작동합니다. 유연하지만 위험도 높습니다.'],
+        b: ['스테이블코인 (Stablecoin)','기준 가치(예: 1달러)에 가깝게 유지되도록 설계된 토큰입니다. 일일 변동성이 낮아 전송과 가격 책정에 사용됩니다.']
+      }
+    },
+    th: {
+      walletExchange: {
+        header: 'วอลเล็ต vs ตลาดแลกเปลี่ยน',
+        a: ['วอลเล็ต','เครื่องมือจัดการกุญแจ คุณควบคุมการเข้าถึงสินทรัพย์โดยตรง ต้องเก็บวลีสำรองให้ปลอดภัย'],
+        b: ['ตลาดแลกเปลี่ยน','แพลตฟอร์มซื้อขาย ตลาดถือกุญแจแทนคุณ สะดวกแต่ต้องพึ่งพาความปลอดภัยของแพลตฟอร์ม']
+      },
+      seedPrivate: {
+        header: 'วลีสำรอง vs คีย์ส่วนตัว',
+        a: ['วลีสำรอง','ชุดคำสำรอง (ปกติ 12 หรือ 24 คำ) สามารถกู้คืนวอลเล็ตทั้งหมด ถ้าใครได้ไปจะได้สิทธิ์ควบคุมทั้งหมด'],
+        b: ['คีย์ส่วนตัว','กุญแจเข้ารหัสที่ผูกกับที่อยู่เดียว ใช้ลงนามธุรกรรม สูญหายหมายถึงเสียการเข้าถึงที่อยู่นั้น']
+      },
+      defiStable: {
+        header: 'DeFi vs Stablecoin',
+        a: ['DeFi','ฟังก์ชันการเงินสร้างด้วยโค้ด — ให้ยืม แลก รับผลตอบแทน — โดยไม่ต้องมีธนาคาร ยืดหยุ่นแต่เสี่ยงสูง'],
+        b: ['Stablecoin','โทเคนที่ออกแบบให้ใกล้เคียงมูลค่าอ้างอิง (เช่น $1) ใช้สำหรับโอนและกำหนดราคาที่ผันผวนน้อย']
+      }
+    },
+    id: {
+      walletExchange: {
+        header: 'Wallet vs Exchange',
+        a: ['Wallet','Alat yang mengelola kunci Anda. Anda mengontrol akses ke aset secara langsung. Anda harus menjaga frasa pemulihan.'],
+        b: ['Exchange','Platform tempat Anda berdagang. Exchange memegang kunci untuk Anda. Nyaman, tetapi bergantung pada keamanan mereka.']
+      },
+      seedPrivate: {
+        header: 'Frasa Pemulihan vs Kunci Privat',
+        a: ['Frasa Pemulihan','Kumpulan kata pemulihan (biasanya 12 atau 24). Bisa memulihkan seluruh wallet. Jika seseorang mendapatnya, mereka mendapat kontrol penuh.'],
+        b: ['Kunci Privat','Satu kunci kriptografi terikat ke satu alamat. Digunakan untuk menandatangani transaksi. Kehilangannya berarti kehilangan akses.']
+      },
+      defiStable: {
+        header: 'DeFi vs Stablecoin',
+        a: ['DeFi','Fungsi keuangan yang dibangun dengan kode — pinjam, tukar, hasilkan — tanpa bank tradisional. Lebih fleksibel, tetapi juga lebih berisiko.'],
+        b: ['Stablecoin','Token yang dirancang tetap dekat dengan nilai acuan (seperti $1). Digunakan untuk transfer dan penetapan harga dengan volatilitas rendah.']
+      }
+    },
+    pt: {
+      walletExchange: {
+        header: 'Carteira vs Exchange',
+        a: ['Carteira','Ferramenta que gerencia suas chaves. Você controla o acesso aos seus ativos diretamente. Precisa manter a frase de recuperação segura.'],
+        b: ['Exchange','Plataforma onde você negocia. A exchange guarda suas chaves. Conveniente, mas você depende da segurança deles.']
+      },
+      seedPrivate: {
+        header: 'Frase de Recuperação vs Chave Privada',
+        a: ['Frase de Recuperação','Um conjunto de palavras de recuperação (geralmente 12 ou 24). Pode restaurar toda a carteira. Se alguém obtiver, terá controle total.'],
+        b: ['Chave Privada','Uma única chave criptográfica vinculada a um endereço. Assina transações. Perdê-la significa perder acesso àquele endereço.']
+      },
+      defiStable: {
+        header: 'DeFi vs Stablecoin',
+        a: ['DeFi','Funções financeiras construídas com código — empréstimos, trocas, rendimentos — sem banco tradicional. Mais flexível, mas também mais arriscado.'],
+        b: ['Stablecoin','Token projetado para ficar próximo de um valor de referência (como $1). Usado para transferências e precificação com menor volatilidade.']
+      }
+    },
+    tr: {
+      walletExchange: {
+        header: 'Cüzdan vs Borsa',
+        a: ['Cüzdan','Anahtarlarınızı yöneten araç. Varlıklarınıza erişimi doğrudan siz kontrol edersiniz. Kurtarma ifadesini güvenli tutmanız gerekir.'],
+        b: ['Borsa','İşlem yaptığınız platform. Borsa anahtarlarınızı sizin adınıza tutar. Kullanışlı ama güvenliğiniz onlara bağlı.']
+      },
+      seedPrivate: {
+        header: 'Kurtarma İfadesi vs Özel Anahtar',
+        a: ['Kurtarma İfadesi','Kurtarma kelimeleri seti (genelde 12 veya 24). Tüm cüzdanı geri yükleyebilir. Birisi alırsa tam kontrol elde eder.'],
+        b: ['Özel Anahtar','Tek bir adrese bağlı kriptografik anahtar. İşlemleri imzalar. Kaybetmek o adrese erişimi kaybetmek demektir.']
+      },
+      defiStable: {
+        header: 'DeFi vs Stablecoin',
+        a: ['DeFi','Kodla oluşturulan finansal fonksiyonlar — ödünç verme, takas, kazanç — geleneksel banka olmadan. Daha esnek ama daha riskli.'],
+        b: ['Stablecoin','Bir referans değere (örn. $1) yakın kalmak üzere tasarlanmış token. Düşük günlük oynaklık ile transfer ve fiyatlandırma için kullanılır.']
+      }
+    },
+    es: {
+      walletExchange: {
+        header: 'Billetera vs Exchange',
+        a: ['Billetera','Herramienta que gestiona tus claves. Tú controlas el acceso a tus activos. Debes mantener la frase semilla segura.'],
+        b: ['Exchange','Plataforma donde intercambias. El exchange guarda tus claves. Cómodo, pero dependes de su seguridad.']
+      },
+      seedPrivate: {
+        header: 'Frase Semilla vs Clave Privada',
+        a: ['Frase Semilla','Un conjunto de palabras de recuperación (usualmente 12 o 24). Puede restaurar toda la billetera. Si alguien la obtiene, tendrá control total.'],
+        b: ['Clave Privada','Una única clave criptográfica vinculada a una dirección. Firma transacciones. Perderla significa perder acceso a esa dirección.']
+      },
+      defiStable: {
+        header: 'DeFi vs Stablecoin',
+        a: ['DeFi','Funciones financieras construidas con código — préstamos, intercambios, rendimientos — sin banco tradicional. Más flexible, pero también más riesgoso.'],
+        b: ['Stablecoin','Token diseñado para mantenerse cerca de un valor de referencia (como $1). Usado para transferencias y fijación de precios con menor volatilidad.']
+      }
+    },
+    ar: {
+      walletExchange: {
+        header: 'المحفظة مقابل البورصة',
+        a: ['المحفظة','أداة تدير مفاتيحك. أنت تتحكم في الوصول إلى أصولك مباشرة. يجب أن تحافظ على عبارة الاسترداد آمنة.'],
+        b: ['البورصة','منصة للتداول. البورصة تحتفظ بمفاتيحك نيابة عنك. مريحة لكنك تعتمد على أمانها.']
+      },
+      seedPrivate: {
+        header: 'عبارة الاسترداد مقابل المفتاح الخاص',
+        a: ['عبارة الاسترداد','مجموعة كلمات استرداد (عادة 12 أو 24). يمكنها استعادة المحفظة بالكامل. إذا حصل عليها أحد يحصل على تحكم كامل.'],
+        b: ['المفتاح الخاص','مفتاح تشفيري واحد مرتبط بعنوان واحد. يوقّع المعاملات. فقدانه يعني فقدان الوصول لذلك العنوان.']
+      },
+      defiStable: {
+        header: 'التمويل اللامركزي مقابل العملة المستقرة',
+        a: ['التمويل اللامركزي','وظائف مالية مبنية بالكود — إقراض وتبادل وأرباح — بدون بنك تقليدي. أكثر مرونة لكن أكثر خطورة.'],
+        b: ['العملة المستقرة','رمز مصمم للبقاء قريباً من قيمة مرجعية (مثل $1). يُستخدم للتحويلات والتسعير مع تقلب يومي أقل.']
+      }
+    },
+    vi: {
+      walletExchange: {
+        header: 'Ví vs Sàn giao dịch',
+        a: ['Ví tiền','Công cụ quản lý khóa. Bạn kiểm soát quyền truy cập tài sản trực tiếp. Cần giữ cụm từ khôi phục an toàn.'],
+        b: ['Sàn giao dịch','Nền tảng giao dịch. Sàn giữ khóa thay bạn. Tiện lợi nhưng phụ thuộc vào bảo mật của họ.']
+      },
+      seedPrivate: {
+        header: 'Cụm từ khôi phục vs Khóa riêng tư',
+        a: ['Cụm từ khôi phục','Bộ từ khôi phục (thường 12 hoặc 24). Có thể khôi phục toàn bộ ví. Ai có được sẽ có toàn quyền kiểm soát.'],
+        b: ['Khóa riêng tư','Một khóa mã hóa gắn với một địa chỉ. Dùng để ký giao dịch. Mất nó nghĩa là mất quyền truy cập địa chỉ đó.']
+      },
+      defiStable: {
+        header: 'DeFi vs Stablecoin',
+        a: ['DeFi','Chức năng tài chính xây bằng mã — cho vay, hoán đổi, kiếm lời — không cần ngân hàng truyền thống. Linh hoạt hơn nhưng rủi ro hơn.'],
+        b: ['Stablecoin','Token thiết kế để giữ gần giá trị tham chiếu (như $1). Dùng cho chuyển tiền và định giá với biến động thấp.']
+      }
+    }
+  };
+  // br falls back to pt
+  compareData.br = compareData.pt;
+
+  // Summary box texts per lesson and page
+  var summaryData = {
+    en: {
+      lessons: [
+        // Lesson 0 - Blockchain
+        [{type:'takeaway',label:'Key Takeaway',text:'A blockchain is a shared record — not controlled by one company. That\'s what makes it different from a regular database.'}],
+        // Lesson 1 - Wallet
+        [{type:'note',label:'Beginner Note',text:'A wallet doesn\'t store coins inside it. It manages keys that prove you control assets recorded on the blockchain.'},
+         {type:'mistake',label:'Common Mistake',text:'Treating an exchange account the same as owning a wallet. They are very different in terms of control.'}],
+        // Lesson 2 - Transfer
+        [{type:'takeaway',label:'Key Takeaway',text:'Always check: network → address → test transfer → TxID. This simple habit prevents most transfer mistakes.'}],
+        // Lesson 3 - Token Roles
+        [{type:'idea',label:'Quick Idea',text:'Instead of asking "Is this coin good?", ask "What role does this token play?" Roles reveal more than names.'}],
+        // Lesson 4 - Real-world
+        [{type:'takeaway',label:'Key Takeaway',text:'Real cases teach you where risk actually appears — phishing, custody failures, or design flaws. Learn the pattern, not just the headline.'}]
+      ],
+      home: {type:'note',label:'Beginner Note',text:'If this is your first time, just follow the lessons in order. Each one builds on the last. No rush.'},
+      safety: {type:'takeaway',label:'Key Takeaway',text:'If someone asks for your seed phrase or demands urgent crypto payment — that\'s a scam signal. Always pause and verify.'},
+      glossary: {type:'note',label:'Beginner Note',text:'You don\'t need to memorize everything. Come back to this page whenever a lesson uses an unfamiliar term.'}
+    },
+    ko: {
+      lessons: [
+        [{type:'takeaway',label:'핵심 요약',text:'블록체인은 하나의 회사가 아닌 여러 참여자가 함께 관리하는 공유 기록입니다. 이것이 일반 데이터베이스와 다른 점입니다.'}],
+        [{type:'note',label:'초보자 참고',text:'지갑은 코인을 담는 상자가 아닙니다. 블록체인에 기록된 자산에 대한 통제권을 증명하는 키를 관리하는 도구입니다.'},
+         {type:'mistake',label:'흔한 실수',text:'거래소 계정을 지갑과 같은 것으로 착각하는 것. 통제 방식에서 큰 차이가 있습니다.'}],
+        [{type:'takeaway',label:'핵심 요약',text:'항상 확인하세요: 네트워크 → 주소 → 테스트 전송 → TxID. 이 간단한 습관이 대부분의 전송 실수를 방지합니다.'}],
+        [{type:'idea',label:'한 줄 핵심',text:'"이 코인이 좋은가요?" 대신 "이 토큰의 역할이 뭔가요?"라고 물어보세요. 역할이 이름보다 더 많은 것을 알려줍니다.'}],
+        [{type:'takeaway',label:'핵심 요약',text:'실제 사례는 위험이 어디서 발생하는지를 가르쳐줍니다 — 피싱, 커스터디 실패, 설계 결함. 헤드라인이 아닌 패턴을 배우세요.'}]
+      ],
+      home: {type:'note',label:'초보자 참고',text:'처음이라면 강의를 순서대로 따라가세요. 각 강의는 이전 내용을 기반으로 합니다. 서두를 필요 없습니다.'},
+      safety: {type:'takeaway',label:'핵심 요약',text:'누군가 시드 문구를 요구하거나 긴급한 크립토 결제를 요구하면 — 그것은 사기 신호입니다. 항상 멈추고 확인하세요.'},
+      glossary: {type:'note',label:'초보자 참고',text:'모든 것을 외울 필요는 없습니다. 강의에서 낯선 용어가 나오면 이 페이지로 돌아오세요.'}
+    },
+    th: {
+      lessons: [
+        [{type:'takeaway',label:'สรุปสำคัญ',text:'บล็อกเชนคือบันทึกร่วมที่ไม่ได้ถูกควบคุมโดยบริษัทเดียว นี่คือสิ่งที่ทำให้มันต่างจากฐานข้อมูลทั่วไป'}],
+        [{type:'note',label:'หมายเหตุสำหรับมือใหม่',text:'วอลเล็ตไม่ได้เก็บเหรียญไว้ข้างใน มันจัดการกุญแจที่พิสูจน์ว่าคุณควบคุมสินทรัพย์บนบล็อกเชน'},
+         {type:'mistake',label:'ข้อผิดพลาดที่พบบ่อย',text:'มองบัญชี exchange เหมือนกับการมีวอลเล็ตของตัวเอง ทั้งสองแตกต่างกันมากในเรื่องการควบคุม'}],
+        [{type:'takeaway',label:'สรุปสำคัญ',text:'ตรวจสอบเสมอ: เครือข่าย → ที่อยู่ → โอนทดสอบ → TxID นิสัยง่ายๆ นี้ป้องกันข้อผิดพลาดส่วนใหญ่'}],
+        [{type:'idea',label:'แนวคิดด่วน',text:'แทนที่จะถามว่า "เหรียญนี้ดีไหม?" ให้ถามว่า "โทเคนนี้มีบทบาทอะไร?" บทบาทบอกอะไรได้มากกว่าชื่อ'}],
+        [{type:'takeaway',label:'สรุปสำคัญ',text:'กรณีจริงสอนว่าความเสี่ยงเกิดขึ้นที่ไหน — ฟิชชิง ความล้มเหลวด้าน custody หรือข้อบกพร่องในการออกแบบ'}]
+      ],
+      home: {type:'note',label:'หมายเหตุสำหรับมือใหม่',text:'ถ้าเป็นครั้งแรก ให้เรียนตามลำดับ แต่ละบทเรียนต่อยอดจากบทก่อนหน้า ไม่ต้องรีบ'},
+      safety: {type:'takeaway',label:'สรุปสำคัญ',text:'ถ้ามีใครขอวลีสำรองหรือเร่งให้จ่ายด้วยคริปโต — นั่นคือสัญญาณหลอกลวง หยุดและตรวจสอบเสมอ'},
+      glossary: {type:'note',label:'หมายเหตุสำหรับมือใหม่',text:'ไม่จำเป็นต้องจำทั้งหมด กลับมาที่หน้านี้เมื่อเจอคำที่ไม่คุ้นเคยในบทเรียน'}
+    },
+    id: {
+      lessons: [
+        [{type:'takeaway',label:'Poin Utama',text:'Blockchain adalah catatan bersama — tidak dikontrol satu perusahaan. Itulah yang membuatnya berbeda dari database biasa.'}],
+        [{type:'note',label:'Catatan Pemula',text:'Wallet tidak menyimpan koin di dalamnya. Ia mengelola kunci yang membuktikan Anda mengontrol aset di blockchain.'},
+         {type:'mistake',label:'Kesalahan Umum',text:'Menganggap akun exchange sama dengan memiliki wallet. Keduanya sangat berbeda dalam hal kontrol.'}],
+        [{type:'takeaway',label:'Poin Utama',text:'Selalu periksa: jaringan → alamat → transfer uji → TxID. Kebiasaan sederhana ini mencegah sebagian besar kesalahan transfer.'}],
+        [{type:'idea',label:'Ide Cepat',text:'Daripada bertanya "Apakah koin ini bagus?" tanyakan "Apa peran token ini?" Peran mengungkap lebih banyak daripada nama.'}],
+        [{type:'takeaway',label:'Poin Utama',text:'Kasus nyata mengajarkan di mana risiko muncul — phishing, kegagalan custody, atau kelemahan desain.'}]
+      ],
+      home: {type:'note',label:'Catatan Pemula',text:'Jika ini pertama kalinya, ikuti pelajaran secara berurutan. Setiap pelajaran dibangun di atas yang sebelumnya.'},
+      safety: {type:'takeaway',label:'Poin Utama',text:'Jika seseorang meminta frasa pemulihan atau memaksa pembayaran crypto mendesak — itu sinyal penipuan. Selalu berhenti dan verifikasi.'},
+      glossary: {type:'note',label:'Catatan Pemula',text:'Anda tidak perlu menghafal semuanya. Kembali ke halaman ini kapan pun menemukan istilah asing.'}
+    },
+    pt: {
+      lessons: [
+        [{type:'takeaway',label:'Ponto-chave',text:'Blockchain é um registro compartilhado — não controlado por uma empresa. Isso a diferencia de um banco de dados comum.'}],
+        [{type:'note',label:'Nota para Iniciantes',text:'Uma carteira não armazena moedas. Ela gerencia chaves que provam que você controla ativos no blockchain.'},
+         {type:'mistake',label:'Erro Comum',text:'Tratar uma conta de exchange como se fosse uma carteira. São muito diferentes em termos de controle.'}],
+        [{type:'takeaway',label:'Ponto-chave',text:'Sempre verifique: rede → endereço → transferência teste → TxID. Este hábito simples previne a maioria dos erros.'}],
+        [{type:'idea',label:'Ideia Rápida',text:'Em vez de perguntar "Essa moeda é boa?", pergunte "Qual o papel deste token?" Papéis revelam mais que nomes.'}],
+        [{type:'takeaway',label:'Ponto-chave',text:'Casos reais mostram onde o risco aparece — phishing, falhas de custódia ou defeitos de design.'}]
+      ],
+      home: {type:'note',label:'Nota para Iniciantes',text:'Se é sua primeira vez, siga as lições em ordem. Cada uma se baseia na anterior. Sem pressa.'},
+      safety: {type:'takeaway',label:'Ponto-chave',text:'Se alguém pedir sua frase de recuperação ou exigir pagamento urgente em cripto — é sinal de golpe. Sempre pare e verifique.'},
+      glossary: {type:'note',label:'Nota para Iniciantes',text:'Não precisa decorar tudo. Volte a esta página quando encontrar um termo desconhecido.'}
+    },
+    tr: {
+      lessons: [
+        [{type:'takeaway',label:'Ana Fikir',text:'Blockchain paylaşılan bir kayıttır — tek bir şirket tarafından kontrol edilmez. Onu normal bir veritabanından farklı kılan budur.'}],
+        [{type:'note',label:'Başlangıç Notu',text:'Cüzdan içinde jeton saklamaz. Blockchain üzerindeki varlıkları kontrol ettiğinizi kanıtlayan anahtarları yönetir.'},
+         {type:'mistake',label:'Sık Yapılan Hata',text:'Borsa hesabını cüzdanla aynı şey sanmak. Kontrol açısından çok farklıdırlar.'}],
+        [{type:'takeaway',label:'Ana Fikir',text:'Her zaman kontrol edin: ağ → adres → test transferi → TxID. Bu basit alışkanlık çoğu hatayı önler.'}],
+        [{type:'idea',label:'Hızlı Fikir',text:'"Bu coin iyi mi?" yerine "Bu tokenın rolü ne?" diye sorun. Roller isimlerden daha fazlasını ortaya koyar.'}],
+        [{type:'takeaway',label:'Ana Fikir',text:'Gerçek vakalar riskin nerede ortaya çıktığını öğretir — phishing, saklama arızaları veya tasarım kusurları.'}]
+      ],
+      home: {type:'note',label:'Başlangıç Notu',text:'İlk kez geliyorsanız dersleri sırayla takip edin. Her ders bir öncekinin üzerine inşa edilir. Acele yok.'},
+      safety: {type:'takeaway',label:'Ana Fikir',text:'Birisi kurtarma ifadenizi isterse veya acil kripto ödemesi talep ederse — bu bir dolandırıcılık sinyalidir. Durun ve doğrulayın.'},
+      glossary: {type:'note',label:'Başlangıç Notu',text:'Her şeyi ezberlemenize gerek yok. Bir derste bilinmeyen bir terim gördüğünüzde bu sayfaya geri dönün.'}
+    },
+    es: {
+      lessons: [
+        [{type:'takeaway',label:'Idea Clave',text:'Una blockchain es un registro compartido — no controlado por una empresa. Eso la diferencia de una base de datos normal.'}],
+        [{type:'note',label:'Nota para Principiantes',text:'Una billetera no almacena monedas. Gestiona claves que prueban que controlas activos en la blockchain.'},
+         {type:'mistake',label:'Error Común',text:'Tratar una cuenta de exchange como si fuera una billetera propia. Son muy diferentes en control.'}],
+        [{type:'takeaway',label:'Idea Clave',text:'Siempre verifica: red → dirección → transferencia de prueba → TxID. Este hábito simple previene la mayoría de errores.'}],
+        [{type:'idea',label:'Idea Rápida',text:'En vez de preguntar "¿Es buena esta moneda?", pregunta "¿Qué rol cumple este token?" Los roles revelan más que los nombres.'}],
+        [{type:'takeaway',label:'Idea Clave',text:'Los casos reales enseñan dónde aparece el riesgo — phishing, fallos de custodia o defectos de diseño.'}]
+      ],
+      home: {type:'note',label:'Nota para Principiantes',text:'Si es tu primera vez, sigue las lecciones en orden. Cada una se basa en la anterior. Sin prisa.'},
+      safety: {type:'takeaway',label:'Idea Clave',text:'Si alguien pide tu frase semilla o exige pago urgente en cripto — es señal de estafa. Siempre detente y verifica.'},
+      glossary: {type:'note',label:'Nota para Principiantes',text:'No necesitas memorizar todo. Vuelve a esta página cuando encuentres un término desconocido.'}
+    },
+    ar: {
+      lessons: [
+        [{type:'takeaway',label:'الفكرة الرئيسية',text:'البلوكشين سجل مشترك لا تسيطر عليه شركة واحدة. هذا ما يميزه عن قاعدة البيانات العادية.'}],
+        [{type:'note',label:'ملاحظة للمبتدئين',text:'المحفظة لا تخزن العملات بداخلها. إنها تدير المفاتيح التي تثبت أنك تتحكم في الأصول على البلوكشين.'},
+         {type:'mistake',label:'خطأ شائع',text:'معاملة حساب البورصة كأنه محفظة خاصة. هما مختلفان جداً من حيث التحكم.'}],
+        [{type:'takeaway',label:'الفكرة الرئيسية',text:'تحقق دائماً: الشبكة ← العنوان ← تحويل تجريبي ← معرّف المعاملة. هذه العادة البسيطة تمنع معظم الأخطاء.'}],
+        [{type:'idea',label:'فكرة سريعة',text:'بدلاً من السؤال "هل هذه العملة جيدة؟" اسأل "ما دور هذا الرمز؟" الأدوار تكشف أكثر من الأسماء.'}],
+        [{type:'takeaway',label:'الفكرة الرئيسية',text:'الحالات الحقيقية تعلمك أين تظهر المخاطر — التصيد، فشل الحفظ، أو عيوب التصميم.'}]
+      ],
+      home: {type:'note',label:'ملاحظة للمبتدئين',text:'إذا كانت هذه المرة الأولى، اتبع الدروس بالترتيب. كل درس يبني على السابق. لا داعي للاستعجال.'},
+      safety: {type:'takeaway',label:'الفكرة الرئيسية',text:'إذا طلب أحد عبارة الاسترداد أو دفع عاجل بالعملات الرقمية — فهذه إشارة احتيال. توقف وتحقق دائماً.'},
+      glossary: {type:'note',label:'ملاحظة للمبتدئين',text:'لا تحتاج لحفظ كل شيء. ارجع لهذه الصفحة عندما تواجه مصطلحاً غير مألوف.'}
+    },
+    vi: {
+      lessons: [
+        [{type:'takeaway',label:'Điểm chính',text:'Blockchain là bản ghi chia sẻ — không do một công ty kiểm soát. Đó là điều khiến nó khác với cơ sở dữ liệu thông thường.'}],
+        [{type:'note',label:'Ghi chú cho người mới',text:'Ví không lưu trữ tiền xu bên trong. Nó quản lý các khóa chứng minh bạn kiểm soát tài sản trên blockchain.'},
+         {type:'mistake',label:'Lỗi thường gặp',text:'Coi tài khoản sàn giao dịch giống như sở hữu ví. Chúng rất khác nhau về quyền kiểm soát.'}],
+        [{type:'takeaway',label:'Điểm chính',text:'Luôn kiểm tra: mạng → địa chỉ → chuyển thử → mã giao dịch. Thói quen đơn giản này ngăn phần lớn lỗi chuyển tiền.'}],
+        [{type:'idea',label:'Ý tưởng nhanh',text:'Thay vì hỏi "Đồng này tốt không?" hãy hỏi "Token này đóng vai trò gì?" Vai trò tiết lộ nhiều hơn tên gọi.'}],
+        [{type:'takeaway',label:'Điểm chính',text:'Các trường hợp thực tế dạy bạn rủi ro xuất hiện ở đâu — lừa đảo, lỗi lưu ký, hoặc lỗi thiết kế.'}]
+      ],
+      home: {type:'note',label:'Ghi chú cho người mới',text:'Nếu đây là lần đầu, hãy theo các bài học theo thứ tự. Mỗi bài xây dựng trên bài trước. Không cần vội.'},
+      safety: {type:'takeaway',label:'Điểm chính',text:'Nếu ai đó yêu cầu cụm từ khôi phục hoặc đòi thanh toán crypto khẩn cấp — đó là dấu hiệu lừa đảo. Luôn dừng lại và xác minh.'},
+      glossary: {type:'note',label:'Ghi chú cho người mới',text:'Bạn không cần nhớ hết. Quay lại trang này khi gặp thuật ngữ lạ trong bài học.'}
+    }
+  };
+  summaryData.br = summaryData.pt;
+
+  function getCompare(){ return compareData[currentLang] || compareData.en; }
+  function getSummary(){ return summaryData[currentLang] || summaryData.en; }
+
+  // ===== PATCH renderLesson =====
+  var __prevRL = window.renderLesson;
+  window.renderLesson = function(i){
+    var html = __prevRL(i);
+    var cmp = getCompare();
+    var sum = getSummary();
+
+    // Insert summary boxes after the callout.info
+    if(sum.lessons && sum.lessons[i]){
+      var boxes = '';
+      for(var s=0; s<sum.lessons[i].length; s++){
+        var b = sum.lessons[i][s];
+        boxes += summaryBox(b.type, b.label, b.text);
+      }
+      // Insert after closing </div> of lc-header
+      var headerEnd = html.indexOf('</div>\n    <div class="lesson-body">');
+      if(headerEnd > -1){
+        html = html.substring(0, headerEnd+6) + boxes + html.substring(headerEnd+6);
+      }
+    }
+
+    // Insert comparison cards based on lesson index
+    var compCards = '';
+    if(i === 1){
+      // Wallet lesson: Wallet vs Exchange + Seed vs Private Key
+      compCards += '<div class="compare-header">'+cmp.walletExchange.header+'</div>';
+      compCards += compareCard(cmp.walletExchange.a[0], cmp.walletExchange.a[1], cmp.walletExchange.b[0], cmp.walletExchange.b[1]);
+      compCards += '<div class="compare-header">'+cmp.seedPrivate.header+'</div>';
+      compCards += compareCard(cmp.seedPrivate.a[0], cmp.seedPrivate.a[1], cmp.seedPrivate.b[0], cmp.seedPrivate.b[1]);
+    }
+    if(i === 3){
+      // Token Roles lesson: DeFi vs Stablecoin
+      compCards += '<div class="compare-header">'+cmp.defiStable.header+'</div>';
+      compCards += compareCard(cmp.defiStable.a[0], cmp.defiStable.a[1], cmp.defiStable.b[0], cmp.defiStable.b[1]);
+    }
+
+    if(compCards){
+      // Insert before the example section (h3 with example.title)
+      var exIdx = html.indexOf('<h3>' + t('example.title') + '</h3>');
+      if(exIdx > -1){
+        html = html.substring(0, exIdx) + compCards + html.substring(exIdx);
+      } else {
+        // Insert before lesson-nav-bar
+        var navIdx = html.indexOf('<div class="complete-row">');
+        if(navIdx > -1) html = html.substring(0, navIdx) + compCards + html.substring(navIdx);
+      }
+    }
+
+    return html;
+  };
+
+  // ===== PATCH renderHome =====
+  var __prevRH = window.renderHome;
+  window.renderHome = function(){
+    var html = __prevRH();
+    var sum = getSummary();
+    var cmp = getCompare();
+
+    // Add home summary box after home-desc
+    if(sum.home){
+      var homeBox = summaryBox(sum.home.type, sum.home.label, sum.home.text);
+      var descEnd = html.indexOf('</p>\n      <div class="home-grid">');
+      if(descEnd > -1){
+        html = html.substring(0, descEnd+4) + homeBox + html.substring(descEnd+4);
+      }
+    }
+
+    // Add Wallet vs Exchange comparison card in home after the 3-card row (Start/FAQ/Safety)
+    var miniGridIdx = html.indexOf('<div class="home-mini-grid">');
+    if(miniGridIdx > -1){
+      var homeCompare = '<div class="compare-header">'+cmp.walletExchange.header+'</div>';
+      homeCompare += compareCard(cmp.walletExchange.a[0], cmp.walletExchange.a[1], cmp.walletExchange.b[0], cmp.walletExchange.b[1]);
+      html = html.substring(0, miniGridIdx) + homeCompare + html.substring(miniGridIdx);
+    }
+
+    return html;
+  };
+
+  // ===== PATCH renderSafetyPage =====
+  var __prevSP = window.renderSafetyPage;
+  window.renderSafetyPage = function(){
+    var html = __prevSP();
+    var sum = getSummary();
+    var cmp = getCompare();
+
+    // Add safety summary box after intro
+    if(sum.safety){
+      var safeBox = summaryBox(sum.safety.type, sum.safety.label, sum.safety.text);
+      // Insert after lc-intro paragraph
+      var introEnd = html.indexOf('</p>\n    </div>');
+      if(introEnd > -1){
+        html = html.substring(0, introEnd+4) + safeBox + html.substring(introEnd+4);
+      }
+    }
+
+    // Add Seed vs Private Key comparison on safety page
+    var stepsIdx = html.indexOf('<ul class="steps-list">') || html.indexOf('<div class="step');
+    if(stepsIdx === -1) stepsIdx = html.indexOf('</div>', html.indexOf('lc-header') + 50);
+    if(stepsIdx > -1){
+      var safeCompare = '<div class="compare-header">'+cmp.seedPrivate.header+'</div>';
+      safeCompare += compareCard(cmp.seedPrivate.a[0], cmp.seedPrivate.a[1], cmp.seedPrivate.b[0], cmp.seedPrivate.b[1]);
+      // Insert at end before closing
+      var lastDiv = html.lastIndexOf('</div>');
+      if(lastDiv > -1){
+        html = html.substring(0, lastDiv) + safeCompare + html.substring(lastDiv);
+      }
+    }
+
+    return html;
+  };
+
+  // ===== PATCH renderGlossary =====
+  var __prevG = window.renderGlossary;
+  window.renderGlossary = function(){
+    var html = __prevG();
+    var sum = getSummary();
+    if(sum.glossary){
+      var gBox = summaryBox(sum.glossary.type, sum.glossary.label, sum.glossary.text);
+      var gIntroEnd = html.indexOf('</p>\n    </div>');
+      if(gIntroEnd > -1){
+        html = html.substring(0, gIntroEnd+4) + gBox + html.substring(gIntroEnd+4);
+      }
+    }
+    return html;
+  };
+
+  // Re-render everything
+  if(typeof renderAllLessons === 'function') renderAllLessons();
+  if(typeof showPage === 'function' && typeof currentPage !== 'undefined' && currentPage === 'home') showPage('home');
+})();
+</script>
+
+<!-- ========== FEATURE: Term Tooltips + Enhanced Quizzes + Find Your Start ========== -->
+<style id="tooltip-quiz-start-css">
+/* --- Term Tooltips --- */
+.term-tip{position:relative;display:inline;border-bottom:1px dashed var(--text-3);cursor:help;color:var(--navy-2);font-weight:600}
+.term-tip .tip-box{
+  display:none;position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);
+  background:var(--panel);border:1px solid var(--line-strong);border-radius:10px;box-shadow:var(--shadow);
+  padding:10px 14px;font-size:.82rem;font-weight:400;color:var(--text-2);line-height:1.55;
+  width:max-content;max-width:280px;z-index:100;pointer-events:none;white-space:normal;text-align:left
+}
+.term-tip .tip-box::after{
+  content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);
+  border:6px solid transparent;border-top-color:var(--line-strong)
+}
+.term-tip:hover .tip-box,.term-tip.tip-active .tip-box{display:block}
+@media(max-width:768px){
+  .term-tip .tip-box{position:fixed;bottom:auto;top:auto;left:16px;right:16px;transform:none;max-width:calc(100vw - 32px);width:auto;bottom:20px}
+  .term-tip .tip-box::after{display:none}
+}
+
+/* --- Enhanced Quiz --- */
+.quiz-enhanced{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:18px 0}
+.quiz-enhanced .quiz-e-title{font-family:"IBM Plex Mono",monospace;font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);font-weight:700;margin-bottom:14px}
+.quiz-e-question{font-size:.94rem;font-weight:700;color:var(--text);margin-bottom:12px}
+.quiz-e-options{display:flex;flex-direction:column;gap:8px}
+.quiz-e-opt{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:.88rem;color:var(--text-2);transition:all .15s var(--ease)}
+.quiz-e-opt:hover{border-color:var(--line-strong);background:var(--sidebar)}
+.quiz-e-opt.correct{border-color:var(--green);background:var(--green-bg);color:var(--green);font-weight:700}
+.quiz-e-opt.wrong{border-color:var(--red);background:var(--red-bg);color:var(--red);opacity:.7}
+.quiz-e-opt.disabled{pointer-events:none}
+.quiz-e-feedback{margin-top:10px;padding:10px 14px;border-radius:10px;font-size:.86rem;display:none}
+.quiz-e-feedback.show{display:block}
+.quiz-e-feedback.correct-fb{background:var(--green-bg);border:1px solid rgba(45,107,73,.15);color:var(--green)}
+.quiz-e-feedback.wrong-fb{background:var(--red-bg);border:1px solid rgba(138,55,49,.15);color:var(--red)}
+.quiz-e-dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--line-strong);flex-shrink:0;display:grid;place-items:center;font-size:.7rem;font-weight:800}
+.quiz-e-opt.correct .quiz-e-dot{border-color:var(--green);background:var(--green);color:#fff}
+.quiz-e-opt.wrong .quiz-e-dot{border-color:var(--red);background:var(--red);color:#fff}
+
+/* --- Find Your Start --- */
+.start-finder{margin:20px 0 8px;padding:20px;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+.start-finder-title{font-size:1rem;font-weight:800;color:var(--text);margin-bottom:6px}
+.start-finder-desc{font-size:.88rem;color:var(--text-2);margin-bottom:14px}
+.start-finder-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.start-finder-btn{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:12px;cursor:pointer;text-align:left;transition:all .15s var(--ease);font-size:.86rem;color:var(--text-2);font-weight:600}
+.start-finder-btn:hover{border-color:var(--navy-2);background:var(--blue-bg);color:var(--navy)}
+.start-finder-btn .sf-icon{width:28px;height:28px;border-radius:8px;background:var(--sidebar);display:grid;place-items:center;flex-shrink:0;font-size:.72rem;font-family:"IBM Plex Mono",monospace;font-weight:800;color:var(--navy)}
+@media(max-width:768px){.start-finder-grid{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  // ============ 1. TERM TOOLTIPS ============
+  var tooltipDefs = {
+    en:{
+      'seed phrase':'A set of recovery words (usually 12 or 24) that can restore your entire wallet. Never share it.',
+      'private key':'A secret cryptographic key that gives control over a wallet address. Keep it safe.',
+      'public key':'A cryptographic key linked to your wallet identity. It helps generate addresses.',
+      'gas fee':'A network fee paid to process a transaction on a blockchain.',
+      'explorer':'A website or tool that lets you view blockchain transactions and addresses publicly.',
+      'smart contract':'Code on a blockchain that automatically follows programmed rules.',
+      'custody':'Who controls the keys and access to the crypto assets.',
+      'bridge':'A tool to move assets or messages between different blockchains.',
+      'defi':'Financial functions built with code — lending, swapping, earning — without a traditional bank.',
+      'stablecoin':'A token designed to stay close to a reference value like $1.',
+      'nft':'A token representing proof of ownership for a specific digital item.',
+      'governance':'A token that gives voting rights in a protocol or community decision.'
+    },
+    ko:{
+      'seed phrase':'지갑을 복구할 수 있는 복구 단어 세트(보통 12개 또는 24개). 절대 공유하지 마세요.',
+      'private key':'지갑 주소를 제어하는 비밀 암호화 키. 안전하게 보관하세요.',
+      'public key':'지갑 신원과 연결된 암호화 키. 주소를 생성하는 데 사용됩니다.',
+      'gas fee':'블록체인에서 거래를 처리하기 위해 지불하는 네트워크 수수료.',
+      'explorer':'블록체인 거래와 주소를 공개적으로 볼 수 있는 웹사이트 또는 도구.',
+      'smart contract':'프로그래밍된 규칙을 자동으로 따르는 블록체인 위의 코드.',
+      'custody':'암호화폐 자산의 키와 접근 권한을 누가 통제하는지.',
+      'bridge':'서로 다른 블록체인 간에 자산이나 메시지를 이동시키는 도구.',
+      'defi':'전통 은행 없이 코드로 구축된 금융 기능 — 대출, 스왑, 수익.',
+      'stablecoin':'1달러처럼 기준값에 가깝게 유지되도록 설계된 토큰.',
+      'nft':'특정 디지털 아이템의 소유권을 증명하는 토큰.',
+      'governance':'프로토콜이나 커뮤니티 결정에서 투표권을 부여하는 토큰.'
+    },
+    th:{
+      'seed phrase':'ชุดคำสำรอง (ปกติ 12 หรือ 24 คำ) สำหรับกู้คืนวอลเล็ต ห้ามแชร์เด็ดขาด',
+      'private key':'กุญแจลับที่ให้สิทธิ์ควบคุมวอลเล็ต เก็บรักษาให้ปลอดภัย',
+      'public key':'กุญแจเข้ารหัสที่เชื่อมกับตัวตนวอลเล็ต ใช้สร้างที่อยู่',
+      'gas fee':'ค่าธรรมเนียมเครือข่ายสำหรับประมวลผลธุรกรรม',
+      'explorer':'เว็บไซต์สำหรับดูธุรกรรมและที่อยู่บล็อกเชน',
+      'smart contract':'โค้ดบนบล็อกเชนที่ทำงานตามกฎที่โปรแกรมไว้',
+      'custody':'ใครเป็นผู้ควบคุมกุญแจและการเข้าถึงสินทรัพย์',
+      'bridge':'เครื่องมือย้ายสินทรัพย์ระหว่างบล็อกเชนต่างๆ',
+      'defi':'ฟังก์ชันการเงินที่สร้างด้วยโค้ด ไม่ต้องพึ่งธนาคาร',
+      'stablecoin':'โทเคนที่ออกแบบให้มูลค่าใกล้เคียงค่าอ้างอิง เช่น $1',
+      'nft':'โทเคนที่พิสูจน์ความเป็นเจ้าของสำหรับไอเทมดิจิทัล',
+      'governance':'โทเคนที่ให้สิทธิ์โหวตในโปรโตคอลหรือชุมชน'
+    },
+    id:{
+      'seed phrase':'Kata pemulihan (biasanya 12 atau 24) untuk memulihkan wallet. Jangan pernah dibagikan.',
+      'private key':'Kunci kriptografis rahasia yang mengontrol alamat wallet.',
+      'public key':'Kunci kriptografis yang terkait dengan identitas wallet.',
+      'gas fee':'Biaya jaringan untuk memproses transaksi di blockchain.',
+      'explorer':'Situs untuk melihat transaksi dan alamat blockchain.',
+      'smart contract':'Kode di blockchain yang mengikuti aturan terprogram secara otomatis.',
+      'custody':'Siapa yang mengontrol kunci dan akses ke aset kripto.',
+      'bridge':'Alat untuk memindahkan aset antar blockchain berbeda.',
+      'defi':'Fungsi keuangan yang dibangun dengan kode, tanpa bank tradisional.',
+      'stablecoin':'Token yang dirancang dekat dengan nilai acuan seperti $1.',
+      'nft':'Token yang mewakili bukti kepemilikan item digital.',
+      'governance':'Token yang memberikan hak suara dalam protokol atau komunitas.'
+    },
+    pt:{
+      'seed phrase':'Conjunto de palavras de recuperação (geralmente 12 ou 24) para restaurar carteira. Nunca compartilhe.',
+      'private key':'Chave criptográfica secreta que dá controle sobre o endereço da carteira.',
+      'public key':'Chave criptográfica ligada à identidade da carteira.',
+      'gas fee':'Taxa de rede paga para processar transação no blockchain.',
+      'explorer':'Site para visualizar transações e endereços de blockchain.',
+      'smart contract':'Código no blockchain que segue regras programadas automaticamente.',
+      'custody':'Quem controla as chaves e o acesso aos ativos cripto.',
+      'bridge':'Ferramenta para mover ativos entre blockchains diferentes.',
+      'defi':'Funções financeiras construídas com código, sem banco tradicional.',
+      'stablecoin':'Token projetado para ficar próximo de um valor de referência como $1.',
+      'nft':'Token que representa prova de propriedade de um item digital.',
+      'governance':'Token que dá direitos de voto em um protocolo ou comunidade.'
+    },
+    tr:{
+      'seed phrase':'Cüzdanı geri yüklemek için kelime seti (genelde 12 veya 24). Asla paylaşmayın.',
+      'private key':'Cüzdan adresini kontrol eden gizli kriptografik anahtar.',
+      'public key':'Cüzdan kimliğiyle bağlantılı kriptografik anahtar.',
+      'gas fee':'Blockchain üzerinde işlem yapmak için ödenen ağ ücreti.',
+      'explorer':'Blockchain işlemlerini ve adresleri görüntüleme aracı.',
+      'smart contract':'Blockchain üzerinde programlanmış kurallara göre çalışan kod.',
+      'custody':'Kripto varlıklara erişim ve anahtarları kimin kontrol ettiği.',
+      'bridge':'Farklı blockchainler arasında varlık taşıma aracı.',
+      'defi':'Geleneksel banka olmadan kodla yapılan finansal işlemler.',
+      'stablecoin':'$1 gibi bir referans değere yakın kalmak üzere tasarlanmış token.',
+      'nft':'Belirli bir dijital öğenin sahiplik kanıtını temsil eden token.',
+      'governance':'Protokol veya topluluk kararlarında oy hakkı veren token.'
+    },
+    es:{
+      'seed phrase':'Conjunto de palabras de recuperación (generalmente 12 o 24) para restaurar billetera. Nunca la compartas.',
+      'private key':'Clave criptográfica secreta que controla una dirección de billetera.',
+      'public key':'Clave criptográfica vinculada a la identidad de la billetera.',
+      'gas fee':'Tarifa de red pagada para procesar una transacción en blockchain.',
+      'explorer':'Sitio web para ver transacciones y direcciones de blockchain.',
+      'smart contract':'Código en blockchain que sigue reglas programadas automáticamente.',
+      'custody':'Quién controla las claves y el acceso a los criptoactivos.',
+      'bridge':'Herramienta para mover activos entre diferentes blockchains.',
+      'defi':'Funciones financieras construidas con código, sin banco tradicional.',
+      'stablecoin':'Token diseñado para mantenerse cerca de un valor de referencia como $1.',
+      'nft':'Token que representa prueba de propiedad de un artículo digital.',
+      'governance':'Token que otorga derechos de voto en un protocolo o comunidad.'
+    },
+    ar:{
+      'seed phrase':'مجموعة كلمات استرداد (عادة 12 أو 24) لاستعادة المحفظة. لا تشاركها أبداً.',
+      'private key':'مفتاح تشفيري سري يتحكم في عنوان المحفظة.',
+      'public key':'مفتاح تشفيري مرتبط بهوية المحفظة.',
+      'gas fee':'رسوم شبكة لمعالجة معاملة على البلوكتشين.',
+      'explorer':'موقع لعرض معاملات وعناوين البلوكتشين.',
+      'smart contract':'كود على البلوكتشين يتبع قواعد مبرمجة تلقائياً.',
+      'custody':'من يتحكم في المفاتيح والوصول إلى الأصول المشفرة.',
+      'bridge':'أداة لنقل الأصول بين سلاسل بلوكتشين مختلفة.',
+      'defi':'وظائف مالية مبنية بالكود بدون بنك تقليدي.',
+      'stablecoin':'رمز مصمم ليبقى قريباً من قيمة مرجعية مثل $1.',
+      'nft':'رمز يمثل إثبات ملكية لعنصر رقمي محدد.',
+      'governance':'رمز يمنح حقوق التصويت في بروتوكول أو مجتمع.'
+    },
+    vi:{
+      'seed phrase':'Bộ từ khôi phục (thường 12 hoặc 24) để khôi phục ví. Không bao giờ chia sẻ.',
+      'private key':'Khóa mã hóa bí mật kiểm soát địa chỉ ví.',
+      'public key':'Khóa mã hóa liên kết với danh tính ví.',
+      'gas fee':'Phí mạng lưới để xử lý giao dịch trên blockchain.',
+      'explorer':'Trang web để xem giao dịch và địa chỉ blockchain.',
+      'smart contract':'Mã trên blockchain tự động thực thi theo quy tắc được lập trình.',
+      'custody':'Ai kiểm soát khóa và quyền truy cập tài sản crypto.',
+      'bridge':'Công cụ di chuyển tài sản giữa các blockchain khác nhau.',
+      'defi':'Chức năng tài chính xây bằng mã, không cần ngân hàng truyền thống.',
+      'stablecoin':'Token thiết kế để giữ gần giá trị tham chiếu như $1.',
+      'nft':'Token đại diện cho bằng chứng sở hữu vật phẩm số.',
+      'governance':'Token cho quyền bỏ phiếu trong giao thức hoặc cộng đồng.'
+    }
+  };
+  // br falls back to pt
+  tooltipDefs.br = tooltipDefs.pt;
+
+  // Terms to scan for (case-insensitive match in rendered HTML text)
+  var termsList = ['seed phrase','private key','public key','gas fee','explorer','smart contract','custody','bridge','defi','stablecoin','nft','governance'];
+
+  function getTooltipDefs(){ return tooltipDefs[currentLang] || tooltipDefs.en; }
+
+  function applyTooltips(html){
+    var defs = getTooltipDefs();
+    // Sort terms by length (longest first) to avoid partial matches
+    var sorted = termsList.slice().sort(function(a,b){return b.length - a.length;});
+    sorted.forEach(function(term){
+      var def = defs[term];
+      if(!def) return;
+      // Case-insensitive replace, but only in text nodes (avoid replacing inside tags/attributes)
+      // Use a regex that avoids matches inside HTML tags or already-wrapped tooltips
+      var escaped = term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+      var re = new RegExp('(?<![\\w-])(' + escaped + ')(?![\\w-])(?![^<]*>)(?![^<]*<\\/span)','gi');
+      var replaced = false;
+      html = html.replace(re, function(match){
+        if(replaced) return match; // Only replace first occurrence per term
+        replaced = true;
+        return '<span class="term-tip" onclick="this.classList.toggle(\'tip-active\')">' + match + '<span class="tip-box">' + def + '</span></span>';
+      });
+    });
+    return html;
+  }
+
+  // Patch renderLesson to apply tooltips
+  var __rlTip = window.renderLesson;
+  window.renderLesson = function(i){
+    var html = __rlTip(i);
+    return applyTooltips(html);
+  };
+
+  // Patch renderSafetyPage
+  var __spTip = window.renderSafetyPage;
+  window.renderSafetyPage = function(){
+    return applyTooltips(__spTip());
+  };
+
+  // Patch renderStartHere
+  var __shTip = window.renderStartHere;
+  window.renderStartHere = function(){
+    return applyTooltips(__shTip());
+  };
+
+  // ============ 2. ENHANCED MINI QUIZZES ============
+  var quizData = {
+    en:[
+      [{q:'What is a blockchain?',opts:['A type of bank account','A shared ledger verified by many participants','A software company','A type of cryptocurrency'],correct:1,fb:'Correct! A blockchain is a shared ledger — not controlled by one company.'}],
+      [{q:'Which of these should you NEVER share?',opts:['Your wallet address','Your seed phrase','Your transaction ID','The network name'],correct:1,fb:'Correct! Your seed phrase gives full control of your wallet. Never share it.'},
+       {q:'What is a wallet, primarily?',opts:['A box that stores coins','A key management tool','A bank account','A type of exchange'],correct:1,fb:'Right! A wallet manages keys that prove your control over assets on the blockchain.'}],
+      [{q:'What should you do before sending the full amount?',opts:['Send a test transfer first','Ask a friend','Wait 24 hours','Check the price'],correct:0,fb:'Correct! A small test transfer helps verify the network and address are right.'}],
+      [{q:'Instead of asking "Is this coin good?", what should you ask?',opts:['What is the price?','Who created it?','What role does this token play?','Is it trending?'],correct:2,fb:'Correct! Understanding a token\'s role reveals more than just its name.'}],
+      [{q:'If someone demands urgent crypto payment, what is it likely?',opts:['A great deal','A scam signal','A normal transaction','A governance vote'],correct:1,fb:'Correct! Urgency and pressure are classic scam tactics. Always pause and verify.'}]
+    ],
+    ko:[
+      [{q:'블록체인이란 무엇인가요?',opts:['은행 계좌의 한 종류','여러 참여자가 검증하는 공유 원장','소프트웨어 회사','암호화폐의 한 종류'],correct:1,fb:'정답! 블록체인은 하나의 회사가 아닌 여러 참여자가 함께 관리하는 공유 기록입니다.'}],
+      [{q:'절대 공유하면 안 되는 것은?',opts:['지갑 주소','시드 문구','거래 ID','네트워크 이름'],correct:1,fb:'정답! 시드 문구는 지갑의 전체 통제권을 부여합니다. 절대 공유하지 마세요.'},
+       {q:'지갑의 주된 역할은?',opts:['코인을 담는 상자','키 관리 도구','은행 계좌','거래소의 한 종류'],correct:1,fb:'정답! 지갑은 블록체인 위 자산에 대한 통제권을 증명하는 키를 관리합니다.'}],
+      [{q:'전체 금액을 보내기 전에 먼저 해야 할 것은?',opts:['소액 테스트 전송','친구에게 물어보기','24시간 기다리기','가격 확인'],correct:0,fb:'정답! 소액 테스트 전송으로 네트워크와 주소가 맞는지 확인할 수 있습니다.'}],
+      [{q:'"이 코인 좋은가요?" 대신 물어야 할 질문은?',opts:['가격이 얼마인가요?','누가 만들었나요?','이 토큰의 역할은 무엇인가요?','트렌딩인가요?'],correct:2,fb:'정답! 토큰의 역할을 이해하면 이름만으로는 알 수 없는 것을 알 수 있습니다.'}],
+      [{q:'누군가 긴급한 크립토 결제를 요구하면?',opts:['좋은 기회','사기 신호','일반 거래','거버넌스 투표'],correct:1,fb:'정답! 긴급함과 압박은 전형적인 사기 수법입니다. 항상 멈추고 확인하세요.'}]
+    ],
+    th:[
+      [{q:'บล็อกเชนคืออะไร?',opts:['บัญชีธนาคารแบบหนึ่ง','บัญชีแยกประเภทร่วมที่หลายฝ่ายตรวจสอบ','บริษัทซอฟต์แวร์','สกุลเงินดิจิทัลแบบหนึ่ง'],correct:1,fb:'ถูกต้อง! บล็อกเชนคือบันทึกร่วมที่ไม่ได้ถูกควบคุมโดยบริษัทเดียว'}],
+      [{q:'สิ่งที่ห้ามแชร์เด็ดขาดคืออะไร?',opts:['ที่อยู่กระเป๋า','วลีสำรอง','ID ธุรกรรม','ชื่อเครือข่าย'],correct:1,fb:'ถูกต้อง! วลีสำรองให้การควบคุมวอลเล็ตทั้งหมด ห้ามแชร์เด็ดขาด'}],
+      [{q:'ก่อนส่งจำนวนเต็มควรทำอะไร?',opts:['ส่งทดสอบจำนวนเล็กน้อย','ถามเพื่อน','รอ 24 ชั่วโมง','ตรวจสอบราคา'],correct:0,fb:'ถูกต้อง! การโอนทดสอบเล็กน้อยช่วยยืนยันว่าเครือข่ายและที่อยู่ถูกต้อง'}],
+      [{q:'แทนที่จะถาม "เหรียญนี้ดีไหม?" ควรถามอะไร?',opts:['ราคาเท่าไร?','ใครสร้าง?','โทเคนนี้มีบทบาทอะไร?','กำลังเทรนด์ไหม?'],correct:2,fb:'ถูกต้อง! การเข้าใจบทบาทของโทเคนบอกอะไรได้มากกว่าแค่ชื่อ'}],
+      [{q:'ถ้ามีคนเร่งให้จ่ายคริปโตเร่งด่วน?',opts:['โอกาสดี','สัญญาณหลอกลวง','ธุรกรรมปกติ','โหวตในโปรโตคอล'],correct:1,fb:'ถูกต้อง! ความเร่งด่วนและแรงกดดันเป็นกลวิธีหลอกลวงคลาสสิก'}]
+    ],
+    id:[
+      [{q:'Apa itu blockchain?',opts:['Jenis rekening bank','Buku besar bersama yang diverifikasi banyak pihak','Perusahaan software','Jenis cryptocurrency'],correct:1,fb:'Benar! Blockchain adalah catatan bersama yang tidak dikontrol satu perusahaan.'}],
+      [{q:'Mana yang TIDAK BOLEH dibagikan?',opts:['Alamat wallet','Frasa pemulihan','ID transaksi','Nama jaringan'],correct:1,fb:'Benar! Frasa pemulihan memberikan kontrol penuh atas wallet Anda.'}],
+      [{q:'Apa yang harus dilakukan sebelum mengirim jumlah penuh?',opts:['Kirim transfer uji kecil','Tanya teman','Tunggu 24 jam','Cek harga'],correct:0,fb:'Benar! Transfer uji kecil membantu memverifikasi jaringan dan alamat.'}],
+      [{q:'Daripada bertanya "Koin ini bagus?", apa yang sebaiknya ditanyakan?',opts:['Berapa harganya?','Siapa pembuatnya?','Apa peran token ini?','Apakah trending?'],correct:2,fb:'Benar! Memahami peran token mengungkap lebih banyak daripada namanya.'}],
+      [{q:'Jika seseorang menuntut pembayaran crypto mendesak?',opts:['Peluang bagus','Sinyal penipuan','Transaksi normal','Voting governance'],correct:1,fb:'Benar! Urgensi dan tekanan adalah taktik penipuan klasik.'}]
+    ],
+    pt:[
+      [{q:'O que é uma blockchain?',opts:['Um tipo de conta bancária','Um registro compartilhado verificado por muitos participantes','Uma empresa de software','Um tipo de criptomoeda'],correct:1,fb:'Correto! Blockchain é um registro compartilhado não controlado por uma empresa.'}],
+      [{q:'O que você NUNCA deve compartilhar?',opts:['Endereço da carteira','Frase de recuperação','ID da transação','Nome da rede'],correct:1,fb:'Correto! A frase de recuperação dá controle total da sua carteira.'}],
+      [{q:'O que fazer antes de enviar o valor total?',opts:['Enviar uma transferência teste','Perguntar a um amigo','Esperar 24 horas','Verificar o preço'],correct:0,fb:'Correto! Uma pequena transferência teste verifica rede e endereço.'}],
+      [{q:'Em vez de perguntar "Essa moeda é boa?", o que perguntar?',opts:['Qual é o preço?','Quem criou?','Qual o papel deste token?','Está em alta?'],correct:2,fb:'Correto! Entender o papel do token revela mais que o nome.'}],
+      [{q:'Se alguém exigir pagamento cripto urgente?',opts:['Uma boa oportunidade','Sinal de golpe','Transação normal','Voto de governança'],correct:1,fb:'Correto! Urgência e pressão são táticas clássicas de golpe.'}]
+    ],
+    tr:[
+      [{q:'Blockchain nedir?',opts:['Bir banka hesabı türü','Birçok katılımcının doğruladığı paylaşılan bir kayıt','Bir yazılım şirketi','Bir kripto para türü'],correct:1,fb:'Doğru! Blockchain tek bir şirket tarafından kontrol edilmeyen paylaşılan bir kayıttır.'}],
+      [{q:'Hangisini ASLA paylaşmamalısınız?',opts:['Cüzdan adresiniz','Kurtarma ifadeniz','İşlem ID\'niz','Ağ adı'],correct:1,fb:'Doğru! Kurtarma ifadesi cüzdanınızın tam kontrolünü verir.'}],
+      [{q:'Tam miktarı göndermeden önce ne yapmalısınız?',opts:['Küçük bir test transferi gönderin','Arkadaşınıza sorun','24 saat bekleyin','Fiyatı kontrol edin'],correct:0,fb:'Doğru! Küçük bir test transferi ağı ve adresi doğrulamaya yardımcı olur.'}],
+      [{q:'"Bu coin iyi mi?" yerine ne sormalısınız?',opts:['Fiyatı ne?','Kim yarattı?','Bu tokenın rolü ne?','Trend mi?'],correct:2,fb:'Doğru! Tokenın rolünü anlamak isminden daha fazlasını ortaya koyar.'}],
+      [{q:'Birisi acil kripto ödemesi isterse?',opts:['Harika fırsat','Dolandırıcılık sinyali','Normal işlem','Yönetişim oyu'],correct:1,fb:'Doğru! Aciliyet ve baskı klasik dolandırıcılık taktikleridir.'}]
+    ],
+    es:[
+      [{q:'¿Qué es una blockchain?',opts:['Un tipo de cuenta bancaria','Un registro compartido verificado por muchos participantes','Una empresa de software','Un tipo de criptomoneda'],correct:1,fb:'¡Correcto! Blockchain es un registro compartido no controlado por una empresa.'}],
+      [{q:'¿Qué NUNCA debes compartir?',opts:['Tu dirección de billetera','Tu frase semilla','Tu ID de transacción','El nombre de la red'],correct:1,fb:'¡Correcto! La frase semilla da control total de tu billetera.'}],
+      [{q:'¿Qué hacer antes de enviar el monto completo?',opts:['Enviar una transferencia de prueba','Preguntar a un amigo','Esperar 24 horas','Verificar el precio'],correct:0,fb:'¡Correcto! Una pequeña transferencia de prueba verifica la red y la dirección.'}],
+      [{q:'En vez de preguntar "¿Esta moneda es buena?", ¿qué preguntar?',opts:['¿Cuál es el precio?','¿Quién la creó?','¿Qué rol juega este token?','¿Está en tendencia?'],correct:2,fb:'¡Correcto! Entender el rol del token revela más que el nombre.'}],
+      [{q:'Si alguien exige pago cripto urgente, ¿qué es probablemente?',opts:['Una gran oportunidad','Señal de estafa','Transacción normal','Voto de gobernanza'],correct:1,fb:'¡Correcto! La urgencia y presión son tácticas clásicas de estafa.'}]
+    ],
+    ar:[
+      [{q:'ما هو البلوكتشين؟',opts:['نوع من الحسابات البنكية','سجل مشترك يتحقق منه العديد من المشاركين','شركة برمجيات','نوع من العملات المشفرة'],correct:1,fb:'صحيح! البلوكتشين سجل مشترك لا تتحكم فيه شركة واحدة.'}],
+      [{q:'ما الذي يجب ألا تشاركه أبداً؟',opts:['عنوان محفظتك','عبارة الاسترداد','معرف المعاملة','اسم الشبكة'],correct:1,fb:'صحيح! عبارة الاسترداد تمنح التحكم الكامل في محفظتك.'}],
+      [{q:'ماذا تفعل قبل إرسال المبلغ الكامل؟',opts:['إرسال تحويل تجريبي صغير','سؤال صديق','الانتظار 24 ساعة','التحقق من السعر'],correct:0,fb:'صحيح! تحويل تجريبي صغير يساعد في التحقق من الشبكة والعنوان.'}],
+      [{q:'بدلاً من سؤال "هل هذه العملة جيدة؟"، ماذا تسأل؟',opts:['ما السعر؟','من أنشأها؟','ما دور هذا الرمز؟','هل هي رائجة؟'],correct:2,fb:'صحيح! فهم دور الرمز يكشف أكثر من مجرد اسمه.'}],
+      [{q:'إذا طلب شخص دفع عملة مشفرة عاجلة؟',opts:['فرصة رائعة','إشارة احتيال','معاملة عادية','تصويت حوكمة'],correct:1,fb:'صحيح! الإلحاح والضغط من أساليب الاحتيال الكلاسيكية.'}]
+    ],
+    vi:[
+      [{q:'Blockchain là gì?',opts:['Một loại tài khoản ngân hàng','Sổ cái chia sẻ được nhiều người xác minh','Công ty phần mềm','Một loại tiền mã hóa'],correct:1,fb:'Đúng! Blockchain là bản ghi chia sẻ không do một công ty kiểm soát.'}],
+      [{q:'Điều gì KHÔNG BAO GIỜ nên chia sẻ?',opts:['Địa chỉ ví','Cụm từ khôi phục','ID giao dịch','Tên mạng lưới'],correct:1,fb:'Đúng! Cụm từ khôi phục cho toàn quyền kiểm soát ví của bạn.'}],
+      [{q:'Trước khi gửi toàn bộ, nên làm gì?',opts:['Gửi thử số nhỏ','Hỏi bạn bè','Đợi 24 giờ','Kiểm tra giá'],correct:0,fb:'Đúng! Chuyển thử nhỏ giúp xác minh mạng lưới và địa chỉ.'}],
+      [{q:'Thay vì hỏi "Coin này tốt không?", nên hỏi gì?',opts:['Giá bao nhiêu?','Ai tạo ra?','Vai trò của token này là gì?','Đang trending?'],correct:2,fb:'Đúng! Hiểu vai trò token cho biết nhiều hơn tên gọi.'}],
+      [{q:'Nếu ai đó yêu cầu thanh toán crypto khẩn cấp?',opts:['Cơ hội tốt','Tín hiệu lừa đảo','Giao dịch bình thường','Bỏ phiếu quản trị'],correct:1,fb:'Đúng! Sự khẩn cấp và áp lực là chiến thuật lừa đảo kinh điển.'}]
+    ]
+  };
+  quizData.br = quizData.pt;
+
+  var quizTitles = {
+    en:'Test Your Understanding',ko:'이해도 확인',th:'ทดสอบความเข้าใจ',id:'Uji Pemahamanmu',
+    pt:'Teste seu Entendimento',tr:'Anlayışınızı Test Edin',es:'Pon a Prueba tu Comprensión',
+    ar:'اختبر فهمك',vi:'Kiểm Tra Hiểu Biết',br:'Teste seu Entendimento'
+  };
+
+  function renderEnhancedQuiz(lessonIdx){
+    var qd = quizData[currentLang] || quizData.en;
+    var items = qd[lessonIdx];
+    if(!items || !items.length) return '';
+    var title = quizTitles[currentLang] || quizTitles.en;
+    var html = '<div class="quiz-enhanced"><div class="quiz-e-title">'+title+'</div>';
+    items.forEach(function(item, qi){
+      var uid = 'eq_'+lessonIdx+'_'+qi+'_'+Math.random().toString(36).substr(2,5);
+      html += '<div class="quiz-e-question">'+item.q+'</div><div class="quiz-e-options" id="'+uid+'">';
+      item.opts.forEach(function(opt, oi){
+        html += '<div class="quiz-e-opt" data-correct="'+(oi===item.correct?'1':'0')+'" onclick="handleQuizClick(this,\''+uid+'\','+item.correct+',\''+uid+'_fb\')"><div class="quiz-e-dot"></div><span>'+opt+'</span></div>';
+      });
+      html += '</div><div class="quiz-e-feedback" id="'+uid+'_fb">'+item.fb+'</div>';
+    });
+    html += '</div>';
+    return html;
+  }
+
+  // Global quiz click handler
+  window.handleQuizClick = function(el, containerId, correctIdx, fbId){
+    var container = document.getElementById(containerId);
+    if(!container) return;
+    var opts = container.querySelectorAll('.quiz-e-opt');
+    var isCorrect = el.getAttribute('data-correct') === '1';
+    opts.forEach(function(o){ o.classList.add('disabled'); });
+    el.classList.add(isCorrect ? 'correct' : 'wrong');
+    // Also highlight correct answer
+    if(!isCorrect) opts[correctIdx].classList.add('correct');
+    var fb = document.getElementById(fbId);
+    if(fb){
+      fb.classList.add('show', isCorrect ? 'correct-fb' : 'wrong-fb');
+      if(!isCorrect) fb.textContent = (currentLang==='ko'?'아쉽습니다! ':'') + fb.textContent;
+    }
+  };
+
+  // Patch renderLesson to replace old quiz with enhanced quiz
+  var __rlQuiz = window.renderLesson;
+  window.renderLesson = function(i){
+    var html = __rlQuiz(i);
+    // Remove old quiz section and insert enhanced quiz before complete-row
+    var completeIdx = html.indexOf('<div class="complete-row">');
+    if(completeIdx > -1){
+      var eqHtml = renderEnhancedQuiz(i);
+      html = html.substring(0, completeIdx) + eqHtml + html.substring(completeIdx);
+    }
+    return html;
+  };
+
+  // ============ 3. FIND YOUR START SECTION ============
+  var startFinderData = {
+    en:{
+      title:'Not sure where to start?',
+      desc:'Pick the option that best describes you:',
+      items:[
+        ['I\'m completely new','Lesson 1',0,'lesson'],
+        ['I\'ve heard of wallets but I\'m confused','Lesson 2',1,'lesson'],
+        ['Transfers scare me the most','Lesson 3',2,'lesson'],
+        ['Token types confuse me','Lesson 4',3,'lesson'],
+        ['I want to see real risks first','Safety','safety','page']
+      ]
+    },
+    ko:{
+      title:'어디서 시작할지 모르겠나요?',
+      desc:'자신에게 맞는 것을 선택하세요:',
+      items:[
+        ['완전 초보입니다','강의 1',0,'lesson'],
+        ['지갑은 들어봤지만 헷갈립니다','강의 2',1,'lesson'],
+        ['전송이 가장 어렵습니다','강의 3',2,'lesson'],
+        ['토큰 종류가 헷갈립니다','강의 4',3,'lesson'],
+        ['실제 리스크를 먼저 보고 싶습니다','Safety','safety','page']
+      ]
+    },
+    th:{
+      title:'ไม่แน่ใจว่าจะเริ่มจากตรงไหน?',
+      desc:'เลือกตัวเลือกที่ตรงกับคุณมากที่สุด:',
+      items:[
+        ['ฉันเป็นมือใหม่สุดๆ','บทที่ 1',0,'lesson'],
+        ['เคยได้ยินเรื่องวอลเล็ตแต่ยังสับสน','บทที่ 2',1,'lesson'],
+        ['การโอนทำให้กลัวมากที่สุด','บทที่ 3',2,'lesson'],
+        ['ประเภทโทเคนทำให้สับสน','บทที่ 4',3,'lesson'],
+        ['อยากดูความเสี่ยงจริงก่อน','ความปลอดภัย','safety','page']
+      ]
+    },
+    id:{
+      title:'Tidak yakin mulai dari mana?',
+      desc:'Pilih yang paling menggambarkan Anda:',
+      items:[
+        ['Saya benar-benar pemula','Pelajaran 1',0,'lesson'],
+        ['Saya pernah dengar wallet tapi masih bingung','Pelajaran 2',1,'lesson'],
+        ['Transfer yang paling membuat takut','Pelajaran 3',2,'lesson'],
+        ['Jenis token membingungkan','Pelajaran 4',3,'lesson'],
+        ['Saya ingin lihat risiko nyata dulu','Keamanan','safety','page']
+      ]
+    },
+    pt:{
+      title:'Não sabe por onde começar?',
+      desc:'Escolha o que melhor descreve você:',
+      items:[
+        ['Sou totalmente iniciante','Lição 1',0,'lesson'],
+        ['Já ouvi falar de carteiras mas estou confuso','Lição 2',1,'lesson'],
+        ['Transferências me assustam mais','Lição 3',2,'lesson'],
+        ['Tipos de tokens me confundem','Lição 4',3,'lesson'],
+        ['Quero ver riscos reais primeiro','Segurança','safety','page']
+      ]
+    },
+    tr:{
+      title:'Nereden başlayacağınızdan emin değil misiniz?',
+      desc:'Sizi en iyi tanımlayan seçeneği seçin:',
+      items:[
+        ['Tamamen yeniyim','Ders 1',0,'lesson'],
+        ['Cüzdanları duydum ama kafam karışık','Ders 2',1,'lesson'],
+        ['Transferler beni en çok korkutuyor','Ders 3',2,'lesson'],
+        ['Token türleri kafamı karıştırıyor','Ders 4',3,'lesson'],
+        ['Önce gerçek riskleri görmek istiyorum','Güvenlik','safety','page']
+      ]
+    },
+    es:{
+      title:'¿No sabes por dónde empezar?',
+      desc:'Elige la opción que mejor te describe:',
+      items:[
+        ['Soy completamente nuevo','Lección 1',0,'lesson'],
+        ['He oído de billeteras pero estoy confundido','Lección 2',1,'lesson'],
+        ['Las transferencias me dan más miedo','Lección 3',2,'lesson'],
+        ['Los tipos de tokens me confunden','Lección 4',3,'lesson'],
+        ['Quiero ver riesgos reales primero','Seguridad','safety','page']
+      ]
+    },
+    ar:{
+      title:'لا تعرف من أين تبدأ؟',
+      desc:'اختر ما يصفك بشكل أفضل:',
+      items:[
+        ['أنا مبتدئ تماماً','الدرس 1',0,'lesson'],
+        ['سمعت عن المحافظ لكنني مشوش','الدرس 2',1,'lesson'],
+        ['التحويلات تخيفني أكثر','الدرس 3',2,'lesson'],
+        ['أنواع التوكن تربكني','الدرس 4',3,'lesson'],
+        ['أريد رؤية المخاطر الحقيقية أولاً','الأمان','safety','page']
+      ]
+    },
+    vi:{
+      title:'Chưa biết bắt đầu từ đâu?',
+      desc:'Chọn lựa chọn mô tả bạn nhất:',
+      items:[
+        ['Tôi hoàn toàn mới','Bài 1',0,'lesson'],
+        ['Tôi nghe về ví nhưng còn bối rối','Bài 2',1,'lesson'],
+        ['Chuyển tiền làm tôi sợ nhất','Bài 3',2,'lesson'],
+        ['Các loại token làm tôi bối rối','Bài 4',3,'lesson'],
+        ['Tôi muốn xem rủi ro thực tế trước','An toàn','safety','page']
+      ]
+    }
+  };
+  startFinderData.br = startFinderData.pt;
+
+  function renderStartFinder(){
+    var sf = startFinderData[currentLang] || startFinderData.en;
+    var html = '<div class="start-finder"><div class="start-finder-title">'+sf.title+'</div><div class="start-finder-desc">'+sf.desc+'</div><div class="start-finder-grid">';
+    sf.items.forEach(function(item){
+      var action = item[3]==='lesson' ? 'showLesson('+item[2]+')' : 'showPage(\''+item[2]+'\')';
+      html += '<div class="start-finder-btn" onclick="'+action+'"><div class="sf-icon">'+(item[3]==='lesson'?(item[2]+1):'!')+'</div><span>'+item[0]+'</span></div>';
+    });
+    html += '</div></div>';
+    return html;
+  }
+
+  // Patch renderHome to add Find Your Start
+  var __rhFinder = window.renderHome;
+  window.renderHome = function(){
+    var html = __rhFinder();
+    var finderHtml = renderStartFinder();
+    // Insert after home-desc, before first home-grid
+    var gridIdx = html.indexOf('<div class="home-grid">');
+    if(gridIdx > -1){
+      html = html.substring(0, gridIdx) + finderHtml + html.substring(gridIdx);
+    }
+    return html;
+  };
+
+  // Re-render
+  if(typeof renderAllLessons === 'function') renderAllLessons();
+  if(typeof showPage === 'function' && typeof currentPage !== 'undefined' && currentPage === 'home') showPage('home');
 })();
 </script>
 </body>
