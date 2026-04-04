@@ -704,6 +704,7 @@ a{color:var(--navy-2)}
       <div class="lesson-nav-item" data-page="safety" onclick="showPage('safety')"><div class="nav-num">!</div><div><div class="nav-title" data-i18n="nav.safety"></div><div class="nav-sub" data-i18n="nav.safetysub"></div></div></div>
 <div class="lesson-nav-item" data-page="glossary" onclick="showPage('glossary')"><div class="nav-num">G</div><div><div class="nav-title" data-i18n="nav.glossary"></div><div class="nav-sub" data-i18n="nav.glossarysub"></div></div></div>
       <div class="lesson-nav-item" data-page="sources" onclick="showPage('sources')"><div class="nav-num">S</div><div><div class="nav-title" data-i18n="nav.sources"></div><div class="nav-sub" data-i18n="nav.sourcesub"></div></div></div>
+      <div class="lesson-nav-item" data-page="updates" onclick="showPage('updates')"><div class="nav-num">U</div><div><div class="nav-title" data-i18n="nav.updates"></div><div class="nav-sub" data-i18n="nav.updatessub"></div></div></div>
     </div>
     <div class="sidebar-divider"></div>
     <div class="sidebar-section">
@@ -731,6 +732,7 @@ a{color:var(--navy-2)}
       <section class="page-content" id="safetyPanel"></section>
       <section class="page-content" id="glossaryPanel"></section>
       <section class="page-content" id="sourcesPanel"></section>
+      <section class="page-content" id="updatesPanel"></section>
       <section class="lesson-content" id="lesson0"></section>
       <section class="lesson-content" id="lesson1"></section>
       <section class="lesson-content" id="lesson2"></section>
@@ -768,7 +770,8 @@ const ui = {
   ,
     "nav.home":"Home","nav.homesub":"Start here first","nav.glossary":"Glossary","nav.glossarysub":"Simple key terms","nav.sources":"Source Library","nav.sourcesub":"Articles and official references","home.arrowNote":"Use the left menu as your learning map.","home.title":"Learn crypto step by step","home.desc":"Use this page as your starting point. You can jump straight to Lessons 1–5, open the Glossary for key terms, or visit the Source Library for real articles and official materials.","home.start":"Where to start","home.useMenu":"Use the left menu as your learning map","home.lessonGuide":"If you are new, begin with Lesson 1 and move in order. Each lesson is written in simple language, with examples, common mistakes, and checkpoints.","home.glossaryTitle":"Glossary","home.glossaryDesc":"Open the Glossary to learn core terms such as gas fee, public key, explorer, smart contract, custody, and bridge in easy words.","home.sourceTitle":"Source Library","home.sourceDesc":"Open the Source Library to read real articles and official references grouped by topic such as scams, exchanges, stablecoins, and wallet safety.","home.openLesson":"Open lesson","home.openGlossary":"Open Glossary","home.openSources":"Open Source Library","glossary.title":"Glossary","glossary.desc":"Simple meanings for key crypto words. Read these first if a lesson feels unfamiliar.","sources.pageTitle":"Source Library","sources.pageDesc":"A reading list of real articles and official references. Use it to connect lesson ideas with real-world cases.","sources.catScams":"Scams","sources.catExchanges":"Exchanges","sources.catStable":"Stablecoins","sources.catWallet":"Wallet Safety","glossary.address.term":"Address","glossary.address.body":"The public location where assets can be received.","glossary.private.term":"Private key","glossary.private.body":"The secret key that gives control over a wallet.","glossary.seed.term":"Seed phrase","glossary.seed.body":"A recovery backup for the wallet. Never share it.","glossary.gas.term":"Gas fee","glossary.gas.body":"A network fee paid to process a transaction.","glossary.public.term":"Public key","glossary.public.body":"A cryptographic key connected to your wallet identity. It helps create addresses.","glossary.explorer.term":"Explorer","glossary.explorer.body":"A website or tool that lets you view blockchain transactions and addresses.","glossary.contract.term":"Smart contract","glossary.contract.body":"Code on a blockchain that follows programmed rules automatically.","glossary.custody.term":"Custody","glossary.custody.body":"Who controls the keys and access to the assets.","glossary.bridge.term":"Bridge","glossary.bridge.body":"A tool used to move assets or messages between different blockchains.","callout.quick":"Quick idea",
     "nav.start":"Start Here","nav.startsub":"Beginner path","nav.faqPage":"FAQ","nav.faqsub":"Common questions","nav.safety":"Safety","nav.safetysub":"Scam prevention",
-    "home.startCardTitle":"Start Here","home.startCardDesc":"Know exactly where to begin if this is your first time here.","home.faqCardTitle":"FAQ","home.faqCardDesc":"Read the most common beginner questions in one place.","home.safetyCardTitle":"Safety","home.safetyCardDesc":"Learn practical scam prevention and wallet safety habits.","home.openStart":"Open Start Here","home.openFaq":"Open FAQ","home.openSafety":"Open Safety"},
+    "home.startCardTitle":"Start Here","home.startCardDesc":"Know exactly where to begin if this is your first time here.","home.faqCardTitle":"FAQ","home.faqCardDesc":"Read the most common beginner questions in one place.","home.safetyCardTitle":"Safety","home.safetyCardDesc":"Learn practical scam prevention and wallet safety habits.","home.openStart":"Open Start Here","home.openFaq":"Open FAQ","home.openSafety":"Open Safety",
+    "nav.updates":"Update History","nav.updatessub":"What changed and when","updates.title":"Update History","updates.desc":"A log of improvements made to this platform over time."},
   ko:{
     "brand.name":"크립토 아카데미","brand.sub":"초보자를 위한 쉬운 강의","sidebar.lessons":"강의 목록","sidebar.topics":"빠른 주제 찾기",
     "nav.l1":"블록체인","nav.l1sub":"공유 원장 기초","nav.l2":"지갑","nav.l2sub":"키와 접근 권한","nav.l3":"안전한 전송","nav.l3sub":"실수 없이 보내기","nav.l4":"암호화폐의 5가지 역할","nav.l4sub":"토큰 역할 쉽게 이해하기","nav.l5":"실제 교훈","nav.l5sub":"구조를 알아야 하는 이유",
@@ -780,6 +783,7 @@ const ui = {
   ,
     "nav.home":"홈","nav.homesub":"여기서 시작","nav.glossary":"용어사전","nav.glossarysub":"핵심 용어 쉽게 보기","nav.sources":"Source Library","nav.sourcesub":"기사와 공식 참고자료","home.arrowNote":"왼쪽 메뉴를 학습 지도처럼 활용해보세요.","home.title":"처음부터 차근차근 배우는 크립토","home.desc":"이 페이지를 시작점으로 사용하세요. 강의 1~5로 바로 이동할 수 있고, 용어사전에서 핵심 용어를 확인하거나 Source Library에서 실제 기사와 공식 자료를 읽을 수 있습니다.","home.start":"어디서 시작하면 좋을까요?","home.useMenu":"왼쪽 메뉴를 학습 지도처럼 사용하세요","home.lessonGuide":"처음이라면 1강부터 순서대로 보는 것이 가장 좋습니다. 각 강의는 쉬운 설명, 예시, 자주 하는 실수, 체크포인트로 구성되어 있습니다.","home.glossaryTitle":"용어사전","home.glossaryDesc":"gas fee, public key, explorer, smart contract, custody, bridge 같은 핵심 용어를 쉬운 말로 확인할 수 있습니다.","home.sourceTitle":"Source Library","home.sourceDesc":"사기, 거래소, 스테이블코인, 지갑 보안처럼 실제 사례와 연결되는 기사·공식 자료를 주제별로 볼 수 있습니다.","home.openLesson":"강의 열기","home.openGlossary":"용어사전 열기","home.openSources":"Source Library 열기","glossary.title":"용어사전","glossary.desc":"강의를 읽다가 낯선 단어가 나오면 여기서 먼저 뜻을 확인해보세요.","sources.pageTitle":"Source Library","sources.pageDesc":"실제 기사와 공식 참고자료를 모아둔 페이지입니다. 강의 내용을 현실 사례와 연결해서 볼 수 있습니다.","sources.catScams":"사기","sources.catExchanges":"거래소","sources.catStable":"스테이블코인","sources.catWallet":"지갑 보안","glossary.address.term":"주소","glossary.address.body":"자산을 받을 때 사용하는 공개 가능한 위치입니다.","glossary.private.term":"개인키","glossary.private.body":"지갑을 통제할 수 있게 해주는 비밀 키입니다.","glossary.seed.term":"시드 문구","glossary.seed.body":"지갑 복구를 위한 백업 문구입니다. 절대 공유하면 안 됩니다.","glossary.gas.term":"가스비","glossary.gas.body":"거래를 처리하기 위해 네트워크에 내는 수수료입니다.","glossary.public.term":"공개키","glossary.public.body":"지갑 정체성과 연결되는 암호학적 키로, 주소 생성에 활용됩니다.","glossary.explorer.term":"익스플로러","glossary.explorer.body":"블록체인 거래와 주소를 조회할 수 있는 웹 도구입니다.","glossary.contract.term":"스마트 컨트랙트","glossary.contract.body":"정해진 규칙에 따라 자동으로 실행되는 블록체인 위의 코드입니다.","glossary.custody.term":"커스터디","glossary.custody.body":"누가 키와 자산 접근 권한을 통제하는지를 뜻합니다.","glossary.bridge.term":"브리지","glossary.bridge.body":"서로 다른 블록체인 사이에서 자산이나 메시지를 이동시키는 도구입니다.","callout.quick":"한 줄 핵심",
     "nav.start":"시작 가이드","nav.startsub":"입문 순서 안내","nav.faqPage":"자주 묻는 질문","nav.faqsub":"핵심 질문 정리","nav.safety":"안전 가이드","nav.safetysub":"사기 예방",
+    "nav.updates":"업데이트 기록","nav.updatessub":"변경 내역 및 날짜","updates.title":"업데이트 기록","updates.desc":"플랫폼에 추가된 개선 사항을 날짜순으로 정리한 로그입니다.",
     "home.startCardTitle":"시작 가이드","home.startCardDesc":"처음 온 사람이 어디부터 봐야 하는지 바로 알 수 있게 도와줍니다.","home.faqCardTitle":"자주 묻는 질문","home.faqCardDesc":"초보자가 가장 많이 헷갈리는 질문을 한 번에 볼 수 있습니다.","home.safetyCardTitle":"안전 가이드","home.safetyCardDesc":"실제로 도움이 되는 사기 예방과 지갑 보안 습관을 배울 수 있습니다.","home.openStart":"시작 가이드 열기","home.openFaq":"자주 묻는 질문 열기","home.openSafety":"안전 가이드 열기"},
   th:{
     "brand.name":"Crypto Academy","brand.sub":"บทเรียนที่เข้าใจง่ายสำหรับผู้เริ่มต้น","sidebar.lessons":"บทเรียน","sidebar.topics":"หัวข้อด่วน",
@@ -792,6 +796,7 @@ const ui = {
   ,
     "nav.home":"หน้าหลัก","nav.homesub":"เริ่มจากตรงนี้","nav.glossary":"อภิธานศัพท์","nav.glossarysub":"คำสำคัญแบบเข้าใจง่าย","nav.sources":"คลังแหล่งอ้างอิง","nav.sourcesub":"บทความและเอกสารทางการ","home.arrowNote":"ใช้เมนูด้านซ้ายเป็นแผนที่การเรียนรู้ของคุณ","home.title":"เรียนคริปโตทีละขั้นอย่างเข้าใจง่าย","home.desc":"ใช้หน้านี้เป็นจุดเริ่มต้น คุณสามารถเปิดบทเรียน 1–5 ไปยังอภิธานศัพท์ หรืออ่านบทความจริงและเอกสารทางการใน Source Library ได้ทันที","home.start":"ควรเริ่มจากตรงไหน","home.useMenu":"ใช้เมนูด้านซ้ายเป็นลำดับการเรียน","home.lessonGuide":"ถ้าเพิ่งเริ่ม แนะนำให้เรียนตามลำดับตั้งแต่บทที่ 1 แต่ละบทใช้ภาษาง่าย มีตัวอย่าง ข้อผิดพลาดที่พบบ่อย และจุดตรวจสอบความเข้าใจ","home.glossaryTitle":"อภิธานศัพท์","home.glossaryDesc":"ดูคำสำคัญอย่าง gas fee, public key, explorer, smart contract, custody และ bridge ในคำอธิบายที่เข้าใจง่าย","home.sourceTitle":"Source Library","home.sourceDesc":"อ่านบทความจริงและแหล่งอ้างอิงทางการ แยกตามหัวข้อ เช่น การหลอกลวง ตลาดแลกเปลี่ยน สเตเบิลคอยน์ และความปลอดภัยของวอลเล็ต","home.openLesson":"เปิดบทเรียน","home.openGlossary":"เปิดอภิธานศัพท์","home.openSources":"เปิด Source Library","glossary.title":"อภิธานศัพท์","glossary.desc":"ความหมายง่าย ๆ ของคำสำคัญในโลกคริปโต ถ้าคำไหนไม่คุ้น ให้เปิดหน้านี้ก่อน","sources.pageTitle":"Source Library","sources.pageDesc":"รวมบทความจริงและเอกสารอ้างอิงทางการ เพื่อเชื่อมโยงบทเรียนกับเหตุการณ์จริง","sources.catScams":"การหลอกลวง","sources.catExchanges":"ตลาดแลกเปลี่ยน","sources.catStable":"สเตเบิลคอยน์","sources.catWallet":"ความปลอดภัยของวอลเล็ต","glossary.address.term":"Address","glossary.address.body":"ตำแหน่งสาธารณะที่ใช้รับสินทรัพย์ดิจิทัล","glossary.private.term":"Private key","glossary.private.body":"คีย์ลับที่ใช้ควบคุมวอลเล็ต","glossary.seed.term":"Seed phrase","glossary.seed.body":"ชุดคำสำรองสำหรับกู้คืนวอลเล็ต ห้ามแชร์เด็ดขาด","glossary.gas.term":"Gas fee","glossary.gas.body":"ค่าธรรมเนียมเครือข่ายที่ใช้ประมวลผลธุรกรรม","glossary.public.term":"Public key","glossary.public.body":"คีย์เข้ารหัสที่เชื่อมกับตัวตนของวอลเล็ต และใช้สร้าง address","glossary.explorer.term":"Explorer","glossary.explorer.body":"เว็บไซต์หรือเครื่องมือที่ใช้ดูธุรกรรมและ address บนบล็อกเชน","glossary.contract.term":"Smart contract","glossary.contract.body":"โค้ดบนบล็อกเชนที่ทำงานอัตโนมัติตามกฎที่ตั้งไว้","glossary.custody.term":"Custody","glossary.custody.body":"ใครเป็นผู้ถือคีย์และควบคุมการเข้าถึงสินทรัพย์","glossary.bridge.term":"Bridge","glossary.bridge.body":"เครื่องมือสำหรับย้ายสินทรัพย์หรือข้อมูลระหว่างบล็อกเชนต่าง ๆ","callout.quick":"แนวคิดสั้น ๆ",
     "nav.start":"เริ่มตรงนี้","nav.startsub":"เส้นทางสำหรับผู้เริ่มต้น","nav.faqPage":"คำถามพบบ่อย","nav.faqsub":"คำถามที่พบบ่อย","nav.safety":"ความปลอดภัย","nav.safetysub":"ป้องกันการหลอกลวง",
+    "nav.updates":"ประวัติการอัปเดต","nav.updatessub":"สิ่งที่เปลี่ยนแปลงและเวลาที่เปลี่ยน","updates.title":"ประวัติการอัปเดต","updates.desc":"บันทึกการปรับปรุงที่เพิ่มเข้ามาในแพลตฟอร์มนี้ตามลำดับเวลา",
     "home.startCardTitle":"เริ่มตรงนี้","home.startCardDesc":"ช่วยให้ผู้มาใหม่รู้ชัดว่าควรเริ่มจากตรงไหนก่อน","home.faqCardTitle":"คำถามพบบ่อย","home.faqCardDesc":"รวมคำถามที่มือใหม่สับสนบ่อยไว้ในที่เดียว","home.safetyCardTitle":"ความปลอดภัย","home.safetyCardDesc":"เรียนรู้นิสัยการป้องกันกลโกงและการปกป้องวอลเล็ตที่ใช้ได้จริง","home.openStart":"เปิดหน้าเริ่มต้น","home.openFaq":"เปิดคำถามพบบ่อย","home.openSafety":"เปิดหน้าความปลอดภัย"},
   id:{
     "brand.name":"Crypto Academy","brand.sub":"Pelajaran mudah untuk pemula","sidebar.lessons":"Daftar pelajaran","sidebar.topics":"Topik cepat",
@@ -804,6 +809,7 @@ const ui = {
   ,
     "nav.home":"Beranda","nav.homesub":"Mulai dari sini","nav.glossary":"Glosarium","nav.glossarysub":"Istilah inti dengan bahasa sederhana","nav.sources":"Source Library","nav.sourcesub":"Artikel dan referensi resmi","home.arrowNote":"Gunakan menu kiri sebagai peta belajar Anda.","home.title":"Belajar crypto langkah demi langkah","home.desc":"Gunakan halaman ini sebagai titik awal. Anda bisa langsung membuka Pelajaran 1–5, membaca Glosarium, atau membuka Source Library untuk artikel nyata dan referensi resmi.","home.start":"Mulai dari mana?","home.useMenu":"Gunakan menu kiri sebagai peta belajar","home.lessonGuide":"Jika Anda benar-benar baru, mulailah dari Pelajaran 1 dan ikuti urutannya. Setiap pelajaran ditulis dengan bahasa sederhana, contoh, kesalahan umum, dan checkpoint.","home.glossaryTitle":"Glosarium","home.glossaryDesc":"Pelajari istilah penting seperti gas fee, public key, explorer, smart contract, custody, dan bridge dengan penjelasan yang mudah.","home.sourceTitle":"Source Library","home.sourceDesc":"Baca artikel nyata dan referensi resmi berdasarkan topik seperti penipuan, bursa, stablecoin, dan keamanan wallet.","home.openLesson":"Buka pelajaran","home.openGlossary":"Buka Glosarium","home.openSources":"Buka Source Library","glossary.title":"Glosarium","glossary.desc":"Arti sederhana dari istilah crypto yang penting. Jika sebuah kata terasa asing, buka halaman ini terlebih dahulu.","sources.pageTitle":"Source Library","sources.pageDesc":"Daftar artikel nyata dan referensi resmi untuk menghubungkan pelajaran dengan kasus dunia nyata.","sources.catScams":"Penipuan","sources.catExchanges":"Bursa","sources.catStable":"Stablecoin","sources.catWallet":"Keamanan Wallet","glossary.address.term":"Address","glossary.address.body":"Lokasi publik tempat aset dapat diterima.","glossary.private.term":"Private key","glossary.private.body":"Kunci rahasia yang memberi kendali atas wallet.","glossary.seed.term":"Seed phrase","glossary.seed.body":"Cadangan pemulihan wallet. Jangan pernah membagikannya.","glossary.gas.term":"Gas fee","glossary.gas.body":"Biaya jaringan untuk memproses transaksi.","glossary.public.term":"Public key","glossary.public.body":"Kunci kriptografi yang terkait dengan identitas wallet dan membantu membuat address.","glossary.explorer.term":"Explorer","glossary.explorer.body":"Situs atau alat untuk melihat transaksi dan address di blockchain.","glossary.contract.term":"Smart contract","glossary.contract.body":"Kode di blockchain yang berjalan otomatis mengikuti aturan yang diprogram.","glossary.custody.term":"Custody","glossary.custody.body":"Siapa yang memegang kunci dan mengontrol akses ke aset.","glossary.bridge.term":"Bridge","glossary.bridge.body":"Alat untuk memindahkan aset atau pesan antar blockchain yang berbeda.","callout.quick":"Gagasan singkat",
     "nav.start":"Mulai di sini","nav.startsub":"Jalur pemula","nav.faqPage":"FAQ","nav.faqsub":"Pertanyaan umum","nav.safety":"Keamanan","nav.safetysub":"Pencegahan penipuan",
+    "nav.updates":"Riwayat Pembaruan","nav.updatessub":"Apa yang berubah dan kapan","updates.title":"Riwayat Pembaruan","updates.desc":"Catatan peningkatan yang ditambahkan ke platform ini dari waktu ke waktu.",
     "home.startCardTitle":"Mulai di sini","home.startCardDesc":"Membantu pengunjung baru tahu persis dari mana harus memulai.","home.faqCardTitle":"FAQ","home.faqCardDesc":"Lihat pertanyaan yang paling sering membingungkan pemula di satu tempat.","home.safetyCardTitle":"Keamanan","home.safetyCardDesc":"Pelajari kebiasaan praktis untuk mencegah penipuan dan melindungi dompet.","home.openStart":"Buka Mulai di sini","home.openFaq":"Buka FAQ","home.openSafety":"Buka Keamanan"},
   pt:{
     "brand.name":"Crypto Academy","brand.sub":"Lições claras para iniciantes","sidebar.lessons":"Lições do curso","sidebar.topics":"Tópicos rápidos",
@@ -816,6 +822,7 @@ const ui = {
   ,
     "nav.home":"Início","nav.homesub":"Comece por aqui","nav.glossary":"Glossário","nav.glossarysub":"Termos essenciais em linguagem simples","nav.sources":"Source Library","nav.sourcesub":"Artigos e referências oficiais","home.arrowNote":"Use o menu à esquerda como seu mapa de aprendizagem.","home.title":"Aprenda cripto passo a passo","home.desc":"Use esta página como ponto de partida. Você pode abrir as Lições 1–5, consultar o Glossário ou visitar a Source Library para ler artigos reais e materiais oficiais.","home.start":"Por onde começar","home.useMenu":"Use o menu à esquerda como seu mapa de estudo","home.lessonGuide":"Se você está começando agora, o ideal é seguir a ordem a partir da Lição 1. Cada lição foi escrita em linguagem simples, com exemplos, erros comuns e pontos de verificação.","home.glossaryTitle":"Glossário","home.glossaryDesc":"Consulte termos-chave como gas fee, public key, explorer, smart contract, custody e bridge em explicações fáceis.","home.sourceTitle":"Source Library","home.sourceDesc":"Leia artigos reais e referências oficiais separados por tema, como golpes, exchanges, stablecoins e segurança de carteiras.","home.openLesson":"Abrir lição","home.openGlossary":"Abrir Glossário","home.openSources":"Abrir Source Library","glossary.title":"Glossário","glossary.desc":"Significados simples para palavras importantes do universo cripto. Se um termo parecer estranho, veja esta página primeiro.","sources.pageTitle":"Source Library","sources.pageDesc":"Uma lista de leitura com artigos reais e referências oficiais para ligar as lições a casos do mundo real.","sources.catScams":"Golpes","sources.catExchanges":"Exchanges","sources.catStable":"Stablecoins","sources.catWallet":"Segurança de Carteiras","glossary.address.term":"Address","glossary.address.body":"O local público para receber ativos.","glossary.private.term":"Private key","glossary.private.body":"A chave secreta que dá controle sobre a carteira.","glossary.seed.term":"Seed phrase","glossary.seed.body":"Um backup de recuperação da carteira. Nunca compartilhe.","glossary.gas.term":"Gas fee","glossary.gas.body":"A taxa de rede paga para processar uma transação.","glossary.public.term":"Public key","glossary.public.body":"Uma chave criptográfica ligada à identidade da carteira e usada na criação de endereços.","glossary.explorer.term":"Explorer","glossary.explorer.body":"Um site ou ferramenta para ver transações e endereços na blockchain.","glossary.contract.term":"Smart contract","glossary.contract.body":"Código na blockchain que executa regras programadas automaticamente.","glossary.custody.term":"Custody","glossary.custody.body":"Quem controla as chaves e o acesso aos ativos.","glossary.bridge.term":"Bridge","glossary.bridge.body":"Ferramenta usada para mover ativos ou mensagens entre blockchains diferentes.","callout.quick":"Ideia rápida",
     "nav.start":"Comece aqui","nav.startsub":"Caminho para iniciantes","nav.faqPage":"FAQ","nav.faqsub":"Perguntas comuns","nav.safety":"Segurança","nav.safetysub":"Prevenção de golpes",
+    "nav.updates":"Histórico de Atualizações","nav.updatessub":"O que mudou e quando","updates.title":"Histórico de Atualizações","updates.desc":"Um registro de melhorias feitas nesta plataforma ao longo do tempo.",
     "home.startCardTitle":"Comece aqui","home.startCardDesc":"Ajuda quem chegou agora a saber exatamente por onde começar.","home.faqCardTitle":"FAQ","home.faqCardDesc":"Veja em um só lugar as dúvidas mais comuns de iniciantes.","home.safetyCardTitle":"Segurança","home.safetyCardDesc":"Aprenda hábitos práticos para evitar golpes e proteger a carteira.","home.openStart":"Abrir Comece aqui","home.openFaq":"Abrir FAQ","home.openSafety":"Abrir Segurança"},
   br:{
     "brand.name":"Crypto Academy","brand.sub":"Lições claras para iniciantes","sidebar.lessons":"Lições do curso","sidebar.topics":"Tópicos rápidos",
@@ -829,7 +836,8 @@ const ui = {
     "home.arrowNote":"Use o menu à esquerda como seu mapa de aprendizado.","home.title":"Aprenda cripto passo a passo","home.desc":"Use esta página como ponto de partida. Você pode ir direto para as Lições 1–5, abrir o Glossário para termos importantes ou visitar a Biblioteca de Fontes para ler artigos e materiais oficiais.","home.start":"Por onde começar","home.useMenu":"Use o menu à esquerda como seu mapa de aprendizado","home.lessonGuide":"Se você está começando agora, siga as lições em ordem. Cada página traz explicações simples, exemplos, erros comuns e checkpoints.","home.glossaryTitle":"Glossário","home.glossaryDesc":"Abra o Glossário para entender termos como gas fee, chave pública, explorer, contrato inteligente, custódia e bridge em linguagem fácil.","home.sourceTitle":"Biblioteca de Fontes","home.sourceDesc":"Abra a Biblioteca de Fontes para ler artigos reais e referências oficiais agrupadas por tema, como golpes, corretoras, stablecoins e segurança da carteira.","home.openLesson":"Abrir lição","home.openGlossary":"Abrir Glossário","home.openSources":"Abrir Biblioteca de Fontes",
     "glossary.title":"Glossário","glossary.desc":"Significados simples para palavras importantes do universo cripto. Leia esta seção primeiro se algum termo parecer estranho.",
     "sources.pageTitle":"Biblioteca de Fontes","sources.pageDesc":"Uma lista de leitura com artigos reais e referências oficiais. Use-a para ligar as ideias das lições a casos do mundo real.","sources.catScams":"Golpes","sources.catExchanges":"Corretoras","sources.catStable":"Stablecoins","sources.catWallet":"Segurança da carteira",
-    "glossary.address.body":"Local público usado para receber ativos digitais.","glossary.private.body":"Chave secreta usada para controlar a carteira.","glossary.seed.body":"Conjunto de palavras de recuperação para restaurar a carteira. Nunca compartilhe.","glossary.gas.body":"Taxa de rede paga para processar uma transação.","glossary.public.body":"Chave criptográfica ligada à identidade da carteira e usada para ajudar a criar endereços.","glossary.explorer.body":"Site ou ferramenta usada para ver transações e endereços na blockchain.","glossary.contract.body":"Código na blockchain que executa automaticamente regras predefinidas.","glossary.custody.body":"Quem controla as chaves e o acesso aos ativos.","glossary.bridge.body":"Ferramenta para mover ativos ou mensagens entre blockchains diferentes."
+    "glossary.address.body":"Local público usado para receber ativos digitais.","glossary.private.body":"Chave secreta usada para controlar a carteira.","glossary.seed.body":"Conjunto de palavras de recuperação para restaurar a carteira. Nunca compartilhe.","glossary.gas.body":"Taxa de rede paga para processar uma transação.","glossary.public.body":"Chave criptográfica ligada à identidade da carteira e usada para ajudar a criar endereços.","glossary.explorer.body":"Site ou ferramenta usada para ver transações e endereços na blockchain.","glossary.contract.body":"Código na blockchain que executa automaticamente regras predefinidas.","glossary.custody.body":"Quem controla as chaves e o acesso aos ativos.","glossary.bridge.body":"Ferramenta para mover ativos ou mensagens entre blockchains diferentes.",
+    "nav.updates":"Histórico de Atualizações","nav.updatessub":"O que mudou e quando","updates.title":"Histórico de Atualizações","updates.desc":"Um registro de melhorias adicionadas a esta plataforma ao longo do tempo."
   },
   tr:{
     "brand.name":"Crypto Academy","brand.sub":"Yeni başlayanlar için anlaşılır dersler","sidebar.lessons":"Dersler","sidebar.topics":"Hızlı konular",
@@ -843,7 +851,8 @@ const ui = {
     "home.arrowNote":"Sol menüyü öğrenme haritanız olarak kullanın.","home.title":"Kriptoyu adım adım öğrenin","home.desc":"Bu sayfayı başlangıç noktası olarak kullanın. Doğrudan 1–5. derslere gidebilir, temel terimler için Sözlük'ü açabilir veya gerçek makaleler ve resmi materyaller için Kaynak Kütüphanesi'ni ziyaret edebilirsiniz.","home.start":"Nereden başlamalı","home.useMenu":"Sol menüyü öğrenme haritanız olarak kullanın","home.lessonGuide":"Yeni başlıyorsanız dersleri sırayla takip edin. Her sayfada basit açıklamalar, örnekler, yaygın hatalar ve kontrol noktaları bulunur.","home.glossaryTitle":"Sözlük","home.glossaryDesc":"Gas fee, açık anahtar, explorer, akıllı sözleşme, custody ve bridge gibi terimleri kolay bir dille öğrenmek için Sözlük'ü açın.","home.sourceTitle":"Kaynak Kütüphanesi","home.sourceDesc":"Dolandırıcılık, borsalar, stablecoin'ler ve cüzdan güvenliği gibi başlıklarda gruplanmış gerçek makaleleri ve resmi kaynakları okumak için Kaynak Kütüphanesi'ni açın.","home.openLesson":"Dersi aç","home.openGlossary":"Sözlüğü aç","home.openSources":"Kaynak Kütüphanesi'ni aç",
     "glossary.title":"Sözlük","glossary.desc":"Önemli kripto terimleri için basit anlamlar. Bir ders size yabancı geliyorsa önce burayı okuyun.",
     "sources.pageTitle":"Kaynak Kütüphanesi","sources.pageDesc":"Gerçek makaleler ve resmi kaynaklardan oluşan okuma listesi. Derslerdeki fikirleri gerçek dünya örnekleriyle bağlamak için kullanın.","sources.catScams":"Dolandırıcılık","sources.catExchanges":"Borsalar","sources.catStable":"Stablecoin'ler","sources.catWallet":"Cüzdan Güvenliği",
-    "glossary.address.body":"Dijital varlık almak için kullanılan herkese açık konum.","glossary.private.body":"Cüzdanı kontrol etmeyi sağlayan gizli anahtar.","glossary.seed.body":"Cüzdanı kurtarmak için kullanılan yedek kelime grubu. Asla paylaşmayın.","glossary.gas.body":"Bir işlemi işlemek için ödenen ağ ücreti.","glossary.public.body":"Cüzdan kimliğine bağlı kriptografik anahtar; adres oluşturmaya yardımcı olur.","glossary.explorer.body":"Blockchain üzerindeki işlemleri ve adresleri görüntülemek için kullanılan site veya araç.","glossary.contract.body":"Önceden belirlenen kuralları otomatik uygulayan blockchain kodu.","glossary.custody.body":"Anahtarları ve varlıklara erişimi kimin kontrol ettiğini ifade eder.","glossary.bridge.body":"Farklı blockchain'ler arasında varlık veya mesaj taşımayı sağlayan araç."
+    "glossary.address.body":"Dijital varlık almak için kullanılan herkese açık konum.","glossary.private.body":"Cüzdanı kontrol etmeyi sağlayan gizli anahtar.","glossary.seed.body":"Cüzdanı kurtarmak için kullanılan yedek kelime grubu. Asla paylaşmayın.","glossary.gas.body":"Bir işlemi işlemek için ödenen ağ ücreti.","glossary.public.body":"Cüzdan kimliğine bağlı kriptografik anahtar; adres oluşturmaya yardımcı olur.","glossary.explorer.body":"Blockchain üzerindeki işlemleri ve adresleri görüntülemek için kullanılan site veya araç.","glossary.contract.body":"Önceden belirlenen kuralları otomatik uygulayan blockchain kodu.","glossary.custody.body":"Anahtarları ve varlıklara erişimi kimin kontrol ettiğini ifade eder.","glossary.bridge.body":"Farklı blockchain'ler arasında varlık veya mesaj taşımayı sağlayan araç.",
+    "nav.updates":"Güncelleme Geçmişi","nav.updatessub":"Son iyileştirmeler","updates.title":"Güncelleme Geçmişi","updates.desc":"Bu sayfa, platformda zaman içinde yapılan geliştirmeleri gösterir."
   },
   es:{
     "brand.name":"Crypto Academy","brand.sub":"Lecciones claras para principiantes","sidebar.lessons":"Lecciones del curso","sidebar.topics":"Temas rápidos",
@@ -854,7 +863,8 @@ const ui = {
     "quiz.reveal":"Mostrar respuesta","source.title":"Fuente","check.title":"Puntos clave para principiantes","faq.title":"Preguntas frecuentes","mistakes.title":"Errores comunes","quiz.title":"Mini quiz","example.title":"Ejemplo sencillo","sources.title":"Fuentes relacionadas",
     "visual.title":"Explicación visual","complete.note":"Tu progreso se guarda en este navegador."
   ,
-    "nav.home":"Inicio","nav.homesub":"Empieza aquí","nav.glossary":"Glosario","nav.glossarysub":"Términos clave en lenguaje simple","nav.sources":"Source Library","nav.sourcesub":"Artículos y referencias oficiales","home.arrowNote":"Usa el menú izquierdo como tu mapa de aprendizaje.","home.title":"Aprende cripto paso a paso","home.desc":"Usa esta página como punto de partida. Puedes abrir las Lecciones 1–5, consultar el Glosario o visitar la Source Library para leer artículos reales y materiales oficiales.","home.start":"¿Por dónde empezar?","home.useMenu":"Usa el menú izquierdo como mapa de aprendizaje","home.lessonGuide":"Si eres principiante, lo mejor es empezar por la Lección 1 y seguir el orden. Cada lección está escrita con lenguaje simple, ejemplos, errores comunes y puntos de verificación.","home.glossaryTitle":"Glosario","home.glossaryDesc":"Consulta términos importantes como gas fee, public key, explorer, smart contract, custody y bridge en explicaciones fáciles.","home.sourceTitle":"Source Library","home.sourceDesc":"Lee artículos reales y referencias oficiales organizados por temas como estafas, exchanges, stablecoins y seguridad de billeteras.","home.openLesson":"Abrir lección","home.openGlossary":"Abrir glosario","home.openSources":"Abrir Source Library","glossary.title":"Glosario","glossary.desc":"Significados simples de palabras clave del mundo cripto. Si una palabra te resulta extraña, mira esta página primero.","sources.pageTitle":"Source Library","sources.pageDesc":"Una lista de lectura con artículos reales y referencias oficiales para conectar las lecciones con casos del mundo real.","sources.catScams":"Estafas","sources.catExchanges":"Exchanges","sources.catStable":"Stablecoins","sources.catWallet":"Seguridad de billeteras","glossary.address.term":"Address","glossary.address.body":"La ubicación pública donde se pueden recibir activos.","glossary.private.term":"Private key","glossary.private.body":"La clave secreta que da control sobre la billetera.","glossary.seed.term":"Seed phrase","glossary.seed.body":"Una copia de recuperación de la billetera. Nunca la compartas.","glossary.gas.term":"Gas fee","glossary.gas.body":"La comisión de red pagada para procesar una transacción.","glossary.public.term":"Public key","glossary.public.body":"Una clave criptográfica vinculada a la identidad de la billetera y usada para crear direcciones.","glossary.explorer.term":"Explorer","glossary.explorer.body":"Un sitio o herramienta para ver transacciones y direcciones en la blockchain.","glossary.contract.term":"Smart contract","glossary.contract.body":"Código en la blockchain que ejecuta reglas programadas automáticamente.","glossary.custody.term":"Custody","glossary.custody.body":"Quién controla las claves y el acceso a los activos.","glossary.bridge.term":"Bridge","glossary.bridge.body":"Herramienta para mover activos o mensajes entre diferentes blockchains."}
+    "nav.home":"Inicio","nav.homesub":"Empieza aquí","nav.glossary":"Glosario","nav.glossarysub":"Términos clave en lenguaje simple","nav.sources":"Source Library","nav.sourcesub":"Artículos y referencias oficiales","home.arrowNote":"Usa el menú izquierdo como tu mapa de aprendizaje.","home.title":"Aprende cripto paso a paso","home.desc":"Usa esta página como punto de partida. Puedes abrir las Lecciones 1–5, consultar el Glosario o visitar la Source Library para leer artículos reales y materiales oficiales.","home.start":"¿Por dónde empezar?","home.useMenu":"Usa el menú izquierdo como mapa de aprendizaje","home.lessonGuide":"Si eres principiante, lo mejor es empezar por la Lección 1 y seguir el orden. Cada lección está escrita con lenguaje simple, ejemplos, errores comunes y puntos de verificación.","home.glossaryTitle":"Glosario","home.glossaryDesc":"Consulta términos importantes como gas fee, public key, explorer, smart contract, custody y bridge en explicaciones fáciles.","home.sourceTitle":"Source Library","home.sourceDesc":"Lee artículos reales y referencias oficiales organizados por temas como estafas, exchanges, stablecoins y seguridad de billeteras.","home.openLesson":"Abrir lección","home.openGlossary":"Abrir glosario","home.openSources":"Abrir Source Library","glossary.title":"Glosario","glossary.desc":"Significados simples de palabras clave del mundo cripto. Si una palabra te resulta extraña, mira esta página primero.","sources.pageTitle":"Source Library","sources.pageDesc":"Una lista de lectura con artículos reales y referencias oficiales para conectar las lecciones con casos del mundo real.","sources.catScams":"Estafas","sources.catExchanges":"Exchanges","sources.catStable":"Stablecoins","sources.catWallet":"Seguridad de billeteras","glossary.address.term":"Address","glossary.address.body":"La ubicación pública donde se pueden recibir activos.","glossary.private.term":"Private key","glossary.private.body":"La clave secreta que da control sobre la billetera.","glossary.seed.term":"Seed phrase","glossary.seed.body":"Una copia de recuperación de la billetera. Nunca la compartas.","glossary.gas.term":"Gas fee","glossary.gas.body":"La comisión de red pagada para procesar una transacción.","glossary.public.term":"Public key","glossary.public.body":"Una clave criptográfica vinculada a la identidad de la billetera y usada para crear direcciones.","glossary.explorer.term":"Explorer","glossary.explorer.body":"Un sitio o herramienta para ver transacciones y direcciones en la blockchain.","glossary.contract.term":"Smart contract","glossary.contract.body":"Código en la blockchain que ejecuta reglas programadas automáticamente.","glossary.custody.term":"Custody","glossary.custody.body":"Quién controla las claves y el acceso a los activos.","glossary.bridge.term":"Bridge","glossary.bridge.body":"Herramienta para mover activos o mensajes entre diferentes blockchains.",
+    "nav.updates":"Historial de Actualizaciones","nav.updatessub":"Qué cambió y cuándo","updates.title":"Historial de Actualizaciones","updates.desc":"Un registro de mejoras realizadas en esta plataforma a lo largo del tiempo."}
 };
 
 const lessons = {
@@ -1328,17 +1338,32 @@ function renderSources(){
   const sectionsHtml = orderedKeys.map(k=>{
     const label = catLabelMap[k] || k;
     const catItems = byCategory[k] || [];
-    const cardsHtml = catItems.map(([_cat, publisher, title, body, url, relatedSection, whyMatters])=>{
+    const cardsHtml = catItems.map((item)=>{
+      // Support both old format [cat, title, body, url] (4 elements)
+      // and new format [cat, publisher, title, body, url, relatedSection, whyMatters] (7 elements)
+      let _cat, publisher, title, body, url, relatedSection, whyMatters;
+      if(item.length >= 7){
+        [_cat, publisher, title, body, url, relatedSection, whyMatters] = item;
+      } else {
+        // Old 4-element format: [cat, title, body, url]
+        [_cat, title, body, url] = item;
+        publisher = '';
+        relatedSection = '';
+        whyMatters = '';
+      }
+      // Safety: ensure url is always a string before calling .replace()
+      const safeUrl = (typeof url === 'string' && url) ? url : '';
+      const displayUrl = safeUrl ? safeUrl.replace(/^https?:\/\//,'').replace(/\/$/,'').substring(0,55) + (safeUrl.length>60?'…':'') : '';
       return `<div class="source-library-item">
         <div class="source-library-meta">${catLabelMap[_cat]||_cat}</div>
         <div class="src-publisher-row">
-          <span class="src-publisher">&#9654; ${publisher}</span>
+          ${publisher ? `<span class="src-publisher">&#9654; ${publisher}</span>` : ''}
           ${relatedSection ? `<span class="src-section-tag">&#8594; ${relatedSection}</span>` : ''}
         </div>
-        <h3>${title}</h3>
-        <p>${body}</p>
+        <h3>${title||''}</h3>
+        <p>${body||''}</p>
         ${whyMatters ? `<div class="src-why"><strong>Why this matters:</strong> ${whyMatters}</div>` : ''}
-        <a class="src-link" href="${url}" target="_blank" rel="noopener">&#128279; ${url.replace(/^https?:\/\//,'').replace(/\/$/,'').substring(0,55)}${url.length>60?'…':''}</a>
+        ${safeUrl ? `<a class="src-link" href="${safeUrl}" target="_blank" rel="noopener">&#128279; ${displayUrl}</a>` : ''}
       </div>`;
     }).join('');
     return `<div class="src-section-block">
@@ -3495,121 +3520,41 @@ const glossaryOverrides = {
   ]
 };
 const sourceOverrides = {
-    "br": [
-    ["Golpes","Alerta ao consumidor da FTC","Orientação da FTC sobre golpes com cripto e proteção do consumidor.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams"],
-    ["Corretoras","Artigo da Reuters sobre a FTX","O caso da FTX ajuda a entender riscos de corretoras e custódia.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/"],
-    ["Stablecoins","Material explicativo do ECB","Explica como uma instituição de política vê a estrutura e os riscos das stablecoins.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html"],
-    ["Segurança da carteira","Alerta de pagamento da FTC","Mostra por que pedidos de pagamento em cripto são um sinal de alerta.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem"]
+  "br": [
+    ["scams","FTC","Alerta da FTC sobre golpes com cripto","Orientação da FTC sobre golpes com criptomoedas e proteção do consumidor.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams","Safety","Ajuda iniciantes a identificar padrões de golpes antes de perder dinheiro."],
+    ["exchanges","Reuters","Reuters sobre o colapso da FTX","O caso da FTX ajuda a entender riscos de corretoras e custódia.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/","Lição 5 — Casos Reais","Mostra o risco de custódia por meio de um colapso real de corretora."],
+    ["stable","ECB","Explicação do ECB sobre stablecoins","Explica como uma instituição de política vê a estrutura e os riscos das stablecoins.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html","Lição 4 — Tipos de Token","Ajuda a entender como reguladores veem o risco de stablecoin."],
+    ["wallet","FTC","Alerta de pagamento da FTC","Mostra por que pedidos de pagamento em cripto são um sinal de alerta.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem","Safety","Mostra por que solicitações de pagamento em cripto podem ser um sinal de golpe."]
   ],
-    "tr": [
-    ["Dolandırıcılık","FTC tüketici uyarısı","FTC'nin kripto dolandırıcılığı ve tüketici güvenliğiyle ilgili rehberi.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams"],
-    ["Borsalar","Reuters FTX haberi","FTX örneği, borsa ve custody risklerini anlamaya yardımcı olur.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/"],
-    ["Stablecoin'ler","ECB açıklama metni","Bir politika kurumunun stablecoin yapısını ve risklerini nasıl gördüğünü açıklar.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html"],
-    ["Cüzdan güvenliği","FTC ödeme uyarısı","Kripto ile ödeme istenmesinin neden bir tehlike işareti olduğunu gösterir.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem"]
+  "tr": [
+    ["scams","FTC","FTC tüketici uyarısı","FTC'nin kripto dolandırıcılığı ve tüketici güvenliğiyle ilgili rehberi.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams","Güvenlik","Yeni başlayanların para kaybetmeden önce dolandırıcılık kalıplarını tanımasına yardımcı olur."],
+    ["exchanges","Reuters","Reuters'ın FTX haberi","FTX örneği, borsa ve custody risklerini anlamaya yardımcı olur.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/","Ders 5 — Gerçek Dünya","Gerçek bir borsa çöküşü üzerinden custody riskini açıklar."],
+    ["stable","ECB","ECB stablecoin açıklaması","Bir politika kurumunun stablecoin yapısını ve risklerini nasıl gördüğünü açıklar.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html","Ders 4 — Token Türleri","Düzenleyicilerin stablecoin riskini nasıl değerlendirdiğini anlamaya yardımcı olur."],
+    ["wallet","FTC","FTC ödeme uyarısı","Kripto ile ödeme istenmesinin neden bir tehlike işareti olduğunu gösterir.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem","Güvenlik","Kripto ödeme taleplerinin neden dolandırıcılık sinyali olabileceğini gösterir."]
   ],
   "th": [
-    [
-      "การหลอกลวง",
-      "คำเตือนผู้บริโภคของ FTC",
-      "คำแนะนำจาก FTC เกี่ยวกับการหลอกลวงคริปโตและการปกป้องผู้บริโภค.",
-      "https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams"
-    ],
-    [
-      "ตลาดแลกเปลี่ยน",
-      "บทความ Reuters เกี่ยวกับ FTX",
-      "กรณีของ FTX ช่วยให้เข้าใจความเสี่ยงของ exchange และ custody.",
-      "https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/"
-    ],
-    [
-      "สเตเบิลคอยน์",
-      "เอกสารอธิบายของ ECB",
-      "อธิบายว่าหน่วยงานด้านนโยบายมองโครงสร้างและความเสี่ยงของ stablecoin อย่างไร.",
-      "https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html"
-    ],
-    [
-      "ความปลอดภัยของวอลเล็ต",
-      "คำเตือนการชำระเงินของ FTC",
-      "แสดงให้เห็นว่าการถูกขอให้จ่ายด้วยคริปโตเป็นสัญญาณอันตรายอย่างไร.",
-      "https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem"
-    ]
+    ["scams","FTC","คำเตือนผู้บริโภคของ FTC","คำแนะนำจาก FTC เกี่ยวกับการหลอกลวงคริปโตและการปกป้องผู้บริโภค.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams","ความปลอดภัย","ช่วยให้ผู้เริ่มต้นระบุรูปแบบการหลอกลวงก่อนสูญเงิน."],
+    ["exchanges","Reuters","Reuters รายงาน FTX","กรณีของ FTX ช่วยให้เข้าใจความเสี่ยงของ exchange และ custody.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/","บทที่ 5 — บทเรียนจริง","แสดงความเสี่ยง custody ผ่านกรณีการล่มสลายจริงของ exchange."],
+    ["stable","ECB","เอกสารอธิบาย stablecoin ของ ECB","อธิบายว่าหน่วยงานด้านนโยบายมองโครงสร้างและความเสี่ยงของ stablecoin อย่างไร.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html","บทที่ 4 — ประเภทโทเคน","ช่วยอธิบายว่าผู้กำกับดูแลมองความเสี่ยง stablecoin อย่างไร."],
+    ["wallet","FTC","คำเตือนการชำระเงินของ FTC","แสดงให้เห็นว่าการถูกขอให้จ่ายด้วยคริปโตเป็นสัญญาณอันตรายอย่างไร.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem","ความปลอดภัย","แสดงว่าการร้องขอชำระเงินด้วยคริปโตอาจเป็นสัญญาณการหลอกลวง."]
   ],
   "id": [
-    [
-      "Penipuan",
-      "Peringatan konsumen FTC",
-      "Panduan FTC tentang penipuan kripto dan perlindungan konsumen.",
-      "https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams"
-    ],
-    [
-      "Exchange",
-      "Artikel Reuters tentang FTX",
-      "Kasus FTX membantu memahami risiko exchange dan custody.",
-      "https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/"
-    ],
-    [
-      "Stablecoin",
-      "Dokumen penjelasan ECB",
-      "Menjelaskan bagaimana lembaga kebijakan melihat struktur dan risiko stablecoin.",
-      "https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html"
-    ],
-    [
-      "Keamanan wallet",
-      "Peringatan pembayaran FTC",
-      "Menunjukkan mengapa permintaan pembayaran dengan kripto bisa menjadi tanda bahaya.",
-      "https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem"
-    ]
+    ["scams","FTC","Peringatan konsumen FTC","Panduan FTC tentang penipuan kripto dan perlindungan konsumen.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams","Keamanan","Membantu pemula mengenali pola penipuan sebelum kehilangan uang."],
+    ["exchanges","Reuters","Reuters tentang FTX","Kasus FTX membantu memahami risiko exchange dan custody.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/","Pelajaran 5 — Kasus Nyata","Menjelaskan risiko custody melalui kasus runtuhnya exchange nyata."],
+    ["stable","ECB","Penjelasan ECB tentang stablecoin","Menjelaskan bagaimana lembaga kebijakan melihat struktur dan risiko stablecoin.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html","Pelajaran 4 — Jenis Token","Membantu menjelaskan bagaimana regulator melihat risiko stablecoin."],
+    ["wallet","FTC","Peringatan pembayaran FTC","Menunjukkan mengapa permintaan pembayaran dengan kripto bisa menjadi tanda bahaya.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem","Keamanan","Menunjukkan mengapa permintaan pembayaran kripto bisa menjadi sinyal penipuan."]
   ],
   "pt": [
-    [
-      "Golpes",
-      "Alerta ao consumidor da FTC",
-      "Orientação da FTC sobre golpes com cripto e proteção do consumidor.",
-      "https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams"
-    ],
-    [
-      "Exchanges",
-      "Artigo da Reuters sobre a FTX",
-      "O caso da FTX ajuda a entender riscos de exchange e custódia.",
-      "https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/"
-    ],
-    [
-      "Stablecoins",
-      "Material explicativo do ECB",
-      "Explica como uma instituição de política vê a estrutura e os riscos das stablecoins.",
-      "https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html"
-    ],
-    [
-      "Segurança da carteira",
-      "Alerta de pagamento da FTC",
-      "Mostra por que pedidos de pagamento em cripto são um sinal de alerta.",
-      "https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem"
-    ]
+    ["scams","FTC","Alerta da FTC sobre golpes com cripto","Orientação da FTC sobre golpes com criptomoedas e proteção do consumidor.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams","Segurança","Ajuda iniciantes a identificar padrões de golpes antes de perder dinheiro."],
+    ["exchanges","Reuters","Reuters sobre o colapso da FTX","O caso da FTX ajuda a entender riscos de exchange e custódia.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/","Lição 5 — Casos Reais","Mostra o risco de custódia por meio de um colapso real de exchange."],
+    ["stable","ECB","Explicação do ECB sobre stablecoins","Explica como uma instituição de política vê a estrutura e os riscos das stablecoins.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html","Lição 4 — Tipos de Token","Ajuda a entender como reguladores veem o risco de stablecoin."],
+    ["wallet","FTC","Alerta de pagamento da FTC","Mostra por que pedidos de pagamento em cripto são um sinal de alerta.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem","Segurança","Mostra por que solicitações de pagamento em cripto podem ser um sinal de golpe."]
   ],
   "es": [
-    [
-      "Estafas",
-      "Advertencia al consumidor de la FTC",
-      "Guía de la FTC sobre estafas con criptomonedas y protección al consumidor.",
-      "https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams"
-    ],
-    [
-      "Exchanges",
-      "Artículo de Reuters sobre FTX",
-      "El caso de FTX ayuda a entender los riesgos de exchange y custodia.",
-      "https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/"
-    ],
-    [
-      "Stablecoins",
-      "Material explicativo del ECB",
-      "Explica cómo una institución de política ve la estructura y los riesgos de las stablecoins.",
-      "https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html"
-    ],
-    [
-      "Seguridad de la cartera",
-      "Alerta de pago de la FTC",
-      "Muestra por qué una solicitud de pago en cripto puede ser una señal de advertencia.",
-      "https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem"
-    ]
+    ["scams","FTC","Advertencia al consumidor de la FTC","Guía de la FTC sobre estafas con criptomonedas y protección al consumidor.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams","Seguridad","Ayuda a los principiantes a identificar patrones de estafa antes de perder dinero."],
+    ["exchanges","Reuters","Reuters sobre el colapso de FTX","El caso de FTX ayuda a entender los riesgos de exchange y custodia.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/","Lección 5 — Casos Reales","Muestra el riesgo de custodia a través de un colapso real de exchange."],
+    ["stable","ECB","Material explicativo del ECB sobre stablecoins","Explica cómo una institución de política ve la estructura y los riesgos de las stablecoins.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html","Lección 4 — Tipos de Token","Ayuda a explicar cómo los reguladores ven el riesgo de stablecoin."],
+    ["wallet","FTC","Alerta de pago de la FTC","Muestra por qué una solicitud de pago en cripto puede ser una señal de advertencia.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem","Seguridad","Muestra por qué las solicitudes de pago en cripto pueden ser una señal de estafa."]
   ]
 };
 
@@ -3766,6 +3711,7 @@ function renderAllLessons(){
   document.getElementById('safetyPanel').innerHTML = renderSafetyPage();
   document.getElementById('glossaryPanel').innerHTML = renderGlossary();
   document.getElementById('sourcesPanel').innerHTML = renderSources();
+  if(typeof renderUpdateHistory === 'function') document.getElementById('updatesPanel').innerHTML = renderUpdateHistory();
 }
 function applyUI(){
   document.querySelectorAll('[data-i18n]').forEach(el=> el.innerHTML = t(el.dataset.i18n));
@@ -3795,6 +3741,7 @@ function showPage(page){
   if(page==='safety'){ document.getElementById('safetyPanel').classList.add('active'); setBreadcrumb(t('nav.safety')); activateSidebar('safety', null); }
   if(page==='glossary'){ document.getElementById('glossaryPanel').classList.add('active'); setBreadcrumb(t('nav.glossary')); activateSidebar('glossary', null); }
   if(page==='sources'){ document.getElementById('sourcesPanel').classList.add('active'); setBreadcrumb(t('nav.sources')); activateSidebar('sources', null); }
+  if(page==='updates'){ document.getElementById('updatesPanel').classList.add('active'); setBreadcrumb(t('nav.updates')); activateSidebar('updates', null); }
   updateProgress();
   document.getElementById('sidebar').classList.remove('open');
   window.scrollTo({top:0, behavior:'smooth'});
@@ -4248,7 +4195,11 @@ if (typeof renderAllLessons === 'function') {
     "sources.catScams":"Dolandırıcılıklar",
     "sources.catExchanges":"Borsalar",
     "sources.catStable":"Stablecoinler",
-    "sources.catWallet":"Cüzdan Güvenliği"
+    "sources.catWallet":"Cüzdan Güvenliği",
+    "nav.updates":"Güncelleme Geçmişi",
+    "nav.updatessub":"Son iyileştirmeler",
+    "updates.title":"Güncelleme Geçmişi",
+    "updates.desc":"Bu sayfa, platformda zaman içinde yapılan geliştirmeleri gösterir."
   };
 
   extraUi.tr = {
@@ -4308,10 +4259,10 @@ if (typeof renderAllLessons === 'function') {
   ];
 
   sourceOverrides.tr = [
-    ["Dolandırıcılık","FTC tüketici uyarısı","FTC'nin kripto dolandırıcılıkları ve tüketici koruması hakkındaki rehberi.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams"],
-    ["Borsalar","FTX hakkında Reuters makalesi","FTX vakası, borsa ve saklama risklerini anlamaya yardımcı olur.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/"],
-    ["Stablecoinler","ECB açıklama metni","Bir politika kurumunun stablecoin yapısını ve risklerini nasıl gördüğünü açıklar.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html"],
-    ["Cüzdan güvenliği","FTC ödeme uyarısı","Kriptoyla ödeme talebinin neden güçlü bir uyarı sinyali olduğunu gösterir.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem"]
+    ["scams","FTC","FTC tüketici uyarısı","FTC'nin kripto dolandırıcılıkları ve tüketici koruması hakkındaki rehberi.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams","Güvenlik","Yeni başlayanların para kaybetmeden önce dolandırıcılık kalıplarını tanımasına yardımcı olur."],
+    ["exchanges","Reuters","FTX hakkında Reuters makalesi","FTX vakası, borsa ve saklama risklerini anlamaya yardımcı olur.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/","Ders 5 — Gerçek Dünya","Gerçek bir borsa çöküşü üzerinden custody riskini açıklar."],
+    ["stable","ECB","Stablecoinler hakkında ECB açıklaması","Bir politika kurumunun stablecoin yapısını ve risklerini nasıl gördüğünü açıklar.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html","Ders 4 — Token Türleri","Düzenleyicilerin stablecoin riskini nasıl değerlendirdiğini anlamaya yardımcı olur."],
+    ["wallet","FTC","FTC ödeme uyarısı","Kriptoyla ödeme talebinin neden güçlü bir uyarı sinyali olduğunu gösterir.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem","Güvenlik","Kripto ödeme taleplerinin neden dolandırıcılık sinyali olabileceğini gösterir."]
   ];
 
   // Turkish lessons currently fall back to English lesson bodies if a localized override is missing.
@@ -4585,10 +4536,10 @@ if (typeof renderAllLessons === 'function') {
   glossaryData.tr = deepClone(glossaryOverrides.tr);
 
   sourceOverrides.tr = [
-    ["Dolandırıcılık","FTC tüketici uyarısı","FTC'nin kripto dolandırıcılıkları ve tüketici güvenliği hakkındaki rehberi.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams"],
-    ["Borsalar","FTX hakkında Reuters haberi","FTX vakası, borsa ve saklama risklerini anlamaya yardımcı olur.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/"],
-    ["Stablecoin'ler","ECB açıklama metni","Bir politika kurumunun stablecoin yapısını ve risklerini nasıl gördüğünü açıklar.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html"],
-    ["Cüzdan güvenliği","FTC ödeme uyarısı","Kripto ile ödeme talebinin neden güçlü bir uyarı sinyali olduğunu gösterir.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem"]
+    ["scams","FTC","FTC tüketici güvenliği rehberi","FTC'nin kripto dolandırıcılıkları ve tüketici güvenliği hakkındaki rehberi.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams","Güvenlik","Yeni başlayanların para kaybetmeden önce dolandırıcılık kalıplarını tanımasına yardımcı olur."],
+    ["exchanges","Reuters","FTX hakkında Reuters haberi","FTX vakası, borsa ve saklama risklerini anlamaya yardımcı olur.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/","Ders 5 — Gerçek Dünya","Gerçek bir borsa çöküşü üzerinden custody riskini açıklar."],
+    ["stable","ECB","ECB stablecoin açıklaması","Bir politika kurumunun stablecoin yapısını ve risklerini nasıl gördüğünü açıklar.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html","Ders 4 — Token Türleri","Düzenleyicilerin stablecoin riskini nasıl değerlendirdiğini anlamaya yardımcı olur."],
+    ["wallet","FTC","FTC kripto ödeme uyarısı","Kripto ile ödeme talebinin neden güçlü bir uyarı sinyali olduğunu gösterir.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem","Güvenlik","Kripto ödeme taleplerinin neden dolandırıcılık sinyali olabileceğini gösterir."]
   ];
   sourceLibrary.tr = deepClone(sourceOverrides.tr);
 
@@ -4713,7 +4664,7 @@ if (typeof renderAllLessons === 'function') {
     }
   ];
 
-  var allowedPages = ['home','glossary','sources','start','faq','safety'];
+  var allowedPages = ['home','glossary','sources','start','faq','safety','updates'];
   window.setLang = function(lang){
     if (!ui[lang] && !extraUi[lang]) lang = 'en';
     currentLang = lang;
@@ -5574,10 +5525,10 @@ if (typeof renderAllLessons === 'function') {
   ];
 
   sourceOverrides.ar = [
-    ["الاحتيال","تحذير FTC للمستهلكين","إرشادات FTC حول احتيال الكريبتو وسلامة المستهلك.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams"],
-    ["البورصات","Reuters عن FTX","حالة FTX تساعد في فهم مخاطر البورصات والحفظ.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/"],
-    ["العملات المستقرة","شرح البنك المركزي الأوروبي","يشرح كيف ترى مؤسسة سياسية هيكل ومخاطر العملات المستقرة.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html"],
-    ["أمان المحفظة","تحذير FTC بشأن الدفع","يوضح لماذا طلب الدفع بالكريبتو غالباً ما يكون إشارة احتيال.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem"]
+    ["scams","FTC","تحذير FTC للمستهلكين","إرشادات FTC حول احتيال الكريبتو وسلامة المستهلك.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams","الأمان","يساعد المبتدئين على التعرف على أنماط الاحتيال قبل خسارة المال."],
+    ["exchanges","Reuters","Reuters عن انهيار FTX","حالة FTX تساعد في فهم مخاطر البورصات والحفظ.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/","الدرس 5 — حالات حقيقية","يوضح مخاطر الحفظ من خلال حالة انهيار بورصة حقيقية."],
+    ["stable","ECB","شرح البنك المركزي الأوروبي للعملات المستقرة","يشرح كيف ترى مؤسسة سياسية هيكل ومخاطر العملات المستقرة.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html","الدرس 4 — أنواع التوكن","يساعد في شرح كيفية تقييم المنظمين لمخاطر العملات المستقرة."],
+    ["wallet","FTC","تحذير FTC بشأن الدفع","يوضح لماذا طلب الدفع بالكريبتو غالباً ما يكون إشارة احتيال.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem","الأمان","يوضح لماذا قد تكون طلبات الدفع بالكريبتو علامة على الاحتيال."]
   ];
 
   polishedSectionContent.ar = {
@@ -5876,10 +5827,10 @@ if (typeof renderAllLessons === 'function') {
   ];
 
   sourceOverrides.vi = [
-    ["Lừa đảo","Cảnh báo người tiêu dùng FTC","Hướng dẫn của FTC về lừa đảo crypto và an toàn người tiêu dùng.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams"],
-    ["Sàn giao dịch","Reuters về FTX","Trường hợp FTX giúp hiểu rủi ro sàn giao dịch và lưu ký.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/"],
-    ["Stablecoin","Tài liệu giải thích của ECB","Giải thích cách cơ quan chính sách nhìn nhận cấu trúc và rủi ro stablecoin.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html"],
-    ["An toàn ví","Cảnh báo thanh toán FTC","Cho thấy tại sao yêu cầu thanh toán bằng crypto thường là dấu hiệu lừa đảo.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem"]
+    ["scams","FTC","Cảnh báo người tiêu dùng FTC","Hướng dẫn của FTC về lừa đảo crypto và an toàn người tiêu dùng.","https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams","An toàn","Giúp người mới nhận biết các mô hình lừa đảo trước khi mất tiền."],
+    ["exchanges","Reuters","Reuters về sự sụp đổ của FTX","Trường hợp FTX giúp hiểu rủi ro sàn giao dịch và lưu ký.","https://www.reuters.com/world/us/ftx-begins-paying-customers-creditors-billions-us-2025-02-18/","Bài 5 — Bài học thực tế","Cho thấy rủi ro lưu ký qua trường hợp sụp đổ sàn giao dịch thực tế."],
+    ["stable","ECB","Giải thích của ECB về stablecoin","Giải thích cách cơ quan chính sách nhìn nhận cấu trúc và rủi ro stablecoin.","https://www.ecb.europa.eu/press/financial-stability-publications/macroprudential-bulletin/html/ecb.mpbu202206_3~406cc89b68.en.html","Bài 4 — Loại Token","Giúp giải thích cách các nhà quản lý đánh giá rủi ro stablecoin."],
+    ["wallet","FTC","Cảnh báo thanh toán FTC","Cho thấy tại sao yêu cầu thanh toán bằng crypto thường là dấu hiệu lừa đảo.","https://consumer.ftc.gov/consumer-alerts/2024/09/dont-pay-anyone-who-contacts-you-and-says-theyll-protect-your-money-or-fix-your-problem","An toàn","Cho thấy tại sao các yêu cầu thanh toán crypto có thể là tín hiệu lừa đảo."]
   ];
 
   polishedSectionContent.vi = {
@@ -6351,6 +6302,7 @@ if (typeof renderAllLessons === 'function') {
   var __prevRenderHome = window.renderHome;
   window.renderHome = function(){
     var html = __prevRenderHome();
+    if(typeof html !== 'string') return html || '';
     // Replace home-card-num numbers with icons for lessons 1-5
     for(var i=0;i<5;i++){
       html = html.replace(
@@ -6399,6 +6351,7 @@ if (typeof renderAllLessons === 'function') {
   var __prevGlossary = window.renderGlossary;
   window.renderGlossary = function(){
     var html = __prevGlossary();
+    if(typeof html !== 'string') return html || '';
     html = html.replace('<span class="meta-pill">G</span>','<span class="meta-pill">'+ic('book')+'</span>');
     return html;
   };
@@ -6406,6 +6359,7 @@ if (typeof renderAllLessons === 'function') {
   var __prevSources = window.renderSources;
   window.renderSources = function(){
     var html = __prevSources();
+    if(typeof html !== 'string') return html || '';
     html = html.replace('<span class="meta-pill">S</span>','<span class="meta-pill">'+ic('library')+'</span>');
     return html;
   };
@@ -6413,6 +6367,7 @@ if (typeof renderAllLessons === 'function') {
   var __prevStartHere = window.renderStartHere;
   window.renderStartHere = function(){
     var html = __prevStartHere();
+    if(typeof html !== 'string') return html || '';
     // Add compass icon to start here meta pill
     var startPill = html.match(/<span class="meta-pill">[^<]+<\/span>/);
     if(startPill){
@@ -6424,6 +6379,7 @@ if (typeof renderAllLessons === 'function') {
   var __prevFAQPage = window.renderFAQPage;
   window.renderFAQPage = function(){
     var html = __prevFAQPage();
+    if(typeof html !== 'string') return html || '';
     var faqPill = html.match(/<span class="meta-pill">[^<]+<\/span>/);
     if(faqPill){
       html = html.replace(faqPill[0], '<span class="meta-pill">'+ic('faq')+faqPill[0].replace(/<span class="meta-pill">/,'').replace(/<\/span>/,'')+'</span>');
@@ -6434,6 +6390,7 @@ if (typeof renderAllLessons === 'function') {
   var __prevSafetyPage = window.renderSafetyPage;
   window.renderSafetyPage = function(){
     var html = __prevSafetyPage();
+    if(typeof html !== 'string') return html || '';
     var safetyPill = html.match(/<span class="meta-pill">[^<]+<\/span>/);
     if(safetyPill){
       html = html.replace(safetyPill[0], '<span class="meta-pill">'+ic('shield')+safetyPill[0].replace(/<span class="meta-pill">/,'').replace(/<\/span>/,'')+'</span>');
@@ -6445,6 +6402,7 @@ if (typeof renderAllLessons === 'function') {
   var __prevRenderLesson = window.renderLesson;
   window.renderLesson = function(i){
     var html = __prevRenderLesson(i);
+    if(typeof html !== 'string') return html || '';
     var iconName = lessonIcons[i] || 'filetext';
     // Insert icon into meta-pill
     html = html.replace(/<span class="meta-pill">/, '<span class="meta-pill">'+ic(iconName)+' ');
@@ -6806,6 +6764,7 @@ if (typeof renderAllLessons === 'function') {
   var __prevRL = window.renderLesson;
   window.renderLesson = function(i){
     var html = __prevRL(i);
+    if(typeof html !== 'string') return html || '';
     var cmp = getCompare();
     var sum = getSummary();
 
@@ -6857,6 +6816,7 @@ if (typeof renderAllLessons === 'function') {
   var __prevRH = window.renderHome;
   window.renderHome = function(){
     var html = __prevRH();
+    if(typeof html !== 'string') return html || '';
     var sum = getSummary();
     var cmp = getCompare();
 
@@ -6884,6 +6844,7 @@ if (typeof renderAllLessons === 'function') {
   var __prevSP = window.renderSafetyPage;
   window.renderSafetyPage = function(){
     var html = __prevSP();
+    if(typeof html !== 'string') return html || '';
     var sum = getSummary();
     var cmp = getCompare();
 
@@ -6917,6 +6878,7 @@ if (typeof renderAllLessons === 'function') {
   var __prevG = window.renderGlossary;
   window.renderGlossary = function(){
     var html = __prevG();
+    if(typeof html !== 'string') return html || '';
     var sum = getSummary();
     if(sum.glossary){
       var gBox = summaryBox(sum.glossary.type, sum.glossary.label, sum.glossary.text);
@@ -7122,6 +7084,7 @@ if (typeof renderAllLessons === 'function') {
   function getTooltipDefs(){ return tooltipDefs[currentLang] || tooltipDefs.en; }
 
   function applyTooltips(html){
+    if(typeof html !== 'string') return html || '';
     var defs = getTooltipDefs();
     // Sort terms by length (longest first) to avoid partial matches
     var sorted = termsList.slice().sort(function(a,b){return b.length - a.length;});
@@ -7146,19 +7109,21 @@ if (typeof renderAllLessons === 'function') {
   var __rlTip = window.renderLesson;
   window.renderLesson = function(i){
     var html = __rlTip(i);
-    return applyTooltips(html);
+    return applyTooltips(typeof html === 'string' ? html : '');
   };
 
   // Patch renderSafetyPage
   var __spTip = window.renderSafetyPage;
   window.renderSafetyPage = function(){
-    return applyTooltips(__spTip());
+    var html = __spTip();
+    return applyTooltips(typeof html === 'string' ? html : '');
   };
 
   // Patch renderStartHere
   var __shTip = window.renderStartHere;
   window.renderStartHere = function(){
-    return applyTooltips(__shTip());
+    var html = __shTip();
+    return applyTooltips(typeof html === 'string' ? html : '');
   };
 
   // ============ 2. ENHANCED MINI QUIZZES ============
@@ -7276,6 +7241,7 @@ if (typeof renderAllLessons === 'function') {
   var __rlQuiz = window.renderLesson;
   window.renderLesson = function(i){
     var html = __rlQuiz(i);
+    if(typeof html !== 'string') return html || '';
     // Remove old quiz section and insert enhanced quiz before complete-row
     var completeIdx = html.indexOf('<div class="complete-row">');
     if(completeIdx > -1){
@@ -7404,6 +7370,7 @@ if (typeof renderAllLessons === 'function') {
   var __rhFinder = window.renderHome;
   window.renderHome = function(){
     var html = __rhFinder();
+    if(typeof html !== 'string') return html || '';
     var finderHtml = renderStartFinder();
     // Insert after home-desc, before first home-grid
     var gridIdx = html.indexOf('<div class="home-grid">');
@@ -7416,6 +7383,252 @@ if (typeof renderAllLessons === 'function') {
   // Re-render
   if(typeof renderAllLessons === 'function') renderAllLessons();
   if(typeof showPage === 'function' && typeof currentPage !== 'undefined' && currentPage === 'home') showPage('home');
+})();
+</script>
+
+<!-- ========== UPDATE HISTORY ========== -->
+<style id="update-history-css">
+.update-timeline{display:flex;flex-direction:column;gap:0;margin:24px 0;}
+.update-entry{display:flex;gap:0;position:relative;}
+.update-entry:not(:last-child) .update-line{position:absolute;left:19px;top:38px;bottom:-2px;width:2px;background:var(--line);z-index:0;}
+.update-dot-col{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:40px;padding-top:6px;}
+.update-dot{width:14px;height:14px;border-radius:50%;background:var(--navy);border:3px solid var(--panel);box-shadow:0 0 0 2px var(--line);flex-shrink:0;z-index:1;position:relative;}
+.update-card{flex:1;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:0 0 16px 12px;}
+.update-date{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
+.update-card-title{font-size:.96rem;font-weight:800;color:var(--text);margin-bottom:8px;}
+.update-items{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px;}
+.update-items li{font-size:.86rem;color:var(--text-2);padding-left:16px;position:relative;line-height:1.55;}
+.update-items li::before{content:"·";position:absolute;left:4px;color:var(--navy);font-weight:900;}
+@media(max-width:520px){
+  .update-card{padding:13px 14px;margin-left:8px;}
+  .update-dot-col{width:32px;}
+  .update-entry:not(:last-child) .update-line{left:15px;}
+}
+</style>
+
+<script id="update-history-script">
+(function(){
+  // ─── Update History data — all 10 languages, all 6 dates ───────────────
+  var updateHistory = {
+    en:[
+      {date:'2026-04-03', title:'Source Library & Visual Navigation',
+       items:['Icons added for clearer visual navigation','Comparison cards added','Quick summary boxes added','Source Library expanded with more articles and categories','Source transparency and structured learning flow improved']},
+      {date:'2026-04-02', title:'Search, Resume & Beginner Tools',
+       items:['Search feature added','Continue Learning / Resume Learning added','Beginner Roadmap added','Top 5 Beginner Mistakes added','Language update notice added']},
+      {date:'2026-04-01', title:'New Pages: Start Here, FAQ & Safety',
+       items:['Start Here page added','FAQ page added','Safety page added','Home-first entry experience improved for PC and mobile']},
+      {date:'2026-03-31', title:'Platform Structure & Usability Improved',
+       items:['Multi-language experience improved','Navigation and section clarity improved','Glossary and Source Library usability improved','Platform structure became more organized']},
+      {date:'2026-03-30', title:'Beginner Learning Flow Refined',
+       items:['Beginner-focused learning structure improved','Lesson flow refined for easier understanding','More beginner-friendly content organization added','Educational direction clarified for broader users']},
+      {date:'2026-03-29', title:'Initial Launch',
+       items:['Crypto Academy initial launch','Core multilingual education structure created','Basic lesson flow established','Home / Lessons / Glossary / Source Library initial structure prepared']}
+    ],
+    ko:[
+      {date:'2026-04-03', title:'Source Library 확장 및 시각 내비게이션 개선',
+       items:['시각적 탐색을 위한 아이콘 추가','비교 카드 추가','빠른 요약 박스 추가','더 많은 기사와 카테고리로 Source Library 확장','출처 투명성 및 구조화된 학습 흐름 개선']},
+      {date:'2026-04-02', title:'검색, 이어보기 및 초보자 도구 추가',
+       items:['검색 기능 추가','이어서 학습하기 / 학습 재개 기능 추가','초보자 로드맵 추가','초보자 Top 5 실수 추가','언어 업데이트 알림 추가']},
+      {date:'2026-04-01', title:'신규 페이지: 시작 가이드, FAQ, 안전 가이드',
+       items:['시작 가이드 페이지 추가','FAQ 페이지 추가','안전 가이드 페이지 추가','PC 및 모바일 첫 진입 홈 화면 경험 개선']},
+      {date:'2026-03-31', title:'플랫폼 구조 및 사용성 개선',
+       items:['다국어 경험 개선','내비게이션 및 섹션 명확성 개선','용어사전 및 Source Library 사용성 개선','플랫폼 구조 전반적으로 정리됨']},
+      {date:'2026-03-30', title:'초보자 학습 흐름 개선',
+       items:['초보자 중심 학습 구조 개선','더 쉬운 이해를 위한 강의 흐름 정제','초보자 친화적 콘텐츠 구성 추가','더 많은 사용자를 위한 교육 방향 명확화']},
+      {date:'2026-03-29', title:'최초 출시',
+       items:['Crypto Academy 최초 출시','핵심 다국어 교육 구조 생성','기본 강의 흐름 구축','홈 / 강의 / 용어사전 / Source Library 초기 구조 완성']}
+    ],
+    th:[
+      {date:'2026-04-03', title:'ขยาย Source Library และปรับปรุงการนำทางด้วยภาพ',
+       items:['เพิ่มไอคอนเพื่อการนำทางที่ชัดเจนขึ้น','เพิ่มการ์ดเปรียบเทียบ','เพิ่มกล่องสรุปย่อ','ขยาย Source Library ด้วยบทความและหมวดหมู่เพิ่มเติม','ปรับปรุงความโปร่งใสของแหล่งอ้างอิงและการเรียนรู้แบบมีโครงสร้าง']},
+      {date:'2026-04-02', title:'เพิ่มการค้นหา เรียนต่อ และเครื่องมือสำหรับผู้เริ่มต้น',
+       items:['เพิ่มฟีเจอร์ค้นหา','เพิ่มฟีเจอร์เรียนต่อ / กลับมาเรียน','เพิ่มแผนการเรียนสำหรับผู้เริ่มต้น','เพิ่มข้อผิดพลาด 5 อันดับสำหรับผู้เริ่มต้น','เพิ่มการแจ้งเตือนการอัปเดตภาษา']},
+      {date:'2026-04-01', title:'เพิ่มหน้าใหม่: เริ่มตรงนี้ คำถามพบบ่อย และความปลอดภัย',
+       items:['เพิ่มหน้า เริ่มตรงนี้','เพิ่มหน้าคำถามพบบ่อย','เพิ่มหน้าความปลอดภัย','ปรับปรุงประสบการณ์เข้าสู่หน้าหลักก่อนสำหรับ PC และมือถือ']},
+      {date:'2026-03-31', title:'ปรับปรุงโครงสร้างแพลตฟอร์มและการใช้งาน',
+       items:['ปรับปรุงประสบการณ์หลายภาษา','ปรับปรุงความชัดเจนของการนำทางและส่วนต่างๆ','ปรับปรุงการใช้งานอภิธานศัพท์และ Source Library','โครงสร้างแพลตฟอร์มเป็นระเบียบมากขึ้น']},
+      {date:'2026-03-30', title:'ปรับแต่งกระบวนการเรียนรู้สำหรับผู้เริ่มต้น',
+       items:['ปรับปรุงโครงสร้างการเรียนรู้ที่เน้นผู้เริ่มต้น','ปรับแต่งขั้นตอนบทเรียนให้เข้าใจง่ายขึ้น','เพิ่มการจัดเนื้อหาที่เป็นมิตรกับผู้เริ่มต้นมากขึ้น','ชี้แจงทิศทางการศึกษาสำหรับผู้ใช้กลุ่มกว้างขึ้น']},
+      {date:'2026-03-29', title:'เปิดตัวครั้งแรก',
+       items:['เปิดตัว Crypto Academy ครั้งแรก','สร้างโครงสร้างการศึกษาหลายภาษาหลัก','จัดตั้งขั้นตอนบทเรียนพื้นฐาน','เตรียมโครงสร้างเริ่มต้นของหน้าหลัก / บทเรียน / อภิธานศัพท์ / Source Library']}
+    ],
+    id:[
+      {date:'2026-04-03', title:'Perluasan Source Library & Navigasi Visual',
+       items:['Ikon ditambahkan untuk navigasi visual yang lebih jelas','Kartu perbandingan ditambahkan','Kotak ringkasan cepat ditambahkan','Source Library diperluas dengan lebih banyak artikel dan kategori','Transparansi sumber dan alur pembelajaran terstruktur ditingkatkan']},
+      {date:'2026-04-02', title:'Pencarian, Lanjutkan Belajar & Alat Pemula',
+       items:['Fitur pencarian ditambahkan','Lanjutkan Belajar / Kembali Belajar ditambahkan','Peta Jalan Pemula ditambahkan','5 Kesalahan Pemula Teratas ditambahkan','Pemberitahuan pembaruan bahasa ditambahkan']},
+      {date:'2026-04-01', title:'Halaman Baru: Mulai di Sini, FAQ & Keamanan',
+       items:['Halaman Mulai di Sini ditambahkan','Halaman FAQ ditambahkan','Halaman Keamanan ditambahkan','Pengalaman masuk pertama ke halaman Beranda ditingkatkan untuk PC dan ponsel']},
+      {date:'2026-03-31', title:'Struktur Platform & Kegunaan Ditingkatkan',
+       items:['Pengalaman multibahasa ditingkatkan','Kejelasan navigasi dan bagian ditingkatkan','Kegunaan Glosarium dan Source Library ditingkatkan','Struktur platform menjadi lebih terorganisir']},
+      {date:'2026-03-30', title:'Alur Pembelajaran Pemula Disempurnakan',
+       items:['Struktur pembelajaran berfokus pemula ditingkatkan','Alur pelajaran disempurnakan agar lebih mudah dipahami','Organisasi konten yang lebih ramah pemula ditambahkan','Arah pendidikan diperjelas untuk pengguna yang lebih luas']},
+      {date:'2026-03-29', title:'Peluncuran Awal',
+       items:['Crypto Academy diluncurkan pertama kali','Struktur pendidikan multibahasa inti dibuat','Alur pelajaran dasar ditetapkan','Struktur awal Beranda / Pelajaran / Glosarium / Source Library disiapkan']}
+    ],
+    pt:[
+      {date:'2026-04-03', title:'Expansão da Source Library & Navegação Visual',
+       items:['Ícones adicionados para navegação visual mais clara','Cartões de comparação adicionados','Caixas de resumo rápido adicionadas','Source Library expandida com mais artigos e categorias','Transparência de fontes e fluxo de aprendizado estruturado melhorados']},
+      {date:'2026-04-02', title:'Pesquisa, Continuar Aprendendo & Ferramentas para Iniciantes',
+       items:['Funcionalidade de pesquisa adicionada','Continuar Aprendendo / Retomar Aprendizado adicionado','Roteiro para Iniciantes adicionado','Top 5 Erros de Iniciantes adicionado','Aviso de atualização de idioma adicionado']},
+      {date:'2026-04-01', title:'Novas Páginas: Comece Aqui, FAQ e Segurança',
+       items:['Página Comece Aqui adicionada','Página FAQ adicionada','Página Segurança adicionada','Experiência de entrada pela tela inicial melhorada para PC e celular']},
+      {date:'2026-03-31', title:'Estrutura da Plataforma & Usabilidade Melhoradas',
+       items:['Experiência multilíngue melhorada','Clareza de navegação e seções melhorada','Usabilidade do Glossário e Source Library melhorada','Estrutura da plataforma tornou-se mais organizada']},
+      {date:'2026-03-30', title:'Fluxo de Aprendizado para Iniciantes Aprimorado',
+       items:['Estrutura de aprendizado focada em iniciantes melhorada','Fluxo de lições refinado para compreensão mais fácil','Organização de conteúdo mais amigável para iniciantes adicionada','Direção educacional esclarecida para públicos mais amplos']},
+      {date:'2026-03-29', title:'Lançamento Inicial',
+       items:['Lançamento inicial do Crypto Academy','Estrutura educacional multilíngue principal criada','Fluxo básico de lições estabelecido','Estrutura inicial de Início / Lições / Glossário / Source Library preparada']}
+    ],
+    tr:[
+      {date:'2026-04-03', title:'Kaynak Kütüphanesi Genişletildi & Görsel Navigasyon',
+       items:['Daha net görsel navigasyon için ikonlar eklendi','Karşılaştırma kartları eklendi','Hızlı özet kutuları eklendi','Kaynak Kütüphanesi daha fazla makale ve kategoriyle genişletildi','Kaynak şeffaflığı ve yapılandırılmış öğrenme akışı iyileştirildi']},
+      {date:'2026-04-02', title:'Arama, Öğrenmeye Devam Et & Başlangıç Araçları',
+       items:['Arama özelliği eklendi','Öğrenmeye Devam Et / Öğrenmeyi Sürdür eklendi','Başlangıç Yol Haritası eklendi','En Sık Yapılan 5 Başlangıç Hatası eklendi','Dil güncelleme bildirimi eklendi']},
+      {date:'2026-04-01', title:'Yeni Sayfalar: Buradan Başla, SSS & Güvenlik',
+       items:['Buradan Başla sayfası eklendi','SSS sayfası eklendi','Güvenlik sayfası eklendi','PC ve mobil için önce Ana Sayfa giriş deneyimi iyileştirildi']},
+      {date:'2026-03-31', title:'Platform Yapısı & Kullanılabilirlik İyileştirildi',
+       items:['Çok dilli deneyim iyileştirildi','Navigasyon ve bölüm netliği iyileştirildi','Sözlük ve Kaynak Kütüphanesi kullanılabilirliği iyileştirildi','Platform yapısı daha düzenli hale geldi']},
+      {date:'2026-03-30', title:'Başlangıç Öğrenme Akışı Geliştirildi',
+       items:['Yeni başlayan odaklı öğrenme yapısı iyileştirildi','Daha kolay anlama için ders akışı geliştirildi','Daha başlangıç dostu içerik organizasyonu eklendi','Daha geniş kullanıcılar için eğitim yönü netleştirildi']},
+      {date:'2026-03-29', title:'İlk Lansman',
+       items:['Crypto Academy ilk lansmanı','Temel çok dilli eğitim yapısı oluşturuldu','Temel ders akışı kuruldu','Ana Sayfa / Dersler / Sözlük / Kaynak Kütüphanesi ilk yapısı hazırlandı']}
+    ],
+    ar:[
+      {date:'2026-04-03', title:'توسيع مكتبة المصادر والتنقل المرئي',
+       items:['أضيفت أيقونات لتنقل مرئي أوضح','أضيفت بطاقات المقارنة','أضيفت مربعات الملخص السريع','توسعت مكتبة المصادر بمزيد من المقالات والفئات','تحسين شفافية المصادر وتدفق التعلم المنظم']},
+      {date:'2026-04-02', title:'البحث، متابعة التعلم وأدوات المبتدئين',
+       items:['أضيفت ميزة البحث','أضيف متابعة التعلم / استئناف التعلم','أضيفت خارطة طريق المبتدئين','أضيفت أكثر 5 أخطاء شائعة للمبتدئين','أضيف إشعار تحديث اللغة']},
+      {date:'2026-04-01', title:'صفحات جديدة: ابدأ هنا، الأسئلة الشائعة والأمان',
+       items:['أضيفت صفحة ابدأ هنا','أضيفت صفحة الأسئلة الشائعة','أضيفت صفحة الأمان','تحسين تجربة الدخول للصفحة الرئيسية على الحاسوب والجوال']},
+      {date:'2026-03-31', title:'تحسين هيكل المنصة وسهولة الاستخدام',
+       items:['تحسين تجربة تعدد اللغات','تحسين وضوح التنقل والأقسام','تحسين سهولة استخدام القاموس ومكتبة المصادر','أصبح هيكل المنصة أكثر تنظيماً']},
+      {date:'2026-03-30', title:'تحسين تدفق التعلم للمبتدئين',
+       items:['تحسين هيكل التعلم الموجه للمبتدئين','تحسين تدفق الدروس لفهم أسهل','إضافة تنظيم محتوى أكثر ملاءمة للمبتدئين','توضيح التوجه التعليمي لفئات أوسع من المستخدمين']},
+      {date:'2026-03-29', title:'الإطلاق الأولي',
+       items:['الإطلاق الأولي لأكاديمية Crypto','إنشاء هيكل التعليم متعدد اللغات الأساسي','تأسيس تدفق الدروس الأساسي','تجهيز الهيكل الأولي للرئيسية / الدروس / القاموس / مكتبة المصادر']}
+    ],
+    vi:[
+      {date:'2026-04-03', title:'Mở rộng Thư viện Nguồn & Điều hướng Trực quan',
+       items:['Thêm biểu tượng để điều hướng trực quan rõ ràng hơn','Thêm thẻ so sánh','Thêm hộp tóm tắt nhanh','Thư viện Nguồn được mở rộng với nhiều bài viết và danh mục hơn','Cải thiện tính minh bạch nguồn và luồng học tập có cấu trúc']},
+      {date:'2026-04-02', title:'Tìm kiếm, Tiếp tục Học & Công cụ cho Người mới',
+       items:['Thêm tính năng tìm kiếm','Thêm Tiếp tục Học / Tiếp tục từ chỗ đã dừng','Thêm Lộ trình cho Người mới','Thêm Top 5 Sai lầm của Người mới','Thêm thông báo cập nhật ngôn ngữ']},
+      {date:'2026-04-01', title:'Trang mới: Bắt đầu Tại đây, FAQ & An toàn',
+       items:['Thêm trang Bắt đầu Tại đây','Thêm trang FAQ','Thêm trang An toàn','Cải thiện trải nghiệm vào trang Chủ trước trên PC và điện thoại']},
+      {date:'2026-03-31', title:'Cải thiện Cấu trúc Nền tảng & Khả năng Sử dụng',
+       items:['Cải thiện trải nghiệm đa ngôn ngữ','Cải thiện độ rõ ràng của điều hướng và các phần','Cải thiện khả năng sử dụng Từ điển và Thư viện Nguồn','Cấu trúc nền tảng trở nên có tổ chức hơn']},
+      {date:'2026-03-30', title:'Tinh chỉnh Luồng Học tập cho Người mới',
+       items:['Cải thiện cấu trúc học tập tập trung vào người mới','Tinh chỉnh luồng bài học để dễ hiểu hơn','Thêm tổ chức nội dung thân thiện hơn với người mới','Làm rõ hướng giáo dục cho nhiều người dùng hơn']},
+      {date:'2026-03-29', title:'Ra mắt Lần đầu',
+       items:['Ra mắt Crypto Academy lần đầu','Tạo cấu trúc giáo dục đa ngôn ngữ cốt lõi','Thiết lập luồng bài học cơ bản','Chuẩn bị cấu trúc ban đầu của Trang chủ / Bài học / Từ điển / Thư viện Nguồn']}
+    ],
+    es:[
+      {date:'2026-04-03', title:'Expansión de la Source Library y Navegación Visual',
+       items:['Iconos añadidos para una navegación visual más clara','Tarjetas de comparación añadidas','Cajas de resumen rápido añadidas','Source Library expandida con más artículos y categorías','Transparencia de fuentes y flujo de aprendizaje estructurado mejorados']},
+      {date:'2026-04-02', title:'Búsqueda, Continuar Aprendiendo y Herramientas para Principiantes',
+       items:['Función de búsqueda añadida','Continuar Aprendiendo / Retomar el Aprendizaje añadido','Hoja de Ruta para Principiantes añadida','Top 5 Errores de Principiantes añadido','Aviso de actualización de idioma añadido']},
+      {date:'2026-04-01', title:'Nuevas Páginas: Empieza Aquí, FAQ y Seguridad',
+       items:['Página Empieza Aquí añadida','Página FAQ añadida','Página Seguridad añadida','Experiencia de entrada a la pantalla de Inicio mejorada para PC y móvil']},
+      {date:'2026-03-31', title:'Estructura de la Plataforma y Usabilidad Mejoradas',
+       items:['Experiencia multilingüe mejorada','Claridad de navegación y secciones mejorada','Usabilidad del Glosario y Source Library mejorada','La estructura de la plataforma se volvió más organizada']},
+      {date:'2026-03-30', title:'Flujo de Aprendizaje para Principiantes Refinado',
+       items:['Estructura de aprendizaje centrada en principiantes mejorada','Flujo de lecciones refinado para una comprensión más fácil','Organización de contenido más amigable para principiantes añadida','Dirección educativa aclarada para usuarios más amplios']},
+      {date:'2026-03-29', title:'Lanzamiento Inicial',
+       items:['Lanzamiento inicial de Crypto Academy','Estructura educativa multilingüe principal creada','Flujo básico de lecciones establecido','Estructura inicial de Inicio / Lecciones / Glosario / Source Library preparada']}
+    ]
+  };
+  // br mirrors pt
+  updateHistory.br = updateHistory.pt;
+
+  // ─── Inject ar/vi nav keys (those langs are not in the main ui object) ─
+  var arViKeys = {
+    ar:{'nav.updates':'سجل التحديثات','nav.updatessub':'ما الذي تغيّر ومتى','updates.title':'سجل التحديثات','updates.desc':'سجل بالتحسينات التي أُضيفت إلى هذه المنصة عبر الزمن.'},
+    vi:{'nav.updates':'Lịch sử Cập nhật','nav.updatessub':'Những thay đổi và thời điểm','updates.title':'Lịch sử Cập nhật','updates.desc':'Nhật ký các cải tiến được thực hiện trên nền tảng này theo thời gian.'}
+  };
+  if(typeof ui !== 'undefined'){
+    ['ar','vi'].forEach(function(lang){
+      if(!ui[lang]) ui[lang] = {};
+      Object.assign(ui[lang], arViKeys[lang]);
+    });
+  }
+
+  // ─── renderUpdateHistory ──────────────────────────────────────────────
+  function renderUpdateHistory(){
+    var data = updateHistory[currentLang] || updateHistory.en;
+    var title = (typeof t === 'function') ? t('updates.title') : 'Update History';
+    var desc  = (typeof t === 'function') ? t('updates.desc')  : '';
+    var metaCat = (typeof t === 'function') ? t('nav.updates') : 'Update History';
+
+    var html = '<div class="lc-header">'
+      + '<div class="lc-meta"><span class="meta-pill">U</span><span class="meta-cat">'+metaCat+'</span></div>'
+      + '<h1 class="lc-title">'+title+'</h1>'
+      + '<p class="lc-intro">'+desc+'</p>'
+      + '</div>'
+      + '<div class="update-timeline">';
+
+    data.forEach(function(entry, idx){
+      html += '<div class="update-entry">'
+        + '<div class="update-dot-col"><div class="update-dot"></div>'
+        + (idx < data.length - 1 ? '<div class="update-line"></div>' : '')
+        + '</div>'
+        + '<div class="update-card">'
+        + '<div class="update-date">'+entry.date+'</div>'
+        + '<div class="update-card-title">'+entry.title+'</div>'
+        + '<ul class="update-items">';
+      entry.items.forEach(function(item){
+        html += '<li>'+item+'</li>';
+      });
+      html += '</ul></div></div>';
+    });
+
+    html += '</div>';
+    return html;
+  }
+
+  // ─── Expose and wire up ───────────────────────────────────────────────
+  window.renderUpdateHistory = renderUpdateHistory;
+
+  // Patch renderAllLessons to always include updatesPanel
+  var _origRAL = window.renderAllLessons;
+  window.renderAllLessons = function(){
+    _origRAL();
+    var panel = document.getElementById('updatesPanel');
+    if(panel) panel.innerHTML = renderUpdateHistory();
+  };
+
+  // Patch setLang so Update History re-renders on language switch
+  var _origSetLang = window.setLang;
+  window.setLang = function(lang){
+    _origSetLang(lang);
+    var panel = document.getElementById('updatesPanel');
+    if(panel) panel.innerHTML = renderUpdateHistory();
+    // If currently on updates page, re-show to refresh breadcrumb too
+    if(typeof currentPage !== 'undefined' && currentPage === 'updates'){
+      if(typeof showPage === 'function') showPage('updates');
+    }
+  };
+
+  // Patch showPage to handle 'updates' (safety net in case base showPage fires before this script)
+  var _origShowPage = window.showPage;
+  window.showPage = function(page){
+    _origShowPage(page);
+    if(page === 'updates'){
+      var panel = document.getElementById('updatesPanel');
+      if(panel) panel.innerHTML = renderUpdateHistory();
+      panel.classList.add('active');
+    }
+  };
+
+  // Initial render
+  var panel = document.getElementById('updatesPanel');
+  if(panel) panel.innerHTML = renderUpdateHistory();
+
+  // Add clock/history icon to sidebar Update History nav num
+  var updatesNavItem = document.querySelector('#sidebar .lesson-nav-item[data-page="updates"] .nav-num');
+  if(updatesNavItem){
+    updatesNavItem.innerHTML = '<span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>';
+  }
+
 })();
 </script>
 </body>
