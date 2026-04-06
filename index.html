@@ -174,7 +174,7 @@ a{color:var(--navy-2)}
 .glossary-term{font-size:.78rem;font-family:"IBM Plex Mono",monospace;color:var(--navy);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
 .glossary-meaning{font-size:.88rem;color:var(--text-2)}
 .source-cats{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 18px}
-.source-cat{padding:7px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:.76rem;font-weight:700;color:var(--text-2)}
+.source-cat{padding:7px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:.76rem;font-weight:700;color:var(--text-2);cursor:pointer}
 .source-library-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}
 .source-library-item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
 .source-library-item h3{font-size:.94rem;font-weight:800;margin-bottom:6px}
@@ -1571,6 +1571,15 @@ function renderGlossary(){
       ${items.map(([term, body])=>`<div class="glossary-card"><div class="glossary-term">${term}</div><div class="glossary-meaning">${typeof body==='function' ? body(t) : body}</div></div>`).join('')}
     </div>`;
 }
+function normalizeSourceTargetKey(value){
+  return String(value || '').toLowerCase().replace(/^https?:\/\//,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+}
+function getSourceItemTargetKey(item, fallbackKey){
+  if(!item) return normalizeSourceTargetKey(fallbackKey || '');
+  const url = item.length >= 7 ? item[4] : item[3];
+  const title = item.length >= 7 ? item[2] : item[1];
+  return normalizeSourceTargetKey(url || fallbackKey || title || '');
+}
 function renderSources(){
   const items = getSourceItems();
   const cats = getSourceCats();
@@ -1593,7 +1602,7 @@ function renderSources(){
   const chipHtml = orderedKeys.map(k=>{
     const label = catLabelMap[k] || k;
     const count = (byCategory[k]||[]).length;
-    return `<div class="source-cat">${label} <span style="font-size:.65rem;opacity:.6;margin-left:3px">(${count})</span></div>`;
+    return `<div class="source-cat" data-source-cat="${k}">${label} <span style="font-size:.65rem;opacity:.6;margin-left:3px">(${count})</span></div>`;
   }).join('');
 
   // Build category sections
@@ -1616,7 +1625,8 @@ function renderSources(){
       // Safety: ensure url is always a string before calling .replace()
       const safeUrl = (typeof url === 'string' && url) ? url : '';
       const displayUrl = safeUrl ? safeUrl.replace(/^https?:\/\//,'').replace(/\/$/,'').substring(0,55) + (safeUrl.length>60?'…':'') : '';
-      return `<div class="source-library-item">
+      const sourceTargetKey = getSourceItemTargetKey(item, title);
+      return `<div class="source-library-item" data-source-key="${sourceTargetKey}">
         <div class="source-library-meta">${catLabelMap[_cat]||_cat}</div>
         <div class="src-publisher-row">
           ${publisher ? `<span class="src-publisher">&#9654; ${publisher}</span>` : ''}
@@ -1628,7 +1638,7 @@ function renderSources(){
         ${safeUrl ? `<a class="src-link" href="${safeUrl}" target="_blank" rel="noopener">&#128279; ${displayUrl}</a>` : ''}
       </div>`;
     }).join('');
-    return `<div class="src-section-block">
+    return `<div class="src-section-block" data-source-section="${k}">
       <div class="src-section-heading">${label}<span class="src-section-count">${catItems.length}</span></div>
       <div class="source-library-grid">${cardsHtml}</div>
     </div>`;
@@ -6123,9 +6133,19 @@ if (typeof renderAllLessons === 'function') {
 .search-box{width:min(94vw,580px);background:var(--panel);border:1px solid var(--line-strong);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.18);overflow:hidden;animation:fade .2s var(--ease)}
 .search-input-wrap{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
 .search-input-wrap svg{width:18px;height:18px;color:var(--text-3);flex-shrink:0}
-.search-input{flex:1;border:none;outline:none;background:transparent;font-size:.95rem;color:var(--text);font-family:inherit}
+.search-input{flex:1 1 180px;border:none;outline:none;background:transparent;font-size:.95rem;color:var(--text);font-family:inherit}
 .search-input::placeholder{color:var(--text-3)}
-.search-close{background:none;border:1px solid var(--line);border-radius:6px;padding:3px 8px;font-size:.7rem;color:var(--text-3);cursor:pointer;font-family:"IBM Plex Mono",monospace}
+.search-close{background:none;border:1px solid var(--line);border-radius:6px;padding:3px 8px;font-size:.7rem;color:var(--text-3);cursor:pointer;font-family:"IBM Plex Mono",monospace;flex-shrink:0}
+.topbar-visitor-block{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap}
+.search-visitor-pill{min-width:110px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;display:flex;flex-direction:column;justify-content:center}
+.search-visitor-label{font-size:.68rem;font-family:"IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3)}
+.search-visitor-value{font-size:.95rem;font-weight:800;color:var(--navy);line-height:1.15;margin-top:2px}
+.search-visitor-value.is-loading{color:var(--text-3);font-weight:700}
+@media(max-width:760px){
+  #topbar .topbar-right{flex-wrap:wrap;justify-content:flex-end}
+  .topbar-visitor-block{width:100%;justify-content:flex-end}
+  .search-visitor-pill{flex:1 1 140px}
+}
 .search-results{max-height:min(50vh,400px);overflow-y:auto;padding:8px}
 .search-results:empty::after{content:attr(data-empty);display:block;padding:20px;text-align:center;color:var(--text-3);font-size:.88rem}
 .search-result-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:10px;cursor:pointer;transition:background .12s}
@@ -6219,10 +6239,132 @@ if (typeof renderAllLessons === 'function') {
   searchBtn.onclick = function(){ openSearch(); };
   topbarRight.insertBefore(searchBtn, progressPill);
 
+  var visitorCounterBlock = document.createElement('div');
+  visitorCounterBlock.className = 'topbar-visitor-block';
+  visitorCounterBlock.id = 'searchVisitorBlock';
+  visitorCounterBlock.setAttribute('aria-live', 'polite');
+  visitorCounterBlock.innerHTML =
+    '<div class="search-visitor-pill">' +
+      '<div class="search-visitor-label" id="visitorTodayLabel">Today Visitors</div>' +
+      '<div class="search-visitor-value is-loading" id="visitorTodayValue">--</div>' +
+    '</div>' +
+    '<div class="search-visitor-pill">' +
+      '<div class="search-visitor-label" id="visitorTotalLabel">Total Visitors</div>' +
+      '<div class="search-visitor-value is-loading" id="visitorTotalValue">--</div>' +
+    '</div>';
+  topbarRight.insertBefore(visitorCounterBlock, progressPill);
+
+  var visitorCounterText = {
+    en:{today:'Today Visitors',total:'Total Visitors'},
+    ko:{today:'오늘 방문자',total:'누적 방문자'},
+    th:{today:'ผู้เยี่ยมชมวันนี้',total:'ผู้เยี่ยมชมทั้งหมด'},
+    id:{today:'Pengunjung Hari Ini',total:'Total Pengunjung'},
+    pt:{today:'Visitantes de Hoje',total:'Total de Visitantes'},
+    br:{today:'Visitantes de Hoje',total:'Total de Visitantes'},
+    tr:{today:'Bugünkü Ziyaretçiler',total:'Toplam Ziyaretçi'},
+    ar:{today:'زوار اليوم',total:'إجمالي الزوار'},
+    vi:{today:'Khách Hôm Nay',total:'Tổng Khách'},
+    es:{today:'Visitantes de Hoy',total:'Visitantes Totales'}
+  };
+
+  var VISITOR_COUNTER_NAMESPACE = 'crypto-academy-platform';
+  var VISITOR_COUNTER_TOTAL_KEY = 'visitors-total';
+  var visitorTodayLabelEl = document.getElementById('visitorTodayLabel');
+  var visitorTotalLabelEl = document.getElementById('visitorTotalLabel');
+  var visitorTodayValueEl = document.getElementById('visitorTodayValue');
+  var visitorTotalValueEl = document.getElementById('visitorTotalValue');
+
+  function getVisitorCounterText(){
+    return visitorCounterText[currentLang] || visitorCounterText.en;
+  }
+
+  function renderVisitorCounterLabels(){
+    var text = getVisitorCounterText();
+    if(visitorTodayLabelEl) visitorTodayLabelEl.textContent = text.today;
+    if(visitorTotalLabelEl) visitorTotalLabelEl.textContent = text.total;
+  }
+
+  function setVisitorCounterValues(today, total){
+    if(visitorTodayValueEl){
+      visitorTodayValueEl.textContent = today;
+      visitorTodayValueEl.classList.remove('is-loading');
+    }
+    if(visitorTotalValueEl){
+      visitorTotalValueEl.textContent = total;
+      visitorTotalValueEl.classList.remove('is-loading');
+    }
+  }
+
+  function setVisitorCounterLoading(){
+    if(visitorTodayValueEl){
+      visitorTodayValueEl.textContent = '--';
+      visitorTodayValueEl.classList.add('is-loading');
+    }
+    if(visitorTotalValueEl){
+      visitorTotalValueEl.textContent = '--';
+      visitorTotalValueEl.classList.add('is-loading');
+    }
+  }
+
+  function getVisitorDayKey(){
+    var parts = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'UTC',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    }).formatToParts(new Date()).reduce(function(acc, part){
+      if(part.type !== 'literal') acc[part.type] = part.value;
+      return acc;
+    }, {});
+    return 'visitors-' + parts.year + '-' + parts.month + '-' + parts.day;
+  }
+
+  function extractVisitorCount(data){
+    if(data && typeof data.count === 'number') return data.count;
+    if(data && typeof data.value === 'number') return data.value;
+    if(data && data.data && typeof data.data.count === 'number') return data.data.count;
+    return null;
+  }
+
+  // Shared visitor counts are stored in CounterAPI keys, so every client reads the same source.
+  function requestVisitorCounter(path){
+    return fetch('https://api.counterapi.dev/v1/' + path, { cache:'no-store' }).then(function(res){
+      if(!res.ok) throw new Error('visitor-counter-request-failed');
+      return res.json();
+    });
+  }
+
+  function loadVisitorCounters(){
+    var todayKey = getVisitorDayKey();
+    var shouldIncrement = !window.__visitorCountedThisLoad;
+    if(shouldIncrement) window.__visitorCountedThisLoad = true;
+
+    var totalRequest = shouldIncrement
+      ? requestVisitorCounter(VISITOR_COUNTER_NAMESPACE + '/' + VISITOR_COUNTER_TOTAL_KEY + '/up')
+      : requestVisitorCounter(VISITOR_COUNTER_NAMESPACE + '/' + VISITOR_COUNTER_TOTAL_KEY);
+    var todayRequest = shouldIncrement
+      ? requestVisitorCounter(VISITOR_COUNTER_NAMESPACE + '/' + todayKey + '/up')
+      : requestVisitorCounter(VISITOR_COUNTER_NAMESPACE + '/' + todayKey);
+
+    return Promise.all([todayRequest, totalRequest]).then(function(results){
+      var todayCount = extractVisitorCount(results[0]);
+      var totalCount = extractVisitorCount(results[1]);
+      setVisitorCounterValues(todayCount == null ? '--' : todayCount, totalCount == null ? '--' : totalCount);
+    }).catch(function(){
+      setVisitorCounterValues('--', '--');
+    });
+  }
+
+  renderVisitorCounterLabels();
+  setVisitorCounterLoading();
+  loadVisitorCounters();
+
   window.openSearch = function(){
     document.getElementById('searchOverlay').classList.add('open');
     document.getElementById('searchInput').value = '';
     document.getElementById('searchResults').innerHTML = '';
+    renderVisitorCounterLabels();
+    loadVisitorCounters();
     setTimeout(function(){ document.getElementById('searchInput').focus(); }, 100);
   };
   window.closeSearch = function(){
@@ -6235,6 +6377,16 @@ if (typeof renderAllLessons === 'function') {
     if(e.key === 'Escape') closeSearch();
     if((e.ctrlKey || e.metaKey) && e.key === 'k'){ e.preventDefault(); openSearch(); }
   });
+
+  var __visitorSetLang = window.setLang;
+  if(typeof __visitorSetLang === 'function' && !__visitorSetLang.__visitorCounterWrapped){
+    var wrappedSetLang = function(lang){
+      __visitorSetLang(lang);
+      renderVisitorCounterLabels();
+    };
+    wrappedSetLang.__visitorCounterWrapped = true;
+    window.setLang = wrappedSetLang;
+  }
 
   function getSearchableItems(){
     var items = [];
@@ -8537,7 +8689,7 @@ function getRepresentativeCoinRelatedSections(coinKey, labels){
     { label: labels.relatedLessons, page:'lessons', items: mapping.relatedLessons.map(function(idx){ return { label: lessonTitleFn(lang, idx), targetPage:'lessons', targetType:'lesson', targetId:String(idx) }; }) },
     { label: labels.relatedGlossary, page:'glossary', items: mapping.relatedGlossary.map(function(id){ return glossaryStore[id] ? { label: glossaryStore[id].title, targetPage:'glossary', targetType:'glossary', targetId:id } : null; }).filter(Boolean) },
     { label: labels.relatedFaq, page:'faq', items: mapping.relatedFaq.map(function(id){ return faqStore[id] ? { label: faqStore[id].title, targetPage:'faq', targetType:'faq', targetId:id } : null; }).filter(Boolean) },
-    { label: labels.relatedSources, page:'sources', items: mapping.relatedSources.map(function(id){ return sourceStore[id] ? { label: sourceStore[id][2], targetPage:'sources', targetType:'source', targetId:id } : null; }).filter(Boolean) },
+    { label: labels.relatedSources, page:'sources', items: mapping.relatedSources.map(function(id){ return sourceStore[id] ? { label: sourceStore[id][2], targetPage:'sources', targetType:'source', targetId:getSourceItemTargetKey(sourceStore[id], id) } : null; }).filter(Boolean) },
     { label: labels.relatedSafety, page:'safety', items: mapping.relatedSafety.map(function(id){ return safetyStore[id] ? { label: safetyStore[id].title, targetPage:'safety', targetType:'safety', targetId:id } : null; }).filter(Boolean) }
   ].filter(function(section){ return section.items && section.items.length; });
 }
@@ -8717,6 +8869,24 @@ function scrollToRepresentativeTarget(page, targetType, targetId){
   var panelMap = { glossary:'#glossaryPanel', faq:'#faqPanel', sources:'#sourcesPanel', safety:'#safetyPanel' };
   var panelSelector = panelMap[page];
   if(!panelSelector) return;
+  if(targetType === 'source'){
+    function findSourceTarget(){
+      return document.querySelector(panelSelector + ' .source-library-item[data-source-key="' + targetId + '"]');
+    }
+    function revealSourceTarget(tries){
+      var targetEl = findSourceTarget();
+      if(targetEl){
+        targetEl.scrollIntoView({ behavior:'smooth', block:'center' });
+        highlightRepresentativeTarget(targetEl);
+        return;
+      }
+      if(tries > 0){
+        setTimeout(function(){ revealSourceTarget(tries - 1); }, 120);
+      }
+    }
+    revealSourceTarget(10);
+    return;
+  }
   var targetLabel = repNormalizeText(getRepresentativeTargetLabel(targetType, targetId));
   if(!targetLabel) return;
 
@@ -8755,6 +8925,22 @@ function scrollToRepresentativeTarget(page, targetType, targetId){
   }
 
   revealTarget(10);
+}
+
+function scrollToSourceSection(targetCat){
+  if(typeof showPage === 'function') showPage('sources');
+  function revealSection(tries){
+    var targetEl = document.querySelector('#sourcesPanel .src-section-block[data-source-section="' + targetCat + '"]');
+    if(targetEl){
+      targetEl.scrollIntoView({ behavior:'smooth', block:'start' });
+      highlightRepresentativeTarget(targetEl);
+      return;
+    }
+    if(tries > 0){
+      setTimeout(function(){ revealSection(tries - 1); }, 120);
+    }
+  }
+  revealSection(10);
 }
 
 function navigateRepresentativeChip(chip){
@@ -8876,6 +9062,20 @@ newSearchInput.addEventListener('input', function(){
 if(typeof window.getSearchableItems === 'undefined' && typeof getSearchableItems === 'function'){
   window.getSearchableItems = getSearchableItems;
 }
+
+document.addEventListener('click', function(e){
+  var sourceCat = e.target.closest('#sourcesPanel .source-cat[data-source-cat]');
+  if(sourceCat){
+    scrollToSourceSection(sourceCat.dataset.sourceCat);
+    return;
+  }
+
+  var sourceCard = e.target.closest('#sourcesPanel .source-library-item[data-source-key]');
+  if(sourceCard && !e.target.closest('a')){
+    sourceCard.scrollIntoView({ behavior:'smooth', block:'center' });
+    highlightRepresentativeTarget(sourceCard);
+  }
+});
 
 })();
 </script>
