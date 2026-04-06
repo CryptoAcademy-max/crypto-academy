@@ -6166,9 +6166,9 @@ if (typeof renderAllLessons === 'function') {
 .search-result-title{font-size:.88rem;font-weight:700;color:var(--text)}
 .search-result-desc{font-size:.78rem;color:var(--text-3);margin-top:2px}
 /* Search trigger button in topbar */
-.search-trigger{display:flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:.77rem;font-weight:600;color:var(--text-3);cursor:pointer}
-.search-trigger svg{width:14px;height:14px}
-@media(max-width:768px){.search-trigger span{display:none}.search-trigger{padding:7px 8px}}
+.search-trigger{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:.77rem;font-weight:600;color:var(--text-3);cursor:pointer;flex-shrink:0}
+.search-trigger svg{width:16px;height:16px}
+.search-trigger span{display:none}
 
 /* Continue Learning card */
 .continue-card{background:linear-gradient(135deg,#eef3fa 0%,#f6edd8 100%);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:transform .16s var(--ease),box-shadow .16s var(--ease)}
@@ -8206,12 +8206,13 @@ if (typeof renderAllLessons === 'function') {
   }
   #topbar .topbar-right{
     display:grid;
-    grid-template-columns:minmax(0,1fr) auto auto;
+    grid-template-columns:auto auto auto;
     width:100%;
     margin-left:0;
     padding-right:0;
     gap:8px;
     align-items:center;
+    justify-content:end;
   }
   #topbar .lang-wrap{
     grid-column:2;
@@ -8229,13 +8230,8 @@ if (typeof renderAllLessons === 'function') {
   }
   #topbar .search-trigger{
     grid-column:1;
-    min-height:42px;
-    width:100%;
-    justify-content:center;
-    padding:9px 12px;
-  }
-  #topbar .search-trigger span{
-    display:inline;
+    width:40px;
+    height:40px;
   }
   .content-area{
     padding-top:18px;
@@ -8246,19 +8242,19 @@ if (typeof renderAllLessons === 'function') {
     --topbar-h:156px;
   }
   #topbar .topbar-right{
-    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-columns:auto auto auto;
   }
   #topbar .search-trigger{
-    grid-column:1 / -1;
-  }
-  #topbar .lang-wrap{
     grid-column:1;
   }
+  #topbar .lang-wrap{
+    grid-column:2;
+  }
   #topbar .lang-toggle{
-    width:100%;
+    width:auto;
   }
   #topbar .mobile-toggle{
-    grid-column:2;
+    grid-column:3;
   }
 }
 </style>
