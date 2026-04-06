@@ -8134,6 +8134,103 @@ if (typeof renderAllLessons === 'function') {
 }
 </style>
 
+<style id="mobile-topbar-fix">
+@media(max-width:760px){
+  :root{
+    --topbar-h:174px;
+  }
+  #topbar{
+    height:var(--topbar-h);
+    padding:10px 12px;
+    align-items:flex-start;
+    align-content:flex-start;
+    flex-wrap:wrap;
+    gap:8px 10px;
+  }
+  #layout{
+    padding-top:var(--topbar-h);
+  }
+  #sidebar,
+  #sidebarOverlay{
+    top:var(--topbar-h);
+  }
+  .brand{
+    width:auto;
+    max-width:100%;
+    height:auto;
+    min-height:40px;
+    padding:0;
+    border-right:none;
+    flex:1 1 100%;
+  }
+  .brand-sub{
+    display:none;
+  }
+  #topbar .topbar-right{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    width:100%;
+    margin-left:0;
+    padding-right:0;
+    gap:8px;
+    align-items:center;
+  }
+  #topbar .lang-wrap{
+    grid-column:1;
+    min-width:0;
+  }
+  #topbar .lang-toggle{
+    min-height:40px;
+    width:100%;
+    justify-content:center;
+  }
+  #topbar .mobile-toggle{
+    grid-column:2;
+    width:40px;
+    height:40px;
+  }
+  #topbar .search-trigger{
+    grid-column:1 / -1;
+    min-height:42px;
+    width:100%;
+    justify-content:center;
+    padding:9px 12px;
+  }
+  #topbar .search-trigger span{
+    display:inline;
+  }
+  #topbar .topbar-visitor-block{
+    grid-column:1 / -1;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    width:100%;
+    gap:8px;
+    justify-content:stretch;
+  }
+  #topbar .search-visitor-pill{
+    min-width:0;
+    padding:7px 9px;
+  }
+  #topbar .search-visitor-label{
+    font-size:.62rem;
+  }
+  #topbar .search-visitor-value{
+    font-size:.86rem;
+  }
+  .content-area{
+    padding-top:22px;
+  }
+}
+@media(max-width:420px){
+  :root{
+    --topbar-h:214px;
+  }
+  #topbar .topbar-visitor-block{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
 <script id="update-history-script">
 (function(){
   // ─── Update History data — all 10 languages, all 6 dates ───────────────
