@@ -7045,26 +7045,8 @@ if (typeof renderAllLessons === 'function') {
     return items;
   }
 
-  document.getElementById('searchInput').addEventListener('input', function(){
-    var q = this.value.trim().toLowerCase();
-    var container = document.getElementById('searchResults');
-    if(!q){ container.innerHTML = ''; return; }
-    var items = getSearchableItems();
-    var results = items.filter(function(item){
-      return item.title.toLowerCase().indexOf(q) !== -1 || item.desc.toLowerCase().indexOf(q) !== -1;
-    });
-    if(results.length === 0){
-      container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-3);font-size:.88rem">' + ((typeof getSearchNoResultsText === 'function') ? getSearchNoResultsText() : 'No results found') + '</div>';
-      return;
-    }
-    container.innerHTML = results.slice(0,12).map(function(r){
-      return '<div class="search-result-item" data-idx="'+items.indexOf(r)+'"><div class="search-result-badge '+r.type+'">'+r.badge+'</div><div><div class="search-result-title">'+r.title+'</div><div class="search-result-desc">'+r.desc+'</div></div></div>';
-    }).join('');
-    container.querySelectorAll('.search-result-item').forEach(function(el){
-      var idx = parseInt(el.dataset.idx);
-      el.addEventListener('click', function(){ items[idx].action(); });
-    });
-  });
+  window.__disableLegacySearchUi = true;
+  window.__legacyInlineSearchDisabled = true;
 
   // ========== 2. CONTINUE LEARNING (localStorage tracking) ==========
   var LAST_VISIT_KEY = 'cryptoAcademyLastVisit';
@@ -9320,6 +9302,14 @@ var otherCoins = {
   'zcash':      {symbol:'ZEC'}
 };
 
+window.__coinSearchStore = window.__coinSearchStore || {};
+window.__coinSearchStore.coinEducation = coinEducation;
+window.__coinSearchStore.repCoins = repCoins;
+window.__coinSearchStore.otherCoins = otherCoins;
+window.coinEducation = coinEducation;
+window.repCoins = repCoins;
+window.otherCoins = otherCoins;
+
 // ---------- ENGLISH ----------
 coinEducation.en = {
   _labels: {
@@ -9924,6 +9914,16 @@ if(coinEducation.ha && coinEducation.ha._labels){
 }
 
 // ===== SEARCH EXTENSION =====
+function buildRepresentativeSearchText(key, coin){
+  var parts = [
+    coin && coin.name,
+    coin && coin.symbol,
+    key,
+    coin && coin.category
+  ];
+  return parts.filter(Boolean).join(' ').toLowerCase();
+}
+
 // Build coin search items
 function getCoinSearchItems(){
   var items = [];
@@ -9938,14 +9938,14 @@ function getCoinSearchItems(){
     var coin = isHausa ? data[key] : (data[key] || fallback[key]);
     if(!coin) return;
     items.push({
-      type: 'coin-rich',
+      type: 'coin-representative',
       coinKey: key,
       name: coin.name,
       symbol: coin.symbol,
       category: coin.category || 'layer1',
       coin: coin,
       labels: labels,
-      searchText: (coin.name + ' ' + coin.symbol + ' ' + key + ' ' + (coin.overview||'')).toLowerCase()
+      searchText: buildRepresentativeSearchText(key, coin)
     });
   });
 
@@ -9968,6 +9968,24 @@ function getCoinSearchItems(){
   });
 
   return items;
+}
+
+function orderRepresentativeCoinResults(items){
+  var repOrder = {};
+  repCoins.forEach(function(key, idx){
+    repOrder[key] = idx;
+  });
+  return (items || []).slice().sort(function(a, b){
+    var aRep = Object.prototype.hasOwnProperty.call(repOrder, a.coinKey) ? repOrder[a.coinKey] : Infinity;
+    var bRep = Object.prototype.hasOwnProperty.call(repOrder, b.coinKey) ? repOrder[b.coinKey] : Infinity;
+    if(aRep !== bRep) return aRep - bRep;
+    if(typeof a.__autoScore === 'number' || typeof b.__autoScore === 'number'){
+      var aScore = typeof a.__autoScore === 'number' ? a.__autoScore : -1;
+      var bScore = typeof b.__autoScore === 'number' ? b.__autoScore : -1;
+      if(aScore !== bScore) return bScore - aScore;
+    }
+    return String(a.name || '').localeCompare(String(b.name || ''));
+  });
 }
 
 // Render rich coin card
@@ -10107,12 +10125,43 @@ function renderRichCoinCard(item){
 }
 
 // Render lightweight coin card
+function getLightCoinIntroText(item){
+  var lang = (typeof currentLang !== 'undefined') ? (currentLang === 'br' ? 'pt' : currentLang) : 'en';
+  var name = String((item && item.name) || (item && item.symbol) || '').replace(/\s+/g, ' ').trim();
+  var raw = String((item && item.desc) || '').replace(/\s+/g, ' ').trim();
+  if(/^coingecko\s*·\s*rank/i.test(raw) || /^coingecko\b/i.test(raw)){
+    raw = '';
+  }
+  if(!raw){
+    var fallbackMap = {
+      en: name ? (name + ' is a digital asset related to this search.') : 'This is a related digital asset.',
+      ko: name ? (name + ' 관련 디지털 자산입니다.') : '관련 디지털 자산입니다.',
+      th: name ? ('นี่คือสินทรัพย์ดิจิทัลที่เกี่ยวข้องกับ ' + name) : 'นี่คือสินทรัพย์ดิจิทัลที่เกี่ยวข้อง',
+      id: name ? ('Aset digital yang terkait dengan ' + name + '.') : 'Aset digital terkait.',
+      pt: name ? ('Ativo digital relacionado a ' + name + '.') : 'Ativo digital relacionado.',
+      tr: name ? (name + ' ile ilgili bir dijital varliktir.') : 'Ilgili bir dijital varliktir.',
+      ar: name ? ('اصل رقمي مرتبط بـ ' + name + '.') : 'اصل رقمي ذي صلة.',
+      ha: name ? (name + ' wani kudin dijital ne mai alaka.') : 'Wannan kudin dijital ne mai alaka.',
+      vi: name ? ('Day la tai san so lien quan den ' + name + '.') : 'Day la tai san so lien quan.',
+      es: name ? ('Activo digital relacionado con ' + name + '.') : 'Activo digital relacionado.'
+    };
+    raw = fallbackMap[lang] || fallbackMap.en;
+  }
+  if(raw.length > 92){
+    raw = raw.slice(0, 91).trim() + '…';
+  }
+  return raw;
+}
+
 function renderLightCoinCard(item){
-  var l = item.labels;
+  var label = (item && item.labels && item.labels.coin) ? item.labels.coin : 'Coin';
+  var symbol = String((item && item.symbol) || '').trim();
+  var name = String((item && item.name) || symbol).trim();
+  var intro = getLightCoinIntroText(item);
   var html = '<div class="coin-light">';
-  html += '<div class="coin-card-header"><div class="coin-badge">'+item.symbol.substring(0,3)+'</div>';
-  html += '<div><div class="coin-name">'+item.name+'</div><div class="coin-symbol">'+item.symbol+'</div></div></div>';
-  if(item.desc) html += '<div class="coin-intro">'+item.desc+'</div>';
+  html += '<div class="coin-card-header"><div class="coin-badge">'+symbol.substring(0,3)+'</div>';
+  html += '<div><div class="coin-name">'+name+'</div><div class="coin-symbol">'+symbol + (label ? ' · ' + label : '') + '</div></div></div>';
+  if(intro) html += '<div class="coin-intro">'+intro+'</div>';
   html += '</div>';
   return html;
 }
@@ -10309,88 +10358,21 @@ function navigateRepresentativeChip(chip){
   }
 }
 
-// Override the search input handler
-var searchInput = document.getElementById('searchInput');
-var origInputHandler = null;
+window.getCoinSearchItems = getCoinSearchItems;
+window.orderRepresentativeCoinResults = orderRepresentativeCoinResults;
+window.renderRichCoinCard = renderRichCoinCard;
+window.renderLightCoinCard = renderLightCoinCard;
+window.getRepresentativeCoinRelatedSections = getRepresentativeCoinRelatedSections;
+window.getRepresentativeTargetLabel = getRepresentativeTargetLabel;
+window.scrollRepresentativeTargetIntoView = scrollRepresentativeTargetIntoView;
+window.highlightRepresentativeTarget = highlightRepresentativeTarget;
+window.scrollToRepresentativeTarget = scrollToRepresentativeTarget;
+window.setActiveSourceCategory = setActiveSourceCategory;
+window.scrollToSourceSection = scrollToSourceSection;
+window.navigateRepresentativeChip = navigateRepresentativeChip;
 
-// Remove existing input listeners by cloning
-var newSearchInput = searchInput.cloneNode(true);
-searchInput.parentNode.replaceChild(newSearchInput, searchInput);
-
-newSearchInput.addEventListener('input', function(){
-  var q = this.value.trim().toLowerCase();
-  var container = document.getElementById('searchResults');
-  if(!q){ container.innerHTML = ''; return; }
-
-  // Get internal items
-  var internalItems = (typeof getSearchableItems === 'function') ? getSearchableItems() : [];
-  var internalResults = internalItems.filter(function(item){
-    return item.title.toLowerCase().indexOf(q) !== -1 || item.desc.toLowerCase().indexOf(q) !== -1;
-  });
-
-  // Get coin items
-  var coinItems = getCoinSearchItems();
-  var coinResults = coinItems.filter(function(item){
-    return item.searchText.indexOf(q) !== -1;
-  });
-
-  if(internalResults.length === 0 && coinResults.length === 0){
-    container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-3);font-size:.88rem">' + ((typeof getSearchNoResultsText === 'function') ? getSearchNoResultsText() : 'No results found') + '</div>';
-    return;
-  }
-
-  var lang = (typeof currentLang !== 'undefined') ? currentLang : 'en';
-  var labels = (coinEducation[lang] && coinEducation[lang]._labels) || coinEducation.en._labels;
-  var html = '';
-
-  // Coin results first
-  if(coinResults.length > 0){
-    html += '<div class="search-section-divider">'+labels.coinResults+'</div>';
-    coinResults.slice(0,5).forEach(function(item){
-      if(item.type === 'coin-rich'){
-        html += renderRichCoinCard(item);
-      } else {
-        html += renderLightCoinCard(item);
-      }
-    });
-  }
-
-  // Internal results
-  if(internalResults.length > 0){
-    if(coinResults.length > 0){
-      html += '<div class="search-section-divider">'+labels.internalResults+'</div>';
-    }
-    internalResults.slice(0,10).forEach(function(r){
-      html += '<div class="search-result-item" data-idx="'+internalItems.indexOf(r)+'"><div class="search-result-badge '+r.type+'">'+r.badge+'</div><div><div class="search-result-title">'+r.title+'</div><div class="search-result-desc">'+r.desc+'</div></div></div>';
-    });
-  }
-
-  container.innerHTML = html;
-
-  // Bind click on internal items
-  container.querySelectorAll('.search-result-item').forEach(function(el){
-    var idx = parseInt(el.dataset.idx);
-    if(!isNaN(idx) && internalItems[idx]){
-      el.addEventListener('click', function(){ internalItems[idx].action(); });
-    }
-  });
-
-  // Bind click on related chips to navigate
-  container.querySelectorAll('.coin-related-chip').forEach(function(chip){
-    chip.addEventListener('click', function(){
-      if(this.dataset.targetType && this.dataset.targetId){
-        navigateRepresentativeChip(this);
-        return;
-      }
-      var page = this.dataset.page;
-      if(page && typeof showPage === 'function'){
-        if(page === 'lessons' && typeof showLesson === 'function') showLesson(0);
-        else showPage(page);
-        closeSearch();
-      }
-    });
-  });
-});
+// Legacy clone-based search override disabled in favor of the unified autocomplete path.
+window.__legacyCoinSearchOverrideDisabled = true;
 
 // Make getSearchableItems globally accessible if it isn't already
 if(typeof window.getSearchableItems === 'undefined' && typeof getSearchableItems === 'function'){
@@ -11459,6 +11441,9 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
   window.__repSourceEntries = sourceEntries;
   window.__repSafetyEntries = safetyEntries;
   window.__repLessonTitle = lessonTitle;
+  window.__coinSearchStore = window.__coinSearchStore || {};
+  window.__coinSearchStore.coinMappings = coinMappings;
+  window.coinMappings = coinMappings;
 
   REL_LANGS.forEach(function(lang){
     var base = baseLang(lang);
@@ -11949,107 +11934,19 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
   }
 
   function renderPatchedSearchResults(query){
-    var container = document.getElementById('searchResults');
-    if(!container) return;
-
-    if(!query){
-      container.innerHTML = '';
-      return;
+    if(typeof window.renderSearchAutocompleteFinal === 'function'){
+      window.renderSearchAutocompleteFinal(query || '');
     }
-
-    var internalItems = (typeof window.getSearchableItems === 'function') ? window.getSearchableItems() : [];
-    var internalResults = internalItems.filter(function(item){
-      return lowerText(item.title).indexOf(query) !== -1 || lowerText(item.desc).indexOf(query) !== -1;
-    });
-
-    var coinItems = (typeof getCoinSearchItems === 'function') ? getCoinSearchItems() : [];
-    var coinResults = coinItems.filter(function(item){
-      return lowerText(item.searchText).indexOf(query) !== -1;
-    });
-
-    if(internalResults.length === 0 && coinResults.length === 0){
-      container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-3);font-size:.88rem">' + window.getSearchNoResultsText() + '</div>';
-      return;
-    }
-
-    var lang = (typeof currentLang !== 'undefined') ? currentLang : 'en';
-    var labels = (typeof coinEducation !== 'undefined' && coinEducation[lang] && coinEducation[lang]._labels) ? coinEducation[lang]._labels : (coinEducation.en && coinEducation.en._labels ? coinEducation.en._labels : { coinResults:'Coin Results', internalResults:'Internal Results' });
-    var html = '';
-
-    if(coinResults.length > 0){
-      html += '<div class="search-section-divider">'+labels.coinResults+'</div>';
-      coinResults.slice(0, 5).forEach(function(item){
-        if(item.type === 'coin-rich' && typeof renderRichCoinCard === 'function'){
-          html += renderRichCoinCard(item);
-        } else if(typeof renderLightCoinCard === 'function') {
-          html += renderLightCoinCard(item);
-        }
-      });
-    }
-
-    if(internalResults.length > 0){
-      if(coinResults.length > 0){
-        html += '<div class="search-section-divider">'+labels.internalResults+'</div>';
-      }
-      internalResults.slice(0, 10).forEach(function(item, idx){
-        html += '<div class="search-result-item" data-idx="'+idx+'"><div class="search-result-badge '+item.type+'">'+item.badge+'</div><div><div class="search-result-title">'+item.title+'</div><div class="search-result-desc">'+item.desc+'</div></div></div>';
-      });
-    }
-
-    container.innerHTML = html;
-
-    container.querySelectorAll('.search-result-item').forEach(function(el){
-      var idx = parseInt(el.dataset.idx, 10);
-      if(!isNaN(idx) && internalResults[idx]){
-        el.addEventListener('click', function(){ internalResults[idx].action(); });
-      }
-    });
-
-    container.querySelectorAll('.coin-related-chip').forEach(function(chip){
-      chip.addEventListener('click', function(){
-        if(this.dataset.targetType && this.dataset.targetId){
-          if(typeof navigateRepresentativeChip === 'function') navigateRepresentativeChip(this);
-          return;
-        }
-        var page = this.dataset.page;
-        if(page && typeof showPage === 'function'){
-          if(page === 'lessons' && typeof showLesson === 'function') showLesson(0);
-          else showPage(page);
-          if(typeof closeSearch === 'function') closeSearch();
-        }
-      });
-    });
   }
+  window.renderPatchedSearchResults = renderPatchedSearchResults;
 
   function bindPatchedSearchInput(){
-    var input = document.getElementById('searchInput');
-    if(!input) return;
-    if(input.__haPatchedSearch){
-      refreshSearchUi();
-      return;
-    }
-
-    var active = document.activeElement === input;
-    var replacement = input.cloneNode(true);
-    replacement.value = input.value || '';
-    input.parentNode.replaceChild(replacement, input);
-    replacement.__haPatchedSearch = true;
-    replacement.addEventListener('input', function(){
-      renderPatchedSearchResults(lowerText(this.value).trim());
-    });
-
+    window.__legacyHausaSearchPatchDisabled = true;
     refreshSearchUi();
-
-    if(replacement.value){
-      renderPatchedSearchResults(lowerText(replacement.value).trim());
-    }
-    if(active){
-      replacement.focus();
-    }
   }
 
   var __haOpenSearch = window.openSearch;
-  if(typeof __haOpenSearch === 'function' && !__haOpenSearch.__haSearchWrapped){
+  if(false && typeof __haOpenSearch === 'function' && !__haOpenSearch.__haSearchWrapped){
     var wrappedOpenSearch = function(){
       __haOpenSearch();
       bindPatchedSearchInput();
@@ -12060,7 +11957,7 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
   }
 
   var __haSetLang = window.setLang;
-  if(typeof __haSetLang === 'function' && !__haSetLang.__haSearchWrapped){
+  if(false && typeof __haSetLang === 'function' && !__haSetLang.__haSearchWrapped){
     var wrappedSetLang = function(lang){
       __haSetLang(lang);
       bindPatchedSearchInput();
@@ -12070,7 +11967,7 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     window.setLang = wrappedSetLang;
   }
 
-  bindPatchedSearchInput();
+  window.__legacyHausaSearchPatchDisabled = true;
   refreshSearchUi();
 
   if(typeof currentLang !== 'undefined' && currentLang === 'ha'){
@@ -13336,22 +13233,30 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
   window.getCoinSearchItems = getCoinSearchItems = function(){
     if(typeof currentLang === 'undefined' || currentLang !== 'ha') return __origGetCoinSearchItems();
     var items = [];
-    repCoins.forEach(function(key){
+    var representativeCoins = Array.isArray(window.repCoins)
+      ? window.repCoins
+      : ((window.__coinSearchStore && Array.isArray(window.__coinSearchStore.repCoins)) ? window.__coinSearchStore.repCoins : []);
+    var lightweightCoins = (window.otherCoins && typeof window.otherCoins === 'object')
+      ? window.otherCoins
+      : ((window.__coinSearchStore && window.__coinSearchStore.otherCoins) ? window.__coinSearchStore.otherCoins : {});
+    representativeCoins.forEach(function(key){
       var coin = HA_COIN_EDUCATION_FULL[key];
       if(!coin) return;
       items.push({
-        type:'coin-rich',
+        type:'coin-representative',
         coinKey:key,
         name:coin.name,
         symbol:coin.symbol,
         category:coin.category || 'layer1',
         coin:coin,
         labels:HA_COIN_EDUCATION_FULL._labels,
-        searchText:(coin.name + ' ' + coin.symbol + ' ' + key + ' ' + (coin.overview || '') + ' ' + (coin.role || '') + ' ' + (coin.beginnerNote || '')).toLowerCase()
+        searchText:(typeof buildRepresentativeSearchText === 'function')
+          ? buildRepresentativeSearchText(key, coin)
+          : (coin.name + ' ' + coin.symbol + ' ' + key).toLowerCase()
       });
     });
-    Object.keys(otherCoins).forEach(function(key){
-      var info = otherCoins[key];
+    Object.keys(lightweightCoins).forEach(function(key){
+      var info = lightweightCoins[key];
       var desc = (HA_COIN_EDUCATION_FULL._other && HA_COIN_EDUCATION_FULL._other[key]) ? HA_COIN_EDUCATION_FULL._other[key] : '';
       var displayName = key.split('-').map(function(w){ return w.charAt(0).toUpperCase() + w.slice(1); }).join(' ');
       items.push({
@@ -13418,6 +13323,1708 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     if(typeof renderAllLessons === 'function') renderAllLessons();
     if(typeof showPage === 'function' && typeof currentPage !== 'undefined') showPage(currentPage || 'home');
   }
+})();
+</script>
+
+<script id="search-autocomplete-final">
+(function(){
+  window.__legacySearchAutocompleteDisabled = true;
+  return;
+  var AUTOCOMPLETE_LIMIT = 8;
+  var autocompleteState = {
+    activeIndex: -1,
+    items: [],
+    suppressNextRender: false
+  };
+  var searchSelectionState = {
+    representativeKey: '',
+    representativeQuery: ''
+  };
+  var coinGeckoState = {
+    cache: {},
+    inflight: {}
+  };
+
+  var autocompleteText = {
+    en:{noResults:'No matching coins', coin:'Coin', layer1:'Layer 1', stablecoin:'Stablecoin', defi:'DeFi', nft:'NFT', exchange:'Exchange'},
+    ko:{noResults:'일치하는 코인이 없습니다', coin:'코인', layer1:'레이어 1', stablecoin:'스테이블코인', defi:'디파이', nft:'NFT', exchange:'거래소'},
+    th:{noResults:'ไม่พบคอยน์ที่ตรงกัน', coin:'เหรียญ', layer1:'เลเยอร์ 1', stablecoin:'สเตเบิลคอยน์', defi:'DeFi', nft:'NFT', exchange:'เอ็กซ์เชนจ์'},
+    id:{noResults:'Tidak ada koin yang cocok', coin:'Koin', layer1:'Layer 1', stablecoin:'Stablecoin', defi:'DeFi', nft:'NFT', exchange:'Exchange'},
+    pt:{noResults:'Nenhuma moeda correspondente', coin:'Moeda', layer1:'Layer 1', stablecoin:'Stablecoin', defi:'DeFi', nft:'NFT', exchange:'Exchange'},
+    tr:{noResults:'Eşleşen coin yok', coin:'Coin', layer1:'Katman 1', stablecoin:'Stablecoin', defi:'DeFi', nft:'NFT', exchange:'Borsa'},
+    ar:{noResults:'لا توجد عملات مطابقة', coin:'عملة', layer1:'الطبقة الأولى', stablecoin:'عملة مستقرة', defi:'DeFi', nft:'NFT', exchange:'منصة تداول'},
+    ha:{noResults:'Ba a sami kudin dijital da ya dace ba', coin:'Kudin dijital', layer1:'Layer 1', stablecoin:'Tsayayyen kudin dijital', defi:'Tsarin kudi marar tsakiya', nft:'NFT', exchange:'Dandalin musaya'},
+    vi:{noResults:'Không có đồng nào phù hợp', coin:'Đồng tiền số', layer1:'Layer 1', stablecoin:'Stablecoin', defi:'DeFi', nft:'NFT', exchange:'Sàn giao dịch'},
+    es:{noResults:'No hay monedas coincidentes', coin:'Moneda', layer1:'Capa 1', stablecoin:'Stablecoin', defi:'DeFi', nft:'NFT', exchange:'Exchange'}
+  };
+
+  var categoryKeywords = {
+    layer1:['layer 1','layer1','blockchain','network','sarkar bayanai','hanyar sadarwa'],
+    stablecoin:['stablecoin','stablecoins','peg','tsayayyen kudin dijital','tsayayyun kudaden dijital'],
+    defi:['defi','decentralized finance','decentralised finance','lending','borrow','borrowing','loan','tsarin kudi marar tsakiya'],
+    nft:['nft','nfts','collectible','collectibles','digital ownership'],
+    exchange:['exchange','trading','binance','dandalin musaya','musaya']
+  };
+
+  var aliasKeywords = {
+    bitcoin:['btc','satoshi','digital gold'],
+    ethereum:['eth','ether','smart contract','smart contracts'],
+    solana:['sol','fast chain'],
+    xrp:['ripple','payments','remittance'],
+    bnb:['binance','bnb chain','exchange token'],
+    usdt:['tether','usd tether','stablecoin'],
+    aave:['lending','borrow','borrowing','loan','defi'],
+    nft:['nft','nfts','collectible','digital ownership'],
+    cardano:['ada'],
+    polkadot:['dot'],
+    avalanche:['avax'],
+    chainlink:['link','oracle'],
+    polygon:['matic'],
+    litecoin:['ltc'],
+    dogecoin:['doge','meme coin'],
+    'shiba-inu':['shib','meme coin'],
+    uniswap:['uni','dex','swap'],
+    cosmos:['atom','interoperability'],
+    near:['near protocol'],
+    algorand:['algo'],
+    fantom:['ftm'],
+    tron:['trx'],
+    stellar:['xlm','payments'],
+    hedera:['hbar','hashgraph'],
+    vechain:['vet','supply chain'],
+    aptos:['apt','move'],
+    sui:['sui','move'],
+    arbitrum:['arb','layer 2','rollup'],
+    optimism:['op','layer 2','rollup'],
+    filecoin:['fil','storage'],
+    'the-graph':['grt','indexing','query'],
+    maker:['mkr','dai'],
+    compound:['comp','lending'],
+    lido:['ldo','staking','liquid staking'],
+    pepe:['meme coin'],
+    toncoin:['ton','telegram'],
+    sei:['trading'],
+    injective:['inj','defi','exchange'],
+    render:['rndr','gpu','ai'],
+    mantle:['mnt','layer 2'],
+    celestia:['tia','data availability'],
+    stacks:['stx','bitcoin layer'],
+    immutable:['imx','gaming','nft'],
+    kaspa:['kas','blockdag'],
+    bonk:['meme coin'],
+    floki:['meme coin'],
+    usdc:['usd coin','stablecoin'],
+    dai:['stablecoin'],
+    monero:['xmr','privacy coin'],
+    zcash:['zec','privacy coin']
+  };
+
+  function baseLang(lang){
+    return lang === 'br' ? 'pt' : (lang || 'en');
+  }
+
+  function getAutocompleteLang(){
+    return baseLang(typeof currentLang !== 'undefined' ? currentLang : 'en');
+  }
+
+  function getAutocompleteText(){
+    var lang = getAutocompleteLang();
+    return autocompleteText[lang] || autocompleteText.en;
+  }
+
+  function getCoinSearchStore(){
+    return window.__coinSearchStore || {};
+  }
+
+  function getRepresentativeCoins(){
+    var store = getCoinSearchStore();
+    if(Array.isArray(store.repCoins)) return store.repCoins;
+    if(Array.isArray(window.repCoins)) return window.repCoins;
+    return [];
+  }
+
+  function getCoinEducationStore(){
+    var store = getCoinSearchStore();
+    if(store.coinEducation && typeof store.coinEducation === 'object') return store.coinEducation;
+    if(window.coinEducation && typeof window.coinEducation === 'object') return window.coinEducation;
+    return null;
+  }
+
+  function getRepresentativeListLabel(){
+    var lang = (typeof currentLang !== 'undefined') ? currentLang : 'en';
+    var store = getCoinEducationStore();
+    return (store && store[lang] && store[lang]._labels && store[lang]._labels.coinResults)
+      || (store && store.en && store.en._labels && store.en._labels.coinResults)
+      || 'Coin Results';
+  }
+
+  function getMoreCoinsListLabel(){
+    var lang = getAutocompleteLang();
+    var labels = {
+      en:'More Coins',
+      ko:'기타 코인',
+      th:'คอยน์เพิ่มเติม',
+      id:'Koin Lainnya',
+      pt:'Mais moedas',
+      tr:'Diğer coinler',
+      ar:'عملات أخرى',
+      ha:'Sauran kudaden dijital',
+      vi:'Các coin khác',
+      es:'Otras monedas'
+    };
+    return labels[lang] || labels.en;
+  }
+
+  function getRepresentativeCoinMetaLabel(){
+    var lang = getAutocompleteLang();
+    var labels = {
+      en:'Representative Coin',
+      ko:'대표 코인',
+      th:'คอยน์หลัก',
+      id:'Koin Utama',
+      pt:'Moeda principal',
+      tr:'Temsil coin',
+      ar:'عملة رئيسية',
+      ha:'Babban kudin dijital',
+      vi:'Coin đại diện',
+      es:'Moneda principal'
+    };
+    return labels[lang] || labels.en;
+  }
+
+  function getRepresentativeCompactLabel(item){
+    return getCoinCategoryLabel(item);
+  }
+
+  function getGeneralCompactLabel(item){
+    return getCoinCategoryLabel(item);
+  }
+
+  function normalizeAutocompleteText(value){
+    value = String(value || '').toLowerCase();
+    try {
+      value = value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    } catch(e){}
+    var charMap = {
+      'ɓ':'b','ɗ':'d','ƙ':'k','ł':'l','ø':'o','ß':'ss','æ':'ae','œ':'oe',
+      'ş':'s','ğ':'g','ı':'i','ç':'c','ñ':'n','đ':'d','þ':'th','ð':'d'
+    };
+    value = value.split('').map(function(ch){
+      return Object.prototype.hasOwnProperty.call(charMap, ch) ? charMap[ch] : ch;
+    }).join('');
+    return value.replace(/[_\-\/]+/g, ' ').replace(/['’`]+/g, '').replace(/\s+/g, ' ').trim();
+  }
+
+  function escapeHtml(value){
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function uniqueList(values){
+    var seen = {};
+    return (values || []).filter(function(value){
+      var key = normalizeAutocompleteText(value);
+      if(!key || seen[key]) return false;
+      seen[key] = true;
+      return true;
+    });
+  }
+
+  function truncateText(value, maxLength){
+    var text = String(value || '').replace(/\s+/g, ' ').trim();
+    if(text.length <= maxLength) return text;
+    return text.slice(0, maxLength - 1).trim() + '…';
+  }
+
+  function isRepresentativeCoinItem(item){
+    var representativeCoins = getRepresentativeCoins();
+    return !!item && representativeCoins.indexOf(item.coinKey) !== -1;
+  }
+
+  function clearSelectedRepresentative(){
+    searchSelectionState.representativeKey = '';
+    searchSelectionState.representativeQuery = '';
+  }
+
+  function setSelectedRepresentative(item, queryValue){
+    if(item && isRepresentativeCoinItem(item)){
+      searchSelectionState.representativeKey = item.coinKey;
+      searchSelectionState.representativeQuery = normalizeAutocompleteText(queryValue || item.name || item.symbol || item.coinKey);
+      return;
+    }
+    clearSelectedRepresentative();
+  }
+
+  function getSelectedRepresentativeItem(items, query){
+    var normalizedQuery = normalizeAutocompleteText(query);
+    if(!searchSelectionState.representativeKey || !normalizedQuery || normalizedQuery !== searchSelectionState.representativeQuery){
+      return null;
+    }
+    var list = items || [];
+    for(var i = 0; i < list.length; i++){
+      if(list[i] && list[i].coinKey === searchSelectionState.representativeKey && isRepresentativeCoinItem(list[i])){
+        return list[i];
+      }
+    }
+    return null;
+  }
+
+  function getCoinGeckoRankText(rank){
+    rank = parseInt(rank, 10);
+    return rank > 0 ? ('CoinGecko · Rank #' + rank) : 'CoinGecko';
+  }
+
+  function createCoinGeckoItem(raw){
+    if(!raw || !raw.id) return null;
+    return {
+      type: 'coin-light',
+      coinKey: raw.id,
+      name: raw.name || raw.id,
+      symbol: String(raw.symbol || '').toUpperCase(),
+      category: 'coin',
+      desc: getCoinGeckoRankText(raw.market_cap_rank),
+      labels: null,
+      geckoSource: 'coingecko',
+      geckoRank: parseInt(raw.market_cap_rank, 10) || 999999,
+      geckoThumb: raw.thumb || '',
+      geckoLarge: raw.large || '',
+      searchText: [
+        raw.id,
+        raw.api_symbol,
+        raw.name,
+        raw.symbol,
+        getCoinGeckoRankText(raw.market_cap_rank)
+      ].filter(Boolean).join(' ').toLowerCase()
+    };
+  }
+
+  function getCoinGeckoCachedItems(query){
+    var normalizedQuery = normalizeAutocompleteText(query);
+    return normalizedQuery && Array.isArray(coinGeckoState.cache[normalizedQuery])
+      ? coinGeckoState.cache[normalizedQuery].slice()
+      : [];
+  }
+
+  function fetchCoinGeckoCoins(query){
+    var normalizedQuery = normalizeAutocompleteText(query);
+    if(!normalizedQuery) return Promise.resolve([]);
+    if(Array.isArray(coinGeckoState.cache[normalizedQuery])) return Promise.resolve(coinGeckoState.cache[normalizedQuery]);
+    if(coinGeckoState.inflight[normalizedQuery]) return coinGeckoState.inflight[normalizedQuery];
+
+    var url = 'https://api.coingecko.com/api/v3/search?query=' + encodeURIComponent(query);
+    coinGeckoState.inflight[normalizedQuery] = fetch(url, { cache:'no-store' })
+      .then(function(res){
+        if(!res.ok) throw new Error('CoinGecko search failed');
+        return res.json();
+      })
+      .then(function(data){
+        var items = ((data && Array.isArray(data.coins)) ? data.coins : [])
+          .map(createCoinGeckoItem)
+          .filter(Boolean)
+          .slice(0, AUTOCOMPLETE_LIMIT);
+        coinGeckoState.cache[normalizedQuery] = items;
+        delete coinGeckoState.inflight[normalizedQuery];
+
+        var input = document.getElementById('searchInput');
+        if(input && normalizeAutocompleteText(input.value) === normalizedQuery){
+          renderAutocomplete(input.value);
+          input.dispatchEvent(new Event('input', { bubbles:true }));
+        }
+        return items;
+      })
+      .catch(function(){
+        coinGeckoState.cache[normalizedQuery] = [];
+        delete coinGeckoState.inflight[normalizedQuery];
+        return [];
+      });
+
+    return coinGeckoState.inflight[normalizedQuery];
+  }
+
+  function ensureAutocompleteStyles(){
+    if(document.getElementById('searchAutocompleteStyles')) return;
+    var style = document.createElement('style');
+    style.id = 'searchAutocompleteStyles';
+    style.textContent =
+      '.search-autocomplete{display:none;padding:8px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(255,253,250,.96),rgba(246,244,239,.96));max-height:min(42vh,320px);overflow-y:auto}' +
+      '.search-autocomplete.open{display:block}' +
+      '.search-autocomplete-item{display:block;width:100%;padding:10px 12px;margin:0 0 6px;border:1px solid transparent;border-radius:12px;background:#fff;text-align:left;cursor:pointer;transition:background .12s,border-color .12s,transform .12s}' +
+      '.search-autocomplete-item.is-compact{padding:9px 11px}' +
+      '.search-autocomplete-item:last-child{margin-bottom:0}' +
+      '.search-autocomplete-item:hover,.search-autocomplete-item.is-active{background:var(--sidebar);border-color:var(--line);transform:translateY(-1px)}' +
+      '.search-autocomplete-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}' +
+      '.search-autocomplete-name-row{display:flex;align-items:center;justify-content:space-between;gap:10px}' +
+      '.search-autocomplete-name{font-size:.88rem;font-weight:700;color:var(--text)}' +
+      '.search-autocomplete-meta{font-size:.74rem;color:var(--text-3);margin-top:2px}' +
+      '.search-autocomplete-tag{flex-shrink:0;font-size:.72rem;font-family:"IBM Plex Mono",monospace;padding:4px 8px;border-radius:999px;background:var(--gold-bg);color:var(--gold);border:1px solid var(--line)}' +
+      '.search-autocomplete-desc{font-size:.78rem;color:var(--text-2);line-height:1.55;margin-top:6px}' +
+      '.search-autocomplete-compact-desc{font-size:.76rem;color:var(--text-2);line-height:1.45;margin-top:4px}' +
+      '.search-autocomplete-section-label{padding:4px 6px 8px;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}' +
+      '.search-autocomplete-item.is-representative{border-color:rgba(24,42,69,.08)}' +
+      '.search-autocomplete-item.is-representative .search-autocomplete-meta{margin-top:4px}' +
+      '.search-autocomplete-item.is-representative .search-autocomplete-tag{display:none}' +
+      '.search-autocomplete-empty{padding:16px 12px;text-align:center;color:var(--text-3);font-size:.84rem}' +
+      '.search-autocomplete-target{box-shadow:0 0 0 3px rgba(152,118,47,.22)!important;background:rgba(246,237,216,.55)!important;transition:box-shadow .2s ease,background-color .2s ease}' +
+      '@media (max-width:640px){.search-autocomplete{padding:6px;max-height:min(40vh,260px)}.search-autocomplete-item{padding:10px}.search-autocomplete-top,.search-autocomplete-name-row{gap:10px}.search-autocomplete-name{font-size:.84rem}.search-autocomplete-meta{font-size:.72rem}.search-autocomplete-desc,.search-autocomplete-compact-desc{font-size:.76rem}}';
+    document.head.appendChild(style);
+  }
+
+  function ensureAutocompleteDom(){
+    ensureAutocompleteStyles();
+    var searchBox = document.querySelector('#searchOverlay .search-box');
+    var inputWrap = searchBox ? searchBox.querySelector('.search-input-wrap') : null;
+    if(!searchBox || !inputWrap) return null;
+    var dropdown = document.getElementById('searchAutocomplete');
+    if(!dropdown){
+      dropdown = document.createElement('div');
+      dropdown.id = 'searchAutocomplete';
+      dropdown.className = 'search-autocomplete';
+      dropdown.setAttribute('role', 'listbox');
+    }
+    if(dropdown.parentNode !== searchBox || dropdown.previousElementSibling !== inputWrap){
+      searchBox.insertBefore(dropdown, inputWrap.nextSibling);
+    }
+    return dropdown;
+  }
+
+  function hideAutocomplete(){
+    var dropdown = document.getElementById('searchAutocomplete');
+    autocompleteState.activeIndex = -1;
+    autocompleteState.items = [];
+    if(dropdown){
+      dropdown.classList.remove('open');
+      dropdown.innerHTML = '';
+    }
+  }
+
+  function setAutocompleteActive(index){
+    var dropdown = document.getElementById('searchAutocomplete');
+    if(!dropdown || !autocompleteState.items.length) return;
+    if(index < 0) index = 0;
+    if(index >= autocompleteState.items.length) index = autocompleteState.items.length - 1;
+    autocompleteState.activeIndex = index;
+    dropdown.querySelectorAll('.search-autocomplete-item').forEach(function(button, buttonIndex){
+      var isActive = buttonIndex === index;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      if(isActive && typeof button.scrollIntoView === 'function'){
+        button.scrollIntoView({block:'nearest'});
+      }
+    });
+  }
+
+  function getCoinCategoryLabel(item){
+    var text = getAutocompleteText();
+    if(item.category && text[item.category]) return text[item.category];
+    return text.coin;
+  }
+
+  function getAutocompleteDedupeKey(item){
+    var symbol = normalizeAutocompleteText(item && item.symbol);
+    var name = normalizeAutocompleteText(item && item.name);
+    var key = normalizeAutocompleteText(item && item.coinKey);
+    if(symbol && name) return symbol + '|' + name;
+    return symbol || name || key;
+  }
+
+  function getAutocompleteMatchTier(item, normalizedQuery){
+    var symbol = normalizeAutocompleteText(item && item.symbol);
+    var name = normalizeAutocompleteText(item && item.name);
+    var key = normalizeAutocompleteText(item && item.coinKey);
+    if(symbol === normalizedQuery) return 0;
+    if(name === normalizedQuery || key === normalizedQuery) return 1;
+    if(symbol.indexOf(normalizedQuery) === 0) return 2;
+    if(name.indexOf(normalizedQuery) === 0 || key.indexOf(normalizedQuery) === 0) return 3;
+    return 4;
+  }
+
+  function compareRepresentativeAutocomplete(a, b, normalizedQuery){
+    var tierDiff = getAutocompleteMatchTier(a, normalizedQuery) - getAutocompleteMatchTier(b, normalizedQuery);
+    if(tierDiff !== 0) return tierDiff;
+    var repOrder = {};
+    getRepresentativeCoins().forEach(function(key, idx){ repOrder[key] = idx; });
+    var aOrder = Object.prototype.hasOwnProperty.call(repOrder, a.coinKey) ? repOrder[a.coinKey] : 999;
+    var bOrder = Object.prototype.hasOwnProperty.call(repOrder, b.coinKey) ? repOrder[b.coinKey] : 999;
+    if(aOrder !== bOrder) return aOrder - bOrder;
+    return String(a.name || '').localeCompare(String(b.name || ''));
+  }
+
+  function compareGeneralAutocomplete(a, b, normalizedQuery){
+    var tierDiff = getAutocompleteMatchTier(a, normalizedQuery) - getAutocompleteMatchTier(b, normalizedQuery);
+    if(tierDiff !== 0) return tierDiff;
+    if(b.__autoScore !== a.__autoScore) return b.__autoScore - a.__autoScore;
+    if((a.geckoRank || 999999) !== (b.geckoRank || 999999)) return (a.geckoRank || 999999) - (b.geckoRank || 999999);
+    return String(a.name || '').localeCompare(String(b.name || ''));
+  }
+
+  function buildCoinKeywordBlob(item){
+    if(item.__autoKeywordBlob) return item.__autoKeywordBlob;
+    var coin = item.coin || {};
+    var isRepresentative = isRepresentativeCoinItem(item);
+    var parts = [
+      item.name,
+      item.symbol,
+      item.coinKey,
+      item.category,
+      item.desc,
+      item.symbol ? String(item.symbol).replace(/\//g, ' ') : ''
+    ];
+
+    if(!isRepresentative){
+      parts = parts.concat([
+        coin.overview,
+        coin.role,
+        coin.strengths,
+        coin.limitations,
+        coin.beginnerNote
+      ]);
+    }
+
+    if(item.coinKey && String(item.coinKey).indexOf('-') !== -1){
+      parts.push(String(item.coinKey).replace(/-/g, ' '));
+    }
+
+    if(!isRepresentative){
+      ['relatedLessons','relatedGlossary','relatedFaq','relatedSources','relatedSafety'].forEach(function(key){
+        if(Array.isArray(coin[key])) parts.push(coin[key].join(' '));
+      });
+    }
+
+    if(item.category && categoryKeywords[item.category]){
+      parts = parts.concat(categoryKeywords[item.category]);
+    }
+    if(item.coinKey && aliasKeywords[item.coinKey]){
+      parts = parts.concat(aliasKeywords[item.coinKey]);
+    }
+
+    item.__autoKeywordBlob = uniqueList(parts).join(' ');
+    item.__autoNormalizedBlob = normalizeAutocompleteText(item.__autoKeywordBlob);
+    return item.__autoKeywordBlob;
+  }
+
+  function scoreCoinItem(item, query){
+    var normalizedQuery = normalizeAutocompleteText(query);
+    if(!normalizedQuery) return isRepresentativeCoinItem(item) ? 2 : 1;
+    var name = normalizeAutocompleteText(item.name);
+    var symbol = normalizeAutocompleteText(item.symbol);
+    var key = normalizeAutocompleteText(item.coinKey);
+    var blob = item.__autoNormalizedBlob || normalizeAutocompleteText(buildCoinKeywordBlob(item));
+    var score = 0;
+
+    if(symbol === normalizedQuery) score += 240;
+    if(name === normalizedQuery || key === normalizedQuery) score += 210;
+    if(symbol.indexOf(normalizedQuery) === 0) score += 180;
+    if(name.indexOf(normalizedQuery) === 0) score += 160;
+    if(key.indexOf(normalizedQuery) === 0) score += 145;
+    if(blob.indexOf(normalizedQuery) === 0) score += 120;
+    if(symbol.indexOf(normalizedQuery) !== -1) score += 95;
+    if(name.indexOf(normalizedQuery) !== -1) score += 80;
+    if(key.indexOf(normalizedQuery) !== -1) score += 65;
+    if(blob.indexOf(' ' + normalizedQuery) !== -1) score += 55;
+    if(blob.indexOf(normalizedQuery) !== -1) score += 35;
+    if(isRepresentativeCoinItem(item)) score += 8;
+    score += Math.max(0, 12 - Math.min(String(item.name || '').length, 12));
+    return score;
+  }
+
+  var __autocompleteOrigGetCoinSearchItems = typeof window.getCoinSearchItems === 'function'
+    ? window.getCoinSearchItems
+    : (typeof getCoinSearchItems === 'function' ? getCoinSearchItems : function(){ return []; });
+
+  window.getCoinSearchItems = getCoinSearchItems = function(){
+    var query = normalizeAutocompleteText((document.getElementById('searchInput') || {}).value || '');
+    var seen = {};
+    var baseItems = [];
+    var geckoItems = getCoinGeckoCachedItems(query);
+    try {
+      baseItems = __autocompleteOrigGetCoinSearchItems() || [];
+    } catch(autocompleteCoinError) {
+      baseItems = [];
+    }
+    return baseItems.concat(geckoItems).reduce(function(list, item){
+      if(!item) return list;
+      var dedupeKey = getAutocompleteDedupeKey(item);
+      if(!dedupeKey || seen[dedupeKey]) return list;
+      seen[dedupeKey] = true;
+      var copy = Object.assign({}, item);
+      buildCoinKeywordBlob(copy);
+      copy.searchText = String(copy.searchText || '') + ' ' + copy.__autoKeywordBlob + ' ' + copy.__autoNormalizedBlob;
+      copy.__autoScore = scoreCoinItem(copy, query);
+      list.push(copy);
+      return list;
+    }, []).sort(function(a, b){
+      if(b.__autoScore !== a.__autoScore) return b.__autoScore - a.__autoScore;
+      if((a.geckoRank || 999999) !== (b.geckoRank || 999999)) return (a.geckoRank || 999999) - (b.geckoRank || 999999);
+      if(isRepresentativeCoinItem(a) !== isRepresentativeCoinItem(b)) return isRepresentativeCoinItem(a) ? -1 : 1;
+      return String(a.name || '').localeCompare(String(b.name || ''));
+    });
+  };
+
+  function getAutocompleteCoinMatches(query){
+    var normalizedQuery = normalizeAutocompleteText(query);
+    var seen = {};
+    var filtered = (window.getCoinSearchItems() || []).filter(function(item){
+      var normalizedBlob = item.__autoNormalizedBlob || normalizeAutocompleteText(item.searchText || '');
+      var name = normalizeAutocompleteText(item.name);
+      var symbol = normalizeAutocompleteText(item.symbol);
+      var key = normalizeAutocompleteText(item.coinKey);
+      var matched = symbol.indexOf(normalizedQuery) === 0 ||
+        name.indexOf(normalizedQuery) === 0 ||
+        key.indexOf(normalizedQuery) === 0 ||
+        normalizedBlob.indexOf(normalizedQuery) !== -1;
+      if(!matched) return false;
+      var dedupeKey = getAutocompleteDedupeKey(item);
+      if(seen[dedupeKey]) return false;
+      seen[dedupeKey] = true;
+      item.__autoScore = scoreCoinItem(item, normalizedQuery);
+      return true;
+    });
+    var representativeMatches = filtered
+      .filter(function(item){ return isRepresentativeCoinItem(item); })
+      .sort(function(a, b){ return compareRepresentativeAutocomplete(a, b, normalizedQuery); });
+    var generalMatches = filtered
+      .filter(function(item){ return !isRepresentativeCoinItem(item); })
+      .sort(function(a, b){ return compareGeneralAutocomplete(a, b, normalizedQuery); })
+      .slice(0, 6);
+    return representativeMatches.concat(generalMatches).slice(0, AUTOCOMPLETE_LIMIT + 6);
+  }
+
+  function getPrioritizedCoinSearchResults(query){
+    var normalizedQuery = normalizeAutocompleteText(query);
+    var representativeCoins = getRepresentativeCoins();
+    if(!normalizedQuery){
+      return { representative: [], general: [], all: [] };
+    }
+    var matches = getAutocompleteCoinMatches(normalizedQuery);
+    var representativeMatches = matches
+      .filter(function(item){ return isRepresentativeCoinItem(item); })
+      .slice(0, representativeCoins.length || AUTOCOMPLETE_LIMIT);
+    var generalMatches = matches
+      .filter(function(item){ return !isRepresentativeCoinItem(item); })
+      .slice(0, 6);
+    return {
+      representative: representativeMatches,
+      general: generalMatches,
+      all: representativeMatches.concat(generalMatches)
+    };
+  }
+  window.getPrioritizedCoinSearchResults = getPrioritizedCoinSearchResults;
+  window.getSelectedRepresentativeItem = getSelectedRepresentativeItem;
+  window.clearSelectedRepresentative = clearSelectedRepresentative;
+
+  function getAutocompleteDescription(item){
+    if(isRepresentativeCoinItem(item)){
+      return getRepresentativeCompactLabel(item);
+    }
+    if(item.coin){
+      return item.coin.overview || item.coin.role || item.coin.beginnerNote || '';
+    }
+    return item.desc || '';
+  }
+
+  function renderRepresentativeAutocompleteButton(item, index){
+    var meta = escapeHtml(item.symbol || '') + ' · ' + escapeHtml(getRepresentativeCoinMetaLabel());
+    var shortDesc = truncateText(getRepresentativeCompactLabel(item), 38);
+    return (
+      '<button type="button" class="search-autocomplete-item is-compact is-representative' + (index === 0 ? ' is-active' : '') + '" data-ac-index="' + index + '" role="option" aria-selected="' + (index === 0 ? 'true' : 'false') + '">' +
+        '<div class="search-autocomplete-name-row">' +
+          '<div class="search-autocomplete-name">' + escapeHtml(item.name) + '</div>' +
+        '</div>' +
+        '<div class="search-autocomplete-meta">' + meta + '</div>' +
+        (shortDesc ? '<div class="search-autocomplete-compact-desc">' + escapeHtml(shortDesc) + '</div>' : '') +
+      '</button>'
+    );
+  }
+
+  function renderGeneralAutocompleteButton(item, index){
+    var shortDesc = truncateText(getAutocompleteDescription(item), 68);
+    var meta = escapeHtml(item.symbol || '') + ' · ' + escapeHtml(getGeneralCompactLabel(item));
+    return (
+      '<button type="button" class="search-autocomplete-item is-compact is-general' + (index === 0 ? ' is-active' : '') + '" data-ac-index="' + index + '" role="option" aria-selected="' + (index === 0 ? 'true' : 'false') + '">' +
+        '<div class="search-autocomplete-name-row">' +
+          '<div class="search-autocomplete-name">' + escapeHtml(item.name) + '</div>' +
+          '<div class="search-autocomplete-tag">' + escapeHtml(item.symbol || '') + '</div>' +
+        '</div>' +
+        '<div class="search-autocomplete-meta">' + meta + '</div>' +
+        (shortDesc ? '<div class="search-autocomplete-compact-desc">' + escapeHtml(shortDesc) + '</div>' : '') +
+      '</button>'
+    );
+  }
+
+  function renderAutocompleteButton(item, index){
+    var isRepresentative = isRepresentativeCoinItem(item);
+    return isRepresentative
+      ? renderRepresentativeAutocompleteButton(item, index)
+      : renderGeneralAutocompleteButton(item, index);
+  }
+
+  function renderAutocomplete(query){
+    var dropdown = ensureAutocompleteDom();
+    if(!dropdown) return;
+    var normalizedQuery = normalizeAutocompleteText(query);
+    if(!normalizedQuery){
+      hideAutocomplete();
+      return;
+    }
+
+    fetchCoinGeckoCoins(query);
+
+    var prioritizedResults = getPrioritizedCoinSearchResults(normalizedQuery);
+    var representativeMatches = prioritizedResults.representative;
+    var generalMatches = prioritizedResults.general;
+    autocompleteState.items = representativeMatches.concat(generalMatches);
+    autocompleteState.activeIndex = autocompleteState.items.length ? 0 : -1;
+
+    if(!autocompleteState.items.length){
+      dropdown.innerHTML = '<div class="search-autocomplete-empty">' + escapeHtml(getAutocompleteText().noResults) + '</div>';
+      dropdown.classList.add('open');
+      return;
+    }
+
+    var htmlParts = [];
+    if(representativeMatches.length){
+      htmlParts.push('<div class="search-autocomplete-section-label">' + escapeHtml(getRepresentativeListLabel()) + '</div>');
+      representativeMatches.forEach(function(item, index){
+        htmlParts.push(renderAutocompleteButton(item, index));
+      });
+    }
+    if(generalMatches.length){
+      htmlParts.push('<div class="search-autocomplete-section-label">' + escapeHtml(getMoreCoinsListLabel()) + '</div>');
+      generalMatches.forEach(function(item, index){
+        htmlParts.push(renderAutocompleteButton(item, representativeMatches.length + index));
+      });
+    }
+    dropdown.innerHTML = htmlParts.join('');
+
+    dropdown.classList.add('open');
+    dropdown.querySelectorAll('.search-autocomplete-item').forEach(function(button){
+      button.addEventListener('mousedown', function(e){
+        e.preventDefault();
+      });
+      button.addEventListener('click', function(){
+        selectAutocompleteIndex(parseInt(this.dataset.acIndex, 10));
+      });
+    });
+  }
+
+  function highlightFirstCoinResult(){
+    var container = document.getElementById('searchResults');
+    if(!container) return;
+    var target = container.querySelector('.coin-card, .coin-light');
+    if(!target) return;
+    target.classList.add('search-autocomplete-target');
+    if(typeof target.scrollIntoView === 'function'){
+      target.scrollIntoView({block:'nearest', behavior:'smooth'});
+    }
+    setTimeout(function(){
+      target.classList.remove('search-autocomplete-target');
+    }, 1400);
+  }
+
+  function getSelectedQueryValue(item, currentValue){
+    var query = normalizeAutocompleteText(currentValue);
+    var symbol = normalizeAutocompleteText(item.symbol);
+    if(query && symbol && symbol.indexOf(query) === 0){
+      return item.symbol;
+    }
+    return item.name || item.symbol || '';
+  }
+
+  function selectAutocompleteIndex(index){
+    var input = document.getElementById('searchInput');
+    var item = autocompleteState.items[index];
+    if(!input || !item) return;
+    var selectedValue = getSelectedQueryValue(item, input.value);
+    setSelectedRepresentative(item, selectedValue);
+    autocompleteState.suppressNextRender = true;
+    input.value = selectedValue;
+    hideAutocomplete();
+    input.focus();
+    input.dispatchEvent(new Event('input', { bubbles:true }));
+    setTimeout(highlightFirstCoinResult, 80);
+  }
+
+  function bindAutocompleteInput(){
+    var input = document.getElementById('searchInput');
+    if(!input) return;
+    ensureAutocompleteDom();
+    if(input.__coinAutocompleteBound) return;
+    input.__coinAutocompleteBound = true;
+
+    input.addEventListener('input', function(){
+      if(autocompleteState.suppressNextRender){
+        autocompleteState.suppressNextRender = false;
+        hideAutocomplete();
+        return;
+      }
+      clearSelectedRepresentative();
+      renderAutocomplete(this.value);
+    });
+
+    input.addEventListener('keydown', function(e){
+      var dropdown = document.getElementById('searchAutocomplete');
+      var isOpen = !!(dropdown && dropdown.classList.contains('open'));
+      if((e.key === 'ArrowDown' || e.key === 'ArrowUp') && !isOpen && this.value.trim()){
+        renderAutocomplete(this.value);
+        dropdown = document.getElementById('searchAutocomplete');
+        isOpen = !!(dropdown && dropdown.classList.contains('open'));
+      }
+      if(!isOpen) return;
+      if(e.key === 'ArrowDown'){
+        e.preventDefault();
+        setAutocompleteActive(autocompleteState.activeIndex + 1);
+        return;
+      }
+      if(e.key === 'ArrowUp'){
+        e.preventDefault();
+        setAutocompleteActive(autocompleteState.activeIndex - 1);
+        return;
+      }
+      if(e.key === 'Enter' && autocompleteState.items.length){
+        e.preventDefault();
+        selectAutocompleteIndex(autocompleteState.activeIndex >= 0 ? autocompleteState.activeIndex : 0);
+        return;
+      }
+      if(e.key === 'Escape'){
+        hideAutocomplete();
+      }
+    });
+
+    input.addEventListener('click', function(){
+      if(this.value.trim()){
+        renderAutocomplete(this.value);
+      }
+    });
+  }
+
+  if(!document.__coinAutocompleteClickBound){
+    document.__coinAutocompleteClickBound = true;
+    document.addEventListener('click', function(e){
+      if(e.target.closest('#searchInput') || e.target.closest('#searchAutocomplete')){
+        return;
+      }
+      hideAutocomplete();
+    });
+  }
+
+  var __autocompleteOpenSearch = window.openSearch;
+  if(typeof __autocompleteOpenSearch === 'function' && !__autocompleteOpenSearch.__coinAutocompleteWrapped){
+    var wrappedOpenSearch = function(){
+      __autocompleteOpenSearch();
+      clearSelectedRepresentative();
+      bindAutocompleteInput();
+      hideAutocomplete();
+    };
+    wrappedOpenSearch.__coinAutocompleteWrapped = true;
+    window.openSearch = wrappedOpenSearch;
+  }
+
+  var __autocompleteCloseSearch = window.closeSearch;
+  if(typeof __autocompleteCloseSearch === 'function' && !__autocompleteCloseSearch.__coinAutocompleteWrapped){
+    var wrappedCloseSearch = function(){
+      hideAutocomplete();
+      clearSelectedRepresentative();
+      __autocompleteCloseSearch();
+    };
+    wrappedCloseSearch.__coinAutocompleteWrapped = true;
+    window.closeSearch = wrappedCloseSearch;
+  }
+
+  var __autocompleteSetLang = window.setLang;
+  if(typeof __autocompleteSetLang === 'function' && !__autocompleteSetLang.__coinAutocompleteWrapped){
+    var wrappedSetLang = function(lang){
+      __autocompleteSetLang(lang);
+      bindAutocompleteInput();
+      var input = document.getElementById('searchInput');
+      if(input && input.value.trim()){
+        renderAutocomplete(input.value);
+      } else {
+        hideAutocomplete();
+      }
+    };
+    wrappedSetLang.__coinAutocompleteWrapped = true;
+    window.setLang = wrappedSetLang;
+  }
+
+  bindAutocompleteInput();
+  hideAutocomplete();
+})();
+</script>
+
+<script id="search-ui-unified-final">
+(function(){
+  var MAX_REPRESENTATIVES = 8;
+  var MAX_GENERAL = 6;
+  var MAX_INTERNAL = 10;
+  var searchState = {
+    activeIndex: -1,
+    items: [],
+    geckoCache: {},
+    geckoInflight: {}
+  };
+
+  function ensureUnifiedSearchStyles(){
+    if(document.getElementById('searchUnifiedFinalStyles')) return;
+    var style = document.createElement('style');
+    style.id = 'searchUnifiedFinalStyles';
+    style.textContent =
+      '#searchAutocompleteUnified,.search-autocomplete{display:none !important}' +
+      '#searchOverlay #searchResults{display:block !important;max-height:min(62vh,560px);overflow-y:auto;overflow-x:hidden;padding:12px 14px 16px;border-top:1px solid var(--line);background:linear-gradient(180deg,rgba(255,253,250,.98),rgba(246,244,239,.98));box-sizing:border-box}' +
+      '#searchOverlay #searchResults:empty::after{content:attr(data-empty);display:block;padding:20px 8px;text-align:center;color:var(--text-3);font-size:.88rem}' +
+      '#searchOverlay #searchResults .search-result-empty{padding:20px 8px;text-align:center;color:var(--text-3);font-size:.88rem}' +
+      '#searchOverlay #searchResults .search-section-divider{padding:6px 2px 10px;font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin:0}' +
+      '#searchOverlay #searchResults .search-section-divider + .coin-card{margin-top:0}' +
+      '#searchOverlay #searchResults .search-result-item{display:flex;width:100%;align-items:flex-start;gap:12px;padding:12px 10px;border-radius:12px;border:1px solid transparent;background:transparent;text-align:left;cursor:pointer;box-sizing:border-box;transition:background .12s,border-color .12s,transform .12s}' +
+      '#searchOverlay #searchResults .search-result-item.search-result-button{appearance:none;-webkit-appearance:none;border:0;outline:none;font:inherit}' +
+      '#searchOverlay #searchResults .search-result-item:hover,#searchOverlay #searchResults .search-result-item.is-active{background:var(--sidebar);border-color:var(--line);transform:translateY(-1px)}' +
+      '#searchOverlay #searchResults .search-result-badge{flex-shrink:0;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-size:.66rem;font-weight:800;font-family:"IBM Plex Mono",monospace;color:#fff}' +
+      '#searchOverlay #searchResults .search-result-badge.coin{background:var(--navy-2);border-radius:50%}' +
+      '#searchOverlay #searchResults .search-result-badge.lesson{background:var(--navy)}' +
+      '#searchOverlay #searchResults .search-result-badge.glossary{background:var(--gold)}' +
+      '#searchOverlay #searchResults .search-result-badge.faq{background:var(--green)}' +
+      '#searchOverlay #searchResults .search-result-badge.source{background:var(--text-3)}' +
+      '#searchOverlay #searchResults .search-result-badge.safety{background:var(--red)}' +
+      '#searchOverlay #searchResults .search-result-badge.page{background:var(--navy-2)}' +
+      '#searchOverlay #searchResults .search-result-body{min-width:0;flex:1 1 auto}' +
+      '#searchOverlay #searchResults .search-result-title{font-size:.92rem;font-weight:700;color:var(--text);line-height:1.35;white-space:normal;overflow-wrap:anywhere;word-break:keep-all}' +
+      '#searchOverlay #searchResults .search-result-meta{font-size:.74rem;color:var(--text-3);margin-top:2px;line-height:1.4;white-space:normal;overflow-wrap:anywhere}' +
+      '#searchOverlay #searchResults .search-result-desc{font-size:.79rem;color:var(--text-2);margin-top:4px;line-height:1.5;white-space:normal;overflow-wrap:anywhere}' +
+      '#searchOverlay #searchResults .coin-card{margin:0;border-radius:16px}' +
+      '@media (max-width:640px){#searchOverlay #searchResults{padding:10px 12px 14px;max-height:min(64vh,560px)}#searchOverlay #searchResults .search-result-item{padding:11px 8px;gap:10px}#searchOverlay #searchResults .search-result-badge{width:28px;height:28px;font-size:.62rem}#searchOverlay #searchResults .search-result-title{font-size:.88rem}#searchOverlay #searchResults .search-result-meta{font-size:.71rem}#searchOverlay #searchResults .search-result-desc{font-size:.77rem}}';
+    document.head.appendChild(style);
+  }
+
+  function baseLang(lang){
+    return lang === 'br' ? 'pt' : (lang || 'en');
+  }
+
+  function normalizeText(value){
+    value = String(value || '').toLowerCase();
+    try {
+      value = value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    } catch(e){}
+    var charMap = {
+      'ɓ':'b','ɗ':'d','ƙ':'k','ł':'l','ø':'o','ß':'ss','æ':'ae','œ':'oe',
+      'ş':'s','ğ':'g','ı':'i','ç':'c','ñ':'n','đ':'d','þ':'th','ð':'d'
+    };
+    value = value.split('').map(function(ch){
+      return Object.prototype.hasOwnProperty.call(charMap, ch) ? charMap[ch] : ch;
+    }).join('');
+    return value.replace(/[_\-\/]+/g, ' ').replace(/['’`]+/g, '').replace(/\s+/g, ' ').trim();
+  }
+
+  function escapeHtml(value){
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function truncateText(value, maxLength){
+    var text = String(value || '').replace(/\s+/g, ' ').trim();
+    if(text.length <= maxLength) return text;
+    return text.slice(0, maxLength - 1).trim() + '…';
+  }
+
+  function getCurrentLang(){
+    return baseLang(typeof currentLang !== 'undefined' ? currentLang : 'en');
+  }
+
+  function getUiText(){
+    var lang = getCurrentLang();
+    var labels = {
+      en:{representative:'Representative Coin', coin:'Coin', repSection:'Representative Coins', generalSection:'More Coins', coinSection:'Coin Results', siteSection:'Site Results', noResults:'No matching coins', layer1:'Layer 1', stablecoin:'Stablecoin', defi:'DeFi', nft:'NFT', exchange:'Exchange'},
+      ko:{representative:'대표 코인', coin:'코인', repSection:'대표 코인', generalSection:'기타 코인', coinSection:'코인 결과', siteSection:'사이트 결과', noResults:'일치하는 코인이 없습니다', layer1:'레이어 1', stablecoin:'스테이블코인', defi:'디파이', nft:'NFT', exchange:'거래소'},
+      th:{representative:'คอยน์หลัก', coin:'คอยน์', repSection:'คอยน์หลัก', generalSection:'คอยน์เพิ่มเติม', coinSection:'ผลลัพธ์คอยน์', siteSection:'ผลลัพธ์ในไซต์', noResults:'ไม่พบคอยน์ที่ตรงกัน', layer1:'เลเยอร์ 1', stablecoin:'สเตเบิลคอยน์', defi:'DeFi', nft:'NFT', exchange:'เอ็กซ์เชนจ์'},
+      id:{representative:'Koin Utama', coin:'Koin', repSection:'Koin Utama', generalSection:'Koin Lainnya', coinSection:'Hasil Koin', siteSection:'Hasil Situs', noResults:'Tidak ada koin yang cocok', layer1:'Layer 1', stablecoin:'Stablecoin', defi:'DeFi', nft:'NFT', exchange:'Exchange'},
+      pt:{representative:'Moeda principal', coin:'Moeda', repSection:'Moedas principais', generalSection:'Mais moedas', coinSection:'Resultados de moedas', siteSection:'Resultados do site', noResults:'Nenhuma moeda correspondente', layer1:'Layer 1', stablecoin:'Stablecoin', defi:'DeFi', nft:'NFT', exchange:'Exchange'},
+      tr:{representative:'Temsil coin', coin:'Coin', repSection:'Temsil coinler', generalSection:'Diğer coinler', coinSection:'Coin Sonuçları', siteSection:'Site Sonuçları', noResults:'Eşleşen coin yok', layer1:'Katman 1', stablecoin:'Stablecoin', defi:'DeFi', nft:'NFT', exchange:'Borsa'},
+      ar:{representative:'عملة رئيسية', coin:'عملة', repSection:'العملات الرئيسية', generalSection:'عملات أخرى', coinSection:'نتائج العملات', siteSection:'نتائج الموقع', noResults:'لا توجد عملات مطابقة', layer1:'الطبقة الأولى', stablecoin:'عملة مستقرة', defi:'DeFi', nft:'NFT', exchange:'منصة تداول'},
+      ha:{representative:'Babban kudin dijital', coin:'Kudin dijital', repSection:'Manyan kudaden dijital', generalSection:'Sauran kudaden dijital', coinSection:'Sakamakon kudaden dijital', siteSection:'Sakamakon shafin', noResults:'Ba a sami kudin dijital da ya dace ba', layer1:'Layer 1', stablecoin:'Tsayayyen kudin dijital', defi:'Tsarin kudi marar tsakiya', nft:'NFT', exchange:'Dandalin musaya'},
+      vi:{representative:'Coin đại diện', coin:'Coin', repSection:'Coin đại diện', generalSection:'Các coin khác', coinSection:'Kết quả coin', siteSection:'Kết quả trong trang', noResults:'Không có đồng nào phù hợp', layer1:'Layer 1', stablecoin:'Stablecoin', defi:'DeFi', nft:'NFT', exchange:'Sàn giao dịch'},
+      es:{representative:'Moneda principal', coin:'Moneda', repSection:'Monedas principales', generalSection:'Otras monedas', coinSection:'Resultados de monedas', siteSection:'Resultados del sitio', noResults:'No hay monedas coincidentes', layer1:'Capa 1', stablecoin:'Stablecoin', defi:'DeFi', nft:'NFT', exchange:'Exchange'}
+    };
+    return labels[lang] || labels.en;
+  }
+
+  function getRepresentativeKeys(){
+    if(Array.isArray(window.repCoins)) return window.repCoins.slice();
+    if(window.__coinSearchStore && Array.isArray(window.__coinSearchStore.repCoins)) return window.__coinSearchStore.repCoins.slice();
+    return [];
+  }
+
+  function getOtherCoinMap(){
+    if(window.otherCoins && typeof window.otherCoins === 'object') return window.otherCoins;
+    if(window.__coinSearchStore && window.__coinSearchStore.otherCoins) return window.__coinSearchStore.otherCoins;
+    return {};
+  }
+
+  function getCoinEducationStore(){
+    if(window.coinEducation && typeof window.coinEducation === 'object') return window.coinEducation;
+    if(window.__coinSearchStore && window.__coinSearchStore.coinEducation) return window.__coinSearchStore.coinEducation;
+    return null;
+  }
+
+  function getCategoryLabel(category){
+    var text = getUiText();
+    if(category && text[category]) return text[category];
+    return text.coin;
+  }
+
+  function getSafeGeneralCoinDescription(name, symbol, desc){
+    var normalizedDesc = normalizeText(desc);
+    var genericCoinLabel = normalizeText(getUiText().coin);
+    if(!normalizedDesc || normalizedDesc === genericCoinLabel){
+      return getGeneralCoinFallbackDescription(name, symbol);
+    }
+    return String(desc || '').replace(/\s+/g, ' ').trim();
+  }
+
+  function getCompactIntro(text, fallback){
+    var raw = String(text || '').replace(/\s+/g, ' ').trim();
+    if(!raw) return String(fallback || '').trim();
+    var sentence = raw.split(/(?<=[.!?])\s+/)[0] || raw;
+    return truncateText(sentence, 68);
+  }
+
+  function getGeneralCoinFallbackDescription(name, symbol){
+    var lang = getCurrentLang();
+    var displayName = String(name || symbol || '').trim();
+    var fallbacks = {
+      en: displayName ? (displayName + ' is a related coin for this search.') : 'This is a related coin.',
+      ko: displayName ? (displayName + ' 관련 일반 코인입니다.') : '관련 일반 코인입니다.',
+      th: displayName ? (displayName + ' เป็นคอยน์ทั่วไปที่เกี่ยวข้องกับการค้นหานี้') : 'นี่คือคอยน์ทั่วไปที่เกี่ยวข้อง',
+      id: displayName ? (displayName + ' adalah koin umum yang terkait dengan pencarian ini.') : 'Ini adalah koin umum yang terkait.',
+      pt: displayName ? (displayName + ' e uma moeda relacionada a esta busca.') : 'Esta e uma moeda relacionada.',
+      tr: displayName ? (displayName + ' bu aramayla ilgili genel bir coindir.') : 'Bu ilgili bir coindir.',
+      ar: displayName ? (displayName + ' عملة مرتبطة بهذا البحث.') : 'هذه عملة مرتبطة بالبحث.',
+      ha: displayName ? (displayName + ' kudin dijital ne mai alaka da wannan binciken.') : 'Wannan kudin dijital ne mai alaka.',
+      vi: displayName ? (displayName + ' la coin lien quan den tim kiem nay.') : 'Day la coin lien quan.',
+      es: displayName ? (displayName + ' es una moneda relacionada con esta busqueda.') : 'Esta es una moneda relacionada.'
+    };
+    return fallbacks[lang] || fallbacks.en;
+  }
+
+  function buildRepresentativeItem(key){
+    var lang = getCurrentLang();
+    var store = getCoinEducationStore();
+    if(!store) return null;
+    var data = store[lang] || store.en || {};
+    var fallback = store.en || data;
+    var labels = data._labels || fallback._labels || {};
+    var coin = data[key] || fallback[key];
+    if(!coin) return null;
+    return {
+      type:'coin-representative',
+      coinKey:key,
+      name:coin.name,
+      symbol:coin.symbol,
+      category:coin.category || 'layer1',
+      coin:coin,
+      labels:labels,
+      desc:getCompactIntro(coin.overview, getCategoryLabel(coin.category || 'layer1')),
+      searchText:(typeof buildRepresentativeSearchText === 'function')
+        ? buildRepresentativeSearchText(key, coin)
+        : [coin.name, coin.symbol, key, coin.category].filter(Boolean).join(' ').toLowerCase()
+    };
+  }
+
+  function buildGeneralItem(key, info){
+    var lang = getCurrentLang();
+    var store = getCoinEducationStore();
+    var data = store ? (store[lang] || store.en || {}) : {};
+    var fallback = store ? (store.en || data) : {};
+    var otherData = data._other || {};
+    var otherFallback = fallback._other || {};
+    var displayName = key.split('-').map(function(word){
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    }).join(' ');
+    var desc = getSafeGeneralCoinDescription(displayName, info.symbol, otherData[key] || otherFallback[key] || '');
+    return {
+      type:'coin-light',
+      coinKey:key,
+      name:displayName,
+      symbol:info.symbol,
+      category:'coin',
+      desc:getCompactIntro(desc, getUiText().coin),
+      searchText:[displayName, info.symbol, key, desc].filter(Boolean).join(' ').toLowerCase()
+    };
+  }
+
+  function buildLocalCoinItems(){
+    var items = [];
+    getRepresentativeKeys().forEach(function(key){
+      var item = buildRepresentativeItem(key);
+      if(item) items.push(item);
+    });
+    Object.keys(getOtherCoinMap()).forEach(function(key){
+      items.push(buildGeneralItem(key, getOtherCoinMap()[key]));
+    });
+    return items;
+  }
+
+  function getAutocompleteDedupeKey(item){
+    return normalizeText(item.symbol) + '|' + normalizeText(item.name);
+  }
+
+  function createGeckoItem(raw){
+    if(!raw || !raw.id) return null;
+    var displayName = raw.name || raw.id;
+    return {
+      type:'coin-light',
+      coinKey:raw.id,
+      name:displayName,
+      symbol:String(raw.symbol || '').toUpperCase(),
+      category:'coin',
+      desc:getSafeGeneralCoinDescription(displayName, raw.symbol, raw.description || ''),
+      geckoRank:parseInt(raw.market_cap_rank, 10) || 999999,
+      searchText:[raw.id, raw.api_symbol, raw.name, raw.symbol].filter(Boolean).join(' ').toLowerCase()
+    };
+  }
+
+  function fetchGeckoItems(query){
+    var normalizedQuery = normalizeText(query);
+    if(!normalizedQuery) return Promise.resolve([]);
+    if(Array.isArray(searchState.geckoCache[normalizedQuery])) return Promise.resolve(searchState.geckoCache[normalizedQuery]);
+    if(searchState.geckoInflight[normalizedQuery]) return searchState.geckoInflight[normalizedQuery];
+    var url = 'https://api.coingecko.com/api/v3/search?query=' + encodeURIComponent(query);
+    searchState.geckoInflight[normalizedQuery] = fetch(url, { cache:'no-store' })
+      .then(function(res){
+        if(!res.ok) throw new Error('gecko-search-failed');
+        return res.json();
+      })
+      .then(function(data){
+        var items = ((data && Array.isArray(data.coins)) ? data.coins : [])
+          .map(createGeckoItem)
+          .filter(Boolean)
+          .slice(0, MAX_GENERAL);
+        searchState.geckoCache[normalizedQuery] = items;
+        delete searchState.geckoInflight[normalizedQuery];
+        var input = document.getElementById('searchInput');
+        if(input && normalizeText(input.value) === normalizedQuery){
+          renderSearchAutocompleteFinal(input.value);
+        }
+        return items;
+      })
+      .catch(function(){
+        searchState.geckoCache[normalizedQuery] = [];
+        delete searchState.geckoInflight[normalizedQuery];
+        return [];
+      });
+    return searchState.geckoInflight[normalizedQuery];
+  }
+
+  function getMatchTier(item, normalizedQuery){
+    var symbol = normalizeText(item.symbol);
+    var name = normalizeText(item.name);
+    var key = normalizeText(item.coinKey);
+    if(symbol === normalizedQuery) return 0;
+    if(name === normalizedQuery || key === normalizedQuery) return 1;
+    if(symbol.indexOf(normalizedQuery) === 0) return 2;
+    if(name.indexOf(normalizedQuery) === 0 || key.indexOf(normalizedQuery) === 0) return 3;
+    return 4;
+  }
+
+  function getSearchBlob(item){
+    return normalizeText(item.searchText || [item.name, item.symbol, item.coinKey, item.desc].filter(Boolean).join(' '));
+  }
+
+  function isMatchedItem(item, normalizedQuery){
+    if(!normalizedQuery) return false;
+    var symbol = normalizeText(item.symbol);
+    var name = normalizeText(item.name);
+    var key = normalizeText(item.coinKey);
+    var blob = getSearchBlob(item);
+    return symbol === normalizedQuery ||
+      name === normalizedQuery ||
+      key === normalizedQuery ||
+      symbol.indexOf(normalizedQuery) === 0 ||
+      name.indexOf(normalizedQuery) === 0 ||
+      key.indexOf(normalizedQuery) === 0 ||
+      blob.indexOf(normalizedQuery) !== -1;
+  }
+
+  function isRepresentativeItem(item){
+    return getRepresentativeKeys().indexOf(item.coinKey) !== -1;
+  }
+
+  function isShortSymbolQuery(normalizedQuery){
+    return /^[a-z0-9]{2,5}$/.test(normalizedQuery || '');
+  }
+
+  function hasRepresentativeExactSymbolMatch(items, normalizedQuery){
+    return (items || []).some(function(item){
+      return normalizeText(item && item.symbol) === normalizedQuery;
+    });
+  }
+
+  function compareRepresentativeItems(a, b, normalizedQuery){
+    var tierDiff = getMatchTier(a, normalizedQuery) - getMatchTier(b, normalizedQuery);
+    if(tierDiff !== 0) return tierDiff;
+    var repOrder = {};
+    getRepresentativeKeys().forEach(function(key, idx){ repOrder[key] = idx; });
+    var aOrder = Object.prototype.hasOwnProperty.call(repOrder, a.coinKey) ? repOrder[a.coinKey] : 999;
+    var bOrder = Object.prototype.hasOwnProperty.call(repOrder, b.coinKey) ? repOrder[b.coinKey] : 999;
+    if(aOrder !== bOrder) return aOrder - bOrder;
+    return String(a.name || '').localeCompare(String(b.name || ''));
+  }
+
+  function compareGeneralItems(a, b, normalizedQuery, demoteBroadMatches){
+    if(demoteBroadMatches){
+      var aTier = getMatchTier(a, normalizedQuery);
+      var bTier = getMatchTier(b, normalizedQuery);
+      var aBroadPenalty = aTier >= 4 ? 1 : 0;
+      var bBroadPenalty = bTier >= 4 ? 1 : 0;
+      if(aBroadPenalty !== bBroadPenalty) return aBroadPenalty - bBroadPenalty;
+    }
+    var tierDiff = getMatchTier(a, normalizedQuery) - getMatchTier(b, normalizedQuery);
+    if(tierDiff !== 0) return tierDiff;
+    if((a.geckoRank || 999999) !== (b.geckoRank || 999999)) return (a.geckoRank || 999999) - (b.geckoRank || 999999);
+    return String(a.name || '').localeCompare(String(b.name || ''));
+  }
+
+  function getCoinMatches(query){
+    var normalizedQuery = normalizeText(query);
+    var seen = {};
+    var items = buildLocalCoinItems().concat(searchState.geckoCache[normalizedQuery] || []);
+    var matches = items.filter(function(item){
+      if(!item || !isMatchedItem(item, normalizedQuery)) return false;
+      var key = getAutocompleteDedupeKey(item);
+      if(!key || seen[key]) return false;
+      seen[key] = true;
+      return true;
+    });
+    var representativeMatches = matches
+      .filter(function(item){ return isRepresentativeItem(item); })
+      .sort(function(a, b){ return compareRepresentativeItems(a, b, normalizedQuery); })
+      .slice(0, MAX_REPRESENTATIVES);
+    var shouldDemoteBroadGeneralMatches = isShortSymbolQuery(normalizedQuery) &&
+      hasRepresentativeExactSymbolMatch(representativeMatches, normalizedQuery);
+    var generalMatches = matches
+      .filter(function(item){ return !isRepresentativeItem(item); })
+      .sort(function(a, b){ return compareGeneralItems(a, b, normalizedQuery, shouldDemoteBroadGeneralMatches); })
+      .slice(0, MAX_GENERAL);
+    return {
+      representative: representativeMatches,
+      general: generalMatches,
+      all: representativeMatches.concat(generalMatches)
+    };
+  }
+
+  function getResultsContainer(){
+    ensureUnifiedSearchStyles();
+    var legacy = document.getElementById('searchAutocomplete');
+    if(legacy){
+      legacy.classList.remove('open');
+      legacy.innerHTML = '';
+      legacy.remove();
+    }
+    var unified = document.getElementById('searchAutocompleteUnified');
+    if(unified){
+      unified.classList.remove('open');
+      unified.innerHTML = '';
+      unified.style.display = 'none';
+    }
+    var results = document.getElementById('searchResults');
+    if(results){
+      results.hidden = false;
+      if(typeof window.getSearchEmptyText === 'function'){
+        results.setAttribute('data-empty', window.getSearchEmptyText());
+      }
+    }
+    return results;
+  }
+
+  function clearRenderedResults(){
+    searchState.activeIndex = -1;
+    searchState.items = [];
+    var container = document.getElementById('searchResults');
+    if(container){
+      container.innerHTML = '';
+      container.hidden = false;
+    }
+  }
+
+  function hideUnifiedAutocomplete(){
+    clearRenderedResults();
+  }
+
+  function setActiveIndex(index){
+    var container = document.getElementById('searchResults');
+    if(!container || !searchState.items.length) return;
+    if(index < 0) index = 0;
+    if(index >= searchState.items.length) index = searchState.items.length - 1;
+    searchState.activeIndex = index;
+    container.querySelectorAll('.search-result-item[data-search-index]').forEach(function(button){
+      var buttonIndex = parseInt(button.dataset.searchIndex, 10);
+      var isActive = buttonIndex === index;
+      button.classList.toggle('is-active', isActive);
+      if(isActive && typeof button.scrollIntoView === 'function'){
+        button.scrollIntoView({ block:'nearest' });
+      }
+    });
+  }
+
+  function getCompactCoinDescription(item){
+    if(item && !isRepresentativeItem(item)){
+      return getCompactIntro(
+        getSafeGeneralCoinDescription(item.name, item.symbol, item.desc),
+        getGeneralCoinFallbackDescription(item.name, item.symbol)
+      );
+    }
+    if(item && item.desc) return getCompactIntro(item.desc, getCategoryLabel(item.category));
+    if(item && item.coin){
+      return getCompactIntro(item.coin.overview || item.coin.role || item.coin.beginnerNote, getCategoryLabel(item.category));
+    }
+    return getCategoryLabel(item && item.category);
+  }
+
+  function renderCoinRow(item, index){
+    var isRepresentative = isRepresentativeItem(item);
+    var shortDesc = escapeHtml(truncateText(getCompactCoinDescription(item), 88));
+    var meta = escapeHtml(item.symbol || '') + ' · ' + escapeHtml(isRepresentative ? getUiText().representative : getUiText().coin);
+    var badge = escapeHtml((item.symbol || item.name || '').substring(0, 3).toUpperCase());
+    return (
+      '<button type="button" class="search-result-item search-result-button" data-search-index="' + index + '">' +
+        '<div class="search-result-badge coin">' + badge + '</div>' +
+        '<div class="search-result-body">' +
+          '<div class="search-result-title">' + escapeHtml(item.name || '') + '</div>' +
+          '<div class="search-result-meta">' + meta + '</div>' +
+          '<div class="search-result-desc">' + shortDesc + '</div>' +
+        '</div>' +
+      '</button>'
+    );
+  }
+
+  function renderInternalRow(item, index){
+    return (
+      '<button type="button" class="search-result-item search-result-button" data-search-index="' + index + '">' +
+        '<div class="search-result-badge ' + escapeHtml(item.type || 'source') + '">' + escapeHtml(item.badge || '') + '</div>' +
+        '<div class="search-result-body">' +
+          '<div class="search-result-title">' + escapeHtml(item.title || '') + '</div>' +
+          '<div class="search-result-desc">' + escapeHtml(item.desc || '') + '</div>' +
+        '</div>' +
+      '</button>'
+    );
+  }
+
+  function bindRenderedResults(container){
+    container.querySelectorAll('.search-result-item[data-search-index]').forEach(function(button){
+      button.addEventListener('mousedown', function(e){
+        e.preventDefault();
+      });
+      button.addEventListener('click', function(){
+        selectAutocompleteItem(parseInt(this.dataset.searchIndex, 10));
+      });
+    });
+    container.querySelectorAll('.coin-related-chip').forEach(function(chip){
+      chip.addEventListener('click', function(){
+        if(this.dataset.targetType && this.dataset.targetId){
+          if(typeof window.navigateRepresentativeChip === 'function') window.navigateRepresentativeChip(this);
+          return;
+        }
+        var page = this.dataset.page;
+        if(page && typeof showPage === 'function'){
+          if(page === 'lessons' && typeof showLesson === 'function') showLesson(0);
+          else showPage(page);
+          if(typeof closeSearch === 'function') closeSearch();
+        }
+      });
+    });
+  }
+
+  function renderSearchAutocompleteFinal(query){
+    var container = getResultsContainer();
+    if(!container) return;
+    var normalizedQuery = normalizeText(query);
+    if(!normalizedQuery){
+      clearRenderedResults();
+      return;
+    }
+    fetchGeckoItems(query);
+    var matches = getCoinMatches(query);
+    var internalResults = getInternalSearchResults(query).slice(0, MAX_INTERNAL);
+    var coinItems = [];
+    var internalItems = [];
+    var html = [];
+
+    matches.representative.forEach(function(item){
+      coinItems.push({ kind:'coin', item:item });
+    });
+    matches.general.forEach(function(item){
+      coinItems.push({ kind:'coin', item:item });
+    });
+    internalResults.forEach(function(item){
+      internalItems.push({ kind:'internal', item:item });
+    });
+
+    if(coinItems.length){
+      html.push('<div class="search-section-divider">' + escapeHtml(getUiText().coinSection) + '</div>');
+    }
+
+    coinItems.forEach(function(entry, index){
+      html.push(entry.kind === 'coin' ? renderCoinRow(entry.item, index) : renderInternalRow(entry.item, index));
+    });
+
+    if(internalItems.length){
+      html.push('<div class="search-section-divider">' + escapeHtml(getUiText().siteSection) + '</div>');
+    }
+
+    internalItems.forEach(function(entry, index){
+      html.push(renderInternalRow(entry.item, coinItems.length + index));
+    });
+
+    if(coinItems.length === 0 && internalItems.length === 0){
+      var noResultsText = (typeof window.getSearchNoResultsText === 'function')
+        ? window.getSearchNoResultsText()
+        : getUiText().noResults;
+      container.innerHTML = '<div class="search-result-empty">' + escapeHtml(noResultsText) + '</div>';
+      searchState.items = [];
+      searchState.activeIndex = -1;
+      return;
+    }
+
+    container.innerHTML = html.join('');
+    searchState.items = coinItems.concat(internalItems);
+    searchState.activeIndex = searchState.items.length ? 0 : -1;
+    if(searchState.items.length){
+      bindRenderedResults(container);
+      setActiveIndex(0);
+    }
+  }
+  window.renderSearchAutocompleteFinal = renderSearchAutocompleteFinal;
+
+  function getTextValue(value){
+    if(typeof value === 'function'){
+      try {
+        return String(value(typeof t === 'function' ? t : function(v){ return v; }) || '');
+      } catch(e){
+        return '';
+      }
+    }
+    return String(value || '');
+  }
+
+  var __unifiedExternalSearchableItems = (typeof window.getSearchableItems === 'function')
+    ? window.getSearchableItems
+    : null;
+
+  function buildCoreSearchableItems(){
+    var items = [];
+    var lang = (typeof currentLang !== 'undefined') ? currentLang : 'en';
+
+    var lessonData = typeof lessons !== 'undefined' ? (lessons[lang] || lessons.en || []) : [];
+    for(var i = 0; i < lessonData.length; i++){
+      items.push({
+        type:'lesson',
+        badge:'L' + (i + 1),
+        title:getTextValue(lessonData[i].title),
+        desc:lessonData[i].intro ? getTextValue(lessonData[i].intro).substring(0, 120) + '...' : '',
+        action:function(idx){ return function(){ if(typeof showLesson === 'function') showLesson(idx); if(typeof closeSearch === 'function') closeSearch(); }; }(i)
+      });
+    }
+
+    var glossaryItems = typeof getGlossaryItems === 'function' ? getGlossaryItems() : [];
+    for(var g = 0; g < glossaryItems.length; g++){
+      items.push({
+        type:'glossary',
+        badge:'G',
+        title:getTextValue(glossaryItems[g][0]),
+        desc:getTextValue(glossaryItems[g][1]),
+        action:function(){ if(typeof showPage === 'function') showPage('glossary'); if(typeof closeSearch === 'function') closeSearch(); }
+      });
+    }
+
+    var faqData = (typeof polishedSectionContent !== 'undefined')
+      ? (polishedSectionContent[lang] || polishedSectionContent.en || null)
+      : null;
+    if(faqData && Array.isArray(faqData.faqItems)){
+      for(var f = 0; f < faqData.faqItems.length; f++){
+        items.push({
+          type:'faq',
+          badge:'F',
+          title:getTextValue(faqData.faqItems[f][0]),
+          desc:getTextValue(faqData.faqItems[f][1]),
+          action:function(){ if(typeof showPage === 'function') showPage('faq'); if(typeof closeSearch === 'function') closeSearch(); }
+        });
+      }
+    }
+
+    var sourceItems = typeof getSourceItems === 'function' ? getSourceItems() : [];
+    for(var s = 0; s < sourceItems.length; s++){
+      items.push({
+        type:'source',
+        badge:'S',
+        title:getTextValue(sourceItems[s][2] || sourceItems[s][1]),
+        desc:[getTextValue(sourceItems[s][3]), getTextValue(sourceItems[s][1])].filter(Boolean).join(' - '),
+        action:function(){ if(typeof showPage === 'function') showPage('sources'); if(typeof closeSearch === 'function') closeSearch(); }
+      });
+    }
+
+    return items;
+  }
+
+  function getAugmentedSearchableItems(){
+    var lang = getCurrentLang();
+    var items = buildCoreSearchableItems();
+    var externalItems = __unifiedExternalSearchableItems ? (__unifiedExternalSearchableItems() || []) : [];
+    var seen = {};
+
+    items.forEach(function(item){
+      seen[(item.type || '') + '|' + normalizeText(item.title)] = true;
+    });
+
+    function addItem(item){
+      if(!item || !item.title) return;
+      var key = (item.type || '') + '|' + normalizeText(item.title);
+      if(seen[key]) return;
+      seen[key] = true;
+      items.push(item);
+    }
+
+    externalItems.forEach(addItem);
+
+    var content = (typeof polishedSectionContent !== 'undefined')
+      ? (polishedSectionContent[lang] || polishedSectionContent.en || null)
+      : null;
+
+    if(content && Array.isArray(content.safetyItems)){
+      content.safetyItems.forEach(function(entry){
+        addItem({
+          type:'safety',
+          badge:'T',
+          title:getTextValue(entry[0]),
+          desc:getTextValue(entry[1]),
+          action:function(){ if(typeof showPage === 'function') showPage('safety'); if(typeof closeSearch === 'function') closeSearch(); }
+        });
+      });
+    }
+
+    var pageDefs = [
+      { page:'home', title:(typeof t === 'function' ? (t('nav.home') || 'Home') : 'Home'), desc:(typeof t === 'function' ? (t('home.heroDesc') || t('home.startCardDesc') || '') : '') },
+      { page:'start', title:(typeof t === 'function' ? (t('nav.start') || 'Start Here') : 'Start Here'), desc:(typeof t === 'function' ? (t('home.startCardDesc') || '') : '') },
+      { page:'faq', title:(typeof t === 'function' ? (t('nav.faqPage') || 'FAQ') : 'FAQ'), desc:content && content.faqIntro ? getTextValue(content.faqIntro) : '' },
+      { page:'safety', title:(typeof t === 'function' ? (t('nav.safety') || 'Safety') : 'Safety'), desc:content && content.safetyIntro ? getTextValue(content.safetyIntro) : '' },
+      { page:'glossary', title:(typeof t === 'function' ? (t('nav.glossary') || 'Glossary') : 'Glossary'), desc:(typeof t === 'function' ? (t('nav.glossarysub') || '') : '') },
+      { page:'sources', title:(typeof t === 'function' ? (t('sources.pageTitle') || 'Source Library') : 'Source Library'), desc:(typeof t === 'function' ? (t('sources.pageDesc') || '') : '') },
+      { page:'updates', title:(typeof t === 'function' ? (t('nav.updates') || 'Updates') : 'Updates'), desc:(typeof t === 'function' ? (t('nav.updatessub') || t('nav.updatesub') || '') : '') }
+    ];
+
+    pageDefs.forEach(function(def){
+      addItem({
+        type:'page',
+        badge:'P',
+        title:getTextValue(def.title),
+        desc:getTextValue(def.desc),
+        action:function(){ if(typeof showPage === 'function') showPage(def.page); if(typeof closeSearch === 'function') closeSearch(); }
+      });
+    });
+
+    return items;
+  }
+  window.getSearchableItems = getAugmentedSearchableItems;
+
+  function getInternalItemSearchText(item){
+    return [
+      item && item.title,
+      item && item.desc,
+      item && item.badge,
+      item && item.type
+    ].filter(Boolean).join(' ');
+  }
+
+  function getInternalItemRank(item, normalizedQuery){
+    var title = normalizeText(item && item.title);
+    var desc = normalizeText(item && item.desc);
+    var badge = normalizeText(item && item.badge);
+    var type = normalizeText(item && item.type);
+    var score = 0;
+    if(title === normalizedQuery) score += 240;
+    if(type === normalizedQuery || badge === normalizedQuery) score += 180;
+    if(title.indexOf(normalizedQuery) === 0) score += 150;
+    if(type.indexOf(normalizedQuery) === 0) score += 120;
+    if(desc.indexOf(normalizedQuery) === 0) score += 95;
+    if(title.indexOf(normalizedQuery) !== -1) score += 80;
+    if(desc.indexOf(normalizedQuery) !== -1) score += 50;
+    return score;
+  }
+
+  function getInternalSearchResults(query){
+    var normalizedQuery = normalizeText(query);
+    var items = getAugmentedSearchableItems();
+    var typeOrder = { lesson:0, glossary:1, faq:2, source:3, safety:4, page:5 };
+    return items.filter(function(item){
+      var blob = normalizeText(getInternalItemSearchText(item));
+      return blob.indexOf(normalizedQuery) !== -1;
+    }).sort(function(a, b){
+      var rankDiff = getInternalItemRank(b, normalizedQuery) - getInternalItemRank(a, normalizedQuery);
+      if(rankDiff !== 0) return rankDiff;
+      var aType = Object.prototype.hasOwnProperty.call(typeOrder, a.type) ? typeOrder[a.type] : 99;
+      var bType = Object.prototype.hasOwnProperty.call(typeOrder, b.type) ? typeOrder[b.type] : 99;
+      if(aType !== bType) return aType - bType;
+      return String(a.title || '').localeCompare(String(b.title || ''));
+    });
+  }
+
+  function renderSearchRichResultFinal(query){
+    renderSearchAutocompleteFinal(query);
+  }
+  window.renderSearchRichResultFinal = renderSearchRichResultFinal;
+  window.renderPatchedSearchResults = renderSearchAutocompleteFinal;
+
+  function getSelectedValue(item, currentValue){
+    var normalizedQuery = normalizeText(currentValue);
+    var symbol = normalizeText(item.symbol);
+    if(normalizedQuery && symbol && symbol.indexOf(normalizedQuery) === 0){
+      return item.symbol;
+    }
+    return item.name || item.symbol || '';
+  }
+
+  function selectAutocompleteItem(index){
+    var input = document.getElementById('searchInput');
+    var entry = searchState.items[index];
+    if(!entry) return;
+    if(entry.kind === 'internal' && entry.item && typeof entry.item.action === 'function'){
+      entry.item.action();
+      return;
+    }
+    if(!input || !entry.item) return;
+    var selectedValue = getSelectedValue(entry.item, input.value);
+    input.value = selectedValue;
+    renderSearchAutocompleteFinal(selectedValue);
+    input.focus();
+  }
+
+  function detachUnifiedSearchInput(){
+    if(!searchState.boundInput || !searchState.boundHandlers) return;
+    searchState.boundInput.removeEventListener('input', searchState.boundHandlers.input);
+    searchState.boundInput.removeEventListener('keydown', searchState.boundHandlers.keydown);
+    searchState.boundInput.removeEventListener('click', searchState.boundHandlers.click);
+    delete searchState.boundInput.__unifiedSearchBound;
+    searchState.boundInput = null;
+    searchState.boundHandlers = null;
+  }
+
+  function bindUnifiedSearchInput(forceRebind){
+    var input = document.getElementById('searchInput');
+    if(!input) return;
+    var active = document.activeElement === input;
+    var value = input.value || '';
+    if(forceRebind || searchState.boundInput !== input){
+      detachUnifiedSearchInput();
+    }
+    if(!input.__unifiedSearchBound){
+      var handlers = {
+        input:function(){
+          renderSearchAutocompleteFinal(this.value || '');
+        },
+        keydown:function(e){
+          if(!searchState.items.length){
+            if(e.key === 'Escape' && typeof closeSearch === 'function'){
+              closeSearch();
+            }
+            return;
+          }
+          if(e.key === 'ArrowDown'){
+            e.preventDefault();
+            setActiveIndex(searchState.activeIndex >= 0 ? searchState.activeIndex + 1 : 0);
+            return;
+          }
+          if(e.key === 'ArrowUp'){
+            e.preventDefault();
+            setActiveIndex(searchState.activeIndex > 0 ? searchState.activeIndex - 1 : 0);
+            return;
+          }
+          if(e.key === 'Enter'){
+            e.preventDefault();
+            selectAutocompleteItem(searchState.activeIndex >= 0 ? searchState.activeIndex : 0);
+            return;
+          }
+          if(e.key === 'Escape'){
+            if(typeof closeSearch === 'function') closeSearch();
+          }
+        },
+        click:function(){
+          if(this.value.trim()){
+            renderSearchAutocompleteFinal(this.value);
+          }
+        }
+      };
+      input.addEventListener('input', handlers.input);
+      input.addEventListener('keydown', handlers.keydown);
+      input.addEventListener('click', handlers.click);
+      input.__unifiedSearchBound = true;
+      searchState.boundInput = input;
+      searchState.boundHandlers = handlers;
+    }
+    getResultsContainer();
+    if(active) input.focus();
+    var results = document.getElementById('searchResults');
+    if(results){
+      results.hidden = false;
+      if(typeof window.getSearchEmptyText === 'function'){
+        results.setAttribute('data-empty', window.getSearchEmptyText());
+      }
+      if(value.trim()){
+        renderSearchAutocompleteFinal(value);
+      } else {
+        clearRenderedResults();
+      }
+    }
+  }
+
+  var __finalOpenSearch = window.openSearch;
+  if(typeof __finalOpenSearch === 'function' && !__finalOpenSearch.__unifiedSearchWrapped){
+    var wrappedOpenSearch = function(){
+      __finalOpenSearch();
+      bindUnifiedSearchInput(true);
+      var input = document.getElementById('searchInput');
+      if(input && input.value.trim()){
+        renderSearchAutocompleteFinal(input.value);
+      } else {
+        clearRenderedResults();
+      }
+    };
+    wrappedOpenSearch.__unifiedSearchWrapped = true;
+    window.openSearch = wrappedOpenSearch;
+  }
+
+  var __finalCloseSearch = window.closeSearch;
+  if(typeof __finalCloseSearch === 'function' && !__finalCloseSearch.__unifiedSearchWrapped){
+    var wrappedCloseSearch = function(){
+      clearRenderedResults();
+      __finalCloseSearch();
+    };
+    wrappedCloseSearch.__unifiedSearchWrapped = true;
+    window.closeSearch = wrappedCloseSearch;
+  }
+
+  var __finalSetLang = window.setLang;
+  if(typeof __finalSetLang === 'function' && !__finalSetLang.__unifiedSearchWrapped){
+    var wrappedSetLang = function(lang){
+      __finalSetLang(lang);
+      bindUnifiedSearchInput(true);
+      var input = document.getElementById('searchInput');
+      if(!input) return;
+      if(input.value.trim()){
+        renderSearchAutocompleteFinal(input.value);
+      } else {
+        clearRenderedResults();
+      }
+    };
+    wrappedSetLang.__unifiedSearchWrapped = true;
+    window.setLang = wrappedSetLang;
+  }
+
+  bindUnifiedSearchInput(true);
+  clearRenderedResults();
 })();
 </script>
 
