@@ -12994,16 +12994,39 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     window.showPage = wrappedShowPage;
   }
 
+  function restoreCurrentViewAfterRuntimePack(){
+    var targetPage = (typeof currentPage !== 'undefined' && currentPage) ? currentPage : 'home';
+    var targetLesson = (typeof currentLesson === 'number' && isFinite(currentLesson)) ? currentLesson : 0;
+    var restore = function(){
+      if(/^lesson\d+$/.test(targetPage) && typeof window.showLesson === 'function'){
+        window.showLesson(targetLesson);
+      }else if(typeof window.showPage === 'function'){
+        window.showPage(targetPage || 'home');
+      }
+    };
+    if(typeof requestAnimationFrame === 'function'){
+      requestAnimationFrame(function(){
+        restore();
+        requestAnimationFrame(restore);
+      });
+    }else{
+      restore();
+      setTimeout(restore, 0);
+    }
+  }
+
   if(typeof window.setLang === 'function' && !window.setLang.__runtimePackWrapped){
     var __origSetLang = window.setLang;
     var wrappedSetLang = function(lang){
+      var targetPage = (typeof currentPage !== 'undefined' && currentPage) ? currentPage : 'home';
+      var targetLesson = (typeof currentLesson === 'number' && isFinite(currentLesson)) ? currentLesson : 0;
       window.__applyRuntimeLanguagePack('ha');
       __origSetLang(lang);
       window.__applyRuntimeLanguagePack('ha');
       applyRuntimeDomPatches();
-      if(lang === 'ha' && typeof window.showPage === 'function' && typeof currentPage !== 'undefined'){
-        window.showPage(currentPage || 'home');
-      }
+      currentPage = targetPage;
+      currentLesson = targetLesson;
+      restoreCurrentViewAfterRuntimePack();
     };
     wrappedSetLang.__runtimePackWrapped = true;
     window.setLang = wrappedSetLang;
@@ -13013,7 +13036,7 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
 
   if(typeof currentLang !== 'undefined' && currentLang === 'ha'){
     if(typeof renderAllLessons === 'function') renderAllLessons();
-    if(typeof showPage === 'function' && typeof currentPage !== 'undefined') showPage(currentPage || 'home');
+    restoreCurrentViewAfterRuntimePack();
   }
 })();
 </script>
