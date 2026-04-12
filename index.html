@@ -18593,8 +18593,8 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     return JSON.parse(JSON.stringify(value));
   }
 
-  function lang7(){
-    var lang = (typeof currentLang !== 'undefined' ? currentLang : 'en') || 'en';
+  function lang7(lang){
+    lang = lang || ((typeof currentLang !== 'undefined' ? currentLang : 'en') || 'en');
     return lang === 'br' ? 'pt' : lang;
   }
 
@@ -18691,7 +18691,8 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
   lessonSevenUnderstandingPack.br = clone(lessonSevenUnderstandingPack.pt);
 
   function getLessonSevenDefs(lang){
-    return clone(lessonSevenDefsPack[lang7()] || lessonSevenDefsPack.en);
+    var key = lang7(lang);
+    return clone(lessonSevenDefsPack[key] || lessonSevenDefsPack.en);
   }
 
   function getLessonSevenUnderstanding(lang){
@@ -18770,6 +18771,318 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
   if(typeof applyUI === 'function') applyUI();
   if(typeof currentPage !== 'undefined' && /^lesson\d+$/.test(currentPage) && typeof showLesson === 'function'){
     showLesson(typeof currentLesson === 'number' ? currentLesson : 0);
+  }
+})();
+</script>
+<script id="address-poisoning-final">
+(function(){
+  if(window.__addressPoisoningFinal) return;
+  window.__addressPoisoningFinal = true;
+
+  function clone(value){
+    if(value === undefined || value === null) return value;
+    return JSON.parse(JSON.stringify(value));
+  }
+
+  function baseLang(lang){
+    return lang === 'br' ? 'pt' : lang;
+  }
+
+  function safeLangPack(lang, pack){
+    return pack[baseLang(lang)] || pack.en;
+  }
+
+  function norm(value){
+    return String(value || '').toLowerCase().replace(/\s+/g, ' ').trim();
+  }
+
+  var ADDRESS_POISONING_PACK = {
+    en:{
+      sectionTitle:'Address poisoning',
+      sectionBody:'Address poisoning is one of the most common and effective crypto scam techniques today, often carried out by bots. Attackers send tiny transactions from lookalike wallet addresses, hoping you will later copy the wrong address from your history. A recent address is not automatically safe, so always compare the full address again before you send.',
+      defTerm:'Address poisoning',
+      defDesc:'A scam tactic where attackers place lookalike wallet addresses in your history so you might copy the wrong one later.',
+      faqQ:'What is address poisoning?',
+      faqA:'It is a scam where attackers send tiny transfers from addresses that look similar to a real one. If you later copy that familiar-looking address from your history without checking it fully, you can send funds to the wrong wallet.',
+      safetyTitle:'Do not trust recent wallet history automatically',
+      safetyBody:'Scammers can leave lookalike addresses in your history with tiny transfers. Before you send, compare the full address carefully instead of trusting the most recent entry.',
+      source1Title:'MetaMask: Address poisoning scams',
+      source1Desc:'Official wallet safety guide explaining how lookalike addresses appear in history and what to check before you copy one.',
+      source1Why:'Shows beginners why copied history addresses can be dangerous.',
+      source2Title:'Trezor: Address poisoning attacks',
+      source2Desc:'Official hardware wallet security article on bot-driven copy-paste scams and safer verification habits.',
+      source2Why:'Useful reminder to verify the entire address before sending.',
+      searchKeywords:['address poisoning','poisoned address','wrong wallet history','fake wallet history','lookalike address','copy wrong address']
+    },
+    ko:{
+      sectionTitle:'주소 오염 공격',
+      sectionBody:'주소 오염 공격은 현재 자주 악용되는 암호화폐 사기 수법 중 하나이며, 많은 경우 봇을 통해 수행됩니다. 공격자는 비슷하게 보이는 지갑 주소로 아주 작은 거래를 남겨 사용자가 나중에 거래 기록에서 잘못된 주소를 복사하도록 유도합니다. 최근에 보낸 주소라고 해서 자동으로 신뢰하면 안 되며, 전송 전에는 전체 주소를 다시 확인해야 합니다.',
+      defTerm:'주소 오염 공격',
+      defDesc:'비슷하게 보이는 주소를 거래 기록에 남겨 사용자가 나중에 잘못된 주소를 복사하도록 유도하는 사기 수법입니다.',
+      faqQ:'주소 오염 공격이란 무엇인가요?',
+      faqA:'공격자가 아주 작은 거래를 보내 비슷한 주소를 기록에 끼워 넣는 수법입니다. 익숙해 보인다는 이유만으로 최근 주소를 복사하면 잘못된 지갑으로 보낼 수 있습니다.',
+      safetyTitle:'최근 기록 주소를 바로 믿지 마세요',
+      safetyBody:'공격자는 아주 작은 거래로 비슷한 주소를 기록에 남길 수 있습니다. 최근 기록만 믿지 말고, 전송 전에는 전체 주소를 다시 비교하세요.',
+      source1Title:'MetaMask: 주소 오염 공격',
+      source1Desc:'비슷하게 생긴 주소가 거래 기록에 어떻게 나타나는지와 복사 전에 무엇을 확인해야 하는지 설명하는 공식 보안 안내입니다.',
+      source1Why:'거래 기록 주소를 그대로 복사하는 습관이 왜 위험한지 초보자에게 알려 줍니다.',
+      source2Title:'Trezor: 주소 오염 공격',
+      source2Desc:'봇이 만든 유사 주소와 복사-붙여넣기 사기를 설명하는 공식 지갑 보안 자료입니다.',
+      source2Why:'전송 전에 전체 주소를 다시 확인해야 하는 이유를 쉽게 보여 줍니다.',
+      searchKeywords:['주소 오염 공격','주소 복사 사기','유사 주소','잘못된 주소 복사','거래 기록 주소']
+    },
+    th:{
+      sectionTitle:'การโจมตี address poisoning',
+      sectionBody:'Address poisoning เป็นหนึ่งในกลโกงคริปโตที่พบได้บ่อยในช่วงนี้ และมักทำด้วยบอต ผู้โจมตีจะส่งธุรกรรมมูลค่าน้อยมากจากกระเป๋าที่มีหน้าตาคล้ายกัน เพื่อหวังว่าในภายหลังคุณจะคัดลอกที่อยู่ผิดจากประวัติธุรกรรม ที่อยู่ล่าสุดไม่ได้แปลว่าปลอดภัยเสมอไป จึงควรตรวจสอบที่อยู่ทั้งหมดอีกครั้งก่อนส่ง',
+      defTerm:'การโจมตี address poisoning',
+      defDesc:'กลโกงที่ผู้โจมตีทำให้มีที่อยู่กระเป๋าที่คล้ายกันโผล่ในประวัติธุรกรรม เพื่อหลอกให้คัดลอกที่อยู่ผิดในภายหลัง',
+      faqQ:'address poisoning คืออะไร?',
+      faqA:'คือกลโกงที่ผู้โจมตีส่งธุรกรรมเล็กน้อยจากที่อยู่ที่ดูคล้ายกับของจริง แล้วหวังว่าคุณจะคัดลอกที่อยู่นั้นจากประวัติธุรกรรมโดยไม่ตรวจสอบให้ครบ',
+      safetyTitle:'อย่าเชื่อที่อยู่ล่าสุดในประวัติทันที',
+      safetyBody:'ผู้โจมตีสามารถทิ้งที่อยู่ที่ดูคล้ายกันไว้ในประวัติด้วยธุรกรรมเล็กน้อย ก่อนส่งทุกครั้งให้ตรวจสอบที่อยู่เต็มอีกครั้ง',
+      source1Title:'MetaMask: กลโกง address poisoning',
+      source1Desc:'คู่มือความปลอดภัยอย่างเป็นทางการที่อธิบายว่าที่อยู่คล้ายกันโผล่ในประวัติได้อย่างไร และควรตรวจสอบอะไรก่อนคัดลอก',
+      source1Why:'ช่วยให้มือใหม่เห็นว่าการคัดลอกจากประวัติอาจเสี่ยงได้อย่างไร',
+      source2Title:'Trezor: การโจมตี address poisoning',
+      source2Desc:'บทความความปลอดภัยจากผู้ให้บริการกระเป๋าฮาร์ดแวร์เกี่ยวกับบอตที่สร้างที่อยู่คล้ายกันและพฤติกรรมที่ปลอดภัยกว่า',
+      source2Why:'ย้ำว่าควรตรวจสอบที่อยู่เต็มก่อนส่งเสมอ',
+      searchKeywords:['address poisoning','poisoned address','ที่อยู่ปลอมในประวัติ','คัดลอกที่อยู่ผิด']
+    },
+    id:{
+      sectionTitle:'Peracunan alamat',
+      sectionBody:'Peracunan alamat adalah salah satu teknik penipuan crypto yang paling sering dipakai saat ini dan sering dijalankan dengan bot. Penyerang mengirim transaksi sangat kecil dari alamat dompet yang mirip, berharap Anda nanti menyalin alamat yang salah dari riwayat. Alamat terbaru tidak otomatis aman, jadi selalu periksa ulang seluruh alamat sebelum mengirim.',
+      defTerm:'Peracunan alamat',
+      defDesc:'Taktik penipuan ketika penyerang menaruh alamat dompet yang mirip di riwayat agar Anda menyalin alamat yang salah nanti.',
+      faqQ:'Apa itu peracunan alamat?',
+      faqA:'Ini adalah penipuan ketika penyerang mengirim transaksi kecil dari alamat yang mirip dengan alamat asli. Jika Anda menyalin alamat yang terlihat familiar dari riwayat tanpa memeriksa penuh, dana bisa terkirim ke dompet yang salah.',
+      safetyTitle:'Jangan langsung percaya alamat di riwayat terbaru',
+      safetyBody:'Penipu bisa meninggalkan alamat yang mirip di riwayat dengan transfer kecil. Sebelum mengirim, bandingkan alamat lengkapnya lagi.',
+      source1Title:'MetaMask: penipuan peracunan alamat',
+      source1Desc:'Panduan keamanan resmi yang menjelaskan bagaimana alamat mirip muncul di riwayat dan apa yang harus dicek sebelum menyalin alamat.',
+      source1Why:'Membantu pemula memahami kenapa alamat yang disalin dari riwayat bisa berbahaya.',
+      source2Title:'Trezor: serangan peracunan alamat',
+      source2Desc:'Artikel keamanan dompet resmi tentang bot yang membuat alamat mirip dan kebiasaan verifikasi yang lebih aman.',
+      source2Why:'Pengingat berguna untuk memeriksa seluruh alamat sebelum mengirim.',
+      searchKeywords:['address poisoning','alamat beracun','riwayat wallet palsu','alamat mirip']
+    },
+    pt:{
+      sectionTitle:'Envenenamento de endereços',
+      sectionBody:'O envenenamento de endereços é uma das táticas de golpe mais usadas em cripto hoje e muitas vezes é feito com bots. Os golpistas enviam transações minúsculas de endereços muito parecidos, esperando que você copie o endereço errado do histórico mais tarde. Um endereço recente não é automaticamente seguro, então confira o endereço completo outra vez antes de enviar.',
+      defTerm:'Envenenamento de endereços',
+      defDesc:'Golpe em que atacantes colocam endereços parecidos no histórico para que você copie o endereço errado depois.',
+      faqQ:'O que é envenenamento de endereços?',
+      faqA:'É um golpe em que atacantes enviam pequenas transações a partir de endereços parecidos com o verdadeiro. Se você copiar do histórico sem checar tudo, pode mandar fundos para a carteira errada.',
+      safetyTitle:'Não confie automaticamente no endereço mais recente',
+      safetyBody:'Golpistas podem deixar endereços parecidos no histórico com transferências minúsculas. Antes de enviar, compare novamente o endereço completo.',
+      source1Title:'MetaMask: golpes de envenenamento de endereços',
+      source1Desc:'Guia oficial de segurança explicando como endereços parecidos aparecem no histórico e o que verificar antes de copiar um deles.',
+      source1Why:'Mostra para iniciantes por que copiar endereços do histórico pode ser perigoso.',
+      source2Title:'Trezor: ataques de envenenamento de endereços',
+      source2Desc:'Artigo oficial de segurança sobre bots que criam endereços parecidos e hábitos mais seguros de verificação.',
+      source2Why:'Lembra por que é importante conferir o endereço inteiro antes de enviar.',
+      searchKeywords:['address poisoning','envenenamento de enderecos','historico de carteira falso','copiar endereco errado']
+    },
+    tr:{
+      sectionTitle:'Adres zehirleme',
+      sectionBody:'Adres zehirleme, bugun en sik gorulen kripto dolandiricilik yontemlerinden biridir ve cogu zaman botlarla yapilir. Saldirganlar, benzer gorunen cüzdan adreslerinden cok kucuk transferler gonderir ve daha sonra sizin gecmisinizden yanlis adresi kopyalamanizi umar. Son kullanilan adres otomatik olarak guvenli degildir; gondermeden once tum adresi yeniden kontrol edin.',
+      defTerm:'Adres zehirleme',
+      defDesc:'Saldirganlarin islem gecmisine benzer adresler birakip daha sonra yanlis adresi kopyalatmaya calistigi dolandiricilik yontemi.',
+      faqQ:'Adres zehirleme nedir?',
+      faqA:'Saldirganlar, gercek adrese benzeyen adreslerden cok kucuk transferler gonderir. Siz de tanidik gorunen bu adresi gecmisten kopyalarsaniz fonlari yanlis cüzdana gonderebilirsiniz.',
+      safetyTitle:'Son adres kaydina otomatik olarak guvenmeyin',
+      safetyBody:'Dolandiricilar, kucuk transferlerle gecmiste benzer adresler birakabilir. Gondermeden once tam adresi yeniden karsilastirin.',
+      source1Title:'MetaMask: adres zehirleme dolandiriciliklari',
+      source1Desc:'Benzer adreslerin gecmiste nasil gorundugunu ve kopyalamadan once nelerin kontrol edilmesi gerektigini anlatan resmi guvenlik rehberi.',
+      source1Why:'Gecmisten adres kopyalama aliskanliginin neden riskli olabilecegini gosterir.',
+      source2Title:'Trezor: adres zehirleme saldirilari',
+      source2Desc:'Botlarla yapilan kopyala-yapistir dolandiriciligini ve daha guvenli dogrulama aliskanliklarini anlatan resmi guvenlik yazisi.',
+      source2Why:'Gondermeden once tum adresi kontrol etmenin neden onemli oldugunu hatirlatir.',
+      searchKeywords:['address poisoning','adres zehirleme','sahte cuzdan gecmisi','yanlis adres kopyalama']
+    },
+    es:{
+      sectionTitle:'Envenenamiento de direcciones',
+      sectionBody:'El envenenamiento de direcciones es una de las t cticas de estafa cripto m s comunes hoy y muchas veces se hace con bots. Los atacantes env an transacciones min sculas desde direcciones que se parecen a una real, esperando que luego copies la equivocada desde tu historial. Una direcci n reciente no es autom ticamente segura, as  que revisa de nuevo la direcci n completa antes de enviar.',
+      defTerm:'Envenenamiento de direcciones',
+      defDesc:'T ctica de estafa en la que atacantes dejan direcciones parecidas en tu historial para que copies la equivocada despu s.',
+      faqQ:' Qu  es el envenenamiento de direcciones?',
+      faqA:'Es una estafa en la que atacantes env an peque as transacciones desde direcciones muy parecidas a una real. Si copias una direcci n familiar del historial sin revisarla completa, puedes enviar fondos a la billetera equivocada.',
+      safetyTitle:'No conf es autom ticamente en la direcci n m s reciente',
+      safetyBody:'Los estafadores pueden dejar direcciones parecidas en tu historial con transferencias peque as. Antes de enviar, vuelve a comparar la direcci n completa.',
+      source1Title:'MetaMask: estafas de envenenamiento de direcciones',
+      source1Desc:'Gu a oficial de seguridad que explica c mo aparecen direcciones parecidas en el historial y qu  revisar antes de copiarlas.',
+      source1Why:'Ayuda a principiantes a entender por qu  copiar direcciones del historial puede ser peligroso.',
+      source2Title:'Trezor: ataques de envenenamiento de direcciones',
+      source2Desc:'Art culo oficial de seguridad sobre bots que crean direcciones parecidas y h bitos de verificaci n m s seguros.',
+      source2Why:'Recuerda por qu  conviene revisar toda la direcci n antes de enviar.',
+      searchKeywords:['address poisoning','envenenamiento de direcciones','historial de billetera falso','copiar direccion equivocada']
+    },
+    ar:{
+      sectionTitle:'تسميم العناوين',
+      sectionBody:'تسميم العناوين من أكثر أساليب الاحتيال الشائعة في العملات الرقمية اليوم، وغالبًا ما تنفذه روبوتات. يرسل المهاجمون معاملات صغيرة جدًا من عناوين تشبه العنوان الحقيقي، على أمل أن تنسخ لاحقًا العنوان الخطأ من سجل معاملاتك. العنوان المستخدم مؤخرًا ليس آمنًا تلقائيًا، لذلك يجب إعادة فحص العنوان كاملًا قبل الإرسال.',
+      defTerm:'تسميم العناوين',
+      defDesc:'أسلوب احتيالي يضع عناوين متشابهة في سجل المعاملات حتى ينسخ المستخدم العنوان الخطأ لاحقًا.',
+      faqQ:'ما هو تسميم العناوين؟',
+      faqA:'هو نوع من الاحتيال يرسل فيه المهاجم معاملات صغيرة من عناوين تشبه العنوان الحقيقي. إذا نسخت عنوانًا يبدو مألوفًا من السجل بدون فحص كامل، فقد ترسل الأموال إلى محفظة خاطئة.',
+      safetyTitle:'لا تثق تلقائيًا بالعناوين الموجودة في السجل الحديث',
+      safetyBody:'يمكن للمحتالين ترك عناوين متشابهة في السجل عبر تحويلات صغيرة. قبل الإرسال، قارن العنوان كاملًا بدل الاعتماد على أحدث سجل فقط.',
+      source1Title:'MetaMask: احتيال تسميم العناوين',
+      source1Desc:'دليل أمني رسمي يشرح كيف تظهر العناوين المتشابهة في السجل وما الذي يجب فحصه قبل نسخ أي عنوان.',
+      source1Why:'يساعد المبتدئين على فهم خطر نسخ العناوين من سجل المعاملات.',
+      source2Title:'Trezor: هجمات تسميم العناوين',
+      source2Desc:'مقال أمني رسمي عن العناوين المتشابهة التي تنشئها الروبوتات وعادات التحقق الأكثر أمانًا.',
+      source2Why:'يذكّر بأهمية مراجعة العنوان كاملًا قبل الإرسال.',
+      searchKeywords:['address poisoning','تسميم العناوين','سجل محفظة مزيف','نسخ عنوان خاطئ']
+    },
+    vi:{
+      sectionTitle:'Dau doc dia chi',
+      sectionBody:'Dau doc dia chi la mot trong nhung kieu lua dao crypto pho bien nhat hien nay va thuong duoc thuc hien bang bot. Ke tan cong gui cac giao dich rat nho tu nhung dia chi vi trong giong nhau, hy vong ban sau do se sao chep nham dia chi tu lich su giao dich. Dia chi vua dung gan day khong tu dong an toan, vi vay hay kiem tra lai toan bo dia chi truoc khi gui.',
+      defTerm:'Dau doc dia chi',
+      defDesc:'Thu doan lua dao khi ke tan cong chen dia chi giong nhau vao lich su giao dich de ban sao chep nham sau nay.',
+      faqQ:'Dau doc dia chi la gi?',
+      faqA:'Do la hinh thuc lua dao trong do ke tan cong gui giao dich nho tu dia chi giong dia chi that. Neu ban sao chep mot dia chi quen mat tu lich su ma khong kiem tra day du, ban co the gui tien den nham vi.',
+      safetyTitle:'Dung tin ngay dia chi trong lich su gan day',
+      safetyBody:'Ke gian co the de lai dia chi giong nhau trong lich su bang nhung giao dich nho. Truoc khi gui, hay doi chieu lai toan bo dia chi.',
+      source1Title:'MetaMask: lua dao dau doc dia chi',
+      source1Desc:'Huong dan an toan chinh thuc giai thich cach dia chi giong nhau xuat hien trong lich su va can kiem tra gi truoc khi sao chep.',
+      source1Why:'Giup nguoi moi hieu vi sao sao chep dia chi tu lich su co the nguy hiem.',
+      source2Title:'Trezor: tan cong dau doc dia chi',
+      source2Desc:'Bai viet bao mat chinh thuc ve cac dia chi giong nhau do bot tao ra va thoi quen xac minh an toan hon.',
+      source2Why:'Nhac lai tam quan trong cua viec kiem tra toan bo dia chi truoc khi gui.',
+      searchKeywords:['address poisoning','dau doc dia chi','lich su vi gia','sao chep nham dia chi']
+    },
+    ha:{
+      sectionTitle:'Gurbata adireshi',
+      sectionBody:'Gurbata adireshi na daya daga cikin dabarun damfara na crypto da ake yawan amfani da su yanzu, kuma sau da yawa bots ne ke yin sa. Masu hari kan aika kananan muamaloli daga adireshin walat masu kama da na gaske, suna fatan daga baya za ka kwafi adireshin da ba daidai ba daga tarihinka. Adireshin da ka gani kwanan nan ba yana nufin yana da aminci kai tsaye ba, don haka ka sake duba cikakken adireshin kafin ka aika.',
+      defTerm:'Gurbata adireshi',
+      defDesc:'Salon damfara ne da masu hari ke barin adireshin walat masu kama da juna a tarihi domin a kwafi wanda ba daidai ba daga baya.',
+      faqQ:'Menene gurbata adireshi?',
+      faqA:'Dabara ce inda masu hari ke aika kananan muamaloli daga adireshi masu kama da na gaske. Idan ka kwafi adireshin da ya yi kama da wanda ka sani daga tarihi ba tare da cikakken dubawa ba, kana iya aika kudi zuwa walat mara kyau.',
+      safetyTitle:'Kada ka yarda da adireshin da ke tarihin baya-bayan nan kai tsaye',
+      safetyBody:'Masu damfara na iya barin adireshi masu kama da juna a tarihinka ta hanyar kananan canje-canje. Kafin ka aika, ka kwatanta cikakken adireshin da kyau.',
+      source1Title:'MetaMask: damfarar gurbata adireshi',
+      source1Desc:'Jagorar tsaro ta hukuma da ke bayyana yadda adireshi masu kama da juna ke bayyana a tarihi da abin da ya kamata a duba kafin kwafi.',
+      source1Why:'Yana taimaka wa masu farawa su gane dalilin da ya sa kwafin adireshi daga tarihi zai iya zama hadari.',
+      source2Title:'Trezor: hare-haren gurbata adireshi',
+      source2Desc:'Rubutun tsaro na hukuma game da bots da ke kirkirar adireshi masu kama da juna da kuma halayen dubawa mafi aminci.',
+      source2Why:'Yana tunasar da muhimmancin sake duba cikakken adireshi kafin aika kudi.',
+      searchKeywords:['address poisoning','gurbata adireshi','tarihin walat na bogi','kwafa adireshin kuskure']
+    }
+  };
+  ADDRESS_POISONING_PACK.br = clone(ADDRESS_POISONING_PACK.pt);
+
+  var ADDRESS_SOURCE_URLS = {
+    metaMask:'https://support.metamask.io/stay-safe/protect-yourself/wallet-and-hardware/address-poisoning-scams/',
+    trezor:'https://trezor.io/support/troubleshooting/coins-tokens/address-poisoning-attacks'
+  };
+
+  function ensureLessonSevenData(lang){
+    if(typeof lessons === 'undefined' || !lessons || !lessons[lang] || !lessons[lang][6]) return;
+    var pack = safeLangPack(lang, ADDRESS_POISONING_PACK);
+    var lesson = lessons[lang][6];
+    if(!Array.isArray(lesson.sections)) lesson.sections = [];
+    if(!lesson.sections.some(function(section){ return norm(section && section.h) === norm(pack.sectionTitle); })){
+      lesson.sections.splice(Math.min(4, lesson.sections.length), 0, {h:pack.sectionTitle, ps:[pack.sectionBody]});
+    }
+    if(!Array.isArray(lesson.defs)) lesson.defs = [];
+    if(!lesson.defs.some(function(row){ return norm(row && row[0]) === norm(pack.defTerm); })){
+      lesson.defs.push([pack.defTerm, pack.defDesc]);
+    }
+    if(!Array.isArray(lesson.faqs)) lesson.faqs = [];
+    if(!lesson.faqs.some(function(row){ return norm(row && row[0]) === norm(pack.faqQ); })){
+      lesson.faqs.push([pack.faqQ, pack.faqA]);
+    }
+    if(!Array.isArray(lesson.sources)) lesson.sources = [];
+    if(!lesson.sources.some(function(row){ return norm(row && row[2]) === norm(ADDRESS_SOURCE_URLS.metaMask) || norm(row && row[1]) === norm(ADDRESS_SOURCE_URLS.metaMask); })){
+      lesson.sources.push([pack.source1Title, pack.source1Desc, ADDRESS_SOURCE_URLS.metaMask]);
+    }
+    if(!lesson.sources.some(function(row){ return norm(row && row[2]) === norm(ADDRESS_SOURCE_URLS.trezor) || norm(row && row[1]) === norm(ADDRESS_SOURCE_URLS.trezor); })){
+      lesson.sources.push([pack.source2Title, pack.source2Desc, ADDRESS_SOURCE_URLS.trezor]);
+    }
+    if(typeof lessonOverrides !== 'undefined' && lessonOverrides && lessonOverrides[lang] && lessonOverrides[lang][6]){
+      lessonOverrides[lang][6] = clone(lesson);
+    }
+  }
+
+  function ensureFaqAndSafety(lang){
+    if(typeof polishedSectionContent === 'undefined' || !polishedSectionContent || !polishedSectionContent[lang]) return;
+    var pack = safeLangPack(lang, ADDRESS_POISONING_PACK);
+    var page = polishedSectionContent[lang];
+    if(!Array.isArray(page.faqItems)) page.faqItems = [];
+    if(!page.faqItems.some(function(row){ return norm(row && row[0]) === norm(pack.faqQ); })){
+      page.faqItems.push([pack.faqQ, pack.faqA]);
+    }
+    if(!Array.isArray(page.safetyItems)) page.safetyItems = [];
+    if(!page.safetyItems.some(function(row){ return norm(row && row[0]) === norm(pack.safetyTitle); })){
+      page.safetyItems.push([pack.safetyTitle, pack.safetyBody]);
+    }
+  }
+
+  function ensureSourceEntries(target, lang){
+    if(!target || !Array.isArray(target[lang])) return;
+    var pack = safeLangPack(lang, ADDRESS_POISONING_PACK);
+    var lessonTitle = (typeof lessons !== 'undefined' && lessons && lessons[lang] && lessons[lang][6] && lessons[lang][6].title) || ((typeof ui !== 'undefined' && ui[lang] && ui[lang]['nav.l7']) || 'Lesson 7');
+    if(!target[lang].some(function(row){ return row && row[4] === ADDRESS_SOURCE_URLS.metaMask; })){
+      target[lang].push(['scams','MetaMask',pack.source1Title,pack.source1Desc,ADDRESS_SOURCE_URLS.metaMask,lessonTitle,pack.source1Why]);
+    }
+    if(!target[lang].some(function(row){ return row && row[4] === ADDRESS_SOURCE_URLS.trezor; })){
+      target[lang].push(['scams','Trezor',pack.source2Title,pack.source2Desc,ADDRESS_SOURCE_URLS.trezor,lessonTitle,pack.source2Why]);
+    }
+  }
+
+  function ensureRenderLessonSevenDefs(){
+    var original = window.renderLesson;
+    if(typeof original !== 'function' || original.__addressPoisoningWrapped) return;
+    var wrapped = function(i){
+      var html = original.apply(this, arguments);
+      if(i !== 6 || typeof html !== 'string') return html || '';
+      var lang = baseLang(typeof currentLang === 'string' && currentLang ? currentLang : 'en');
+      var lesson = (typeof lessons !== 'undefined' && lessons && lessons[lang] && lessons[lang][6]) || null;
+      if(!lesson || !Array.isArray(lesson.defs)) return html;
+      var temp = document.createElement('div');
+      temp.innerHTML = html;
+      var defsMount = temp.querySelector('.def-grid');
+      if(defsMount){
+        defsMount.outerHTML = '<div class="def-grid">' + lesson.defs.map(function(row){
+          return '<div class="def-block"><div class="def-term">' + String(row[0] || '') + '</div><div class="def-body">' + String(row[1] || '') + '</div></div>';
+        }).join('') + '</div>';
+      }
+      return temp.innerHTML;
+    };
+    wrapped.__addressPoisoningWrapped = true;
+    window.renderLesson = wrapped;
+  }
+
+  function ensureLessonSevenKeywords(){
+    var previous = window.getLessonSearchKeywords;
+    if(typeof previous !== 'function' || previous.__addressPoisoningWrapped) return;
+    var wrapped = function(index){
+      var result = previous.apply(this, arguments);
+      if(index !== 6) return result;
+      var keywords = safeLangPack(typeof currentLang === 'string' && currentLang ? currentLang : 'en', ADDRESS_POISONING_PACK).searchKeywords || [];
+      return (Array.isArray(result) ? result : []).concat(keywords);
+    };
+    wrapped.__addressPoisoningWrapped = true;
+    window.getLessonSearchKeywords = wrapped;
+  }
+
+  ['en','ko','th','id','pt','br','tr','es','ar','vi','ha'].forEach(function(lang){
+    ensureLessonSevenData(lang);
+    ensureFaqAndSafety(lang);
+    if(typeof sourceLibrary !== 'undefined' && sourceLibrary) ensureSourceEntries(sourceLibrary, lang);
+    if(typeof sourceOverrides !== 'undefined' && sourceOverrides) ensureSourceEntries(sourceOverrides, lang);
+  });
+
+  ensureRenderLessonSevenDefs();
+  ensureLessonSevenKeywords();
+
+  if(typeof renderAllLessons === 'function') renderAllLessons();
+  if(typeof applyUI === 'function') applyUI();
+  if(typeof currentPage !== 'undefined'){
+    if(/^lesson\d+$/.test(currentPage) && typeof showLesson === 'function'){
+      showLesson(typeof currentLesson === 'number' ? currentLesson : 0);
+    } else if((currentPage === 'faq' || currentPage === 'safety' || currentPage === 'sources') && typeof showPage === 'function'){
+      showPage(currentPage);
+    }
   }
 })();
 </script>
