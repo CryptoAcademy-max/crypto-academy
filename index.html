@@ -19100,6 +19100,12 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
 .start-finder-btn.is-page-item .sf-icon{background:var(--gold-bg);color:#7a5f1f}
 .start-finder-btn.is-safety-item .sf-icon{background:#fff4f2;color:#8a3731}
 .start-finder-btn.is-scams-item .sf-icon{background:#eef3fa;color:var(--navy)}
+.home-identity-block{margin:16px 0 8px;padding:16px 18px;background:linear-gradient(180deg,#fff,#faf8f3);border:1px solid var(--line);border-radius:16px}
+.home-identity-title{font-size:.92rem;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:10px}
+.home-identity-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.home-identity-item{min-width:0;padding:12px 13px;border-radius:12px;background:#fff;border:1px solid var(--line)}
+.home-identity-label{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:24px;padding:0 9px;border-radius:999px;background:var(--sidebar);color:var(--navy);font-size:.68rem;font-weight:800;letter-spacing:.04em}
+.home-identity-copy{margin-top:8px;font-size:.8rem;color:var(--text-2);line-height:1.55}
 .home-support-block{margin:18px 0 0;padding:16px 18px;background:linear-gradient(180deg,#fff,#fbf8f3);border:1px solid var(--line);border-radius:14px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .home-support-copy{min-width:0}
 .home-support-title{font-size:.92rem;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:5px}
@@ -19113,13 +19119,22 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
 .home-pdf-link{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 13px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--text);text-decoration:none;font-size:.82rem;font-weight:700;transition:transform .14s var(--ease),box-shadow .14s var(--ease),border-color .14s var(--ease),background .14s var(--ease)}
 .home-pdf-link:hover{transform:translateY(-1px);box-shadow:var(--shadow);border-color:rgba(38,65,99,.18);background:var(--blue-bg)}
 .home-pdf-link-tag{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;min-width:40px;height:24px;padding:0 8px;border-radius:999px;background:var(--sidebar);color:var(--navy);font-size:.67rem;font-weight:800;letter-spacing:.04em}
+.home-premium-pdf-block{margin:14px 0 0;padding:16px 18px;background:linear-gradient(180deg,#fffdf8,#faf6ee);border:1px solid var(--line);border-radius:14px}
+.home-premium-pdf-title{font-size:.92rem;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:5px}
+.home-premium-pdf-body,.home-premium-pdf-extra{font-size:.82rem;color:var(--text-2);line-height:1.58}
+.home-premium-pdf-extra{margin-top:8px}
+.home-premium-pdf-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.home-premium-pdf-btn{display:inline-flex;align-items:center;justify-content:center;padding:11px 14px;border-radius:11px;border:1px solid rgba(38,65,99,.14);background:#fff;color:var(--navy);font-size:.8rem;font-weight:800;text-decoration:none;transition:transform .14s var(--ease),box-shadow .14s var(--ease),border-color .14s var(--ease),background .14s var(--ease)}
+.home-premium-pdf-btn:hover{transform:translateY(-1px);box-shadow:var(--shadow);border-color:rgba(38,65,99,.22);background:var(--blue-bg)}
 .lesson7-roadmap-icon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;margin-bottom:6px;opacity:.9}
 .lesson7-roadmap-icon svg{width:18px;height:18px;stroke:var(--navy);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:768px){
+  .home-identity-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .start-finder.is-expanded-home-menu .start-finder-grid{grid-template-columns:1fr}
   .home-support-block{flex-direction:column;align-items:flex-start}
   .home-support-btn{width:100%}
   .home-pdf-grid{grid-template-columns:1fr}
+  .home-premium-pdf-actions{grid-template-columns:1fr}
 }
 </style>
 <script id="home-ui-final-fixes">
@@ -19249,6 +19264,104 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     return packs[lang] || packs.en;
   }
 
+  function getHomeIdentityPack(){
+    var lang = homeFixLang();
+    var packs = {
+      en:{
+        title:'What Crypto Academy offers',
+        items:[
+          {label:'FREE', text:'Free beginner crypto lessons'},
+          {label:'LANG', text:'Structured learning across multiple languages'},
+          {label:'PDF', text:'Free PDF guides and checklists'},
+          {label:'PLUS', text:'Premium guidebooks for deeper learning'}
+        ]
+      },
+      ko:{
+        title:'Crypto Academy가 제공하는 것',
+        items:[
+          {label:'무료', text:'초보자를 위한 무료 암호화폐 강의'},
+          {label:'다국어', text:'여러 언어로 배우는 구조화된 학습'},
+          {label:'PDF', text:'무료 PDF 가이드와 체크리스트'},
+          {label:'확장형', text:'더 깊이 보는 유료 가이드북'}
+        ]
+      },
+      th:{
+        title:'สิ่งที่คุณจะได้จาก Crypto Academy',
+        items:[
+          {label:'ฟรี', text:'บทเรียนคริปโตฟรีสำหรับผู้เริ่มต้น'},
+          {label:'หลายภาษา', text:'เรียนอย่างเป็นระบบได้หลายภาษา'},
+          {label:'PDF', text:'คู่มือและเช็กลิสต์ PDF ฟรี'},
+          {label:'เชิงลึก', text:'คู่มือแบบเสียค่าใช้จ่ายสำหรับการเรียนรู้ที่ลึกขึ้น'}
+        ]
+      },
+      id:{
+        title:'Apa yang tersedia di Crypto Academy',
+        items:[
+          {label:'Gratis', text:'Pelajaran crypto gratis untuk pemula'},
+          {label:'Bahasa', text:'Belajar terstruktur dalam banyak bahasa'},
+          {label:'PDF', text:'Panduan dan checklist PDF gratis'},
+          {label:'Lanjutan', text:'Guidebook premium untuk belajar lebih dalam'}
+        ]
+      },
+      pt:{
+        title:'O que você encontra na Crypto Academy',
+        items:[
+          {label:'Grátis', text:'Lições gratuitas de cripto para iniciantes'},
+          {label:'Idiomas', text:'Aprendizado estruturado em vários idiomas'},
+          {label:'PDF', text:'Guias e checklists em PDF gratuitos'},
+          {label:'Extra', text:'Guias premium para aprender com mais profundidade'}
+        ]
+      },
+      tr:{
+        title:'Crypto Academy’de neler var',
+        items:[
+          {label:'Ücretsiz', text:'Yeni başlayanlar için ücretsiz kripto dersleri'},
+          {label:'Dil', text:'Birden fazla dilde yapılandırılmış öğrenme'},
+          {label:'PDF', text:'Ücretsiz PDF rehberleri ve kontrol listeleri'},
+          {label:'Derinlik', text:'Daha derin öğrenme için premium rehberler'}
+        ]
+      },
+      es:{
+        title:'Lo que ofrece Crypto Academy',
+        items:[
+          {label:'Gratis', text:'Lecciones gratuitas de cripto para principiantes'},
+          {label:'Idiomas', text:'Aprendizaje estructurado en varios idiomas'},
+          {label:'PDF', text:'Guías y listas PDF gratuitas'},
+          {label:'Avanzado', text:'Guías premium para profundizar más'}
+        ]
+      },
+      ar:{
+        title:'ما الذي يقدمه Crypto Academy',
+        items:[
+          {label:'مجاني', text:'دروس مجانية للمبتدئين في الكريبتو'},
+          {label:'لغات', text:'تعلم منظم عبر عدة لغات'},
+          {label:'PDF', text:'أدلة وقوائم PDF مجانية'},
+          {label:'متقدم', text:'كتيبات مدفوعة للتعلم بشكل أعمق'}
+        ]
+      },
+      vi:{
+        title:'Những gì Crypto Academy cung cấp',
+        items:[
+          {label:'Miễn phí', text:'Bài học crypto miễn phí cho người mới'},
+          {label:'Đa ngôn ngữ', text:'Lộ trình học có cấu trúc bằng nhiều ngôn ngữ'},
+          {label:'PDF', text:'Hướng dẫn và checklist PDF miễn phí'},
+          {label:'Chuyên sâu', text:'Guidebook trả phí để học sâu hơn'}
+        ]
+      },
+      ha:{
+        title:'Abin da Crypto Academy ke bayarwa',
+        items:[
+          {label:'Kyauta', text:'Darussan crypto kyauta ga masu farawa'},
+          {label:'Harsuna', text:'Tsarin koyo cikin harsuna da yawa'},
+          {label:'PDF', text:'Jagorori da jerin dubawa na PDF kyauta'},
+          {label:'Zurfi', text:'Jagororin biya don ƙarin zurfin fahimta'}
+        ]
+      }
+    };
+    packs.br = packs.pt;
+    return packs[lang] || packs.en;
+  }
+
   function getHomePdfPack(){
     var lang = homeFixLang();
     var packs = {
@@ -19291,6 +19404,84 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
       ha:{
         title:'Jagororin PDF Kyauta',
         body:'Sauke jerin duba tsaron crypto na masu farawa a matsayin PDF cikin harshenka.'
+      }
+    };
+    packs.br = packs.pt;
+    return packs[lang] || packs.en;
+  }
+
+  function getHomePremiumPdfPack(){
+    var lang = homeFixLang();
+    var packs = {
+      en:{
+        title:'Premium PDF Guide',
+        body:'If you want something more detailed than a quick checklist, you can explore the extended beginner guidebook in PDF format.',
+        extra:'It covers first buying, transfers, storage, and scam awareness in a more structured way.',
+        buttonEn:'View English Edition',
+        buttonKo:'View Korean Edition'
+      },
+      ko:{
+        title:'유료 PDF 가이드',
+        body:'빠른 체크리스트보다 더 자세한 설명이 필요하다면, 초보자를 위한 실전 암호화폐 입문 가이드북을 PDF로 확인할 수 있습니다.',
+        extra:'첫 구매, 전송, 보관, 사기 예방까지 차근차근 정리한 확장형 가이드입니다.',
+        buttonEn:'영어판 보기',
+        buttonKo:'한국어판 보기'
+      },
+      th:{
+        title:'คู่มือ PDF แบบพรีเมียม',
+        body:'ถ้าคุณต้องการเนื้อหาที่ละเอียดกว่ารายการเช็กสั้น ๆ คุณสามารถดูคู่มือเริ่มต้นฉบับขยายสำหรับผู้เริ่มต้นในรูปแบบ PDF ได้',
+        extra:'คู่มือนี้เรียบเรียงเรื่องการซื้อครั้งแรก การโอน การเก็บรักษา และการระวังกลโกงแบบเป็นขั้นตอนมากขึ้น',
+        buttonEn:'ดูฉบับภาษาอังกฤษ',
+        buttonKo:'ดูฉบับภาษาเกาหลี'
+      },
+      id:{
+        title:'Panduan PDF Premium',
+        body:'Jika Anda ingin penjelasan yang lebih lengkap daripada checklist singkat, Anda bisa membuka guidebook pemula versi lengkap dalam format PDF.',
+        extra:'Isinya membahas pembelian pertama, transfer, penyimpanan, dan kewaspadaan terhadap penipuan dengan alur yang lebih terstruktur.',
+        buttonEn:'Lihat edisi bahasa Inggris',
+        buttonKo:'Lihat edisi bahasa Korea'
+      },
+      pt:{
+        title:'Guia PDF Premium',
+        body:'Se você quiser algo mais detalhado do que uma lista rápida, pode consultar o guia estendido para iniciantes em formato PDF.',
+        extra:'Ele organiza compra inicial, transferências, armazenamento e prevenção de golpes de forma mais estruturada.',
+        buttonEn:'Ver edição em inglês',
+        buttonKo:'Ver edição em coreano'
+      },
+      tr:{
+        title:'Premium PDF Rehberi',
+        body:'Kisa bir kontrol listesinden daha ayrintili bir icerik istiyorsaniz, yeni baslayanlar icin hazirlanan genisletilmis PDF rehberi inceleyebilirsiniz.',
+        extra:'Ilk alim, transfer, saklama ve dolandiricilik farkindaligi konularini daha duzenli bir akista toplar.',
+        buttonEn:'Ingilizce surumu ac',
+        buttonKo:'Korece surumu ac'
+      },
+      es:{
+        title:'Guía PDF Premium',
+        body:'Si quieres algo más detallado que una lista rápida, puedes revisar la guía ampliada para principiantes en formato PDF.',
+        extra:'Resume con más estructura la primera compra, las transferencias, el almacenamiento y la prevención de estafas.',
+        buttonEn:'Ver edición en inglés',
+        buttonKo:'Ver edición en coreano'
+      },
+      ar:{
+        title:'دليل PDF مدفوع',
+        body:'إذا كنت تريد شرحاً أكثر تفصيلاً من قائمة سريعة، يمكنك الاطلاع على الدليل الموسع للمبتدئين بصيغة PDF.',
+        extra:'يغطي الشراء الأول والتحويل والتخزين والانتباه للاحتيال بطريقة أكثر تنظيماً.',
+        buttonEn:'عرض النسخة الإنجليزية',
+        buttonKo:'عرض النسخة الكورية'
+      },
+      vi:{
+        title:'Huong dan PDF tra phi',
+        body:'Neu ban muon noi dung chi tiet hon mot checklist ngan, ban co the xem guidebook mo rong cho nguoi moi duoi dang PDF.',
+        extra:'Tai lieu nay trinh bay ro hon ve lan mua dau tien, chuyen tien, luu tru va nhan biet lua dao.',
+        buttonEn:'Mo ban tieng Anh',
+        buttonKo:'Mo ban tieng Han'
+      },
+      ha:{
+        title:'Jagorar PDF mai biya',
+        body:'Idan kana son karin bayani fiye da gajeren jerin dubawa, za ka iya duba fadadden jagorar masu farawa a matsayin PDF.',
+        extra:'Yana tattara sayen farko, canja wuri, ajiya, da kariya daga damfara cikin tsari mai saukin bi.',
+        buttonEn:'Duba sigar Turanci',
+        buttonKo:'Duba sigar Koriya'
       }
     };
     packs.br = packs.pt;
@@ -19452,6 +19643,19 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
       + '</section>';
   }
 
+  function buildHomeIdentityHtml(){
+    var pack = getHomeIdentityPack();
+    return ''
+      + '<section class="home-identity-block">'
+      +   '<div class="home-identity-title">' + (pack.title || 'What Crypto Academy offers') + '</div>'
+      +   '<div class="home-identity-grid">'
+      +     (pack.items || []).map(function(item){
+              return '<div class="home-identity-item"><span class="home-identity-label">' + item.label + '</span><div class="home-identity-copy">' + item.text + '</div></div>';
+            }).join('')
+      +   '</div>'
+      + '</section>';
+  }
+
   function buildHomePdfGuidesHtml(){
     var pack = getHomePdfPack();
     return ''
@@ -19466,6 +19670,20 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
       + '</section>';
   }
 
+  function buildHomePremiumPdfHtml(){
+    var pack = getHomePremiumPdfPack();
+    return ''
+      + '<section class="home-premium-pdf-block">'
+      +   '<div class="home-premium-pdf-title">' + (pack.title || 'Premium PDF Guide') + '</div>'
+      +   '<div class="home-premium-pdf-body">' + (pack.body || 'If you want something more detailed than a quick checklist, you can explore the extended beginner guidebook in PDF format.') + '</div>'
+      +   '<div class="home-premium-pdf-extra">' + (pack.extra || 'It covers first buying, transfers, storage, and scam awareness in a more structured way.') + '</div>'
+      +   '<div class="home-premium-pdf-actions">'
+      +     '<a class="home-premium-pdf-btn" href="https://buymeacoffee.com/beenetworkkorea/e/528650" target="_blank" rel="noopener noreferrer">' + (pack.buttonEn || 'View English Edition') + '</a>'
+      +     '<a class="home-premium-pdf-btn" href="https://buymeacoffee.com/beenetworkkorea/e/528662" target="_blank" rel="noopener noreferrer">' + (pack.buttonKo || 'View Korean Edition') + '</a>'
+      +   '</div>'
+      + '</section>';
+  }
+
   function enhanceHomeRecentUpdatesFinal(panel){
     panel.querySelectorAll('.home-recent-update-item').forEach(function(item){
       var dateEl = item.querySelector('.home-recent-update-date');
@@ -19475,6 +19693,29 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
       if(oldMeta) oldMeta.remove();
       dateEl.insertAdjacentHTML('afterend', buildHomeUpdateMetaHtml(date));
     });
+  }
+
+  function ensureHomeIdentityBlockFinal(panel){
+    var hero = panel.querySelector('.home-hero');
+    if(!hero) return;
+    panel.querySelectorAll('.home-identity-block').forEach(function(node){
+      if(node.parentNode !== hero) node.remove();
+    });
+    var desc = hero.querySelector('.home-desc');
+    var block = hero.querySelector('.home-identity-block');
+    if(!block){
+      if(desc){
+        desc.insertAdjacentHTML('afterend', buildHomeIdentityHtml());
+      } else {
+        hero.insertAdjacentHTML('afterbegin', buildHomeIdentityHtml());
+      }
+      block = hero.querySelector('.home-identity-block');
+    }
+    if(!block) return;
+    var host = document.createElement('div');
+    host.innerHTML = buildHomeIdentityHtml();
+    var next = host.firstElementChild;
+    if(next) block.replaceWith(next);
   }
 
   function syncContinueCardFinal(panel){
@@ -19579,17 +19820,37 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     if(next) block.replaceWith(next);
   }
 
+  function ensureHomePremiumPdfBlockFinal(panel){
+    var finder = panel.querySelector('.start-finder');
+    if(!finder) return;
+    panel.querySelectorAll('.home-premium-pdf-block').forEach(function(node){
+      if(node.parentNode !== finder) node.remove();
+    });
+    var block = finder.querySelector('.home-premium-pdf-block');
+    if(!block){
+      finder.insertAdjacentHTML('beforeend', buildHomePremiumPdfHtml());
+      block = finder.querySelector('.home-premium-pdf-block');
+    }
+    if(!block) return;
+    var host = document.createElement('div');
+    host.innerHTML = buildHomePremiumPdfHtml();
+    var next = host.firstElementChild;
+    if(next) block.replaceWith(next);
+  }
+
   function syncHomeUiFinal(){
     var panel = document.getElementById('homePanel');
     if(!panel) return;
     panel.querySelectorAll('.home-all-guides').forEach(function(node){ node.remove(); });
     panel.querySelectorAll('.home-grid, .home-mini-grid').forEach(function(node){ node.remove(); });
+    ensureHomeIdentityBlockFinal(panel);
     enhanceHomeRecentUpdatesFinal(panel);
     syncContinueCardFinal(panel);
     ensureRoadmapLessonSevenIconFinal(panel);
     expandStartFinderFinal(panel);
     ensureHomeSupportBlockFinal(panel);
     ensureHomePdfBlockFinal(panel);
+    ensureHomePremiumPdfBlockFinal(panel);
   }
 
   function wrapHomeUiFinal(name){
@@ -19755,6 +20016,271 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
   }
   if(typeof currentPage !== 'undefined' && currentPage === 'start' && typeof showPage === 'function'){
     showPage('start');
+  }
+})();
+</script>
+<script id="bookmark-safety-tip-final">
+(function(){
+  if(window.__bookmarkSafetyTipFinal) return;
+  window.__bookmarkSafetyTipFinal = true;
+  if(typeof polishedSectionContent === 'undefined' || !polishedSectionContent) return;
+
+  function clone(value){
+    return JSON.parse(JSON.stringify(value));
+  }
+
+  function norm(value){
+    return String(value || '').toLowerCase().replace(/\s+/g,' ').trim();
+  }
+
+  var bookmarkSafetyPack = {
+    en:{
+      title:'Use bookmarked official sites',
+      body:'For important exchanges, wallets, and crypto services, confirm the official domain first and save it as a bookmark. Using a trusted bookmark instead of random search results, ads, or DM links can reduce the risk of fake websites.'
+    },
+    ko:{
+      title:'북마크된 공식 사이트만 사용하세요',
+      body:'중요한 거래소, 지갑, 자주 쓰는 서비스는 공식 도메인을 직접 확인한 뒤 북마크해 두는 것이 좋습니다. 검색 결과, 광고, DM 링크를 바로 누르기보다 저장해 둔 북마크를 사용하는 습관이 가짜 사이트 위험을 줄여줍니다.'
+    },
+    th:{
+      title:'ใช้เฉพาะเว็บทางการที่บันทึกบุ๊กมาร์กไว้',
+      body:'สำหรับเว็บเทรด วอลเล็ต และบริการคริปโตที่สำคัญ ควรตรวจสอบโดเมนทางการด้วยตัวเองก่อนแล้วบันทึกเป็นบุ๊กมาร์กไว้ การเปิดจากบุ๊กมาร์กที่เชื่อถือได้แทนผลค้นหา โฆษณา หรือ DM จะช่วยลดความเสี่ยงจากเว็บไซต์ปลอมได้'
+    },
+    id:{
+      title:'Gunakan situs resmi yang sudah dibookmark',
+      body:'Untuk exchange, wallet, dan layanan crypto penting, periksa dulu domain resminya lalu simpan sebagai bookmark. Kebiasaan membuka dari bookmark tepercaya, bukan dari hasil pencarian, iklan, atau tautan DM, bisa mengurangi risiko situs palsu.'
+    },
+    pt:{
+      title:'Use apenas sites oficiais salvos nos favoritos',
+      body:'Para exchanges, carteiras e serviços importantes, confirme primeiro o domínio oficial e salve-o nos favoritos. Abrir por um favorito confiável, em vez de resultados de busca, anúncios ou links por DM, reduz o risco de sites falsos.'
+    },
+    tr:{
+      title:'Yalnızca yer imlerine eklediğiniz resmi siteleri kullanın',
+      body:'Önemli borsalar, cüzdanlar ve kripto hizmetleri için önce resmi alan adını kendiniz doğrulayın ve yer imlerine kaydedin. Arama sonuçları, reklamlar veya DM bağlantıları yerine güvenilir yer imlerini kullanmak sahte site riskini azaltır.'
+    },
+    es:{
+      title:'Usa solo sitios oficiales guardados en marcadores',
+      body:'Para exchanges, billeteras y servicios cripto importantes, confirma primero el dominio oficial y guárdalo en tus marcadores. Abrir un marcador confiable en lugar de resultados de búsqueda, anuncios o enlaces por DM reduce el riesgo de sitios falsos.'
+    },
+    ar:{
+      title:'استخدم فقط المواقع الرسمية المحفوظة في الإشارات المرجعية',
+      body:'بالنسبة للمنصات والمحافظ والخدمات المهمة، تأكد أولاً من النطاق الرسمي بنفسك ثم احفظه في الإشارات المرجعية. استخدام رابط محفوظ وموثوق بدلاً من نتائج البحث أو الإعلانات أو روابط الرسائل الخاصة يقلل من خطر المواقع المزيفة.'
+    },
+    vi:{
+      title:'Chi dùng các trang chính thức đã lưu dấu trang',
+      body:'Với các sàn, ví và dịch vụ crypto quan trọng, hãy tự xác nhận tên miền chính thức trước rồi lưu lại bằng dấu trang. Mở từ dấu trang đáng tin cậy thay vì kết quả tìm kiếm, quảng cáo hoặc liên kết trong DM sẽ giúp giảm rủi ro gặp trang giả.'
+    },
+    ha:{
+      title:'Yi amfani da shafukan hukuma da ka yi wa alamar shafi',
+      body:'Ga muhimman dandali, walat, da ayyukan crypto, ka fara tabbatar da sahihin domain ɗin hukuma sannan ka yi masa alamar shafi. Yin amfani da alamar shafi mai aminci maimakon sakamakon bincike, talla, ko mahaɗin DM yana rage haɗarin shafin bogi.'
+    }
+  };
+  bookmarkSafetyPack.br = clone(bookmarkSafetyPack.pt);
+
+  function ensureBookmarkTip(lang){
+    var target = polishedSectionContent[lang];
+    var pack = bookmarkSafetyPack[lang] || bookmarkSafetyPack.en;
+    if(!target || !pack) return;
+    target.safetyItems = Array.isArray(target.safetyItems) ? target.safetyItems.slice() : [];
+    var exists = target.safetyItems.some(function(row){
+      return norm(row && row[0]) === norm(pack.title);
+    });
+    if(!exists){
+      target.safetyItems.push([pack.title, pack.body]);
+    }
+  }
+
+  Object.keys(bookmarkSafetyPack).forEach(function(lang){
+    ensureBookmarkTip(lang);
+  });
+
+  if(typeof currentPage !== 'undefined' && currentPage === 'safety' && typeof showPage === 'function'){
+    showPage('safety');
+  }else if(typeof document !== 'undefined'){
+    var panel = document.getElementById('safetyPanel');
+    if(panel && typeof renderSafetyPage === 'function'){
+      panel.innerHTML = renderSafetyPage();
+    }
+  }
+})();
+</script>
+<script id="lesson-seven-bookmark-warning-final">
+(function(){
+  if(window.__lessonSevenBookmarkWarningFinal) return;
+  window.__lessonSevenBookmarkWarningFinal = true;
+  if(typeof lessons === 'undefined' || !lessons) return;
+
+  function clone(value){
+    return JSON.parse(JSON.stringify(value));
+  }
+
+  function norm(value){
+    return String(value || '').toLowerCase().replace(/\s+/g,' ').trim();
+  }
+
+  var warningPack = {
+    en:'Fake sites that look visually similar can fool a beginner very easily. For important services, confirm the official domain first and use a saved bookmark instead of random search results, ads, or DM links.',
+    ko:'겉보기에 비슷한 가짜 사이트는 초보자를 쉽게 속일 수 있습니다. 중요한 서비스는 공식 도메인을 먼저 확인한 뒤 북마크해 두고, 검색 결과나 광고, DM 링크 대신 저장한 북마크로 접속하는 습관이 더 안전합니다.',
+    th:'เว็บปลอมที่หน้าตาคล้ายกันมากสามารถหลอกผู้เริ่มต้นได้ง่าย สำหรับบริการสำคัญ ควรตรวจสอบโดเมนทางการก่อนแล้วบันทึกเป็นบุ๊กมาร์กไว้ และใช้บุ๊กมาร์กนั้นแทนผลค้นหา โฆษณา หรือ DM',
+    id:'Situs palsu yang tampak sangat mirip bisa dengan mudah menipu pemula. Untuk layanan penting, periksa dulu domain resminya lalu simpan sebagai bookmark, dan biasakan membuka dari bookmark itu, bukan dari hasil pencarian, iklan, atau tautan DM.',
+    pt:'Sites falsos muito parecidos podem enganar iniciantes com facilidade. Para serviços importantes, confirme primeiro o domínio oficial, salve-o nos favoritos e use esse favorito em vez de resultados de busca, anúncios ou links por DM.',
+    tr:'Birbirine çok benzeyen sahte siteler yeni başlayanları kolayca kandırabilir. Önemli hizmetlerde önce resmi alan adını doğrulayın, yer imlerine kaydedin ve arama sonuçları, reklamlar veya DM bağlantıları yerine o kaydı kullanın.',
+    es:'Los sitios falsos que se parecen mucho al original pueden engañar fácilmente a un principiante. Para servicios importantes, confirma primero el dominio oficial, guárdalo en marcadores y entra desde ese marcador en lugar de resultados de búsqueda, anuncios o enlaces por DM.',
+    ar:'المواقع المزيفة المتشابهة بصرياً قد تخدع المبتدئ بسهولة. في الخدمات المهمة، تأكد أولاً من النطاق الرسمي ثم احفظه في الإشارات المرجعية، وادخل من هذا الرابط المحفوظ بدلاً من نتائج البحث أو الإعلانات أو روابط الرسائل الخاصة.',
+    vi:'Những trang giả có giao diện rất giống trang thật có thể đánh lừa người mới rất dễ dàng. Với các dịch vụ quan trọng, hãy xác nhận tên miền chính thức trước, lưu lại bằng dấu trang, rồi dùng dấu trang đó thay vì kết quả tìm kiếm, quảng cáo hoặc liên kết trong DM.',
+    ha:'Shafukan bogi masu kama da na gaske na iya ruɗar mai farawa cikin sauƙi. Ga muhimman ayyuka, ka fara tabbatar da sahihin domain ɗin hukuma, ka yi masa alamar shafi, sannan ka riƙa shiga ta wannan alamar shafi maimakon sakamakon bincike, talla, ko mahaɗin DM.'
+  };
+  warningPack.br = warningPack.pt;
+
+  function injectWarningIntoLesson(lang, store){
+    if(!store || !store[lang] || !store[lang][6] || !Array.isArray(store[lang][6].sections)) return;
+    var lesson = store[lang][6];
+    var section = lesson.sections[4];
+    var warning = warningPack[lang] || warningPack.en;
+    if(!section || !Array.isArray(section.ps) || !warning) return;
+    if(!section.ps.some(function(line){ return norm(line) === norm(warning); })){
+      section.ps = section.ps.slice();
+      section.ps.push(warning);
+    }
+  }
+
+  Object.keys(warningPack).forEach(function(lang){
+    injectWarningIntoLesson(lang, lessons);
+    if(typeof lessonOverrides !== 'undefined' && lessonOverrides){
+      injectWarningIntoLesson(lang, lessonOverrides);
+    }
+  });
+
+  if(typeof currentPage !== 'undefined' && /^lesson\d+$/.test(currentPage) && typeof currentLesson === 'number' && currentLesson === 6 && typeof showLesson === 'function'){
+    showLesson(6);
+  }
+})();
+</script>
+<script id="lesson-seven-bookmark-callout-box-final">
+(function(){
+  if(window.__lessonSevenBookmarkCalloutBoxFinal) return;
+  window.__lessonSevenBookmarkCalloutBoxFinal = true;
+  if(typeof window.renderLesson !== 'function') return;
+
+  function baseLang(lang){
+    var resolved = lang || (typeof currentLang === 'string' ? currentLang : 'en') || 'en';
+    return resolved === 'br' ? 'pt' : resolved;
+  }
+
+  function normalizeText(value){
+    return String(value || '').replace(/\s+/g,' ').trim().toLowerCase();
+  }
+
+  var bookmarkPack = {
+    en: {
+      title: 'Use bookmarked official sites',
+      body: 'For important exchanges, wallets, and crypto services, confirm the official domain first and save it as a bookmark. Using a trusted bookmark instead of random search results, ads, or DM links can reduce the risk of fake websites.'
+    },
+    ko: {
+      title: '북마크된 공식 사이트만 사용하세요',
+      body: '중요한 거래소, 지갑, 자주 쓰는 서비스는 공식 도메인을 직접 확인한 뒤 북마크해 두는 것이 좋습니다. 검색 결과, 광고, DM 링크를 바로 누르기보다 저장해 둔 북마크로 접속하는 습관이 가짜 사이트 위험을 줄여줍니다.'
+    },
+    th: {
+      title: 'ใช้เฉพาะเว็บไซต์ทางการที่บันทึกไว้',
+      body: 'สำหรับเว็บเทรด กระเป๋าเงิน และบริการคริปโตที่สำคัญ ควรตรวจสอบโดเมนทางการก่อนแล้วบันทึกเป็นบุ๊กมาร์ก การเข้าใช้งานผ่านบุ๊กมาร์กที่เชื่อถือได้แทนผลค้นหา โฆษณา หรือ ลิงก์จาก DM จะช่วยลดความเสี่ยงจากเว็บไซต์ปลอมได้'
+    },
+    id: {
+      title: 'Gunakan hanya situs resmi yang sudah dibookmark',
+      body: 'Untuk exchange, wallet, dan layanan crypto yang penting, periksa dulu domain resminya lalu simpan sebagai bookmark. Membuka lewat bookmark tepercaya, bukan dari hasil pencarian, iklan, atau tautan DM, bisa mengurangi risiko situs palsu.'
+    },
+    pt: {
+      title: 'Use apenas sites oficiais salvos nos favoritos',
+      body: 'Para exchanges, carteiras e serviços cripto importantes, confirme primeiro o domínio oficial e salve-o nos favoritos. Abrir pelo favorito confiável, em vez de resultados de busca, anúncios ou links por DM, pode reduzir o risco de sites falsos.'
+    },
+    tr: {
+      title: 'Yalnızca yer imlerine kaydettiğiniz resmi siteleri kullanın',
+      body: 'Önemli borsalar, cüzdanlar ve kripto hizmetleri için önce resmi alan adını doğrulayın ve yer imlerine kaydedin. Arama sonuçları, reklamlar veya DM bağlantıları yerine kayıtlı yer imini kullanmak sahte site riskini azaltabilir.'
+    },
+    es: {
+      title: 'Usa solo sitios oficiales guardados en marcadores',
+      body: 'Para exchanges, billeteras y servicios cripto importantes, confirma primero el dominio oficial y guárdalo en marcadores. Entrar desde un marcador confiable, en lugar de resultados de búsqueda, anuncios o enlaces por DM, puede reducir el riesgo de sitios falsos.'
+    },
+    ar: {
+      title: 'استخدم فقط المواقع الرسمية المحفوظة في الإشارات المرجعية',
+      body: 'بالنسبة إلى المنصات والمحافظ وخدمات العملات الرقمية المهمة، تأكد أولا من النطاق الرسمي ثم احفظه في الإشارات المرجعية. استخدام رابط محفوظ وموثوق بدلا من نتائج البحث أو الإعلانات أو روابط الرسائل الخاصة يقلل خطر المواقع المزيفة.'
+    },
+    vi: {
+      title: 'Chỉ dùng các trang chính thức đã lưu dấu trang',
+      body: 'Với các sàn, ví và dịch vụ crypto quan trọng, hãy kiểm tra đúng tên miền chính thức trước rồi lưu lại bằng dấu trang. Mở từ dấu trang tin cậy thay vì kết quả tìm kiếm, quảng cáo hoặc liên kết trong DM sẽ giúp giảm rủi ro gặp trang giả.'
+    },
+    ha: {
+      title: 'Yi amfani da shafukan hukuma da ka yi wa alamar shafi kawai',
+      body: 'Ga muhimman dandamali, walat da ayyukan crypto, ka fara tabbatar da sahihin domain na hukuma sannan ka yi masa alamar shafi. Yin shiga ta alamar shafi da ka amince da ita maimakon sakamakon bincike, talla ko mahaɗin DM na rage haɗarin shafukan bogi.'
+    }
+  };
+  bookmarkPack.br = bookmarkPack.pt;
+
+  function buildBookmarkCallout(lang){
+    var entry = bookmarkPack[baseLang(lang)] || bookmarkPack.en;
+    return (
+      '<div class="callout warn lesson-seven-bookmark-callout">' +
+        '<strong>' + entry.title + '</strong><br>' +
+        entry.body +
+      '</div>'
+    );
+  }
+
+  function removeInjectedWarningParagraph(root, lang){
+    var entry = bookmarkPack[baseLang(lang)] || bookmarkPack.en;
+    var target = normalizeText(entry.body);
+    Array.prototype.slice.call(root.querySelectorAll('.lesson-body p')).forEach(function(node){
+      if(normalizeText(node.textContent) === target){
+        node.remove();
+      }
+    });
+  }
+
+  function insertBookmarkCallout(root, lang){
+    var body = root.querySelector('.lesson-body');
+    if(!body || body.querySelector('.lesson-seven-bookmark-callout')) return;
+
+    var headings = body.querySelectorAll('h2');
+    var anchor = headings[4] || headings[2] || headings[headings.length - 1] || null;
+    if(!anchor){
+      body.insertAdjacentHTML('afterbegin', buildBookmarkCallout(lang));
+      return;
+    }
+
+    var insertAfter = anchor;
+    var next = anchor.nextElementSibling;
+    while(next && next.tagName === 'P'){
+      insertAfter = next;
+      next = next.nextElementSibling;
+    }
+    insertAfter.insertAdjacentHTML('afterend', buildBookmarkCallout(lang));
+  }
+
+  var originalRenderLesson = window.renderLesson;
+  if(originalRenderLesson.__lessonSevenBookmarkCalloutWrapped) return;
+
+  function wrappedRenderLesson(i){
+    var html = originalRenderLesson.apply(this, arguments);
+    if(i !== 6 || typeof html !== 'string') return html;
+    var shell = document.createElement('div');
+    shell.innerHTML = html;
+    var lang = baseLang();
+    removeInjectedWarningParagraph(shell, lang);
+    insertBookmarkCallout(shell, lang);
+    return shell.innerHTML;
+  }
+
+  wrappedRenderLesson.__lessonSevenBookmarkCalloutWrapped = true;
+  window.renderLesson = wrappedRenderLesson;
+
+  if(typeof document !== 'undefined'){
+    var lessonSevenPanel = document.getElementById('lesson6');
+    if(lessonSevenPanel){
+      lessonSevenPanel.innerHTML = window.renderLesson(6);
+    }
+  }
+
+  if(typeof currentPage !== 'undefined' && /^lesson\d+$/.test(currentPage) && typeof currentLesson === 'number' && currentLesson === 6 && typeof showLesson === 'function'){
+    showLesson(6);
   }
 })();
 </script>
