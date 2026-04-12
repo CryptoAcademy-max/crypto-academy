@@ -14778,7 +14778,10 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     activeIndex: -1,
     items: [],
     geckoCache: {},
-    geckoInflight: {}
+    geckoInflight: {},
+    lastQuery: '',
+    focusRequestId: 0,
+    highlightTimer: null
   };
 
   function ensureUnifiedSearchStyles(){
@@ -14807,6 +14810,8 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
       '#searchOverlay #searchResults .search-result-title{font-size:.92rem;font-weight:700;color:var(--text);line-height:1.35;white-space:normal;overflow-wrap:anywhere;word-break:keep-all}' +
       '#searchOverlay #searchResults .search-result-meta{font-size:.74rem;color:var(--text-3);margin-top:2px;line-height:1.4;white-space:normal;overflow-wrap:anywhere}' +
       '#searchOverlay #searchResults .search-result-desc{font-size:.79rem;color:var(--text-2);margin-top:4px;line-height:1.5;white-space:normal;overflow-wrap:anywhere}' +
+      '.search-target-highlight-final{position:relative;background:rgba(199,171,84,.14) !important;box-shadow:0 0 0 2px rgba(199,171,84,.42),0 14px 32px rgba(24,42,69,.10) !important;border-color:rgba(199,171,84,.58) !important;animation:searchTargetPulseFinal 2.8s ease}' +
+      '@keyframes searchTargetPulseFinal{0%{transform:translateY(0);box-shadow:0 0 0 0 rgba(199,171,84,.0),0 0 0 rgba(24,42,69,.0)}20%{transform:translateY(-1px);box-shadow:0 0 0 3px rgba(199,171,84,.28),0 14px 32px rgba(24,42,69,.10)}100%{transform:translateY(0);box-shadow:0 0 0 2px rgba(199,171,84,.42),0 14px 32px rgba(24,42,69,.10)}}' +
       '#searchOverlay #searchResults .coin-card{margin:0;border-radius:16px}' +
       '@media (max-width:640px){#searchOverlay #searchResults{padding:10px 12px 14px;max-height:min(64vh,560px)}#searchOverlay #searchResults .search-result-item{padding:11px 8px;gap:10px}#searchOverlay #searchResults .search-result-badge{width:28px;height:28px;font-size:.62rem}#searchOverlay #searchResults .search-result-title{font-size:.88rem}#searchOverlay #searchResults .search-result-meta{font-size:.71rem}#searchOverlay #searchResults .search-result-desc{font-size:.77rem}}';
     document.head.appendChild(style);
@@ -15809,6 +15814,8 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
       items.push({
         type:'lesson',
         badge:'L' + (i + 1),
+        page:'lesson',
+        lessonIndex:i,
         title:getTextValue(lessonData[i].title),
         desc:lessonData[i].intro ? getTextValue(lessonData[i].intro).substring(0, 120) + '...' : '',
         keywords:getLessonSearchKeywordsFinal(i, lessonData[i]),
@@ -15821,6 +15828,7 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
       items.push({
         type:'glossary',
         badge:'G',
+        page:'glossary',
         title:getTextValue(glossaryItems[g][0]),
         desc:getTextValue(glossaryItems[g][1]),
         keywords:getGlossarySearchKeywordsFinal(g, glossaryItems[g]).concat(getKnownInternalKeywordsFinal(getTextValue(glossaryItems[g][0]), getTextValue(glossaryItems[g][1]), 'glossary', 'G')),
@@ -15836,6 +15844,7 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
         items.push({
           type:'faq',
           badge:'F',
+          page:'faq',
           title:getTextValue(faqData.faqItems[f][0]),
           desc:getTextValue(faqData.faqItems[f][1]),
           keywords:getFaqSearchKeywordsFinal(f, faqData.faqItems[f]).concat(getKnownInternalKeywordsFinal(getTextValue(faqData.faqItems[f][0]), getTextValue(faqData.faqItems[f][1]), 'faq', 'F')),
@@ -15849,6 +15858,7 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
       items.push({
         type:'source',
         badge:'S',
+        page:'sources',
         title:getTextValue(sourceItems[s][2] || sourceItems[s][1]),
         desc:[getTextValue(sourceItems[s][3]), getTextValue(sourceItems[s][1])].filter(Boolean).join(' - '),
         keywords:getKnownInternalKeywordsFinal(getTextValue(sourceItems[s][2] || sourceItems[s][1]), [getTextValue(sourceItems[s][3]), getTextValue(sourceItems[s][1])].filter(Boolean).join(' - '), 'source', 'S'),
@@ -15885,6 +15895,7 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
         addItem({
           type:'safety',
           badge:'T',
+          page:'safety',
           title:getTextValue(entry[0]),
           desc:getTextValue(entry[1]),
           keywords:getKnownInternalKeywordsFinal(getTextValue(entry[0]), getTextValue(entry[1]), 'safety', 'T'),
@@ -15907,6 +15918,7 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
       addItem({
         type:'page',
         badge:'P',
+        page:def.page,
         title:getTextValue(def.title),
         desc:getTextValue(def.desc),
         keywords:getPageSearchKeywordsFinal(def.page).concat(getKnownInternalKeywordsFinal(getTextValue(def.title), getTextValue(def.desc), 'page', 'P')),
@@ -16115,6 +16127,7 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     var container = getResultsContainer();
     if(!container) return;
     var normalizedQuery = normalizeText(query);
+    searchState.lastQuery = query || '';
     if(!normalizedQuery){
       clearRepresentativeSelectionFinal();
       renderSuggestedSearchResultsFinal();
@@ -16241,6 +16254,168 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
   }
   window.highlightFirstCoinResult = highlightFirstCoinResultFinal;
 
+  function clearSearchTargetHighlightFinal(){
+    if(searchState.highlightTimer){
+      clearTimeout(searchState.highlightTimer);
+      searchState.highlightTimer = null;
+    }
+    document.querySelectorAll('.search-target-highlight-final').forEach(function(node){
+      node.classList.remove('search-target-highlight-final');
+    });
+  }
+
+  function getSearchFocusNeedlesFinal(payload){
+    var list = [];
+    function add(value){
+      var normalized = normalizeText(value);
+      if(!normalized || normalized.length < 2) return;
+      if(list.indexOf(normalized) === -1) list.push(normalized);
+    }
+    add(payload && payload.query);
+    add(payload && payload.title);
+    (payload && payload.keywords || []).forEach(add);
+    return list;
+  }
+
+  function getSearchTargetRootFinal(payload){
+    if(!payload) return null;
+    if(payload.page === 'lesson' && typeof payload.lessonIndex === 'number'){
+      return document.getElementById('lesson' + payload.lessonIndex);
+    }
+    if(payload.page === 'glossary') return document.getElementById('glossaryPanel');
+    if(payload.page === 'faq') return document.getElementById('faqPanel');
+    if(payload.page === 'safety') return document.getElementById('safetyPanel');
+    if(payload.page === 'sources') return document.getElementById('sourcesPanel');
+    if(payload.page === 'start') return document.getElementById('startPanel');
+    if(payload.page === 'updates') return document.getElementById('updatesPanel');
+    if(payload.page === 'home') return document.getElementById('homePanel');
+    return null;
+  }
+
+  function getSearchTargetCandidatesFinal(payload, root){
+    if(!payload || !root) return [];
+    if(payload.page === 'lesson'){
+      return Array.prototype.slice.call(root.querySelectorAll('.lesson-body h2, .lesson-body h3, .lesson-body p, .lesson-body .def-block, .lesson-body .example-card, .lesson-body .mistake-card, .lesson-body .faq-item, .lesson-body .checkpoint-item, .lesson-body .quiz-card, .lesson-body .source-card, .lesson-body .callout, .lesson-body .step-item, .visual, .lc-header'));
+    }
+    if(payload.page === 'glossary'){
+      return Array.prototype.slice.call(root.querySelectorAll('.glossary-card'));
+    }
+    if(payload.page === 'faq'){
+      return Array.prototype.slice.call(root.querySelectorAll('.faq-item'));
+    }
+    if(payload.page === 'safety'){
+      return Array.prototype.slice.call(root.querySelectorAll('.mistake-card'));
+    }
+    if(payload.page === 'sources'){
+      return Array.prototype.slice.call(root.querySelectorAll('.source-library-item, .src-section-block, .lc-header'));
+    }
+    if(payload.page === 'start'){
+      return Array.prototype.slice.call(root.querySelectorAll('.step-item, .callout, .lc-header'));
+    }
+    if(payload.page === 'updates'){
+      return Array.prototype.slice.call(root.querySelectorAll('.update-entry, .home-recent-update-item, .lc-header'));
+    }
+    return Array.prototype.slice.call(root.querySelectorAll('.lc-header, .home-card, .home-panel-card'));
+  }
+
+  function getSearchCandidateScoreFinal(node, payload, needles){
+    if(!node) return -1;
+    var text = normalizeText(node.textContent || '');
+    if(!text) return -1;
+    var score = 0;
+    var titleNeedle = normalizeText(payload && payload.title);
+    var queryNeedle = normalizeText(payload && payload.query);
+    if(queryNeedle){
+      if(text === queryNeedle) score += 300;
+      else if(text.indexOf(queryNeedle) === 0) score += 220;
+      else if(text.indexOf(queryNeedle) !== -1) score += 170;
+    }
+    if(titleNeedle){
+      if(text === titleNeedle) score += 240;
+      else if(text.indexOf(titleNeedle) === 0) score += 180;
+      else if(text.indexOf(titleNeedle) !== -1) score += 120;
+    }
+    needles.forEach(function(needle){
+      if(!needle) return;
+      if(text === needle) score += 160;
+      else if(text.indexOf(needle) === 0) score += 90;
+      else if(text.indexOf(needle) !== -1) score += 45;
+    });
+    if(node.classList.contains('glossary-card') || node.classList.contains('faq-item') || node.classList.contains('mistake-card') || node.classList.contains('source-library-item') || node.classList.contains('def-block')){
+      score += 25;
+    }
+    if(node.classList.contains('lc-header') && score === 0){
+      score += 5;
+    }
+    return score;
+  }
+
+  function applySearchTargetHighlightFinal(target){
+    if(!target) return;
+    clearSearchTargetHighlightFinal();
+    target.classList.add('search-target-highlight-final');
+    searchState.highlightTimer = setTimeout(function(){
+      target.classList.remove('search-target-highlight-final');
+      searchState.highlightTimer = null;
+    }, 2800);
+  }
+
+  function focusSearchTargetFinal(payload, requestId, triesLeft){
+    if(requestId !== searchState.focusRequestId) return;
+    var root = getSearchTargetRootFinal(payload);
+    if(!root){
+      if(triesLeft > 0){
+        setTimeout(function(){ focusSearchTargetFinal(payload, requestId, triesLeft - 1); }, 120);
+      }
+      return;
+    }
+    var needles = getSearchFocusNeedlesFinal(payload);
+    var candidates = getSearchTargetCandidatesFinal(payload, root);
+    var best = null;
+    var bestScore = -1;
+    candidates.forEach(function(node){
+      var score = getSearchCandidateScoreFinal(node, payload, needles);
+      if(score > bestScore){
+        best = node;
+        bestScore = score;
+      }
+    });
+    if(!best){
+      if(triesLeft > 0){
+        setTimeout(function(){ focusSearchTargetFinal(payload, requestId, triesLeft - 1); }, 120);
+      }
+      return;
+    }
+    if(payload.page === 'sources' && typeof setActiveSourceCategory === 'function'){
+      var section = best.closest('.src-section-block');
+      if(section && section.dataset.sourceSection){
+        setActiveSourceCategory(section.dataset.sourceSection);
+      }
+    }
+    if(typeof best.scrollIntoView === 'function'){
+      best.scrollIntoView({ block:'center', behavior:'smooth' });
+    }
+    applySearchTargetHighlightFinal(best);
+  }
+
+  function queueSearchTargetFocusFinal(item, query){
+    if(!item) return;
+    var payload = {
+      type:item.type || '',
+      page:item.page || item.type || '',
+      lessonIndex:typeof item.lessonIndex === 'number' ? item.lessonIndex : null,
+      title:getTextValue(item.title || ''),
+      query:query || searchState.lastQuery || '',
+      keywords:Array.isArray(item.keywords) ? item.keywords.slice(0, 18) : []
+    };
+    var requestId = ++searchState.focusRequestId;
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        focusSearchTargetFinal(payload, requestId, 10);
+      });
+    });
+  }
+
   function commitRepresentativeSelectionFinal(item, input, selectedValue){
     if(!item || !input || !isRepresentativeItem(item)) return;
     setRepresentativeSelectionFinal(item);
@@ -16274,6 +16449,7 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     if(!entry) return;
     if(entry.kind === 'internal' && entry.item && typeof entry.item.action === 'function'){
       clearRepresentativeSelectionFinal();
+      queueSearchTargetFocusFinal(entry.item, input ? input.value : searchState.lastQuery);
       entry.item.action();
       return;
     }
