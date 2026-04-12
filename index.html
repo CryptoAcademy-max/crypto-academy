@@ -19106,12 +19106,20 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
 .home-support-body{font-size:.82rem;color:var(--text-2);line-height:1.58}
 .home-support-btn{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;padding:11px 14px;border-radius:11px;border:1px solid rgba(38,65,99,.14);background:var(--sidebar);color:var(--navy);font-size:.8rem;font-weight:800;text-decoration:none;transition:transform .14s var(--ease),box-shadow .14s var(--ease),border-color .14s var(--ease)}
 .home-support-btn:hover{transform:translateY(-1px);box-shadow:var(--shadow);border-color:rgba(38,65,99,.22)}
+.home-pdf-block{margin:14px 0 0;padding:16px 18px;background:linear-gradient(180deg,#fff,#f8fafc);border:1px solid var(--line);border-radius:14px}
+.home-pdf-title{font-size:.92rem;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:5px}
+.home-pdf-body{font-size:.82rem;color:var(--text-2);line-height:1.58;margin-bottom:14px}
+.home-pdf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.home-pdf-link{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 13px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--text);text-decoration:none;font-size:.82rem;font-weight:700;transition:transform .14s var(--ease),box-shadow .14s var(--ease),border-color .14s var(--ease),background .14s var(--ease)}
+.home-pdf-link:hover{transform:translateY(-1px);box-shadow:var(--shadow);border-color:rgba(38,65,99,.18);background:var(--blue-bg)}
+.home-pdf-link-tag{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;min-width:40px;height:24px;padding:0 8px;border-radius:999px;background:var(--sidebar);color:var(--navy);font-size:.67rem;font-weight:800;letter-spacing:.04em}
 .lesson7-roadmap-icon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;margin-bottom:6px;opacity:.9}
 .lesson7-roadmap-icon svg{width:18px;height:18px;stroke:var(--navy);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:768px){
   .start-finder.is-expanded-home-menu .start-finder-grid{grid-template-columns:1fr}
   .home-support-block{flex-direction:column;align-items:flex-start}
   .home-support-btn{width:100%}
+  .home-pdf-grid{grid-template-columns:1fr}
 }
 </style>
 <script id="home-ui-final-fixes">
@@ -19240,6 +19248,68 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     };
     return packs[lang] || packs.en;
   }
+
+  function getHomePdfPack(){
+    var lang = homeFixLang();
+    var packs = {
+      en:{
+        title:'Free PDF Guides',
+        body:'Download the beginner crypto safety checklist in your language.'
+      },
+      ko:{
+        title:'무료 PDF 가이드',
+        body:'초보자를 위한 암호화폐 안전 체크리스트를 언어별 PDF로 다운로드할 수 있습니다.'
+      },
+      th:{
+        title:'คู่มือ PDF ฟรี',
+        body:'ดาวน์โหลดเช็กลิสต์ความปลอดภัยคริปโตสำหรับผู้เริ่มต้นในรูปแบบ PDF ตามภาษาของคุณ'
+      },
+      id:{
+        title:'Panduan PDF Gratis',
+        body:'Unduh checklist keamanan crypto untuk pemula dalam PDF sesuai bahasa Anda.'
+      },
+      pt:{
+        title:'Guias PDF Gratuitos',
+        body:'Baixe em PDF a lista de verificação de segurança cripto para iniciantes no seu idioma.'
+      },
+      tr:{
+        title:'Ucretsiz PDF Rehberleri',
+        body:'Yeni baslayanlar icin hazirlanan kripto guvenlik kontrol listesini kendi dilinizde PDF olarak indirin.'
+      },
+      es:{
+        title:'Guias PDF Gratis',
+        body:'Descarga la lista de verificación de seguridad cripto para principiantes en PDF y en tu idioma.'
+      },
+      ar:{
+        title:'أدلة PDF مجانية',
+        body:'نزّل قائمة التحقق الخاصة بأمان العملات الرقمية للمبتدئين بصيغة PDF وبلغتك.'
+      },
+      vi:{
+        title:'Huong dan PDF mien phi',
+        body:'Tai xuong checklist an toan crypto cho nguoi moi duoi dang PDF bang ngon ngu cua ban.'
+      },
+      ha:{
+        title:'Jagororin PDF Kyauta',
+        body:'Sauke jerin duba tsaron crypto na masu farawa a matsayin PDF cikin harshenka.'
+      }
+    };
+    packs.br = packs.pt;
+    return packs[lang] || packs.en;
+  }
+
+  var homePdfFiles = [
+    {code:'en', label:'English PDF', href:'pdf/crypto-safety-guide-en.pdf'},
+    {code:'ko', label:'한국어 PDF', href:'pdf/crypto-safety-guide-ko.pdf'},
+    {code:'th', label:'ไทย PDF', href:'pdf/crypto-safety-guide-th.pdf'},
+    {code:'id', label:'Indonesia PDF', href:'pdf/crypto-safety-guide-id.pdf'},
+    {code:'pt', label:'Português PDF', href:'pdf/crypto-safety-guide-pt.pdf'},
+    {code:'br', label:'Português (BR) PDF', href:'pdf/crypto-safety-guide-br.pdf'},
+    {code:'tr', label:'Türkçe PDF', href:'pdf/crypto-safety-guide-tr.pdf'},
+    {code:'es', label:'Español PDF', href:'pdf/crypto-safety-guide-es.pdf'},
+    {code:'ar', label:'العربية PDF', href:'pdf/crypto-safety-guide-ar.pdf'},
+    {code:'vi', label:'Tiếng Việt PDF', href:'pdf/crypto-safety-guide-vi.pdf'},
+    {code:'ha', label:'Hausa PDF', href:'pdf/crypto-safety-guide-ha.pdf'}
+  ];
 
   function getHomeUpdateLabelKeys(date){
     var byDate = {
@@ -19382,6 +19452,20 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
       + '</section>';
   }
 
+  function buildHomePdfGuidesHtml(){
+    var pack = getHomePdfPack();
+    return ''
+      + '<section class="home-pdf-block">'
+      +   '<div class="home-pdf-title">' + (pack.title || 'Free PDF Guides') + '</div>'
+      +   '<div class="home-pdf-body">' + (pack.body || 'Download the beginner crypto safety checklist in your language.') + '</div>'
+      +   '<div class="home-pdf-grid">'
+      +     homePdfFiles.map(function(item){
+              return '<a class="home-pdf-link" href="' + item.href + '" target="_blank" rel="noopener noreferrer"><span>' + item.label + '</span><span class="home-pdf-link-tag">PDF</span></a>';
+            }).join('')
+      +   '</div>'
+      + '</section>';
+  }
+
   function enhanceHomeRecentUpdatesFinal(panel){
     panel.querySelectorAll('.home-recent-update-item').forEach(function(item){
       var dateEl = item.querySelector('.home-recent-update-date');
@@ -19477,6 +19561,24 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     if(next) block.replaceWith(next);
   }
 
+  function ensureHomePdfBlockFinal(panel){
+    var finder = panel.querySelector('.start-finder');
+    if(!finder) return;
+    panel.querySelectorAll('.home-pdf-block').forEach(function(node){
+      if(node.parentNode !== finder) node.remove();
+    });
+    var block = finder.querySelector('.home-pdf-block');
+    if(!block){
+      finder.insertAdjacentHTML('beforeend', buildHomePdfGuidesHtml());
+      block = finder.querySelector('.home-pdf-block');
+    }
+    if(!block) return;
+    var host = document.createElement('div');
+    host.innerHTML = buildHomePdfGuidesHtml();
+    var next = host.firstElementChild;
+    if(next) block.replaceWith(next);
+  }
+
   function syncHomeUiFinal(){
     var panel = document.getElementById('homePanel');
     if(!panel) return;
@@ -19487,6 +19589,7 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     ensureRoadmapLessonSevenIconFinal(panel);
     expandStartFinderFinal(panel);
     ensureHomeSupportBlockFinal(panel);
+    ensureHomePdfBlockFinal(panel);
   }
 
   function wrapHomeUiFinal(name){
