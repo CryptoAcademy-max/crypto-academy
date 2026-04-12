@@ -8895,6 +8895,71 @@ quizData.ha = quizData.en;
   };
   startFinderData.br = startFinderData.pt;
 
+  var startFinderSupportData = {
+    en:{
+      title:'Support Crypto Academy',
+      body:'Crypto Academy is free to use. If this project helps you, you can support future updates here.',
+      button:'Buy Me a Coffee'
+    },
+    ko:{
+      title:'Crypto Academy 후원하기',
+      body:'Crypto Academy는 무료로 제공되고 있습니다. 이 프로젝트가 도움이 되었다면, 앞으로의 업데이트를 후원으로 응원하실 수 있습니다.',
+      button:'Buy Me a Coffee'
+    },
+    th:{
+      title:'สนับสนุน Crypto Academy',
+      body:'Crypto Academy เปิดให้ใช้งานฟรี หากโปรเจกต์นี้มีประโยชน์กับคุณ คุณสามารถสนับสนุนการอัปเดตต่อไปได้ที่นี่',
+      button:'Buy Me a Coffee'
+    },
+    id:{
+      title:'Dukung Crypto Academy',
+      body:'Crypto Academy dapat digunakan secara gratis. Jika proyek ini membantu Anda, Anda bisa mendukung pembaruan berikutnya di sini.',
+      button:'Buy Me a Coffee'
+    },
+    pt:{
+      title:'Apoie a Crypto Academy',
+      body:'A Crypto Academy é gratuita. Se este projeto está ajudando você, pode apoiar as próximas atualizações aqui.',
+      button:'Buy Me a Coffee'
+    },
+    tr:{
+      title:'Crypto Academy\'yi Destekleyin',
+      body:'Crypto Academy ücretsiz kullanılabilir. Bu proje size yardımcı oluyorsa, gelecek güncellemeleri buradan destekleyebilirsiniz.',
+      button:'Buy Me a Coffee'
+    },
+    es:{
+      title:'Apoya a Crypto Academy',
+      body:'Crypto Academy es gratis. Si este proyecto te ayuda, puedes apoyar aquí las próximas actualizaciones.',
+      button:'Buy Me a Coffee'
+    },
+    ar:{
+      title:'ادعم Crypto Academy',
+      body:'يمكنك استخدام Crypto Academy مجانًا. إذا كان هذا المشروع مفيدًا لك، يمكنك دعم التحديثات القادمة من هنا.',
+      button:'Buy Me a Coffee'
+    },
+    vi:{
+      title:'Ủng hộ Crypto Academy',
+      body:'Crypto Academy được sử dụng miễn phí. Nếu dự án này hữu ích với bạn, bạn có thể ủng hộ các bản cập nhật tiếp theo tại đây.',
+      button:'Buy Me a Coffee'
+    },
+    ha:{
+      title:'Tallafa wa Crypto Academy',
+      body:'Ana ba da Crypto Academy kyauta. Idan wannan aiki yana taimaka maka, za ka iya tallafa wa sabbin abubuwan da za a kara a nan.',
+      button:'Buy Me a Coffee'
+    }
+  };
+  startFinderSupportData.br = startFinderSupportData.pt;
+
+  function renderStartFinderSupport(){
+    var support = startFinderSupportData[currentLang] || startFinderSupportData.en;
+    return '<section class="home-support-block">'
+      + '<div class="home-support-copy">'
+      +   '<div class="home-support-title">'+support.title+'</div>'
+      +   '<div class="home-support-body">'+support.body+'</div>'
+      + '</div>'
+      + '<a class="home-support-btn" href="https://buymeacoffee.com/beenetworkkorea" target="_blank" rel="noopener noreferrer">'+support.button+'</a>'
+      + '</section>';
+  }
+
   function renderStartFinder(){
     var sf = startFinderData[currentLang] || startFinderData.en;
     var html = '<div class="start-finder"><div class="start-finder-title">'+sf.title+'</div><div class="start-finder-desc">'+sf.desc+'</div><div class="start-finder-grid">';
@@ -8902,7 +8967,7 @@ quizData.ha = quizData.en;
       var action = item[3]==='lesson' ? 'showLesson('+item[2]+')' : 'showPage(\''+item[2]+'\')';
       html += '<div class="start-finder-btn" onclick="'+action+'"><div class="sf-icon">'+(item[3]==='lesson'?(item[2]+1):'!')+'</div><span>'+item[0]+'</span></div>';
     });
-    html += '</div></div>';
+    html += '</div>' + renderStartFinderSupport() + '</div>';
     return html;
   }
 
@@ -18722,10 +18787,18 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
 .start-finder-btn.is-page-item .sf-icon{background:var(--gold-bg);color:#7a5f1f}
 .start-finder-btn.is-safety-item .sf-icon{background:#fff4f2;color:#8a3731}
 .start-finder-btn.is-scams-item .sf-icon{background:#eef3fa;color:var(--navy)}
+.home-support-block{margin:18px 0 0;padding:16px 18px;background:linear-gradient(180deg,#fff,#fbf8f3);border:1px solid var(--line);border-radius:14px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.home-support-copy{min-width:0}
+.home-support-title{font-size:.92rem;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:5px}
+.home-support-body{font-size:.82rem;color:var(--text-2);line-height:1.58}
+.home-support-btn{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;padding:11px 14px;border-radius:11px;border:1px solid rgba(38,65,99,.14);background:var(--sidebar);color:var(--navy);font-size:.8rem;font-weight:800;text-decoration:none;transition:transform .14s var(--ease),box-shadow .14s var(--ease),border-color .14s var(--ease)}
+.home-support-btn:hover{transform:translateY(-1px);box-shadow:var(--shadow);border-color:rgba(38,65,99,.22)}
 .lesson7-roadmap-icon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;margin-bottom:6px;opacity:.9}
 .lesson7-roadmap-icon svg{width:18px;height:18px;stroke:var(--navy);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:768px){
   .start-finder.is-expanded-home-menu .start-finder-grid{grid-template-columns:1fr}
+  .home-support-block{flex-direction:column;align-items:flex-start}
+  .home-support-btn{width:100%}
 }
 </style>
 <script id="home-ui-final-fixes">
@@ -18747,6 +18820,9 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
         safetySub:'Scam prevention and protection habits',
         faqSub:'Quick beginner questions',
         startSub:'Recommended first route for brand-new learners',
+        supportTitle:'Support Crypto Academy',
+        supportBody:'Crypto Academy is free to use. If this project helps you, you can support future updates here.',
+        supportButton:'Buy Me a Coffee',
         updateLabels:{Search:'Search',Lessons:'Lessons',Languages:'Languages',Updates:'Updates',Safety:'Safety',Home:'Home'}
       },
       ko:{
@@ -18755,6 +18831,9 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
         safetySub:'사기 예방과 보호 습관',
         faqSub:'초보자용 빠른 질문 모음',
         startSub:'완전 초보자를 위한 추천 시작 경로',
+        supportTitle:'Crypto Academy 후원하기',
+        supportBody:'Crypto Academy는 무료로 제공되고 있습니다. 이 프로젝트가 도움이 되었다면, 앞으로의 업데이트를 후원으로 응원하실 수 있습니다.',
+        supportButton:'Buy Me a Coffee',
         updateLabels:{Search:'검색',Lessons:'강의',Languages:'언어',Updates:'업데이트',Safety:'보안',Home:'홈'}
       },
       th:{
@@ -18763,6 +18842,9 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
         safetySub:'การป้องกันสแกมและนิสัยความปลอดภัย',
         faqSub:'คำถามสั้นสำหรับผู้เริ่มต้น',
         startSub:'เส้นทางเริ่มต้นที่แนะนำสำหรับมือใหม่',
+        supportTitle:'สนับสนุน Crypto Academy',
+        supportBody:'Crypto Academy เปิดให้ใช้งานฟรี หากโปรเจกต์นี้ช่วยคุณได้ คุณสามารถสนับสนุนการอัปเดตในอนาคตได้ที่นี่',
+        supportButton:'Buy Me a Coffee',
         updateLabels:{Search:'ค้นหา',Lessons:'บทเรียน',Languages:'ภาษา',Updates:'อัปเดต',Safety:'ความปลอดภัย',Home:'หน้าแรก'}
       },
       id:{
@@ -18771,6 +18853,9 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
         safetySub:'Pencegahan scam dan kebiasaan perlindungan',
         faqSub:'Pertanyaan cepat untuk pemula',
         startSub:'Rute awal yang disarankan untuk pemula total',
+        supportTitle:'Dukung Crypto Academy',
+        supportBody:'Crypto Academy gratis digunakan. Jika proyek ini membantu Anda, Anda bisa mendukung update berikutnya di sini.',
+        supportButton:'Buy Me a Coffee',
         updateLabels:{Search:'Pencarian',Lessons:'Pelajaran',Languages:'Bahasa',Updates:'Update',Safety:'Keamanan',Home:'Beranda'}
       },
       pt:{
@@ -18779,6 +18864,9 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
         safetySub:'Prevenção de golpes e hábitos de proteção',
         faqSub:'Perguntas rápidas para iniciantes',
         startSub:'Rota inicial recomendada para quem está começando',
+        supportTitle:'Apoie a Crypto Academy',
+        supportBody:'A Crypto Academy é gratuita. Se este projeto ajuda você, é possível apoiar as próximas atualizações aqui.',
+        supportButton:'Buy Me a Coffee',
         updateLabels:{Search:'Busca',Lessons:'Lições',Languages:'Idiomas',Updates:'Atualizações',Safety:'Segurança',Home:'Início'}
       },
       tr:{
@@ -18787,6 +18875,9 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
         safetySub:'Dolandiricilik onleme ve koruma aliskanliklari',
         faqSub:'Yeni baslayanlar icin hizli sorular',
         startSub:'Tam yeni baslayanlar icin onerilen baslangic rotasi',
+        supportTitle:'Crypto Academy\'yi destekleyin',
+        supportBody:'Crypto Academy ücretsizdir. Bu proje size yardımcı oluyorsa, sonraki güncellemeleri burada destekleyebilirsiniz.',
+        supportButton:'Buy Me a Coffee',
         updateLabels:{Search:'Arama',Lessons:'Dersler',Languages:'Diller',Updates:'Guncellemeler',Safety:'Guvenlik',Home:'Ana Sayfa'}
       },
       es:{
@@ -18795,6 +18886,9 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
         safetySub:'Prevención de estafas y hábitos de protección',
         faqSub:'Preguntas rápidas para principiantes',
         startSub:'Ruta inicial recomendada para principiantes totales',
+        supportTitle:'Apoya Crypto Academy',
+        supportBody:'Crypto Academy es de uso gratuito. Si este proyecto te ayuda, puedes apoyar aquí las próximas actualizaciones.',
+        supportButton:'Buy Me a Coffee',
         updateLabels:{Search:'Búsqueda',Lessons:'Lecciones',Languages:'Idiomas',Updates:'Actualizaciones',Safety:'Seguridad',Home:'Inicio'}
       },
       ar:{
@@ -18803,6 +18897,9 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
         safetySub:'عادات الحماية ومنع الاحتيال',
         faqSub:'أسئلة سريعة للمبتدئين',
         startSub:'مسار بداية مقترح للمبتدئ تماما',
+        supportTitle:'ادعم Crypto Academy',
+        supportBody:'Crypto Academy متاح مجاناً. إذا كان هذا المشروع مفيداً لك، يمكنك دعم التحديثات القادمة من هنا.',
+        supportButton:'Buy Me a Coffee',
         updateLabels:{Search:'البحث',Lessons:'الدروس',Languages:'اللغات',Updates:'التحديثات',Safety:'الأمان',Home:'الرئيسية'}
       },
       vi:{
@@ -18811,6 +18908,9 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
         safetySub:'Thoi quen bao ve va phong tranh lua dao',
         faqSub:'Cau hoi nhanh cho nguoi moi',
         startSub:'Lo trinh bat dau de xuat cho nguoi moi hoan toan',
+        supportTitle:'Ung ho Crypto Academy',
+        supportBody:'Crypto Academy duoc su dung mien phi. Neu du an nay giup ich cho ban, ban co the ung ho cac ban cap nhat tiep theo tai day.',
+        supportButton:'Buy Me a Coffee',
         updateLabels:{Search:'Tim kiem',Lessons:'Bai hoc',Languages:'Ngon ngu',Updates:'Cap nhat',Safety:'An toan',Home:'Trang chu'}
       },
       ha:{
@@ -18819,6 +18919,9 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
         safetySub:'Rigakafin damfara da halayen kariya',
         faqSub:'Tambayoyi masu sauri ga masu farawa',
         startSub:'Hanyar farawa da aka fi ba da shawara ga sabbin masu farawa',
+        supportTitle:'Tallafa wa Crypto Academy',
+        supportBody:'Crypto Academy kyauta ce ga kowa. Idan wannan aikin ya taimaka maka, za ka iya tallafa wa sabbin sabuntawa daga nan.',
+        supportButton:'Buy Me a Coffee',
         updateLabels:{Search:'Bincike',Lessons:'Darussa',Languages:'Harsuna',Updates:'Sabuntawa',Safety:'Tsaro',Home:'Gida'}
       }
     };
@@ -18954,6 +19057,18 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     return items;
   }
 
+  function buildHomeSupportBlockHtml(){
+    var pack = getHomeFixPack();
+    return ''
+      + '<section class="home-support-block">'
+      +   '<div class="home-support-copy">'
+      +     '<div class="home-support-title">' + (pack.supportTitle || 'Support Crypto Academy') + '</div>'
+      +     '<div class="home-support-body">' + (pack.supportBody || 'Crypto Academy is free to use. If this project helps you, you can support future updates here.') + '</div>'
+      +   '</div>'
+      +   '<a class="home-support-btn" href="https://buymeacoffee.com/beenetworkkorea" target="_blank" rel="noopener noreferrer">' + (pack.supportButton || 'Buy Me a Coffee') + '</a>'
+      + '</section>';
+  }
+
   function enhanceHomeRecentUpdatesFinal(panel){
     panel.querySelectorAll('.home-recent-update-item').forEach(function(item){
       var dateEl = item.querySelector('.home-recent-update-date');
@@ -19031,6 +19146,24 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     });
   }
 
+  function ensureHomeSupportBlockFinal(panel){
+    var finder = panel.querySelector('.start-finder');
+    if(!finder) return;
+    panel.querySelectorAll('.home-support-block').forEach(function(node){
+      if(node.parentNode !== finder) node.remove();
+    });
+    var block = finder.querySelector('.home-support-block');
+    if(!block){
+      finder.insertAdjacentHTML('beforeend', buildHomeSupportBlockHtml());
+      block = finder.querySelector('.home-support-block');
+    }
+    if(!block) return;
+    var host = document.createElement('div');
+    host.innerHTML = buildHomeSupportBlockHtml();
+    var next = host.firstElementChild;
+    if(next) block.replaceWith(next);
+  }
+
   function syncHomeUiFinal(){
     var panel = document.getElementById('homePanel');
     if(!panel) return;
@@ -19040,6 +19173,7 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     syncContinueCardFinal(panel);
     ensureRoadmapLessonSevenIconFinal(panel);
     expandStartFinderFinal(panel);
+    ensureHomeSupportBlockFinal(panel);
   }
 
   function wrapHomeUiFinal(name){
@@ -19054,6 +19188,22 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     window[name] = wrapped;
   }
 
+  if(typeof window.renderHome === 'function' && !window.renderHome.__homeSupportWrapped){
+    var __origRenderHomeSupport = window.renderHome;
+    var wrappedRenderHomeSupport = function(){
+      var html = __origRenderHomeSupport.apply(this, arguments);
+      if(typeof html !== 'string') return html || '';
+      if(html.indexOf('home-support-block') !== -1) return html;
+      var supportHtml = buildHomeSupportBlockHtml();
+      var anchor = html.lastIndexOf('</div></div></div>');
+      if(anchor !== -1) return html.slice(0, anchor + 18) + supportHtml + html.slice(anchor + 18);
+      return html + supportHtml;
+    };
+    wrappedRenderHomeSupport.__homeSupportWrapped = true;
+    window.renderHome = wrappedRenderHomeSupport;
+  }
+
+  wrapHomeUiFinal('renderHome');
   wrapHomeUiFinal('renderAllLessons');
   wrapHomeUiFinal('showPage');
   wrapHomeUiFinal('setLang');
