@@ -9682,6 +9682,37 @@ quizData.ha = quizData.en;
     es:{date:'2026-04-13', title:'La calidad de los resultados de búsqueda se ajustó una vez más para conectar mejor las palabras clave prácticas', items:['Se reforzaron los flujos de búsqueda de seguridad para términos como address poisoning, seed phrase, fake website y wrong network','Se añadió a la página Safety un consejo sobre usar dominios oficiales guardados en marcadores para reforzar un hábito de seguridad más práctico','También se conectó dentro de Lesson 7 una advertencia sobre usar sitios oficiales guardados en marcadores','Se ampliaron las explicaciones, el glosario y las fuentes sobre address poisoning para que el aprendizaje de prevención de estafas sea más claro','En la home, el flujo de clases gratuitas, aprendizaje multilingüe, PDF gratuitos y guías premium se hizo más visible y fácil de entender','Esta actualización se centró en ayudar a los principiantes a pasar de la búsqueda a los hábitos de seguridad y al aprendizaje de prevención de estafas de una forma más natural.']}
   };
   updateEntry20260413.br = updateEntry20260413.pt;
+  var updateEntry20260412 = {
+    en:{
+      date:'2026-04-12',
+      title:'Search result quality and practical security links were refined',
+      items:[
+        'Search result quality was refined so practical keywords connect more clearly.',
+        'Security-related search links were strengthened for terms such as address poisoning, seed phrase, fake websites, and wrong network.',
+        'A bookmark habit tip was added to the Safety page to reinforce checking and saving official domains first.',
+        'A warning about using bookmarked official sites was also connected inside Lesson 7.',
+        'This update focused on helping beginners move more naturally from search to safer habits and scam-prevention learning.'
+      ]
+    },
+    ko:{
+      date:'2026-04-12',
+      title:'검색 결과 품질과 보안 학습 흐름을 정리했습니다',
+      items:[
+        '검색 결과 품질을 정리해 실전 키워드가 더 잘 연결되도록 보강했습니다',
+        '주소 오염 공격, 시드 문구, 가짜 사이트, 잘못된 네트워크 같은 보안 관련 검색 흐름을 강화했습니다',
+        'Safety 페이지에 공식 도메인을 북마크해 사용하는 습관을 추가해 실전 안전 팁을 보강했습니다',
+        'Lesson 7에도 북마크된 공식 사이트 사용 습관과 관련된 경고문을 연결했습니다',
+        '이번 업데이트는 초보자가 검색부터 안전 습관, 사기 예방 학습까지 더 자연스럽게 이어서 이해할 수 있도록 흐름을 정리하는 데 집중했습니다'
+      ]
+    }
+  };
+  ['th','id','pt','tr','ar','ha','vi','es'].forEach(function(lang){
+    if(updateEntry20260413[lang]){
+      updateEntry20260412[lang] = JSON.parse(JSON.stringify(updateEntry20260413[lang]));
+      updateEntry20260412[lang].date = '2026-04-12';
+    }
+  });
+  updateEntry20260412.br = updateEntry20260412.pt;
   updateHistory.ha = [
     {
       date:'2026-04-06',
@@ -9793,9 +9824,9 @@ quizData.ha = quizData.en;
     }
   });
   ['en','ko','th','id','pt','tr','ar','ha','vi','es'].forEach(function(lang){
-    if(updateHistory[lang] && updateEntry20260413[lang]){
-      updateHistory[lang] = updateHistory[lang].filter(function(entry){ return entry.date !== '2026-04-13'; });
-      updateHistory[lang].unshift(updateEntry20260413[lang]);
+    if(updateHistory[lang] && updateEntry20260412[lang]){
+      updateHistory[lang] = updateHistory[lang].filter(function(entry){ return entry.date !== '2026-04-12'; });
+      updateHistory[lang].unshift(updateEntry20260412[lang]);
     }
   });
   // br mirrors pt
@@ -12927,7 +12958,7 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
 
   if(haPack && Array.isArray(haPack.updates)){
     haPack.updates = haPack.updates.filter(function(entry){
-      return entry.date !== '2026-04-09' && entry.date !== '2026-04-10' && entry.date !== '2026-04-11' && entry.date !== '2026-04-13';
+      return entry.date !== '2026-04-09' && entry.date !== '2026-04-10' && entry.date !== '2026-04-11' && entry.date !== '2026-04-12';
     });
     if(typeof updateEntry20260409 !== 'undefined' && updateEntry20260409.ha){
       haPack.updates.unshift(clone(updateEntry20260409.ha));
@@ -12938,8 +12969,8 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     if(typeof updateEntry20260411 !== 'undefined' && updateEntry20260411.ha){
       haPack.updates.unshift(clone(updateEntry20260411.ha));
     }
-    if(typeof updateEntry20260413 !== 'undefined' && updateEntry20260413.ha){
-      haPack.updates.unshift(clone(updateEntry20260413.ha));
+    if(typeof updateEntry20260412 !== 'undefined' && updateEntry20260412.ha){
+      haPack.updates.unshift(clone(updateEntry20260412.ha));
     }
   }
 
@@ -15940,6 +15971,46 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     ].filter(Boolean).join(' ');
   }
 
+  function getInternalKeywordTerms(item){
+    return Array.isArray(item && item.keywords)
+      ? item.keywords.map(function(keyword){ return normalizeText(keyword); }).filter(Boolean)
+      : [];
+  }
+
+  function hasInternalKeywordMatch(item, normalizedQuery, mode){
+    return getInternalKeywordTerms(item).some(function(keyword){
+      if(mode === 'exact') return keyword === normalizedQuery;
+      if(mode === 'starts') return keyword.indexOf(normalizedQuery) === 0;
+      return keyword.indexOf(normalizedQuery) !== -1;
+    });
+  }
+
+  function getInternalPriorityBucketFinal(item, normalizedQuery){
+    if(!normalizedQuery) return 5;
+    var title = normalizeText(item && item.title);
+    var desc = normalizeText(item && item.desc);
+    var titleContains = title.indexOf(normalizedQuery) !== -1;
+    var descContains = desc.indexOf(normalizedQuery) !== -1;
+    var keywordContains = hasInternalKeywordMatch(item, normalizedQuery, 'contains');
+
+    if(title === normalizedQuery || desc === normalizedQuery || hasInternalKeywordMatch(item, normalizedQuery, 'exact')){
+      return 0;
+    }
+    if(title.indexOf(normalizedQuery) === 0 || hasInternalKeywordMatch(item, normalizedQuery, 'starts')){
+      return 1;
+    }
+    if(item && item.type === 'glossary' && (titleContains || descContains || keywordContains)){
+      return 2;
+    }
+    if(item && item.type === 'lesson' && (titleContains || descContains || keywordContains)){
+      return 3;
+    }
+    if(item && (item.type === 'safety' || item.type === 'faq' || item.type === 'source') && (titleContains || descContains || keywordContains)){
+      return 4;
+    }
+    return 5;
+  }
+
   function getInternalItemRank(item, normalizedQuery){
     var title = normalizeText(item && item.title);
     var desc = normalizeText(item && item.desc);
@@ -15972,6 +16043,7 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     } else if(item && item.type === 'source'){
       score += 10;
     }
+    score += (5 - getInternalPriorityBucketFinal(item, normalizedQuery)) * 1200;
     score += getInternalIntentBoostFinal(item, normalizedQuery);
     return score;
   }
@@ -15984,6 +16056,8 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
       var blob = normalizeText(getInternalItemSearchText(item));
       return blob.indexOf(normalizedQuery) !== -1;
     }).sort(function(a, b){
+      var bucketDiff = getInternalPriorityBucketFinal(a, normalizedQuery) - getInternalPriorityBucketFinal(b, normalizedQuery);
+      if(bucketDiff !== 0) return bucketDiff;
       var rankDiff = getInternalItemRank(b, normalizedQuery) - getInternalItemRank(a, normalizedQuery);
       if(rankDiff !== 0) return rankDiff;
       var aType = Object.prototype.hasOwnProperty.call(typeOrder, a.type) ? typeOrder[a.type] : 99;
@@ -19232,7 +19306,7 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
   }
 })();
 </script>
-<script id="address-poisoning-final">
+<script id="address-poisoning-final" type="application/json">
 (function(){
   if(window.__addressPoisoningFinal) return;
   window.__addressPoisoningFinal = true;
@@ -19962,6 +20036,7 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
 
   function getHomeUpdateLabelKeys(date){
     var byDate = {
+      '2026-04-12':['Search','Safety','Updates'],
       '2026-04-11':['Home','Lessons','Updates'],
       '2026-04-10':['Search','Lessons','Safety'],
       '2026-04-09':['Languages','Search','Updates']
@@ -20742,7 +20817,7 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
   }
 })();
 </script>
-<script id="glossary-eight-terms-final">
+<script id="glossary-eight-terms-final" type="application/json">
 (function(){
   if(window.__glossaryEightTermsFinal) return;
   window.__glossaryEightTermsFinal = true;
@@ -21018,6 +21093,800 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     if(panel && typeof renderGlossary === 'function'){
       panel.innerHTML = renderGlossary();
     }
+  }
+})();
+</script>
+<script id="glossary-20260413-patch-disabled" type="application/json">
+(function(){
+  if(window.__glossary20260413Patch) return;
+  window.__glossary20260413Patch = true;
+
+  function clone(value){
+    return value == null ? value : JSON.parse(JSON.stringify(value));
+  }
+
+  function baseLang(lang){
+    var value = lang || (typeof currentLang === "string" && currentLang ? currentLang : "en");
+    return value === "br" ? "pt" : value;
+  }
+
+  function normalize(value){
+    return String(value || "").toLowerCase().replace(/\s+/g, " ").trim();
+  }
+
+  function dedupeVisibleList(list){
+    var seen = {};
+    return (list || []).filter(function(row){
+      var key = normalize(row && row[0]);
+      if(!key || seen[key]) return false;
+      seen[key] = true;
+      return true;
+    });
+  }
+
+  function getVisibleList(store, lang){
+    var resolved = baseLang(lang);
+    if(!store) return [];
+    if(Array.isArray(store[lang])) return clone(store[lang]);
+    if(Array.isArray(store[resolved])) return clone(store[resolved]);
+    if(Array.isArray(store.en)) return clone(store.en);
+    return [];
+  }
+
+  function getSearchStore(lang){
+    var resolved = baseLang(lang);
+    if(window.__repGlossaryEntries && window.__repGlossaryEntries[lang]) return clone(window.__repGlossaryEntries[lang]);
+    if(window.__repGlossaryEntries && window.__repGlossaryEntries[resolved]) return clone(window.__repGlossaryEntries[resolved]);
+    if(typeof glossaryEntries !== "undefined" && glossaryEntries[lang]) return clone(glossaryEntries[lang]);
+    if(typeof glossaryEntries !== "undefined" && glossaryEntries[resolved]) return clone(glossaryEntries[resolved]);
+    return {};
+  }
+
+  var LANGS = ["en","ko","th","id","pt","br","tr","es","ar","vi","ha"];
+  var GLOSSARY_ORDER = ["kyc","fiat","selfCustodyWallet","airdrop","giveawayScam","seedPhrase","rugPull","addressPoisoning"];
+  var GLOSSARY_PACK = {
+    en:{
+      kyc:{title:"KYC", body:"An identity check a platform may ask for before full account access."},
+      fiat:{title:"Fiat currency", body:"Regular government-issued money such as KRW, USD, or EUR."},
+      selfCustodyWallet:{title:"Self-custody wallet", body:"A wallet where you control the keys and recovery details yourself."},
+      airdrop:{title:"Airdrop", body:"Tokens given out by a project, often for promotion or community activity."},
+      giveawayScam:{title:"Giveaway scam", body:"A fake reward event that tries to make you connect a wallet or send funds first."},
+      seedPhrase:{title:"Seed phrase", body:"The recovery words for a wallet. Never share or upload them."},
+      rugPull:{title:"Rug pull", body:"When a project team suddenly pulls liquidity or disappears with user funds."},
+      addressPoisoning:{title:"Address poisoning", body:"A scam that leaves a lookalike address in your history so you copy the wrong one later."}
+    },
+    ko:{
+      kyc:{title:"신원 확인(KYC)", body:"플랫폼이 전체 기능을 열기 전에 요구할 수 있는 본인 확인 절차입니다."},
+      fiat:{title:"법정화폐", body:"원화, 달러처럼 정부가 발행하는 일반 화폐입니다."},
+      selfCustodyWallet:{title:"자기보관지갑", body:"키와 복구 정보를 사용자가 직접 관리하는 지갑입니다."},
+      airdrop:{title:"에어드롭", body:"프로젝트가 홍보나 참여 보상으로 토큰을 나누어 주는 방식입니다."},
+      giveawayScam:{title:"경품형 사기", body:"무료 보상을 미끼로 지갑 연결이나 선입금을 유도하는 사기입니다."},
+      seedPhrase:{title:"시드 문구", body:"지갑을 복구하는 단어 묶음으로 절대 공유하면 안 됩니다."},
+      rugPull:{title:"러그풀", body:"프로젝트 팀이 유동성을 빼거나 자금을 들고 사라지는 유형입니다."},
+      addressPoisoning:{title:"주소 오염 공격", body:"거래 기록에 비슷한 주소를 남겨 나중에 잘못 복사하게 만드는 사기입니다."}
+    },
+    th:{
+      kyc:{title:"การยืนยันตัวตน", body:"การตรวจสอบตัวตนที่แพลตฟอร์มอาจขอก่อนเปิดให้ใช้บัญชีเต็มรูปแบบ."},
+      fiat:{title:"เงินตรารัฐ", body:"เงินปกติที่รัฐบาลออกให้ เช่น บาท ดอลลาร์ หรือยูโร."},
+      selfCustodyWallet:{title:"กระเป๋าแบบดูแลเอง", body:"กระเป๋าที่คุณดูแลคีย์และข้อมูลกู้คืนด้วยตัวเอง."},
+      airdrop:{title:"แอร์ดรอป", body:"การแจกโทเคนจากโปรเจกต์เพื่อโปรโมตหรือกระตุ้นการมีส่วนร่วม."},
+      giveawayScam:{title:"หลอกแจกของรางวัล", body:"กลโกงที่ทำเหมือนแจกฟรีเพื่อหลอกให้คุณเชื่อมกระเป๋าหรือโอนเงินก่อน."},
+      seedPhrase:{title:"วลีสำรอง", body:"ชุดคำสำหรับกู้คืนกระเป๋าและไม่ควรแชร์ให้ใคร."},
+      rugPull:{title:"รักพูล", body:"เหตุการณ์ที่ทีมโปรเจกต์ดึงสภาพคล่องหรือหายไปพร้อมเงินของผู้ใช้."},
+      addressPoisoning:{title:"การวางยาพิษที่อยู่", body:"กลโกงที่ทิ้งที่อยู่คล้ายกันไว้ในประวัติเพื่อให้คุณคัดลอกผิดภายหลัง."}
+    },
+    id:{
+      kyc:{title:"Verifikasi identitas", body:"Pemeriksaan identitas yang mungkin diminta platform sebelum akses penuh dibuka."},
+      fiat:{title:"Uang fiat", body:"Uang resmi pemerintah seperti rupiah, dolar, atau euro."},
+      selfCustodyWallet:{title:"Dompet kustodi mandiri", body:"Dompet di mana Anda sendiri mengendalikan kunci dan data pemulihannya."},
+      airdrop:{title:"Airdrop", body:"Cara proyek membagikan token untuk promosi atau aktivitas komunitas."},
+      giveawayScam:{title:"Penipuan giveaway", body:"Hadiah palsu yang mencoba membuat Anda menghubungkan wallet atau mengirim dana lebih dulu."},
+      seedPhrase:{title:"Frasa seed", body:"Kumpulan kata pemulihan wallet yang tidak boleh pernah dibagikan."},
+      rugPull:{title:"Rug pull", body:"Saat tim proyek tiba-tiba menarik likuiditas atau menghilang membawa dana pengguna."},
+      addressPoisoning:{title:"Peracunan alamat", body:"Modus yang meninggalkan alamat mirip di riwayat agar Anda salah menyalin alamat nanti."}
+    },
+    pt:{
+      kyc:{title:"Verificação de identidade", body:"Checagem de identidade que a plataforma pode pedir antes do acesso completo."},
+      fiat:{title:"Moeda fiduciária", body:"Dinheiro comum emitido por governos, como real, dólar ou euro."},
+      selfCustodyWallet:{title:"Carteira de autocustódia", body:"Carteira em que você controla as chaves e os dados de recuperação."},
+      airdrop:{title:"Airdrop", body:"Distribuição de tokens feita por um projeto para promoção ou atividade da comunidade."},
+      giveawayScam:{title:"Golpe de sorteio", body:"Falso evento de recompensa que tenta fazer você conectar a carteira ou enviar fundos primeiro."},
+      seedPhrase:{title:"Frase-semente", body:"Palavras de recuperação da carteira. Nunca compartilhe nem envie isso."},
+      rugPull:{title:"Rug pull", body:"Quando a equipe do projeto puxa a liquidez de repente ou some com fundos de usuários."},
+      addressPoisoning:{title:"Envenenamento de endereço", body:"Golpe que deixa um endereço parecido no histórico para você copiar o errado depois."}
+    },
+    tr:{
+      kyc:{title:"Kimlik doğrulama", body:"Platformun tam erişimden önce isteyebileceği temel kimlik kontrolü."},
+      fiat:{title:"Fiat para", body:"TL, dolar veya euro gibi devlet destekli normal para."},
+      selfCustodyWallet:{title:"Kendi saklama cüzdanı", body:"Anahtarları ve kurtarma bilgilerini sizin yönettiğiniz cüzdan."},
+      airdrop:{title:"Airdrop", body:"Bir projenin tanıtım veya topluluk etkinliği için token dağıtması."},
+      giveawayScam:{title:"Ödül dolandırıcılığı", body:"Ücretsiz ödül gibi görünen ama cüzdan bağlamanızı ya da para göndermenizi isteyen tuzak."},
+      seedPhrase:{title:"Kurtarma kelimeleri", body:"Cüzdanı geri yükleyen kelime grubu. Asla paylaşılmamalıdır."},
+      rugPull:{title:"Rug pull", body:"Proje ekibinin likiditeyi çekip kullanıcı fonlarıyla ortadan kaybolması."},
+      addressPoisoning:{title:"Adres zehirleme", body:"İşlem geçmişine benzer adres bırakıp daha sonra yanlış adresi kopyalatmaya çalışan dolandırıcılık."}
+    },
+    es:{
+      kyc:{title:"Verificación de identidad", body:"Revisión de identidad que la plataforma puede pedir antes del acceso completo."},
+      fiat:{title:"Moneda fiduciaria", body:"Dinero normal emitido por gobiernos, como euro, dólar o peso."},
+      selfCustodyWallet:{title:"Cartera de autocustodia", body:"Cartera donde tú controlas las claves y los datos de recuperación."},
+      airdrop:{title:"Airdrop", body:"Forma en que un proyecto reparte tokens para promoción o actividad de comunidad."},
+      giveawayScam:{title:"Estafa de sorteo", body:"Falsa recompensa que intenta hacerte conectar la cartera o enviar fondos primero."},
+      seedPhrase:{title:"Frase semilla", body:"Palabras de recuperación de la cartera. Nunca debes compartirlas ni subirlas."},
+      rugPull:{title:"Rug pull", body:"Cuando el equipo de un proyecto saca la liquidez de repente o desaparece con fondos."},
+      addressPoisoning:{title:"Envenenamiento de direcciones", body:"Estafa que deja una dirección parecida en tu historial para que copies la equivocada después."}
+    },
+    ar:{
+      kyc:{title:"التحقق من الهوية", body:"فحص هوية قد تطلبه المنصة قبل فتح الوصول الكامل إلى الحساب."},
+      fiat:{title:"العملة الرسمية", body:"المال العادي الذي تصدره الحكومات مثل الوون أو الدولار أو اليورو."},
+      selfCustodyWallet:{title:"محفظة حفظ ذاتي", body:"محفظة تتحكم أنت فيها بالمفاتيح وبيانات الاسترداد بنفسك."},
+      airdrop:{title:"إيردروب", body:"طريقة يوزع بها المشروع الرموز لأغراض الترويج أو نشاط المجتمع."},
+      giveawayScam:{title:"احتيال الجوائز", body:"مكافأة مزيفة تحاول دفعك لربط المحفظة أو إرسال المال أولاً."},
+      seedPhrase:{title:"عبارة الاسترداد", body:"كلمات استرداد المحفظة ولا يجب مشاركتها أو رفعها أبداً."},
+      rugPull:{title:"سحب السيولة والهروب", body:"عندما يسحب فريق المشروع السيولة فجأة أو يختفي بأموال المستخدمين."},
+      addressPoisoning:{title:"تسميم العناوين", body:"احتيال يترك عنواناً مشابهاً في السجل حتى تنسخ العنوان الخاطئ لاحقاً."}
+    },
+    vi:{
+      kyc:{title:"Xác minh danh tính", body:"Bước kiểm tra danh tính mà nền tảng có thể yêu cầu trước khi mở đầy đủ quyền truy cập."},
+      fiat:{title:"Tiền pháp định", body:"Tiền do chính phủ phát hành như VND, USD hoặc EUR."},
+      selfCustodyWallet:{title:"Ví tự lưu ký", body:"Ví mà bạn tự quản lý khóa và thông tin khôi phục."},
+      airdrop:{title:"Airdrop", body:"Cách dự án phát token để quảng bá hoặc thúc đẩy cộng đồng."},
+      giveawayScam:{title:"Lừa đảo quà tặng", body:"Phần thưởng giả nhằm dụ bạn kết nối ví hoặc gửi tiền trước."},
+      seedPhrase:{title:"Cụm từ khôi phục", body:"Các từ dùng để khôi phục ví và tuyệt đối không được chia sẻ."},
+      rugPull:{title:"Rug pull", body:"Khi đội ngũ dự án rút thanh khoản đột ngột hoặc biến mất cùng tiền của người dùng."},
+      addressPoisoning:{title:"Đầu độc địa chỉ", body:"Chiêu lừa để lại địa chỉ giống nhau trong lịch sử khiến bạn sao chép nhầm sau đó."}
+    },
+    ha:{
+      kyc:{title:"Tabbatar da shaida", body:"Tantance kai da dandali zai iya nema kafin ya ba da cikakken damar asusu."},
+      fiat:{title:"Kudin fiat", body:"Kudin gwamnati na yau da kullum kamar naira, dala ko euro."},
+      selfCustodyWallet:{title:"Walat na ajiyar kai", body:"Walat da kai kanka ke kula da makullai da bayanan dawowa."},
+      airdrop:{title:"Rabon token", body:"Hanyar da aiki ke amfani da ita wajen raba token don talla ko motsa al'umma."},
+      giveawayScam:{title:"Damfarar kyauta", body:"Kyauta ta bogi da ke son ka hada walat ko ka tura kudi da farko."},
+      seedPhrase:{title:"Kalmomin dawo da walat", body:"Kalmomin dawo da walat ne kuma kada a taba rabawa kowa."},
+      rugPull:{title:"Kwacen jari da guduwa", body:"Lokacin da masu aikin su kwashe kudin ruwa ko su bace da kudin masu amfani."},
+      addressPoisoning:{title:"Gurbata adireshi", body:"Dabara ce ta barin adireshi mai kama a tarihi domin ka kwafi wanda ba daidai ba daga baya."}
+    }
+  };
+  GLOSSARY_PACK.br = clone(GLOSSARY_PACK.pt);
+
+  var GLOSSARY_ALIASES = {
+    kyc:["KYC","identity verification"],
+    fiat:["Fiat currency","fiat","fiat money"],
+    selfCustodyWallet:["Self-custody wallet","self custody wallet","self-custody"],
+    airdrop:["Airdrop"],
+    giveawayScam:["Giveaway scam","giveaway"],
+    seedPhrase:["Seed phrase","recovery phrase","backup phrase","mnemonic phrase"],
+    rugPull:["Rug pull"],
+    addressPoisoning:["Address poisoning","poisoned address"]
+  };
+
+  LANGS.forEach(function(lang){
+    var pack = GLOSSARY_PACK[baseLang(lang)] || GLOSSARY_PACK.en;
+    GLOSSARY_ORDER.forEach(function(key){
+      GLOSSARY_ALIASES[key].push(pack[key].title);
+    });
+  });
+
+  function matchesKey(term, key){
+    return (GLOSSARY_ALIASES[key] || []).some(function(alias){
+      return normalize(alias) === normalize(term);
+    });
+  }
+
+  function upsertVisibleEntry(list, key, entry){
+    var index = -1;
+    for(var i = 0; i < list.length; i++){
+      if(matchesKey(list[i] && list[i][0], key)){
+        index = i;
+        break;
+      }
+    }
+    var row = [entry.title, entry.body];
+    if(index === -1) list.push(row);
+    else list[index] = row;
+  }
+
+  var glossaryDataRef = typeof glossaryData !== "undefined" ? glossaryData : null;
+  var glossaryOverridesRef = typeof glossaryOverrides !== "undefined" ? glossaryOverrides : null;
+
+  LANGS.forEach(function(lang){
+    var pack = GLOSSARY_PACK[baseLang(lang)] || GLOSSARY_PACK.en;
+    var visibleList = getVisibleList(glossaryOverridesRef, lang);
+    if(!visibleList.length) visibleList = getVisibleList(glossaryDataRef, lang);
+
+    GLOSSARY_ORDER.forEach(function(key){
+      upsertVisibleEntry(visibleList, key, pack[key]);
+    });
+    visibleList = dedupeVisibleList(visibleList);
+
+    if(glossaryOverridesRef) glossaryOverridesRef[lang] = clone(visibleList);
+    if(glossaryDataRef) glossaryDataRef[lang] = clone(visibleList);
+
+    var searchStore = getSearchStore(lang);
+    GLOSSARY_ORDER.forEach(function(key){
+      searchStore[key] = { title: pack[key].title, body: pack[key].body };
+    });
+    if(typeof glossaryEntries !== "undefined") glossaryEntries[lang] = clone(searchStore);
+    window.__repGlossaryEntries = window.__repGlossaryEntries || {};
+    window.__repGlossaryEntries[lang] = clone(searchStore);
+  });
+
+  if(typeof currentPage !== "undefined" && currentPage === "glossary" && typeof showPage === "function"){
+    showPage("glossary");
+  } else if(typeof document !== "undefined"){
+    var panel = document.getElementById("glossaryPanel");
+    if(panel && typeof renderGlossary === "function"){
+      panel.innerHTML = renderGlossary();
+    }
+  }
+})();
+</script>
+<script id="glossary-20260413-patch">
+(function(){
+  if(window.__glossary20260413Patch) return;
+  window.__glossary20260413Patch = true;
+
+  function clone(value){
+    return value == null ? value : JSON.parse(JSON.stringify(value));
+  }
+
+  function resolveLang(lang){
+    var value = lang || (typeof currentLang === 'string' && currentLang ? currentLang : 'en');
+    return value === 'br' ? 'pt' : value;
+  }
+
+  function normalize(value){
+    return String(value || '').toLowerCase().replace(/\s+/g, ' ').trim();
+  }
+
+  function dedupeTerms(list){
+    var seen = {};
+    return (list || []).filter(function(row){
+      var key = normalize(row && row[0]);
+      if(!key || seen[key]) return false;
+      seen[key] = true;
+      return true;
+    });
+  }
+
+  function getVisibleList(store, lang){
+    var resolved = resolveLang(lang);
+    if(!store) return [];
+    if(Array.isArray(store[lang])) return clone(store[lang]);
+    if(Array.isArray(store[resolved])) return clone(store[resolved]);
+    if(Array.isArray(store.en)) return clone(store.en);
+    return [];
+  }
+
+  function getSearchStore(lang){
+    var resolved = resolveLang(lang);
+    if(window.__repGlossaryEntries && window.__repGlossaryEntries[lang]) return clone(window.__repGlossaryEntries[lang]);
+    if(window.__repGlossaryEntries && window.__repGlossaryEntries[resolved]) return clone(window.__repGlossaryEntries[resolved]);
+    if(typeof glossaryEntries !== 'undefined' && glossaryEntries[lang]) return clone(glossaryEntries[lang]);
+    if(typeof glossaryEntries !== 'undefined' && glossaryEntries[resolved]) return clone(glossaryEntries[resolved]);
+    return {};
+  }
+
+  var LANGS = ['en','ko','th','id','pt','br','tr','es','ar','vi','ha'];
+  var ORDER = ['kyc','fiat','selfCustodyWallet','airdrop','giveawayScam','seedPhrase','rugPull','addressPoisoning'];
+  var PACK = {
+    en:{
+      kyc:{title:'KYC', body:'An identity check a platform may ask for before full account access.'},
+      fiat:{title:'Fiat currency', body:'Regular government-issued money such as KRW, USD, or EUR.'},
+      selfCustodyWallet:{title:'Self-custody wallet', body:'A wallet where you control the keys and recovery details yourself.'},
+      airdrop:{title:'Airdrop', body:'Tokens given out by a project, often for promotion or community activity.'},
+      giveawayScam:{title:'Giveaway scam', body:'A fake reward event that tries to make you connect a wallet or send funds first.'},
+      seedPhrase:{title:'Seed phrase', body:'The recovery words for a wallet. Never share or upload them.'},
+      rugPull:{title:'Rug pull', body:'When a project team suddenly pulls liquidity or disappears with user funds.'},
+      addressPoisoning:{title:'Address poisoning', body:'A scam that leaves a lookalike address in your history so you copy the wrong one later.'}
+    },
+    ko:{
+      kyc:{title:'신원 확인', body:'플랫폼이 계정 기능을 모두 열기 전에 요구할 수 있는 본인 확인 절차입니다.'},
+      fiat:{title:'법정화폐', body:'원화, 달러, 유로처럼 정부가 발행하는 일반 화폐입니다.'},
+      selfCustodyWallet:{title:'자기보관지갑', body:'키와 복구 정보를 사용자가 직접 관리하는 지갑입니다.'},
+      airdrop:{title:'에어드롭', body:'프로젝트가 홍보나 커뮤니티 참여 보상으로 토큰을 나눠 주는 방식입니다.'},
+      giveawayScam:{title:'경품형사기', body:'무료 보상을 미끼로 지갑 연결이나 선입금을 유도하는 사기입니다.'},
+      seedPhrase:{title:'시드문구', body:'지갑을 복구하는 단어 묶음으로 절대 공유하거나 업로드하면 안 됩니다.'},
+      rugPull:{title:'러그풀', body:'프로젝트 팀이 유동성을 빼거나 사용자 자금을 남긴 채 갑자기 사라지는 유형입니다.'},
+      addressPoisoning:{title:'주소오염공격', body:'거래 기록에 비슷한 주소를 남겨 나중에 잘못 복사하게 만드는 사기 수법입니다.'}
+    },
+    th:{
+      kyc:{title:'การยืนยันตัวตน', body:'การตรวจสอบตัวตนที่แพลตฟอร์มอาจขอก่อนเปิดใช้งานบัญชีเต็มรูปแบบ'},
+      fiat:{title:'เงินตราทั่วไป', body:'เงินที่รัฐบาลออกให้ใช้งานทั่วไป เช่น บาท ดอลลาร์ หรือยูโร'},
+      selfCustodyWallet:{title:'กระเป๋าเงินดูแลเอง', body:'กระเป๋าที่คุณถือกุญแจและข้อมูลกู้คืนด้วยตัวเอง'},
+      airdrop:{title:'แอร์ดรอป', body:'การแจกโทเค็นจากโปรเจกต์เพื่อโปรโมตหรือกระตุ้นชุมชน'},
+      giveawayScam:{title:'หลอกแจกฟรี', body:'รางวัลปลอมที่หลอกให้คุณเชื่อมกระเป๋าหรือโอนเงินก่อน'},
+      seedPhrase:{title:'วลีกู้คืน', body:'ชุดคำสำหรับกู้คืนกระเป๋า และห้ามแชร์หรืออัปโหลด'},
+      rugPull:{title:'ดึงสภาพคล่องหนี', body:'ตอนที่ทีมโปรเจกต์ดึงสภาพคล่องหรือหายไปพร้อมเงินผู้ใช้'},
+      addressPoisoning:{title:'วางยาพิษที่อยู่', body:'กลโกงที่ทิ้งที่อยู่คล้ายกันในประวัติให้คุณคัดลอกผิดภายหลัง'}
+    },
+    id:{
+      kyc:{title:'Verifikasi identitas', body:'Pemeriksaan identitas yang mungkin diminta platform sebelum akses penuh dibuka.'},
+      fiat:{title:'Uang fiat', body:'Uang resmi pemerintah seperti rupiah, dolar, atau euro.'},
+      selfCustodyWallet:{title:'Dompet kustodi mandiri', body:'Dompet di mana Anda sendiri mengendalikan kunci dan data pemulihannya.'},
+      airdrop:{title:'Airdrop', body:'Pembagian token dari proyek untuk promosi atau aktivitas komunitas.'},
+      giveawayScam:{title:'Penipuan giveaway', body:'Hadiah palsu yang mencoba membuat Anda menghubungkan wallet atau mengirim dana lebih dulu.'},
+      seedPhrase:{title:'Frasa seed', body:'Kumpulan kata pemulihan wallet yang tidak boleh pernah dibagikan.'},
+      rugPull:{title:'Rug pull', body:'Saat tim proyek tiba-tiba menarik likuiditas atau menghilang membawa dana pengguna.'},
+      addressPoisoning:{title:'Peracunan alamat', body:'Modus yang meninggalkan alamat mirip di riwayat agar Anda salah menyalin alamat nanti.'}
+    },
+    pt:{
+      kyc:{title:'Verificacao de identidade', body:'Checagem de identidade que a plataforma pode pedir antes do acesso completo.'},
+      fiat:{title:'Moeda fiduciaria', body:'Dinheiro comum emitido por governos, como real, dolar ou euro.'},
+      selfCustodyWallet:{title:'Carteira de autocustodia', body:'Carteira em que voce controla as chaves e os dados de recuperacao.'},
+      airdrop:{title:'Airdrop', body:'Distribuicao de tokens feita por um projeto para promocao ou atividade da comunidade.'},
+      giveawayScam:{title:'Golpe de sorteio', body:'Falso evento de recompensa que tenta fazer voce conectar a carteira ou enviar fundos primeiro.'},
+      seedPhrase:{title:'Frase-semente', body:'Palavras de recuperacao da carteira. Nunca compartilhe nem envie isso.'},
+      rugPull:{title:'Rug pull', body:'Quando a equipe do projeto puxa a liquidez de repente ou some com fundos de usuarios.'},
+      addressPoisoning:{title:'Envenenamento de endereco', body:'Golpe que deixa um endereco parecido no historico para voce copiar o errado depois.'}
+    },
+    tr:{
+      kyc:{title:'Kimlik dogrulama', body:'Platformun tam erisimden once isteyebilecegi temel kimlik kontrolu.'},
+      fiat:{title:'Fiat para', body:'TL, dolar veya euro gibi devlet destekli normal para.'},
+      selfCustodyWallet:{title:'Kendi saklama cuzdani', body:'Anahtarlari ve kurtarma bilgilerini sizin yonettiginiz cüzdan.'},
+      airdrop:{title:'Airdrop', body:'Bir projenin tanitim veya topluluk etkinligi icin token dagitmasi.'},
+      giveawayScam:{title:'Sahte hediye dolandiriciligi', body:'Ucretsiz odul gibi gorunup cuzdan baglamanizi ya da para gondermenizi isteyen tuzak.'},
+      seedPhrase:{title:'Kurtarma kelimeleri', body:'Cuzdani geri yukleyen kelime grubu. Asla paylasilmamalidir.'},
+      rugPull:{title:'Rug pull', body:'Proje ekibinin likiditeyi cekip kullanici fonlariyla ortadan kaybolmasi.'},
+      addressPoisoning:{title:'Adres zehirleme', body:'Gecmise benzer adres birakip daha sonra yanlis adresi kopyalatmaya calisan dolandiricilik.'}
+    },
+    es:{
+      kyc:{title:'Verificacion de identidad', body:'Revision de identidad que la plataforma puede pedir antes del acceso completo.'},
+      fiat:{title:'Moneda fiduciaria', body:'Dinero normal emitido por gobiernos, como euro, dolar o peso.'},
+      selfCustodyWallet:{title:'Cartera de autocustodia', body:'Cartera donde controlas las claves y los datos de recuperacion.'},
+      airdrop:{title:'Airdrop', body:'Forma en que un proyecto reparte tokens para promocion o actividad de comunidad.'},
+      giveawayScam:{title:'Estafa de sorteo', body:'Falsa recompensa que intenta hacerte conectar la cartera o enviar fondos primero.'},
+      seedPhrase:{title:'Frase semilla', body:'Palabras de recuperacion de la cartera. Nunca debes compartirlas ni subirlas.'},
+      rugPull:{title:'Rug pull', body:'Cuando el equipo de un proyecto saca la liquidez de repente o desaparece con fondos.'},
+      addressPoisoning:{title:'Envenenamiento de direcciones', body:'Estafa que deja una direccion parecida en tu historial para que copies la equivocada despues.'}
+    },
+    ar:{
+      kyc:{title:'التحقق من الهوية', body:'فحص هوية قد تطلبه المنصة قبل فتح كل مزايا الحساب.'},
+      fiat:{title:'عملة تقليدية', body:'مال تصدره الحكومة مثل الدولار أو اليورو.'},
+      selfCustodyWallet:{title:'محفظة حفظ ذاتي', body:'محفظة تتحكم فيها بالمفاتيح وبيانات الاسترداد بنفسك.'},
+      airdrop:{title:'ايردروب', body:'توزيع رموز يقدمه مشروع للترويج أو لنشاط المجتمع.'},
+      giveawayScam:{title:'احتيال الجوائز', body:'جائزة مزيفة تحاول دفعك لربط المحفظة أو إرسال المال أولا.'},
+      seedPhrase:{title:'عبارة الاسترداد', body:'كلمات استرداد المحفظة ويجب عدم مشاركتها أبدا.'},
+      rugPull:{title:'سحب السيولة والهروب', body:'عندما يسحب فريق المشروع السيولة أو يختفي بأموال المستخدمين.'},
+      addressPoisoning:{title:'تسميم العنوان', body:'احتيال يترك عنوانا مشابها في السجل لتنسخ العنوان الخطأ لاحقا.'}
+    },
+    vi:{
+      kyc:{title:'Xac minh danh tinh', body:'Buoc kiem tra danh tinh ma nen tang co the yeu cau truoc khi mo day du quyen truy cap.'},
+      fiat:{title:'Tien phap dinh', body:'Tien do chinh phu phat hanh nhu VND, USD hoac EUR.'},
+      selfCustodyWallet:{title:'Vi tu quan ly', body:'Vi ma ban tu giu khoa va thong tin khoi phuc.'},
+      airdrop:{title:'Airdrop', body:'Cach du an phat token de quang ba hoac thu hut cong dong.'},
+      giveawayScam:{title:'Lua dao tang qua', body:'Phan thuong gia mao de du ban ket noi vi hoac gui tien truoc.'},
+      seedPhrase:{title:'Cum tu khoi phuc', body:'Cac tu dung de khoi phuc vi va tuyet doi khong duoc chia se.'},
+      rugPull:{title:'Rug pull', body:'Khi doi ngu du an rut thanh khoan hoac bien mat cung tien cua nguoi dung.'},
+      addressPoisoning:{title:'Dau doc dia chi', body:'Chieu lua de lai dia chi giong nhau trong lich su khien ban sao chep nham sau do.'}
+    },
+    ha:{
+      kyc:{title:'Tabbatar da shaida', body:'Tantance kai da dandali zai iya nema kafin ya ba da cikakken damar asusu.'},
+      fiat:{title:'Kudin fiat', body:'Kudin gwamnati na yau da kullum kamar naira, dala ko euro.'},
+      selfCustodyWallet:{title:'Walat na ajiyar kai', body:'Walat da kai kanka ke kula da makullai da bayanan dawowa.'},
+      airdrop:{title:'Airdrop', body:'Hanyar da aiki ke amfani da ita wajen raba token don talla ko motsa al umma.'},
+      giveawayScam:{title:'Damfarar kyauta', body:'Kyauta ta bogi da ke son ka hada walat ko ka tura kudi da farko.'},
+      seedPhrase:{title:'Kalmomin dawo da walat', body:'Kalmomin dawo da walat ne kuma kada a taba rabawa kowa.'},
+      rugPull:{title:'Rug pull', body:'Lokacin da masu aikin su kwashe kudin ruwa ko su bace da kudin masu amfani.'},
+      addressPoisoning:{title:'Gurbata adireshi', body:'Dabara ce ta barin adireshi mai kama a tarihi domin ka kwafi wanda ba daidai ba daga baya.'}
+    }
+  };
+  PACK.br = clone(PACK.pt);
+
+  var ALIASES = {
+    kyc:['KYC','identity verification','know your customer'],
+    fiat:['Fiat currency','fiat','fiat money'],
+    selfCustodyWallet:['Self-custody wallet','self custody wallet','self-custody'],
+    airdrop:['Airdrop'],
+    giveawayScam:['Giveaway scam','giveaway'],
+    seedPhrase:['Seed phrase','recovery phrase','backup phrase','mnemonic phrase'],
+    rugPull:['Rug pull'],
+    addressPoisoning:['Address poisoning','poisoned address']
+  };
+
+  LANGS.forEach(function(lang){
+    var pack = PACK[resolveLang(lang)] || PACK.en;
+    ORDER.forEach(function(key){
+      ALIASES[key].push(pack[key].title);
+    });
+  });
+
+  function matchesKey(term, key){
+    return (ALIASES[key] || []).some(function(alias){
+      return normalize(alias) === normalize(term);
+    });
+  }
+
+  function upsertVisibleEntry(list, key, entry){
+    var index = -1;
+    for(var i = 0; i < list.length; i++){
+      if(matchesKey(list[i] && list[i][0], key)){
+        index = i;
+        break;
+      }
+    }
+    var row = [entry.title, entry.body];
+    if(index === -1) list.push(row);
+    else list[index] = row;
+  }
+
+  var glossaryDataRef = typeof glossaryData !== 'undefined' ? glossaryData : null;
+  var glossaryOverridesRef = typeof glossaryOverrides !== 'undefined' ? glossaryOverrides : null;
+
+  LANGS.forEach(function(lang){
+    var pack = PACK[resolveLang(lang)] || PACK.en;
+    var visibleList = getVisibleList(glossaryOverridesRef, lang);
+    if(!visibleList.length) visibleList = getVisibleList(glossaryDataRef, lang);
+
+    ORDER.forEach(function(key){
+      upsertVisibleEntry(visibleList, key, pack[key]);
+    });
+    visibleList = dedupeTerms(visibleList);
+
+    if(glossaryOverridesRef) glossaryOverridesRef[lang] = clone(visibleList);
+    if(glossaryDataRef) glossaryDataRef[lang] = clone(visibleList);
+
+    var searchStore = getSearchStore(lang);
+    ORDER.forEach(function(key){
+      searchStore[key] = { title: pack[key].title, body: pack[key].body };
+    });
+    if(typeof glossaryEntries !== 'undefined') glossaryEntries[lang] = clone(searchStore);
+    window.__repGlossaryEntries = window.__repGlossaryEntries || {};
+    window.__repGlossaryEntries[lang] = clone(searchStore);
+  });
+
+  if(typeof currentPage !== 'undefined' && currentPage === 'glossary' && typeof showPage === 'function'){
+    showPage('glossary');
+  } else if(typeof document !== 'undefined'){
+    var panel = document.getElementById('glossaryPanel');
+    if(panel && typeof renderGlossary === 'function'){
+      panel.innerHTML = renderGlossary();
+    }
+  }
+})();
+</script>
+<script id="faq-source-20260413-patch">
+(function(){
+  if(window.__faqSource20260413Patch) return;
+  window.__faqSource20260413Patch = true;
+
+  function clone(value){
+    return value == null ? value : JSON.parse(JSON.stringify(value));
+  }
+
+  function baseLang(lang){
+    var value = lang || (typeof currentLang === "string" && currentLang ? currentLang : "en");
+    return value === "br" ? "pt" : value;
+  }
+
+  function normalize(value){
+    return String(value || "").toLowerCase().replace(/\s+/g, " ").trim();
+  }
+
+  function ensurePageLang(lang){
+    if(typeof polishedSectionContent === "undefined" || !polishedSectionContent) return null;
+    var resolved = baseLang(lang);
+    if(!polishedSectionContent[lang]){
+      polishedSectionContent[lang] = clone(polishedSectionContent[resolved] || polishedSectionContent.en || {});
+    }
+    polishedSectionContent[lang].faqItems = polishedSectionContent[lang].faqItems || [];
+    return polishedSectionContent[lang];
+  }
+
+  function ensureSourceList(store, lang){
+    if(!store) return null;
+    var resolved = baseLang(lang);
+    if(!Array.isArray(store[lang])){
+      store[lang] = clone(store[resolved] || store.en || []);
+    }
+    return store[lang];
+  }
+
+  function upsertFaq(list, faq){
+    if(!list.some(function(row){ return normalize(row && row[0]) === normalize(faq.q); })){
+      list.push([faq.q, faq.a]);
+    }
+  }
+
+  function upsertSource(list, source, relatedLabel){
+    if(!list.some(function(row){ return row && row[4] === source.url; })){
+      list.push(["scams", source.publisher, source.title, source.desc, source.url, relatedLabel, source.why]);
+    }
+  }
+
+  function getRelatedLabel(lang){
+    if(typeof lessons !== "undefined" && lessons && lessons[lang] && lessons[lang][6] && lessons[lang][6].title){
+      return lessons[lang][6].title;
+    }
+    if(typeof ui !== "undefined" && ui && ui[lang] && ui[lang]["nav.l7"]){
+      return ui[lang]["nav.l7"];
+    }
+    return "Lesson 7";
+  }
+
+  var LANGS = ["en","ko","th","id","pt","br","tr","es","ar","vi","ha"];
+  var SOURCE_URLS = {
+    metamask:"https://support.metamask.io/stay-safe/protect-yourself/wallet-and-hardware/address-poisoning-scams/",
+    trezor:"https://trezor.io/support/troubleshooting/coins-tokens/address-poisoning-attacks"
+  };
+  var FAQ_SOURCE_PACK = {
+    en:{
+      faqs:[
+        {q:"Is it okay to keep assets on an exchange at first?", a:"It can be okay for a small beginner amount, but remember the exchange controls the keys. Learn the risk and move funds if you need more control."},
+        {q:"Where should I store my seed phrase?", a:"Store it offline in a private place you can access again. Avoid screenshots, chat apps, email, and cloud notes."},
+        {q:"Why is a different network dangerous even if the address looks correct?", a:"The address alone is not enough. If the network is wrong, funds may not arrive correctly or may be hard to recover."},
+        {q:"How can I recognize a fake support DM?", a:"Be careful if a DM asks for your seed phrase, password, remote access, or urgent payment. Pressure and private contact are common scam signs."},
+        {q:"How can I avoid address poisoning?", a:"Do not copy an address from recent history alone. Check the full address, use saved trusted addresses when possible, and send a small test first."}
+      ],
+      sources:[
+        {publisher:"MetaMask", title:"MetaMask: Address poisoning scams", desc:"Official guide showing how lookalike addresses appear in transaction history and what to check before copying.", url:SOURCE_URLS.metamask, why:"Useful for beginners who might copy an address from history too quickly."},
+        {publisher:"Trezor", title:"Trezor: Address poisoning attacks", desc:"Official wallet security article explaining bot-made lookalike addresses and wrong-copy risk.", url:SOURCE_URLS.trezor, why:"Good reminder to compare the full address before every send."}
+      ]
+    },
+    ko:{
+      faqs:[
+        {q:"처음에는 거래소에 자산을 두어도 되나요?", a:"초보자 금액을 잠시 두는 것은 가능하지만, 키는 거래소가 관리합니다. 위험을 이해하고 필요하면 직접 보관으로 옮기세요."},
+        {q:"시드 문구는 어디에 보관하는 것이 좋나요?", a:"다시 확인할 수 있는 오프라인의 개인 공간에 보관하세요. 스크린샷, 메신저, 이메일, 클라우드 메모는 피하는 편이 좋습니다."},
+        {q:"주소가 맞아도 네트워크가 다르면 왜 문제가 되나요?", a:"주소만 맞는다고 충분하지 않습니다. 네트워크가 다르면 자산이 제대로 도착하지 않거나 복구가 매우 어려울 수 있습니다."},
+        {q:"고객센터를 사칭하는 DM은 어떻게 구분하나요?", a:"시드 문구, 비밀번호, 원격 접속, 즉시 결제를 요구하면 특히 조심하세요. 압박과 개인 DM은 흔한 사기 신호입니다."},
+        {q:"주소 오염 공격은 어떻게 피할 수 있나요?", a:"최근 기록만 보고 주소를 복사하지 마세요. 전체 주소를 다시 확인하고, 가능하면 저장한 신뢰 주소를 쓰고, 먼저 소액 테스트를 하세요."}
+      ],
+      sources:[
+        {publisher:"MetaMask", title:"MetaMask: 주소 오염 공격 사기", desc:"거래 기록에 비슷한 주소가 어떻게 섞이는지와 복사 전에 무엇을 확인해야 하는지 설명하는 공식 안내입니다.", url:SOURCE_URLS.metamask, why:"거래 기록에서 급하게 주소를 복사할 때 왜 위험한지 초보자에게 바로 보여줍니다."},
+        {publisher:"Trezor", title:"Trezor: 주소 오염 공격", desc:"봇이 비슷한 주소를 만들고 잘못 복사하게 유도하는 위험을 설명하는 공식 지갑 보안 글입니다.", url:SOURCE_URLS.trezor, why:"보내기 전 전체 주소를 다시 비교해야 하는 이유를 분명하게 알려줍니다."}
+      ]
+    },
+    th:{
+      faqs:[
+        {q:"เก็บสินทรัพย์ไว้บนเว็บเทรดก่อนในช่วงเริ่มต้นได้ไหม?", a:"ได้สำหรับจำนวนเล็ก ๆ ในช่วงเริ่มต้น แต่คีย์ยังอยู่ในการควบคุมของเว็บเทรด ควรเข้าใจความเสี่ยงและย้ายออกเมื่ออยากควบคุมเองมากขึ้น."},
+        {q:"ควรเก็บ seed phrase ไว้ที่ไหน?", a:"เก็บแบบออฟไลน์ในที่ส่วนตัวที่คุณกลับมาเปิดดูได้ อย่าเก็บเป็นภาพหน้าจอ แชต อีเมล หรือโน้ตบนคลาวด์."},
+        {q:"ทำไมเครือข่ายที่ต่างกันถึงอันตราย แม้ที่อยู่จะดูถูกต้อง?", a:"แค่ที่อยู่ดูถูกต้องยังไม่พอ ถ้าเครือข่ายผิด สินทรัพย์อาจไปไม่ถึงหรือกู้คืนได้ยากมาก."},
+        {q:"จะสังเกต DM ปลอมที่อ้างว่าเป็นฝ่ายช่วยเหลือได้อย่างไร?", a:"ถ้า DM ขอ seed phrase รหัสผ่าน รีโมตเข้าถึงเครื่อง หรือเร่งให้จ่ายเงิน ให้ระวังเป็นพิเศษ ความกดดันและการติดต่อส่วนตัวเป็นสัญญาณหลอกลวงที่พบบ่อย."},
+        {q:"จะหลีกเลี่ยง address poisoning ได้อย่างไร?", a:"อย่าคัดลอกที่อยู่จากประวัติล่าสุดอย่างเดียว ตรวจที่อยู่เต็มอีกครั้ง ใช้ที่อยู่ที่บันทึกไว้และเชื่อถือได้เมื่อทำได้ และลองส่งจำนวนน้อยก่อน."}
+      ],
+      sources:[
+        {publisher:"MetaMask", title:"MetaMask: กลโกง address poisoning", desc:"คู่มือทางการที่อธิบายว่าที่อยู่คล้ายกันโผล่ในประวัติธุรกรรมได้อย่างไรและควรเช็กอะไรก่อนคัดลอก.", url:SOURCE_URLS.metamask, why:"ช่วยให้ผู้เริ่มต้นเห็นความเสี่ยงของการคัดลอกจากประวัติแบบรีบ ๆ."},
+        {publisher:"Trezor", title:"Trezor: การโจมตี address poisoning", desc:"บทความความปลอดภัยทางการของกระเป๋าเงินที่อธิบายที่อยู่คล้ายกันจากบอตและความเสี่ยงของการคัดลอกผิด.", url:SOURCE_URLS.trezor, why:"ย้ำให้ตรวจที่อยู่เต็มทุกครั้งก่อนส่ง."}
+      ]
+    },
+    id:{
+      faqs:[
+        {q:"Bolehkah pada awalnya saya menyimpan aset di exchange?", a:"Boleh untuk jumlah kecil saat baru mulai, tetapi exchange tetap memegang kendali atas kuncinya. Pahami risikonya dan pindahkan jika Anda butuh kendali lebih."},
+        {q:"Di mana sebaiknya saya menyimpan seed phrase?", a:"Simpan secara offline di tempat pribadi yang bisa Anda cek lagi. Hindari screenshot, chat, email, dan catatan cloud."},
+        {q:"Mengapa jaringan yang berbeda berbahaya walaupun alamatnya terlihat benar?", a:"Alamat saja tidak cukup. Jika jaringannya salah, aset bisa tidak sampai dengan benar atau sulit dipulihkan."},
+        {q:"Bagaimana cara mengenali DM support palsu?", a:"Waspadai DM yang meminta seed phrase, kata sandi, akses jarak jauh, atau pembayaran mendesak. Tekanan dan kontak pribadi adalah tanda scam yang umum."},
+        {q:"Bagaimana cara menghindari peracunan alamat?", a:"Jangan menyalin alamat hanya dari riwayat terbaru. Periksa seluruh alamat, gunakan alamat tepercaya yang sudah disimpan bila memungkinkan, dan kirim tes kecil terlebih dahulu."}
+      ],
+      sources:[
+        {publisher:"MetaMask", title:"MetaMask: penipuan peracunan alamat", desc:"Panduan resmi yang menjelaskan bagaimana alamat mirip muncul di riwayat transaksi dan apa yang perlu dicek sebelum menyalin.", url:SOURCE_URLS.metamask, why:"Membantu pemula memahami risiko menyalin alamat terlalu cepat dari riwayat."},
+        {publisher:"Trezor", title:"Trezor: serangan peracunan alamat", desc:"Artikel keamanan wallet resmi tentang alamat mirip buatan bot dan risiko salah menyalin.", url:SOURCE_URLS.trezor, why:"Pengingat penting untuk membandingkan seluruh alamat sebelum mengirim."}
+      ]
+    },
+    pt:{
+      faqs:[
+        {q:"É normal deixar ativos na corretora no começo?", a:"Pode acontecer com um valor pequeno no início, mas a corretora continua controlando as chaves. Entenda esse risco e mova os fundos se quiser mais controle."},
+        {q:"Onde devo guardar minha frase-semente?", a:"Guarde offline em um lugar privado que você consiga consultar de novo. Evite captura de tela, chat, email e notas na nuvem."},
+        {q:"Por que uma rede diferente é perigosa mesmo se o endereço parecer correto?", a:"O endereço sozinho não basta. Se a rede estiver errada, os ativos podem não chegar direito ou ficar muito difíceis de recuperar."},
+        {q:"Como reconhecer um DM falso de suporte?", a:"Desconfie se o DM pedir frase-semente, senha, acesso remoto ou pagamento urgente. Pressa e contato privado são sinais comuns de golpe."},
+        {q:"Como posso evitar envenenamento de endereço?", a:"Não copie o endereço apenas do histórico recente. Confira o endereço completo, use endereços confiáveis salvos quando puder e faça um teste pequeno primeiro."}
+      ],
+      sources:[
+        {publisher:"MetaMask", title:"MetaMask: golpes de envenenamento de endereço", desc:"Guia oficial explicando como endereços parecidos aparecem no histórico de transações e o que verificar antes de copiar.", url:SOURCE_URLS.metamask, why:"Ajuda iniciantes a entender o risco de copiar um endereço do histórico rápido demais."},
+        {publisher:"Trezor", title:"Trezor: ataques de envenenamento de endereço", desc:"Artigo oficial de segurança de carteira sobre endereços parecidos criados por bots e risco de cópia errada.", url:SOURCE_URLS.trezor, why:"Lembra por que vale comparar o endereço inteiro antes de cada envio."}
+      ]
+    },
+    tr:{
+      faqs:[
+        {q:"Başlangıçta varlıkları borsada tutmak olur mu?", a:"Başlangıçta küçük bir tutar için olabilir, ama anahtarlar yine borsanın kontrolündedir. Riski anlayın ve daha fazla kontrol istiyorsanız fonları taşıyın."},
+        {q:"Seed phrase'i nerede saklamalıyım?", a:"Çevrimdışı ve size özel bir yerde saklayın. Ekran görüntüsü, mesaj uygulaması, email ve bulut notlardan kaçının."},
+        {q:"Adres doğru görünse bile farklı ağ neden tehlikelidir?", a:"Tek başına adres yeterli değildir. Ağ yanlışsa varlıklar doğru ulaşmayabilir veya geri almak çok zor olabilir."},
+        {q:"Sahte destek DM'i nasıl anlarım?", a:"Seed phrase, şifre, uzaktan erişim veya acil ödeme isteyen DM'lere dikkat edin. Baskı ve özel mesaj yaygın dolandırıcılık işaretleridir."},
+        {q:"Adres zehirlemeyi nasıl önlerim?", a:"Sadece son işlem geçmişinden adres kopyalamayın. Tüm adresi kontrol edin, mümkünse kaydedilmiş güvenilir adresleri kullanın ve önce küçük bir test gönderin."}
+      ],
+      sources:[
+        {publisher:"MetaMask", title:"MetaMask: adres zehirleme dolandırıcılıkları", desc:"Benzer adreslerin işlem geçmişinde nasıl göründüğünü ve kopyalamadan önce nelerin kontrol edilmesi gerektiğini anlatan resmi rehber.", url:SOURCE_URLS.metamask, why:"Adresi geçmişten aceleyle kopyalamanın riskini yeni başlayanlara açıkça gösterir."},
+        {publisher:"Trezor", title:"Trezor: adres zehirleme saldırıları", desc:"Botların ürettiği benzer adresleri ve yanlış kopyalama riskini anlatan resmi cüzdan güvenlik yazısı.", url:SOURCE_URLS.trezor, why:"Her gönderimden önce tam adresi karşılaştırmayı hatırlatır."}
+      ]
+    },
+    es:{
+      faqs:[
+        {q:"¿Está bien dejar los activos en un exchange al principio?", a:"Puede pasar con una cantidad pequeña al empezar, pero el exchange sigue controlando las claves. Entiende ese riesgo y mueve los fondos si quieres más control."},
+        {q:"¿Dónde debo guardar mi frase semilla?", a:"Guárdala offline en un lugar privado al que puedas volver. Evita capturas de pantalla, chats, correo y notas en la nube."},
+        {q:"¿Por qué una red diferente es peligrosa aunque la dirección parezca correcta?", a:"La dirección por sí sola no basta. Si la red es incorrecta, los fondos pueden no llegar bien o ser muy difíciles de recuperar."},
+        {q:"¿Cómo reconozco un DM falso de soporte?", a:"Sospecha si el DM pide frase semilla, contraseña, acceso remoto o pago urgente. La presión y el contacto privado son señales comunes de estafa."},
+        {q:"¿Cómo puedo evitar el envenenamiento de direcciones?", a:"No copies una dirección solo desde el historial reciente. Revisa la dirección completa, usa direcciones confiables guardadas cuando puedas y envía primero una pequeña prueba."}
+      ],
+      sources:[
+        {publisher:"MetaMask", title:"MetaMask: estafas de envenenamiento de direcciones", desc:"Guía oficial que explica cómo aparecen direcciones parecidas en el historial de transacciones y qué revisar antes de copiar.", url:SOURCE_URLS.metamask, why:"Ayuda a principiantes a entender el riesgo de copiar una dirección del historial con prisa."},
+        {publisher:"Trezor", title:"Trezor: ataques de envenenamiento de direcciones", desc:"Artículo oficial de seguridad de cartera sobre direcciones parecidas creadas por bots y el riesgo de copiar mal.", url:SOURCE_URLS.trezor, why:"Recuerda por qué conviene comparar la dirección completa antes de cada envío."}
+      ]
+    },
+    ar:{
+      faqs:[
+        {q:"هل لا بأس بترك الأصول في المنصة في البداية؟", a:"قد يكون ذلك مقبولاً لمبلغ صغير في البداية، لكن المنصة تبقى هي المتحكمة في المفاتيح. افهم هذا الخطر وانقل الأصول إذا أردت سيطرة أكبر."},
+        {q:"أين يجب أن أحفظ عبارة الاسترداد؟", a:"احفظها دون اتصال بالإنترنت في مكان خاص يمكنك الرجوع إليه. تجنب لقطات الشاشة والدردشة والبريد الإلكتروني والملاحظات السحابية."},
+        {q:"لماذا تكون الشبكة المختلفة خطيرة حتى لو بدا العنوان صحيحاً؟", a:"العنوان وحده لا يكفي. إذا كانت الشبكة خاطئة فقد لا تصل الأصول بشكل صحيح أو يصبح استرجاعها صعباً جداً."},
+        {q:"كيف أتعرف على رسالة دعم مزيفة عبر DM؟", a:"انتبه إذا طلبت الرسالة عبارة الاسترداد أو كلمة المرور أو الوصول عن بُعد أو دفعة عاجلة. الضغط والتواصل الخاص من علامات الاحتيال الشائعة."},
+        {q:"كيف أتجنب تسميم العناوين؟", a:"لا تنسخ العنوان من السجل الأخير فقط. راجع العنوان كاملاً واستخدم العناوين الموثوقة المحفوظة إن أمكن وأرسل مبلغاً صغيراً للاختبار أولاً."}
+      ],
+      sources:[
+        {publisher:"MetaMask", title:"MetaMask: احتيالات تسميم العناوين", desc:"دليل رسمي يشرح كيف تظهر العناوين المتشابهة في سجل المعاملات وما الذي يجب فحصه قبل النسخ.", url:SOURCE_URLS.metamask, why:"يساعد المبتدئ على فهم خطر نسخ عنوان من السجل بسرعة."},
+        {publisher:"Trezor", title:"Trezor: هجمات تسميم العناوين", desc:"مقال أمان رسمي للمحفظة يشرح العناوين المتشابهة التي تصنعها البوتات وخطر النسخ الخاطئ.", url:SOURCE_URLS.trezor, why:"تذكير مهم بمقارنة العنوان كاملاً قبل كل إرسال."}
+      ]
+    },
+    vi:{
+      faqs:[
+        {q:"Lúc đầu để tài sản trên sàn có được không?", a:"Có thể chấp nhận với số tiền nhỏ khi mới bắt đầu, nhưng sàn vẫn kiểm soát khóa. Hãy hiểu rủi ro đó và chuyển tài sản nếu bạn muốn tự kiểm soát nhiều hơn."},
+        {q:"Tôi nên lưu cụm từ khôi phục ở đâu?", a:"Hãy lưu offline ở nơi riêng tư mà bạn có thể xem lại. Tránh ảnh chụp màn hình, ứng dụng chat, email và ghi chú đám mây."},
+        {q:"Vì sao khác mạng lại nguy hiểm dù địa chỉ nhìn có vẻ đúng?", a:"Chỉ đúng địa chỉ là chưa đủ. Nếu sai mạng, tài sản có thể không đến đúng hoặc rất khó khôi phục."},
+        {q:"Làm sao nhận ra DM hỗ trợ giả?", a:"Hãy cảnh giác nếu DM hỏi cụm từ khôi phục, mật khẩu, quyền điều khiển từ xa hoặc yêu cầu thanh toán gấp. Sự thúc ép và liên hệ riêng là dấu hiệu lừa đảo phổ biến."},
+        {q:"Làm sao tránh đầu độc địa chỉ?", a:"Đừng chỉ sao chép địa chỉ từ lịch sử gần đây. Hãy kiểm tra toàn bộ địa chỉ, dùng địa chỉ tin cậy đã lưu khi có thể và gửi thử một khoản nhỏ trước."}
+      ],
+      sources:[
+        {publisher:"MetaMask", title:"MetaMask: lừa đảo đầu độc địa chỉ", desc:"Hướng dẫn chính thức giải thích cách địa chỉ giống nhau xuất hiện trong lịch sử giao dịch và cần kiểm tra gì trước khi sao chép.", url:SOURCE_URLS.metamask, why:"Giúp người mới hiểu rủi ro khi sao chép địa chỉ từ lịch sử quá nhanh."},
+        {publisher:"Trezor", title:"Trezor: tấn công đầu độc địa chỉ", desc:"Bài viết bảo mật ví chính thức về các địa chỉ giống nhau do bot tạo ra và rủi ro sao chép nhầm.", url:SOURCE_URLS.trezor, why:"Nhắc bạn so sánh toàn bộ địa chỉ trước mỗi lần gửi."}
+      ]
+    },
+    ha:{
+      faqs:[
+        {q:"Ya dace in bar kadarori a kan exchange a farko?", a:"Zai iya yiwuwa ga karamin adadi a farkon lokaci, amma har yanzu exchange ne ke rike da makullan. Ka fahimci hadarin sannan ka matsar da kadarar idan kana son karin iko."},
+        {q:"A ina ya fi dacewa in adana kalmomin dawo da walat?", a:"Ajiye su offline a wuri na sirri da za ka iya komawa ka duba. Ka guji screenshot, chat, email da bayanin cloud."},
+        {q:"Me ya sa hanyar sadarwa daban take da hadari ko da adireshin ya yi daidai?", a:"Adireshi kadai bai isa ba. Idan hanyar sadarwa ta yi kuskure, kadarar na iya kasa isa ko kuma ta yi wuya a dawo da ita."},
+        {q:"Ta yaya zan gane DM din tallafi na bogi?", a:"Ka yi hankali idan DM yana neman kalmomin dawo da walat, kalmar sirri, remote access ko biyan kudi cikin gaggawa. Matsi da sakon sirri alamu ne na damfara da suka saba."},
+        {q:"Ta yaya zan guji gurbata adireshi?", a:"Kada ka kwafi adireshi daga tarihin baya-bayan nan kadai. Ka duba cikakken adireshin, ka yi amfani da amintattun adireshin da ka adana idan zai yiwu, sannan ka fara da karamin gwaji."}
+      ],
+      sources:[
+        {publisher:"MetaMask", title:"MetaMask: damfarar gurbata adireshi", desc:"Jagorar hukuma da ke bayanin yadda adireshi masu kama da juna ke bayyana a tarihin muamala da abin da ya kamata a duba kafin kwafi.", url:SOURCE_URLS.metamask, why:"Yana taimaka wa mai farawa ya gane hadarin kwafa daga tarihi cikin sauri."},
+        {publisher:"Trezor", title:"Trezor: hare-haren gurbata adireshi", desc:"Rubutun tsaro na walat na hukuma game da adireshi masu kama da juna da bots ke kirkira da hadarin kuskuren kwafi.", url:SOURCE_URLS.trezor, why:"Yana tunasar da kai ka kwatanta cikakken adireshi kafin kowace aikawa."}
+      ]
+    }
+  };
+  FAQ_SOURCE_PACK.br = clone(FAQ_SOURCE_PACK.pt);
+
+  LANGS.forEach(function(lang){
+    var pack = FAQ_SOURCE_PACK[baseLang(lang)] || FAQ_SOURCE_PACK.en;
+    var page = ensurePageLang(lang);
+    if(page){
+      pack.faqs.forEach(function(entry){
+        upsertFaq(page.faqItems, entry);
+      });
+    }
+
+    var relatedLabel = getRelatedLabel(lang);
+    var sourceList = ensureSourceList(typeof sourceLibrary !== "undefined" ? sourceLibrary : null, lang);
+    if(sourceList){
+      pack.sources.forEach(function(entry){
+        upsertSource(sourceList, entry, relatedLabel);
+      });
+    }
+
+    var sourceOverrideList = ensureSourceList(typeof sourceOverrides !== "undefined" ? sourceOverrides : null, lang);
+    if(sourceOverrideList){
+      pack.sources.forEach(function(entry){
+        upsertSource(sourceOverrideList, entry, relatedLabel);
+      });
+    }
+  });
+
+  if(typeof currentPage !== "undefined" && (currentPage === "faq" || currentPage === "sources") && typeof showPage === "function"){
+    showPage(currentPage);
+  }
+})();
+</script>
+<script id="update-history-20260413-patch">
+(function(){
+  if(window.__updateHistory20260413Patch) return;
+  window.__updateHistory20260413Patch = true;
+
+  function clone(value){
+    return value == null ? value : JSON.parse(JSON.stringify(value));
+  }
+
+  function baseLang(lang){
+    var value = lang || (typeof currentLang === "string" && currentLang ? currentLang : "en");
+    return value === "br" ? "pt" : value;
+  }
+
+  var UPDATE_PACK = {
+    en:{
+      date:"2026-04-13",
+      title:"Glossary, FAQ, and source links were expanded for beginners",
+      items:[
+        "The glossary and FAQ were expanded so beginners can check confusing ideas more easily.",
+        "Core terms such as KYC, fiat currency, self-custody wallet, seed phrase, and address poisoning were added.",
+        "Practical questions about exchanges, seed phrase storage, fake support DMs, and wrong networks were added to the FAQ.",
+        "Address poisoning sources were added so learners can review transaction history risk, lookalike addresses, and wrong-copy mistakes.",
+        "This update focused on helping users move naturally from search into terms, questions, and reference material."
+      ]
+    },
+    ko:{
+      date:"2026-04-13",
+      title:"용어사전, FAQ, 출처 연결을 초보자 기준으로 보강했습니다",
+      items:[
+        "용어사전과 FAQ를 보강해 초보자가 자주 헷갈리는 개념을 더 쉽게 확인할 수 있도록 정리했습니다",
+        "KYC, 법정화폐, 자기보관지갑, 시드 문구, 주소 오염 공격 같은 핵심 용어를 추가했습니다",
+        "처음 거래소에 자산을 두어도 되는지, 시드 문구를 어떻게 보관해야 하는지, 가짜 고객센터 DM을 어떻게 구분하는지 같은 실전 질문도 FAQ에 반영했습니다",
+        "Address poisoning 관련 출처 연결도 보강해 사기 예방 학습 흐름을 더 또렷하게 만들었습니다",
+        "이번 업데이트는 검색 이후 바로 용어, 질문, 참고자료까지 자연스럽게 이어서 확인할 수 있도록 정리하는 데 집중했습니다"
+      ]
+    }
+  };
+
+  function buildUpdateEntry(lang){
+    return clone(UPDATE_PACK[baseLang(lang)] || UPDATE_PACK.en);
+  }
+
+  var originalGetUpdateHistoryEntries = typeof window.getUpdateHistoryEntries === "function" ? window.getUpdateHistoryEntries : null;
+  window.getUpdateHistoryEntries = function(lang){
+    var list = originalGetUpdateHistoryEntries ? originalGetUpdateHistoryEntries(lang) : [];
+    list = Array.isArray(list) ? list.slice() : [];
+    list = list.filter(function(entry){
+      return entry && entry.date !== "2026-04-13";
+    });
+    list.unshift(buildUpdateEntry(lang));
+    return list;
+  };
+
+  function renderUpdateHistoryPatched(){
+    var data = window.getUpdateHistoryEntries(typeof currentLang !== "undefined" ? currentLang : "en");
+    var title = (typeof t === "function") ? t("updates.title") : "Update History";
+    var desc = (typeof t === "function") ? t("updates.desc") : "";
+    var metaCat = (typeof t === "function") ? t("nav.updates") : "Update History";
+
+    var html = '<div class="lc-header">'
+      + '<div class="lc-meta"><span class="meta-pill">U</span><span class="meta-cat">' + metaCat + '</span></div>'
+      + '<h1 class="lc-title">' + title + '</h1>'
+      + '<p class="lc-intro">' + desc + '</p>'
+      + '</div>'
+      + '<div class="update-timeline">';
+
+    data.forEach(function(entry, idx){
+      html += '<div class="update-entry">'
+        + '<div class="update-dot-col"><div class="update-dot"></div>'
+        + (idx < data.length - 1 ? '<div class="update-line"></div>' : '')
+        + '</div>'
+        + '<div class="update-card">'
+        + '<div class="update-date">' + entry.date + '</div>'
+        + '<div class="update-card-title">' + entry.title + '</div>'
+        + '<ul class="update-items">';
+      (entry.items || []).forEach(function(item){
+        html += '<li>' + item + '</li>';
+      });
+      html += '</ul></div></div>';
+    });
+
+    html += '</div>';
+    return html;
+  }
+
+  window.renderUpdateHistory = renderUpdateHistoryPatched;
+
+  function refreshUpdatePanels(){
+    if(typeof document === "undefined") return;
+    var panel = document.getElementById("updatesPanel");
+    if(panel){
+      panel.innerHTML = renderUpdateHistoryPatched();
+    }
+  }
+
+  function wrapRefresh(name){
+    var original = window[name];
+    if(typeof original !== "function" || original.__updateHistory20260413Wrapped) return;
+    var wrapped = function(){
+      var result = original.apply(this, arguments);
+      refreshUpdatePanels();
+      return result;
+    };
+    wrapped.__updateHistory20260413Wrapped = true;
+    window[name] = wrapped;
+  }
+
+  wrapRefresh("renderAllLessons");
+  wrapRefresh("setLang");
+  wrapRefresh("showPage");
+  refreshUpdatePanels();
+
+  if(typeof currentPage !== "undefined" && (currentPage === "home" || currentPage === "updates") && typeof showPage === "function"){
+    showPage(currentPage);
   }
 })();
 </script>
