@@ -21924,17 +21924,32 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
   }
 
   var PDF_FILES = {
-    en:'pdf/crypto-safety-guide-en.pdf',
-    ko:'pdf/crypto-safety-guide-ko.pdf',
-    th:'pdf/crypto-safety-guide-th.pdf',
-    id:'pdf/crypto-safety-guide-id.pdf',
-    pt:'pdf/crypto-safety-guide-pt.pdf',
-    br:'pdf/crypto-safety-guide-br.pdf',
-    tr:'pdf/crypto-safety-guide-tr.pdf',
-    es:'pdf/crypto-safety-guide-es.pdf',
-    ar:'pdf/crypto-safety-guide-ar.pdf',
-    vi:'pdf/crypto-safety-guide-vi.pdf',
-    ha:'pdf/crypto-safety-guide-ha.pdf'
+    lesson6:{
+      en:'pdf/lesson6-first-purchase-checklist-en.pdf',
+      ko:'pdf/lesson6-first-purchase-checklist-ko.pdf',
+      th:'pdf/lesson6-first-purchase-checklist-th.pdf',
+      id:'pdf/lesson6-first-purchase-checklist-id.pdf',
+      pt:'pdf/lesson6-first-purchase-checklist-pt.pdf',
+      br:'pdf/lesson6-first-purchase-checklist-pt.pdf',
+      tr:'pdf/lesson6-first-purchase-checklist-tr.pdf',
+      es:'pdf/lesson6-first-purchase-checklist-es.pdf',
+      ar:'pdf/lesson6-first-purchase-checklist-ar.pdf',
+      vi:'pdf/lesson6-first-purchase-checklist-vi.pdf',
+      ha:'pdf/lesson6-first-purchase-checklist-ha.pdf'
+    },
+    lesson7:{
+      en:'pdf/lesson7-scam-prevention-guide-en.pdf',
+      ko:'pdf/lesson7-scam-prevention-guide-ko.pdf',
+      th:'pdf/lesson7-scam-prevention-guide-th.pdf',
+      id:'pdf/lesson7-scam-prevention-guide-id.pdf',
+      pt:'pdf/lesson7-scam-prevention-guide-pt.pdf',
+      br:'pdf/lesson7-scam-prevention-guide-pt.pdf',
+      tr:'pdf/lesson7-scam-prevention-guide-tr.pdf',
+      es:'pdf/lesson7-scam-prevention-guide-es.pdf',
+      ar:'pdf/lesson7-scam-prevention-guide-ar.pdf',
+      vi:'pdf/lesson7-scam-prevention-guide-vi.pdf',
+      ha:'pdf/lesson7-scam-prevention-guide-ha.pdf'
+    }
   };
 
   var TEXT = {
@@ -22065,17 +22080,19 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     return TEXT[lang] || TEXT[baseLang(lang)] || TEXT.en;
   }
 
-  function getPdfHref(lang){
-    if(PDF_FILES[lang]) return PDF_FILES[lang];
+  function getLessonPdfHref(key, lang){
+    var files = PDF_FILES[key] || PDF_FILES.lesson6 || {};
+    if(files[lang]) return files[lang];
     var resolved = baseLang(lang);
-    if(PDF_FILES[resolved]) return PDF_FILES[resolved];
-    return PDF_FILES.en;
+    if(files[resolved]) return files[resolved];
+    if(files.en) return files.en;
+    return files.ko || '';
   }
 
   function buildLessonPdfCard(i, lang){
     var key = i === 5 ? 'lesson6' : 'lesson7';
     var pack = getLangPack(lang)[key];
-    var href = getPdfHref(lang);
+    var href = getLessonPdfHref(key, lang);
     return ''
       + '<section class="home-pdf-block lesson-pdf-card" data-lesson-pdf="' + key + '">'
       +   '<div class="home-pdf-title">' + pack.title + '</div>'
@@ -22131,17 +22148,32 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
   }
 
   var PDF_FILES = {
-    en:'pdf/crypto-safety-guide-en.pdf',
-    ko:'pdf/crypto-safety-guide-ko.pdf',
-    th:'pdf/crypto-safety-guide-th.pdf',
-    id:'pdf/crypto-safety-guide-id.pdf',
-    pt:'pdf/crypto-safety-guide-pt.pdf',
-    br:'pdf/crypto-safety-guide-br.pdf',
-    tr:'pdf/crypto-safety-guide-tr.pdf',
-    es:'pdf/crypto-safety-guide-es.pdf',
-    ar:'pdf/crypto-safety-guide-ar.pdf',
-    vi:'pdf/crypto-safety-guide-vi.pdf',
-    ha:'pdf/crypto-safety-guide-ha.pdf'
+    lesson6:{
+      en:'pdf/lesson6-first-purchase-checklist-en.pdf',
+      ko:'pdf/lesson6-first-purchase-checklist-ko.pdf',
+      th:'pdf/lesson6-first-purchase-checklist-th.pdf',
+      id:'pdf/lesson6-first-purchase-checklist-id.pdf',
+      pt:'pdf/lesson6-first-purchase-checklist-pt.pdf',
+      br:'pdf/lesson6-first-purchase-checklist-pt.pdf',
+      tr:'pdf/lesson6-first-purchase-checklist-tr.pdf',
+      es:'pdf/lesson6-first-purchase-checklist-es.pdf',
+      ar:'pdf/lesson6-first-purchase-checklist-ar.pdf',
+      vi:'pdf/lesson6-first-purchase-checklist-vi.pdf',
+      ha:'pdf/lesson6-first-purchase-checklist-ha.pdf'
+    },
+    lesson7:{
+      en:'pdf/lesson7-scam-prevention-guide-en.pdf',
+      ko:'pdf/lesson7-scam-prevention-guide-ko.pdf',
+      th:'pdf/lesson7-scam-prevention-guide-th.pdf',
+      id:'pdf/lesson7-scam-prevention-guide-id.pdf',
+      pt:'pdf/lesson7-scam-prevention-guide-pt.pdf',
+      br:'pdf/lesson7-scam-prevention-guide-pt.pdf',
+      tr:'pdf/lesson7-scam-prevention-guide-tr.pdf',
+      es:'pdf/lesson7-scam-prevention-guide-es.pdf',
+      ar:'pdf/lesson7-scam-prevention-guide-ar.pdf',
+      vi:'pdf/lesson7-scam-prevention-guide-vi.pdf',
+      ha:'pdf/lesson7-scam-prevention-guide-ha.pdf'
+    }
   };
 
   var TEXT = {
@@ -22272,17 +22304,19 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     return TEXT[lang] || TEXT[baseLang(lang)] || TEXT.en;
   }
 
-  function getPdfHref(lang){
-    if(PDF_FILES[lang]) return PDF_FILES[lang];
+  function getLessonPdfHref(key, lang){
+    var files = PDF_FILES[key] || PDF_FILES.lesson6 || {};
+    if(files[lang]) return files[lang];
     var resolved = baseLang(lang);
-    if(PDF_FILES[resolved]) return PDF_FILES[resolved];
-    return PDF_FILES.en;
+    if(files[resolved]) return files[resolved];
+    if(files.en) return files.en;
+    return files.ko || '';
   }
 
   function buildLessonPdfCard(i, lang){
     var key = i === 5 ? 'lesson6' : 'lesson7';
     var pack = getLangPack(lang)[key];
-    var href = getPdfHref(lang);
+    var href = getLessonPdfHref(key, lang);
     return ''
       + '<section class="home-pdf-block lesson-pdf-card" data-lesson-pdf="' + key + '">'
       +   '<div class="home-pdf-title">' + pack.title + '</div>'
