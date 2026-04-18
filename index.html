@@ -23387,6 +23387,25 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
     return { scams:'safety', wallet:'wallet', exchanges:'wallet', cases:'wallet', basics:'beginner', stable:'beginner', defi:'beginner', reg:'official', freepdf:'freepdf', premium:'premium' };
   }
 
+  function normalizeSourceMenuKey(value){
+    return String(value || '').replace(/[\s/_-]+/g, '').toLowerCase();
+  }
+
+  function getSourceSectionKeyForGroup(groupKey){
+    return {
+      beginner:'basics',
+      safety:'scams',
+      wallet:'wallet',
+      freepdf:'freePdf',
+      premium:'premium',
+      official:'reg'
+    }[groupKey] || 'basics';
+  }
+
+  function getSourceTopMenuKey(groupKey){
+    return groupKey === 'freepdf' ? 'freePdf' : groupKey;
+  }
+
   function getCardTags(meta, pack, groupKey){
     var labels = [];
     function add(label, className){
@@ -23465,8 +23484,33 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
   }
 
   function resolveSourceSectionKey(targetCat){
-    var map = getGroupKeyResolver();
-    return map[targetCat] || targetCat;
+    var normalized = normalizeSourceMenuKey(targetCat);
+    var aliasMap = {
+      beginner:'basics',
+      basics:'basics',
+      basic:'basics',
+      stable:'basics',
+      defi:'basics',
+      safety:'scams',
+      scams:'scams',
+      scam:'scams',
+      wallet:'wallet',
+      exchanges:'wallet',
+      exchange:'wallet',
+      cases:'wallet',
+      case:'wallet',
+      freepdf:'freePdf',
+      pdf:'freePdf',
+      pdffree:'freePdf',
+      premium:'premium',
+      premiumguide:'premium',
+      premiumguides:'premium',
+      official:'reg',
+      reg:'reg',
+      officialreference:'reg',
+      officialreferences:'reg'
+    };
+    return aliasMap[normalized] || 'basics';
   }
 
   renderSources = function(){
@@ -23481,14 +23525,17 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
       return groups[key] && groups[key].length;
     }).map(function(key){
       var section = pack.sections[key];
-      return '<div class="source-cat" data-source-cat="' + key + '">' + section.title + ' <span style="font-size:.65rem;opacity:.6;margin-left:3px">(' + groups[key].length + ')</span></div>';
+      var sectionKey = getSourceSectionKeyForGroup(key);
+      var menuKey = getSourceTopMenuKey(key);
+      return '<div class="source-cat" data-source-top-menu="' + menuKey + '" data-source-cat="' + sectionKey + '" data-source-group="' + key + '">' + section.title + ' <span style="font-size:.65rem;opacity:.6;margin-left:3px">(' + groups[key].length + ')</span></div>';
     }).join('');
     var sectionsHtml = GROUP_ORDER.filter(function(key){
       return groups[key] && groups[key].length;
     }).map(function(key){
       var section = pack.sections[key];
+      var sectionKey = getSourceSectionKeyForGroup(key);
       var spotlightClass = key === 'safety' ? ' is-source-spotlight' : '';
-      return '<div class="src-section-block' + spotlightClass + '" data-source-section="' + key + '">'
+      return '<div class="src-section-block' + spotlightClass + '" data-source-section="' + sectionKey + '" data-source-group="' + key + '">'
         + '<div class="src-section-heading">' + section.title + '<span class="src-section-count">' + groups[key].length + '</span></div>'
         + '<p class="src-group-desc">' + section.desc + '</p>'
         + '<div class="source-library-grid">' + groups[key].map(function(meta){
@@ -23510,8 +23557,9 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
 
   setActiveSourceCategory = function(targetCat){
     var resolved = resolveSourceSectionKey(targetCat);
-    document.querySelectorAll('#sourcesPanel .source-cat[data-source-cat]').forEach(function(chip){
-      chip.classList.toggle('is-active', chip.dataset.sourceCat === resolved);
+    document.querySelectorAll('#sourcesPanel .source-cat[data-source-cat], #sourcesPanel [data-source-top-menu]').forEach(function(chip){
+      var chipKey = chip.dataset.sourceCat || chip.dataset.sourceTopMenu || chip.dataset.sourceGroup || '';
+      chip.classList.toggle('is-active', resolveSourceSectionKey(chipKey) === resolved);
     });
   };
   window.setActiveSourceCategory = setActiveSourceCategory;
@@ -23543,6 +23591,553 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
   }
   if(typeof currentPage !== 'undefined' && currentPage === 'sources' && typeof showPage === 'function'){
     showPage('sources');
+  }
+})();
+</script>
+<style id="mobile-ux-scroll-retention-20260419">
+@media (max-width: 768px){
+  #topbar{padding-right:4px}
+  .brand{flex:1 1 auto;max-width:calc(100vw - 156px);min-width:0;padding:0 10px 0 14px;gap:8px}
+  .brand > div{min-width:0}
+  .brand-title,.brand-sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .brand-title{max-width:100%}
+  .topbar-right{gap:5px;padding-right:4px;flex:0 0 auto;flex-shrink:0}
+  .lang-wrap{min-width:0}
+  .lang-toggle,.mobile-toggle,#topbar .search-trigger{min-height:40px;flex:0 0 auto}
+  .lang-toggle{width:auto;min-width:48px;max-width:52px;padding:0 8px;gap:3px}
+  .mobile-toggle,#topbar .search-trigger{width:40px;min-width:40px}
+  .lang-menu{max-width:min(240px,calc(100vw - 18px))}
+  .content-area{padding:24px 16px 72px}
+  .lesson-body p{margin-bottom:15px}
+  .glossary-grid,.source-library-grid{gap:14px}
+  .glossary-card,.source-library-item,.example-card,.mistake-card,.faq-item,.checkpoint-item,.quiz-card,.source-card{padding:15px}
+  .quickbar{overflow:visible;gap:8px}
+  .quick-chip{white-space:normal;flex:1 1 140px;min-height:38px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.35;padding:8px 12px}
+  .source-cats{gap:8px}
+  .source-cat{display:inline-flex;align-items:center;justify-content:center;min-height:38px;white-space:normal;line-height:1.35;text-align:center}
+  .lesson-nav-bar{gap:10px;margin-top:30px;padding-top:18px}
+  .nav-action{width:100%;min-height:46px;padding:12px 16px;justify-content:center}
+}
+@media (max-width: 520px){
+  #topbar{padding-right:2px}
+  .brand{max-width:calc(100vw - 146px);padding:0 8px 0 12px}
+  .brand-badge{width:28px;height:28px}
+  .brand-title{font-size:.84rem}
+  .brand-sub{font-size:.66rem}
+  .topbar-right{gap:4px;padding-right:2px}
+  .lang-toggle{min-width:46px;max-width:48px;padding:0 6px}
+  .content-area{padding:22px 14px 68px}
+  .lc-header{margin-bottom:22px;padding-bottom:18px}
+  .lesson-body h2{margin:26px 0 10px}
+  .lesson-nav-bar{gap:12px}
+  .nav-action,.complete-btn{min-height:48px}
+  .source-cat,.quick-chip{font-size:.72rem}
+}
+@media (max-width: 380px){
+  .brand{max-width:calc(100vw - 136px);gap:6px}
+  .brand-sub{display:none}
+  .brand-title{font-size:.8rem}
+  .topbar-right{gap:3px;padding-right:2px}
+  .lang-toggle{min-width:44px;max-width:46px;padding:0 6px}
+}
+</style>
+<script id="lang-scroll-retention-20260419">
+(function(){
+  if(typeof window === 'undefined' || window.__langScrollRetention20260419) return;
+  window.__langScrollRetention20260419 = true;
+
+  var PANEL_IDS = {
+    home: 'homePanel',
+    start: 'startPanel',
+    faq: 'faqPanel',
+    safety: 'safetyPanel',
+    glossary: 'glossaryPanel',
+    sources: 'sourcesPanel',
+    updates: 'updatesPanel'
+  };
+
+  function isFiniteNumber(value){
+    return typeof value === 'number' && isFinite(value);
+  }
+
+  function getCurrentScrollY(){
+    return window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+  }
+
+  function getViewportHeight(){
+    return window.innerHeight || document.documentElement.clientHeight || 0;
+  }
+
+  function resolvePanelId(page, lesson){
+    if(typeof page === 'string' && /^lesson\d+$/.test(page)) return page;
+    if(page === 'lesson' && isFiniteNumber(lesson)) return 'lesson' + lesson;
+    return PANEL_IDS[page] || 'homePanel';
+  }
+
+  function getTargetPanel(state){
+    var page = state && state.page ? state.page : (typeof currentPage === 'string' && currentPage ? currentPage : 'home');
+    var lesson = state && isFiniteNumber(state.lesson) ? state.lesson : (isFiniteNumber(currentLesson) ? currentLesson : 0);
+    return document.getElementById(resolvePanelId(page, lesson));
+  }
+
+  function captureLanguageScrollState(){
+    var page = typeof currentPage === 'string' && currentPage ? currentPage : 'home';
+    var lesson = isFiniteNumber(currentLesson) ? currentLesson : 0;
+    var panel = getTargetPanel({ page: page, lesson: lesson });
+    var scrollY = getCurrentScrollY();
+    var viewportHeight = getViewportHeight();
+    var panelTop = panel ? scrollY + panel.getBoundingClientRect().top : 0;
+    var panelRange = panel ? Math.max(panel.scrollHeight - viewportHeight, 0) : Math.max(document.documentElement.scrollHeight - viewportHeight, 0);
+    var offsetWithinPanel = panel ? Math.max(0, scrollY - panelTop) : scrollY;
+    var progress = panelRange > 0 ? Math.min(1, offsetWithinPanel / panelRange) : 0;
+    return {
+      page: page,
+      lesson: lesson,
+      scrollY: scrollY,
+      panelRange: panelRange,
+      offsetWithinPanel: offsetWithinPanel,
+      progress: progress
+    };
+  }
+
+  function restoreLanguageScrollState(state){
+    if(!state) return;
+    var panel = getTargetPanel(state);
+    var viewportHeight = getViewportHeight();
+    var targetTop = state.scrollY;
+    if(panel){
+      var panelTop = getCurrentScrollY() + panel.getBoundingClientRect().top;
+      var panelRange = Math.max(panel.scrollHeight - viewportHeight, 0);
+      var targetOffset = state.offsetWithinPanel;
+      if(state.panelRange > 0 && panelRange > 0){
+        targetOffset = panelRange * state.progress;
+      }else{
+        targetOffset = Math.min(state.offsetWithinPanel, panelRange);
+      }
+      targetTop = panelTop + targetOffset;
+    }
+    var maxScroll = Math.max(document.documentElement.scrollHeight - viewportHeight, 0);
+    targetTop = Math.max(0, Math.min(Math.round(targetTop), maxScroll));
+    window.scrollTo({ top: targetTop, left: 0, behavior: 'auto' });
+  }
+
+  function extractRequestedTop(argsLike){
+    try{
+      if(!argsLike || !argsLike.length) return null;
+      if(argsLike.length === 1 && argsLike[0] && typeof argsLike[0] === 'object'){
+        if(Object.prototype.hasOwnProperty.call(argsLike[0], 'top')) return Number(argsLike[0].top);
+        return null;
+      }
+      if(argsLike.length >= 2) return Number(argsLike[1]);
+    }catch(error){}
+    return null;
+  }
+
+  function shouldSuppressTopScroll(argsLike){
+    if(!window.__langScrollSuppressionCount) return false;
+    var requestedTop = extractRequestedTop(argsLike);
+    return requestedTop !== null && isFinite(requestedTop) && requestedTop <= 0;
+  }
+
+  function withLanguageScrollSuppressed(fn, ctx, args){
+    var nativeScrollTo = window.scrollTo;
+    window.scrollTo = function(){
+      if(shouldSuppressTopScroll(arguments)) return;
+      return nativeScrollTo.apply(window, arguments);
+    };
+    try{
+      return fn.apply(ctx, args || []);
+    }finally{
+      window.scrollTo = nativeScrollTo;
+    }
+  }
+
+  if(typeof window.showPage === 'function' && !window.showPage.__langScrollRetentionWrapped){
+    var originalShowPage = window.showPage;
+    var wrappedShowPage = function(){
+      if(!window.__langScrollSuppressionCount) return originalShowPage.apply(this, arguments);
+      return withLanguageScrollSuppressed(originalShowPage, this, arguments);
+    };
+    wrappedShowPage.__langScrollRetentionWrapped = true;
+    window.showPage = wrappedShowPage;
+    try{ showPage = wrappedShowPage; }catch(error){}
+  }
+
+  if(typeof window.showLesson === 'function' && !window.showLesson.__langScrollRetentionWrapped){
+    var originalShowLesson = window.showLesson;
+    var wrappedShowLesson = function(){
+      if(!window.__langScrollSuppressionCount) return originalShowLesson.apply(this, arguments);
+      return withLanguageScrollSuppressed(originalShowLesson, this, arguments);
+    };
+    wrappedShowLesson.__langScrollRetentionWrapped = true;
+    window.showLesson = wrappedShowLesson;
+    try{ showLesson = wrappedShowLesson; }catch(error){}
+  }
+
+  function scheduleLanguageScrollRestore(state){
+    var restore = function(){
+      restoreLanguageScrollState(state);
+    };
+    if(typeof requestAnimationFrame === 'function'){
+      requestAnimationFrame(function(){
+        restore();
+        requestAnimationFrame(restore);
+      });
+    }else{
+      setTimeout(restore, 0);
+      setTimeout(restore, 60);
+    }
+    setTimeout(restore, 120);
+    setTimeout(restore, 280);
+  }
+
+  if(typeof window.setLang === 'function' && !window.setLang.__langScrollRetentionWrapped){
+    var originalSetLang = window.setLang;
+    var wrappedSetLang = function(lang){
+      var snapshot = captureLanguageScrollState();
+      var released = false;
+      window.__langScrollSuppressionCount = (window.__langScrollSuppressionCount || 0) + 1;
+      function releaseSuppression(){
+        if(released) return;
+        released = true;
+        window.__langScrollSuppressionCount = Math.max((window.__langScrollSuppressionCount || 1) - 1, 0);
+      }
+      try{
+        return originalSetLang.apply(this, arguments);
+      }finally{
+        scheduleLanguageScrollRestore(snapshot);
+        setTimeout(releaseSuppression, 520);
+      }
+    };
+    wrappedSetLang.__langScrollRetentionWrapped = true;
+    window.setLang = wrappedSetLang;
+    try{ setLang = wrappedSetLang; }catch(error){}
+  }
+})();
+</script>
+<style id="mobile-topbar-reflow-20260419">
+@media (max-width: 768px){
+  #topbar{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    align-items:center;
+    justify-content:unset;
+    gap:8px;
+    padding-left:10px;
+    padding-right:10px;
+    overflow:visible;
+  }
+  #topbar .brand{
+    width:auto;
+    max-width:none;
+    flex:1 1 auto;
+    min-width:0;
+    padding:0;
+    gap:8px;
+    border-right:none;
+    overflow:hidden;
+    position:relative;
+    z-index:1;
+  }
+  #topbar .brand > div{
+    min-width:0;
+    overflow:hidden;
+  }
+  #topbar .brand-title{
+    display:block;
+    min-width:0;
+    width:100%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-size:.84rem;
+    line-height:1.15;
+  }
+  #topbar .brand-sub{
+    display:none;
+  }
+  #topbar .topbar-right{
+    flex:0 0 auto;
+    display:grid;
+    grid-auto-flow:column;
+    grid-auto-columns:max-content;
+    align-items:center;
+    justify-content:end;
+    gap:4px;
+    min-width:max-content;
+    padding-right:0;
+    margin-left:0;
+    position:relative;
+    z-index:5;
+  }
+  #topbar .lang-wrap{
+    min-width:0;
+    flex:0 0 auto;
+    position:relative;
+    z-index:6;
+  }
+  #topbar .search-trigger,
+  #topbar .lang-toggle,
+  #topbar .mobile-toggle{
+    height:40px;
+    min-height:40px;
+    flex-shrink:0;
+  }
+  #topbar .lang-toggle,
+  #topbar .mobile-toggle,
+  #topbar .search-trigger{
+    position:relative;
+    z-index:7;
+    pointer-events:auto;
+  }
+  #topbar .search-trigger,
+  #topbar .mobile-toggle{
+    width:40px;
+    min-width:40px;
+    padding:0;
+  }
+  #topbar .lang-toggle{
+    width:auto;
+    min-width:46px;
+    max-width:50px;
+    padding:0 8px;
+    gap:3px;
+    justify-content:center;
+  }
+  #topbar .lang-toggle svg{
+    width:9px;
+  }
+  #topbar .lang-menu{
+    z-index:20;
+    pointer-events:auto;
+  }
+}
+@media (max-width: 430px){
+  #topbar{
+    gap:6px;
+    padding-left:8px;
+    padding-right:8px;
+  }
+  #topbar .brand{
+    gap:7px;
+  }
+  #topbar .brand-title{
+    font-size:.82rem;
+  }
+  #topbar .topbar-right{
+    gap:3px;
+  }
+  #topbar .lang-toggle{
+    min-width:44px;
+    max-width:46px;
+    padding:0 6px;
+  }
+}
+@media (max-width: 360px){
+  #topbar{
+    gap:5px;
+    padding-left:6px;
+    padding-right:6px;
+  }
+  #topbar .brand{
+    gap:6px;
+  }
+  #topbar .brand-title{
+    font-size:.8rem;
+  }
+  #topbar .topbar-right{
+    gap:2px;
+  }
+  #topbar .lang-toggle{
+    min-width:42px;
+    max-width:44px;
+    padding:0 5px;
+  }
+}
+</style>
+<script id="lang-switch-performance-20260419">
+(function(){
+  if(typeof window === 'undefined' || window.__langSwitchPerformance20260419) return;
+  window.__langSwitchPerformance20260419 = true;
+
+  function currentPageKey(){
+    return (typeof currentPage === 'string' && currentPage) ? currentPage : 'home';
+  }
+
+  function currentLessonIndex(){
+    return (typeof currentLesson === 'number' && isFinite(currentLesson)) ? currentLesson : 0;
+  }
+
+  function renderPanelByPage(page){
+    if(/^lesson\d+$/.test(page)){
+      var lessonIndex = currentLessonIndex();
+      var lessonPanel = document.getElementById('lesson' + lessonIndex);
+      if(lessonPanel && typeof renderLesson === 'function'){
+        lessonPanel.innerHTML = renderLesson(lessonIndex);
+      }
+      return;
+    }
+    if(page === 'home'){
+      var homePanel = document.getElementById('homePanel');
+      if(homePanel && typeof renderHome === 'function') homePanel.innerHTML = renderHome();
+      return;
+    }
+    if(page === 'start'){
+      var startPanel = document.getElementById('startPanel');
+      if(startPanel && typeof renderStartHere === 'function') startPanel.innerHTML = renderStartHere();
+      return;
+    }
+    if(page === 'faq'){
+      var faqPanel = document.getElementById('faqPanel');
+      if(faqPanel && typeof renderFAQPage === 'function') faqPanel.innerHTML = renderFAQPage();
+      return;
+    }
+    if(page === 'safety'){
+      var safetyPanel = document.getElementById('safetyPanel');
+      if(safetyPanel && typeof renderSafetyPage === 'function') safetyPanel.innerHTML = renderSafetyPage();
+      return;
+    }
+    if(page === 'glossary'){
+      var glossaryPanel = document.getElementById('glossaryPanel');
+      if(glossaryPanel && typeof renderGlossary === 'function') glossaryPanel.innerHTML = renderGlossary();
+      return;
+    }
+    if(page === 'sources'){
+      var sourcesPanel = document.getElementById('sourcesPanel');
+      if(sourcesPanel && typeof renderSources === 'function') sourcesPanel.innerHTML = renderSources();
+      return;
+    }
+    if(page === 'updates'){
+      var updatesPanel = document.getElementById('updatesPanel');
+      if(updatesPanel && typeof renderUpdateHistory === 'function') updatesPanel.innerHTML = renderUpdateHistory();
+    }
+  }
+
+  function renderHiddenPanelsAfterSwitch(token){
+    if(window.__langSwitchPerformanceToken !== token) return;
+    var page = currentPageKey();
+    var lessonIndex = currentLessonIndex();
+    var totalLessons = (typeof getTotalLessons === 'function') ? getTotalLessons() : 0;
+    for(var i = 0; i < totalLessons; i++){
+      if(page === ('lesson' + i) && i === lessonIndex) continue;
+      var lessonPanel = document.getElementById('lesson' + i);
+      if(lessonPanel && typeof renderLesson === 'function'){
+        lessonPanel.innerHTML = renderLesson(i);
+      }
+    }
+    if(page !== 'home'){
+      var homePanel = document.getElementById('homePanel');
+      if(homePanel && typeof renderHome === 'function') homePanel.innerHTML = renderHome();
+    }
+    if(page !== 'start'){
+      var startPanel = document.getElementById('startPanel');
+      if(startPanel && typeof renderStartHere === 'function') startPanel.innerHTML = renderStartHere();
+    }
+    if(page !== 'faq'){
+      var faqPanel = document.getElementById('faqPanel');
+      if(faqPanel && typeof renderFAQPage === 'function') faqPanel.innerHTML = renderFAQPage();
+    }
+    if(page !== 'safety'){
+      var safetyPanel = document.getElementById('safetyPanel');
+      if(safetyPanel && typeof renderSafetyPage === 'function') safetyPanel.innerHTML = renderSafetyPage();
+    }
+    if(page !== 'glossary'){
+      var glossaryPanel = document.getElementById('glossaryPanel');
+      if(glossaryPanel && typeof renderGlossary === 'function') glossaryPanel.innerHTML = renderGlossary();
+    }
+    if(page !== 'sources'){
+      var sourcesPanel = document.getElementById('sourcesPanel');
+      if(sourcesPanel && typeof renderSources === 'function') sourcesPanel.innerHTML = renderSources();
+    }
+    if(page !== 'updates'){
+      var updatesPanel = document.getElementById('updatesPanel');
+      if(updatesPanel && typeof renderUpdateHistory === 'function') updatesPanel.innerHTML = renderUpdateHistory();
+    }
+  }
+
+  if(typeof window.renderAllLessons === 'function' && !window.renderAllLessons.__langSwitchPerformanceWrapped){
+    var fullRenderAllLessons = window.renderAllLessons;
+    var wrappedRenderAllLessons = function(){
+      if(window.__langSwitchPerformanceActive){
+        if(!window.__langSwitchPerformanceVisibleDone){
+          window.__langSwitchPerformanceVisibleDone = true;
+          renderPanelByPage(currentPageKey());
+        }
+        return;
+      }
+      return fullRenderAllLessons.apply(this, arguments);
+    };
+    wrappedRenderAllLessons.__langSwitchPerformanceWrapped = true;
+    wrappedRenderAllLessons.__langSwitchPerformanceFull = fullRenderAllLessons;
+    window.renderAllLessons = wrappedRenderAllLessons;
+    try{ renderAllLessons = wrappedRenderAllLessons; }catch(error){}
+  }
+
+  if(typeof window.setLang === 'function' && !window.setLang.__langSwitchPerformanceWrapped){
+    var previousSetLang = window.setLang;
+    var wrappedSetLang = function(lang){
+      var nextLang = lang;
+      var uiStore = (typeof ui !== 'undefined' && ui) ? ui : null;
+      var extraUiStore = (typeof extraUi !== 'undefined' && extraUi) ? extraUi : null;
+      var labelStore = (typeof langLabels !== 'undefined' && langLabels) ? langLabels : null;
+      if(uiStore || extraUiStore){
+        if((!uiStore || !uiStore[nextLang]) && (!extraUiStore || !extraUiStore[nextLang])) nextLang = 'en';
+      }
+
+      var langMenu = document.getElementById('langMenu');
+      if(langMenu) langMenu.classList.remove('open');
+
+      var currentLabel = document.getElementById('currentLangLabel');
+      if(currentLabel) currentLabel.textContent = (labelStore && labelStore[nextLang]) ? labelStore[nextLang] : String(nextLang || 'en').toUpperCase();
+
+      document.querySelectorAll('.lang-item').forEach(function(el){
+        el.classList.toggle('active', el.dataset.lang === nextLang);
+      });
+
+      var token = Date.now() + Math.random();
+      window.__langSwitchPerformanceToken = token;
+      window.__langSwitchPerformanceActive = true;
+      window.__langSwitchPerformanceVisibleDone = false;
+
+      try{
+        return previousSetLang.apply(this, [nextLang]);
+      }finally{
+        window.__langSwitchPerformanceActive = false;
+        window.__langSwitchPerformanceVisibleDone = false;
+        var deferredRender = function(){
+          renderHiddenPanelsAfterSwitch(token);
+        };
+        if(typeof requestIdleCallback === 'function'){
+          requestIdleCallback(deferredRender, { timeout: 400 });
+        }else{
+          setTimeout(deferredRender, 60);
+        }
+      }
+    };
+    wrappedSetLang.__langSwitchPerformanceWrapped = true;
+    window.setLang = wrappedSetLang;
+    try{ setLang = wrappedSetLang; }catch(error){}
+  }
+
+  var langMenu = document.getElementById('langMenu');
+  if(langMenu && !langMenu.__langSwitchPerformanceBound){
+    langMenu.addEventListener('click', function(e){
+      var item = e.target.closest('.lang-item[data-lang]');
+      if(!item) return;
+      e.preventDefault();
+      e.stopPropagation();
+      if(typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+      langMenu.classList.remove('open');
+      var targetLang = item.dataset.lang;
+      if(typeof requestAnimationFrame === 'function'){
+        requestAnimationFrame(function(){
+          if(typeof window.setLang === 'function') window.setLang(targetLang);
+        });
+      }else if(typeof window.setLang === 'function'){
+        setTimeout(function(){ window.setLang(targetLang); }, 0);
+      }
+    }, true);
+    langMenu.__langSwitchPerformanceBound = true;
   }
 })();
 </script>
