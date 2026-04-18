@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cryptoacademy-max.github.io/crypto-academy/sitemap.xml
