@@ -21913,5 +21913,700 @@ if(typeof showPage === 'function' && typeof currentPage !== 'undefined')
   window.__applyHaUnifiedGlossary = applyHaUnified;
 })();
 </script>
+<script id="lesson-pdf-cards-20260418-disabled" type="application/json">
+(function(){
+  if(typeof window === 'undefined' || window.__lessonPdfCards20260418) return;
+  window.__lessonPdfCards20260418 = true;
+
+  function baseLang(lang){
+    var value = lang || (typeof currentLang === 'string' && currentLang ? currentLang : 'en');
+    return value === 'br' ? 'pt' : value;
+  }
+
+  var PDF_FILES = {
+    en:'pdf/crypto-safety-guide-en.pdf',
+    ko:'pdf/crypto-safety-guide-ko.pdf',
+    th:'pdf/crypto-safety-guide-th.pdf',
+    id:'pdf/crypto-safety-guide-id.pdf',
+    pt:'pdf/crypto-safety-guide-pt.pdf',
+    br:'pdf/crypto-safety-guide-br.pdf',
+    tr:'pdf/crypto-safety-guide-tr.pdf',
+    es:'pdf/crypto-safety-guide-es.pdf',
+    ar:'pdf/crypto-safety-guide-ar.pdf',
+    vi:'pdf/crypto-safety-guide-vi.pdf',
+    ha:'pdf/crypto-safety-guide-ha.pdf'
+  };
+
+  var TEXT = {
+    en:{
+      lesson6:{
+        title:'Free PDF Checklist',
+        body:'If you want a quick reference before your first purchase, you can open the beginner crypto safety checklist PDF.',
+        button:'Open Free PDF'
+      },
+      lesson7:{
+        title:'Scam Prevention PDF Guide',
+        body:'If you want to review warning signs like fake websites, seed phrases, or address poisoning, you can open the free PDF guide.',
+        button:'Open Scam Prevention PDF'
+      }
+    },
+    ko:{
+      lesson6:{
+        title:'무료 PDF 체크리스트',
+        body:'첫 구매 전에 다시 확인하고 싶다면, 초보자를 위한 암호화폐 안전 체크리스트 PDF를 열어볼 수 있습니다.',
+        button:'무료 PDF 열기'
+      },
+      lesson7:{
+        title:'사기 예방 PDF 가이드',
+        body:'가짜 사이트, 시드 문구, 주소 오염 공격 같은 위험 신호를 다시 확인하고 싶다면 무료 PDF 가이드를 열어볼 수 있습니다.',
+        button:'사기 예방 PDF 열기'
+      }
+    },
+    th:{
+      lesson6:{
+        title:'เช็กลิสต์ PDF ฟรี',
+        body:'ถ้าคุณอยากมีสรุปไว้ดูอีกครั้งก่อนซื้อครั้งแรก คุณสามารถเปิด PDF เช็กลิสต์ความปลอดภัยคริปโตสำหรับผู้เริ่มต้นได้',
+        button:'เปิด PDF ฟรี'
+      },
+      lesson7:{
+        title:'คู่มือ PDF ป้องกันสแกม',
+        body:'ถ้าคุณอยากทบทวนสัญญาณเตือนอย่างเว็บปลอม seed phrase หรือ address poisoning คุณสามารถเปิดคู่มือ PDF ฟรีได้',
+        button:'เปิด PDF ป้องกันสแกม'
+      }
+    },
+    id:{
+      lesson6:{
+        title:'Checklist PDF Gratis',
+        body:'Jika ingin referensi cepat sebelum pembelian pertama, Anda bisa membuka PDF checklist keamanan crypto untuk pemula.',
+        button:'Buka PDF Gratis'
+      },
+      lesson7:{
+        title:'Panduan PDF Anti-Scam',
+        body:'Jika ingin meninjau lagi tanda bahaya seperti situs palsu, seed phrase, atau address poisoning, Anda bisa membuka panduan PDF gratis.',
+        button:'Buka PDF Anti-Scam'
+      }
+    },
+    pt:{
+      lesson6:{
+        title:'Checklist PDF Gratuito',
+        body:'Se quiser uma referencia rapida antes da primeira compra, voce pode abrir o PDF com a checklist de seguranca cripto para iniciantes.',
+        button:'Abrir PDF Gratuito'
+      },
+      lesson7:{
+        title:'Guia PDF de Prevencao de Golpes',
+        body:'Se quiser revisar sinais de alerta como sites falsos, seed phrase ou address poisoning, voce pode abrir o guia PDF gratuito.',
+        button:'Abrir PDF de Golpes'
+      }
+    },
+    tr:{
+      lesson6:{
+        title:'Ucretsiz PDF Kontrol Listesi',
+        body:'Ilk aliminizdan once hizli bir referans istiyorsaniz, yeni baslayanlar icin kripto guvenlik kontrol listesi PDF dosyasini acabilirsiniz.',
+        button:'Ucretsiz PDF Ac'
+      },
+      lesson7:{
+        title:'Dolandiricilik Onleme PDF Rehberi',
+        body:'Sahte siteler, seed phrase veya address poisoning gibi uyari isaretlerini yeniden gozden gecirmek isterseniz, ucretsiz PDF rehberini acabilirsiniz.',
+        button:'PDF Rehberini Ac'
+      }
+    },
+    es:{
+      lesson6:{
+        title:'Checklist PDF Gratis',
+        body:'Si quieres una referencia rapida antes de tu primera compra, puedes abrir el PDF con la lista de seguridad cripto para principiantes.',
+        button:'Abrir PDF Gratis'
+      },
+      lesson7:{
+        title:'Guia PDF para Evitar Estafas',
+        body:'Si quieres repasar senales de alerta como sitios falsos, seed phrase o address poisoning, puedes abrir la guia PDF gratuita.',
+        button:'Abrir PDF Antiestafas'
+      }
+    },
+    ar:{
+      lesson6:{
+        title:'قائمة PDF مجانية',
+        body:'إذا أردت مرجعاً سريعاً قبل أول عملية شراء، يمكنك فتح ملف PDF لقائمة أمان العملات الرقمية للمبتدئين.',
+        button:'افتح PDF المجاني'
+      },
+      lesson7:{
+        title:'دليل PDF لمنع الاحتيال',
+        body:'إذا أردت مراجعة إشارات التحذير مثل المواقع المزيفة أو seed phrase أو address poisoning، يمكنك فتح دليل PDF المجاني.',
+        button:'افتح دليل الاحتيال'
+      }
+    },
+    vi:{
+      lesson6:{
+        title:'Checklist PDF Mien Phi',
+        body:'Neu ban muon mot tai lieu xem nhanh truoc lan mua dau tien, ban co the mo file PDF checklist an toan crypto cho nguoi moi.',
+        button:'Mo PDF Mien Phi'
+      },
+      lesson7:{
+        title:'Huong Dan PDF Chong Lua Dao',
+        body:'Neu ban muon xem lai cac dau hieu canh bao nhu trang gia, seed phrase hay address poisoning, ban co the mo huong dan PDF mien phi.',
+        button:'Mo PDF Chong Lua Dao'
+      }
+    },
+    ha:{
+      lesson6:{
+        title:'Jerin Dubawa na PDF Kyauta',
+        body:'Idan kana son takaitaccen abu da za ka sake dubawa kafin sayenka na farko, za ka iya bude PDF na jerin duba tsaron crypto na masu farawa.',
+        button:'Bude PDF Kyauta'
+      },
+      lesson7:{
+        title:'Jagorar PDF ta Kariya daga Damfara',
+        body:'Idan kana son sake duba alamun gargadi kamar shafukan bogi, seed phrase, ko address poisoning, za ka iya bude jagorar PDF kyauta.',
+        button:'Bude PDF na Damfara'
+      }
+    }
+  };
+  TEXT.br = TEXT.pt;
+
+  function getLangPack(lang){
+    return TEXT[lang] || TEXT[baseLang(lang)] || TEXT.en;
+  }
+
+  function getPdfHref(lang){
+    if(PDF_FILES[lang]) return PDF_FILES[lang];
+    var resolved = baseLang(lang);
+    if(PDF_FILES[resolved]) return PDF_FILES[resolved];
+    return PDF_FILES.en;
+  }
+
+  function buildLessonPdfCard(i, lang){
+    var key = i === 5 ? 'lesson6' : 'lesson7';
+    var pack = getLangPack(lang)[key];
+    var href = getPdfHref(lang);
+    return ''
+      + '<section class="home-pdf-block lesson-pdf-card" data-lesson-pdf="' + key + '">'
+      +   '<div class="home-pdf-title">' + pack.title + '</div>'
+      +   '<div class="home-pdf-body">' + pack.body + '</div>'
+      +   '<div class="home-pdf-grid">'
+      +     '<a class="home-pdf-link" href="' + href + '" target="_blank" rel="noopener noreferrer">'
+      +       '<span>' + pack.button + '</span>'
+      +       '<span class="home-pdf-link-tag">PDF</span>'
+      +     '</a>'
+      +   '</div>'
+      + '</section>';
+  }
+
+  var originalRenderLesson = window.renderLesson;
+  if(typeof originalRenderLesson !== 'function' || originalRenderLesson.__lessonPdfCardsWrapped) return;
+
+  function wrappedRenderLesson(i){
+    var html = originalRenderLesson.apply(this, arguments);
+    if((i !== 5 && i !== 6) || typeof html !== 'string') return html;
+    var shell = document.createElement('div');
+    shell.innerHTML = html;
+    var nav = shell.querySelector('.lesson-nav-bar');
+    if(!nav) return html;
+    var existing = shell.querySelector('.lesson-pdf-card');
+    if(existing) existing.remove();
+    nav.insertAdjacentHTML('beforebegin', buildLessonPdfCard(i, typeof currentLang === 'string' ? currentLang : 'en'));
+    return shell.innerHTML;
+  }
+
+  wrappedRenderLesson.__lessonPdfCardsWrapped = true;
+  window.renderLesson = wrappedRenderLesson;
+
+  if(typeof document !== 'undefined'){
+    var lessonSixPanel = document.getElementById('lesson5');
+    if(lessonSixPanel) lessonSixPanel.innerHTML = window.renderLesson(5);
+    var lessonSevenPanel = document.getElementById('lesson6');
+    if(lessonSevenPanel) lessonSevenPanel.innerHTML = window.renderLesson(6);
+  }
+
+  if(typeof currentPage !== 'undefined' && /^lesson\d+$/.test(currentPage) && typeof currentLesson === 'number' && (currentLesson === 5 || currentLesson === 6) && typeof showLesson === 'function'){
+    showLesson(currentLesson);
+  }
+})();
+</script>
+<script id="lesson-pdf-cards-20260418">
+(function(){
+  if(typeof window === 'undefined' || window.__lessonPdfCards20260418) return;
+  window.__lessonPdfCards20260418 = true;
+
+  function baseLang(lang){
+    var value = lang || (typeof currentLang === 'string' && currentLang ? currentLang : 'en');
+    return value === 'br' ? 'pt' : value;
+  }
+
+  var PDF_FILES = {
+    en:'pdf/crypto-safety-guide-en.pdf',
+    ko:'pdf/crypto-safety-guide-ko.pdf',
+    th:'pdf/crypto-safety-guide-th.pdf',
+    id:'pdf/crypto-safety-guide-id.pdf',
+    pt:'pdf/crypto-safety-guide-pt.pdf',
+    br:'pdf/crypto-safety-guide-br.pdf',
+    tr:'pdf/crypto-safety-guide-tr.pdf',
+    es:'pdf/crypto-safety-guide-es.pdf',
+    ar:'pdf/crypto-safety-guide-ar.pdf',
+    vi:'pdf/crypto-safety-guide-vi.pdf',
+    ha:'pdf/crypto-safety-guide-ha.pdf'
+  };
+
+  var TEXT = {
+    en:{
+      lesson6:{
+        title:'Free PDF Checklist',
+        body:'If you want a quick reference before your first purchase, you can open the beginner crypto safety checklist PDF.',
+        button:'Open Free PDF'
+      },
+      lesson7:{
+        title:'Scam Prevention PDF Guide',
+        body:'If you want to review warning signs like fake websites, seed phrases, or address poisoning, you can open the free PDF guide.',
+        button:'Open Scam Prevention PDF'
+      }
+    },
+    ko:{
+      lesson6:{
+        title:'\ubb34\ub8cc PDF \uccb4\ud06c\ub9ac\uc2a4\ud2b8',
+        body:'\uccab \uad6c\ub9e4 \uc804\uc5d0 \ub2e4\uc2dc \ud655\uc778\ud558\uace0 \uc2f6\ub2e4\uba74, \ucd08\ubcf4\uc790\ub97c \uc704\ud55c \uc554\ud638\ud654\ud3d0 \uc548\uc804 \uccb4\ud06c\ub9ac\uc2a4\ud2b8 PDF\ub97c \uc5f4\uc5b4\ubcfc \uc218 \uc788\uc2b5\ub2c8\ub2e4.',
+        button:'\ubb34\ub8cc PDF \uc5f4\uae30'
+      },
+      lesson7:{
+        title:'\uc0ac\uae30 \uc608\ubc29 PDF \uac00\uc774\ub4dc',
+        body:'\uac00\uc9dc \uc0ac\uc774\ud2b8, \uc2dc\ub4dc \ubb38\uad6c, \uc8fc\uc18c \uc624\uc5fc \uacf5\uaca9 \uac19\uc740 \uc704\ud5d8 \uc2e0\ud638\ub97c \ub2e4\uc2dc \ud655\uc778\ud558\uace0 \uc2f6\ub2e4\uba74 \ubb34\ub8cc PDF \uac00\uc774\ub4dc\ub97c \uc5f4\uc5b4\ubcfc \uc218 \uc788\uc2b5\ub2c8\ub2e4.',
+        button:'\uc0ac\uae30 \uc608\ubc29 PDF \uc5f4\uae30'
+      }
+    },
+    th:{
+      lesson6:{
+        title:'\u0e40\u0e0a\u0e47\u0e01\u0e25\u0e34\u0e2a\u0e15\u0e4c PDF \u0e1f\u0e23\u0e35',
+        body:'\u0e16\u0e49\u0e32\u0e04\u0e38\u0e13\u0e2d\u0e22\u0e32\u0e01\u0e21\u0e35\u0e2a\u0e23\u0e38\u0e1b\u0e44\u0e27\u0e49\u0e14\u0e39\u0e2d\u0e35\u0e01\u0e04\u0e23\u0e31\u0e49\u0e07\u0e01\u0e48\u0e2d\u0e19\u0e0b\u0e37\u0e49\u0e2d\u0e04\u0e23\u0e31\u0e49\u0e07\u0e41\u0e23\u0e01 \u0e04\u0e38\u0e13\u0e2a\u0e32\u0e21\u0e32\u0e23\u0e16\u0e40\u0e1b\u0e34\u0e14 PDF \u0e40\u0e0a\u0e47\u0e01\u0e25\u0e34\u0e2a\u0e15\u0e4c\u0e04\u0e27\u0e32\u0e21\u0e1b\u0e25\u0e2d\u0e14\u0e20\u0e31\u0e22\u0e04\u0e23\u0e34\u0e1b\u0e42\u0e15\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a\u0e1c\u0e39\u0e49\u0e40\u0e23\u0e34\u0e48\u0e21\u0e15\u0e49\u0e19\u0e44\u0e14\u0e49',
+        button:'\u0e40\u0e1b\u0e34\u0e14 PDF \u0e1f\u0e23\u0e35'
+      },
+      lesson7:{
+        title:'\u0e04\u0e39\u0e48\u0e21\u0e37\u0e2d PDF \u0e1b\u0e49\u0e2d\u0e07\u0e01\u0e31\u0e19\u0e2a\u0e41\u0e01\u0e21',
+        body:'\u0e16\u0e49\u0e32\u0e04\u0e38\u0e13\u0e2d\u0e22\u0e32\u0e01\u0e17\u0e1a\u0e17\u0e27\u0e19\u0e2a\u0e31\u0e0d\u0e0d\u0e32\u0e13\u0e40\u0e15\u0e37\u0e2d\u0e19\u0e2d\u0e22\u0e48\u0e32\u0e07\u0e40\u0e27\u0e47\u0e1a\u0e1b\u0e25\u0e2d\u0e21 seed phrase \u0e2b\u0e23\u0e37\u0e2d address poisoning \u0e04\u0e38\u0e13\u0e2a\u0e32\u0e21\u0e32\u0e23\u0e16\u0e40\u0e1b\u0e34\u0e14\u0e04\u0e39\u0e48\u0e21\u0e37\u0e2d PDF \u0e1f\u0e23\u0e35\u0e44\u0e14\u0e49',
+        button:'\u0e40\u0e1b\u0e34\u0e14 PDF \u0e1b\u0e49\u0e2d\u0e07\u0e01\u0e31\u0e19\u0e2a\u0e41\u0e01\u0e21'
+      }
+    },
+    id:{
+      lesson6:{
+        title:'Checklist PDF Gratis',
+        body:'Jika ingin referensi cepat sebelum pembelian pertama, Anda bisa membuka PDF checklist keamanan crypto untuk pemula.',
+        button:'Buka PDF Gratis'
+      },
+      lesson7:{
+        title:'Panduan PDF Anti-Scam',
+        body:'Jika ingin meninjau lagi tanda bahaya seperti situs palsu, seed phrase, atau address poisoning, Anda bisa membuka panduan PDF gratis.',
+        button:'Buka PDF Anti-Scam'
+      }
+    },
+    pt:{
+      lesson6:{
+        title:'Checklist PDF Gratuito',
+        body:'Se quiser uma referencia rapida antes da primeira compra, voce pode abrir o PDF com a checklist de seguranca cripto para iniciantes.',
+        button:'Abrir PDF Gratuito'
+      },
+      lesson7:{
+        title:'Guia PDF de Prevencao de Golpes',
+        body:'Se quiser revisar sinais de alerta como sites falsos, seed phrase ou address poisoning, voce pode abrir o guia PDF gratuito.',
+        button:'Abrir PDF de Golpes'
+      }
+    },
+    tr:{
+      lesson6:{
+        title:'Ucretsiz PDF Kontrol Listesi',
+        body:'Ilk aliminizdan once hizli bir referans istiyorsaniz, yeni baslayanlar icin kripto guvenlik kontrol listesi PDF dosyasini acabilirsiniz.',
+        button:'Ucretsiz PDF Ac'
+      },
+      lesson7:{
+        title:'Dolandiricilik Onleme PDF Rehberi',
+        body:'Sahte siteler, seed phrase veya address poisoning gibi uyari isaretlerini yeniden gozden gecirmek isterseniz, ucretsiz PDF rehberini acabilirsiniz.',
+        button:'PDF Rehberini Ac'
+      }
+    },
+    es:{
+      lesson6:{
+        title:'Checklist PDF Gratis',
+        body:'Si quieres una referencia rapida antes de tu primera compra, puedes abrir el PDF con la lista de seguridad cripto para principiantes.',
+        button:'Abrir PDF Gratis'
+      },
+      lesson7:{
+        title:'Guia PDF para Evitar Estafas',
+        body:'Si quieres repasar senales de alerta como sitios falsos, seed phrase o address poisoning, puedes abrir la guia PDF gratuita.',
+        button:'Abrir PDF Antiestafas'
+      }
+    },
+    ar:{
+      lesson6:{
+        title:'\u0642\u0627\u0626\u0645\u0629 PDF \u0645\u062c\u0627\u0646\u064a\u0629',
+        body:'\u0625\u0630\u0627 \u0623\u0631\u062f\u062a \u0645\u0631\u062c\u0639\u0627\u064b \u0633\u0631\u064a\u0639\u0627\u064b \u0642\u0628\u0644 \u0623\u0648\u0644 \u0639\u0645\u0644\u064a\u0629 \u0634\u0631\u0627\u0621\u060c \u064a\u0645\u0643\u0646\u0643 \u0641\u062a\u062d \u0645\u0644\u0641 PDF \u0644\u0642\u0627\u0626\u0645\u0629 \u0623\u0645\u0627\u0646 \u0627\u0644\u0639\u0645\u0644\u0627\u062a \u0627\u0644\u0631\u0642\u0645\u064a\u0629 \u0644\u0644\u0645\u0628\u062a\u062f\u0626\u064a\u0646.',
+        button:'\u0627\u0641\u062a\u062d PDF \u0627\u0644\u0645\u062c\u0627\u0646\u064a'
+      },
+      lesson7:{
+        title:'\u062f\u0644\u064a\u0644 PDF \u0644\u0645\u0646\u0639 \u0627\u0644\u0627\u062d\u062a\u064a\u0627\u0644',
+        body:'\u0625\u0630\u0627 \u0623\u0631\u062f\u062a \u0645\u0631\u0627\u062c\u0639\u0629 \u0625\u0634\u0627\u0631\u0627\u062a \u0627\u0644\u062a\u062d\u0630\u064a\u0631 \u0645\u062b\u0644 \u0627\u0644\u0645\u0648\u0627\u0642\u0639 \u0627\u0644\u0645\u0632\u064a\u0641\u0629 \u0623\u0648 seed phrase \u0623\u0648 address poisoning\u060c \u064a\u0645\u0643\u0646\u0643 \u0641\u062a\u062d \u062f\u0644\u064a\u0644 PDF \u0627\u0644\u0645\u062c\u0627\u0646\u064a.',
+        button:'\u0627\u0641\u062a\u062d \u062f\u0644\u064a\u0644 \u0627\u0644\u0627\u062d\u062a\u064a\u0627\u0644'
+      }
+    },
+    vi:{
+      lesson6:{
+        title:'Checklist PDF Mien Phi',
+        body:'Neu ban muon mot tai lieu xem nhanh truoc lan mua dau tien, ban co the mo file PDF checklist an toan crypto cho nguoi moi.',
+        button:'Mo PDF Mien Phi'
+      },
+      lesson7:{
+        title:'Huong Dan PDF Chong Lua Dao',
+        body:'Neu ban muon xem lai cac dau hieu canh bao nhu trang gia, seed phrase hay address poisoning, ban co the mo huong dan PDF mien phi.',
+        button:'Mo PDF Chong Lua Dao'
+      }
+    },
+    ha:{
+      lesson6:{
+        title:'Jerin Dubawa na PDF Kyauta',
+        body:'Idan kana son takaitaccen abu da za ka sake dubawa kafin sayenka na farko, za ka iya bude PDF na jerin duba tsaron crypto na masu farawa.',
+        button:'Bude PDF Kyauta'
+      },
+      lesson7:{
+        title:'Jagorar PDF ta Kariya daga Damfara',
+        body:'Idan kana son sake duba alamun gargadi kamar shafukan bogi, seed phrase, ko address poisoning, za ka iya bude jagorar PDF kyauta.',
+        button:'Bude PDF na Damfara'
+      }
+    }
+  };
+  TEXT.br = TEXT.pt;
+
+  function getLangPack(lang){
+    return TEXT[lang] || TEXT[baseLang(lang)] || TEXT.en;
+  }
+
+  function getPdfHref(lang){
+    if(PDF_FILES[lang]) return PDF_FILES[lang];
+    var resolved = baseLang(lang);
+    if(PDF_FILES[resolved]) return PDF_FILES[resolved];
+    return PDF_FILES.en;
+  }
+
+  function buildLessonPdfCard(i, lang){
+    var key = i === 5 ? 'lesson6' : 'lesson7';
+    var pack = getLangPack(lang)[key];
+    var href = getPdfHref(lang);
+    return ''
+      + '<section class="home-pdf-block lesson-pdf-card" data-lesson-pdf="' + key + '">'
+      +   '<div class="home-pdf-title">' + pack.title + '</div>'
+      +   '<div class="home-pdf-body">' + pack.body + '</div>'
+      +   '<div class="home-pdf-grid">'
+      +     '<a class="home-pdf-link" href="' + href + '" target="_blank" rel="noopener noreferrer">'
+      +       '<span>' + pack.button + '</span>'
+      +       '<span class="home-pdf-link-tag">PDF</span>'
+      +     '</a>'
+      +   '</div>'
+      + '</section>';
+  }
+
+  var originalRenderLesson = window.renderLesson;
+  if(typeof originalRenderLesson !== 'function' || originalRenderLesson.__lessonPdfCardsWrapped) return;
+
+  function wrappedRenderLesson(i){
+    var html = originalRenderLesson.apply(this, arguments);
+    if((i !== 5 && i !== 6) || typeof html !== 'string') return html;
+    var shell = document.createElement('div');
+    shell.innerHTML = html;
+    var nav = shell.querySelector('.lesson-nav-bar');
+    if(!nav) return html;
+    var existing = shell.querySelector('.lesson-pdf-card');
+    if(existing) existing.remove();
+    nav.insertAdjacentHTML('beforebegin', buildLessonPdfCard(i, typeof currentLang === 'string' ? currentLang : 'en'));
+    return shell.innerHTML;
+  }
+
+  wrappedRenderLesson.__lessonPdfCardsWrapped = true;
+  window.renderLesson = wrappedRenderLesson;
+
+  if(typeof document !== 'undefined'){
+    var lessonSixPanel = document.getElementById('lesson5');
+    if(lessonSixPanel) lessonSixPanel.innerHTML = window.renderLesson(5);
+    var lessonSevenPanel = document.getElementById('lesson6');
+    if(lessonSevenPanel) lessonSevenPanel.innerHTML = window.renderLesson(6);
+  }
+
+  if(typeof currentPage !== 'undefined' && /^lesson\d+$/.test(currentPage) && typeof currentLesson === 'number' && (currentLesson === 5 || currentLesson === 6) && typeof showLesson === 'function'){
+    showLesson(currentLesson);
+  }
+})();
+</script>
+<script id="address-poisoning-sources-20260418">
+(function(){
+  if(typeof window === 'undefined' || window.__addressPoisoningSources20260418) return;
+  window.__addressPoisoningSources20260418 = true;
+
+  function clone(value){
+    return value == null ? value : JSON.parse(JSON.stringify(value));
+  }
+
+  function baseLang(lang){
+    var value = lang || (typeof currentLang === "string" && currentLang ? currentLang : "en");
+    return value === "br" ? "pt" : value;
+  }
+
+  function getRelatedLabel(lang){
+    var resolved = baseLang(lang);
+    if(typeof lessons !== "undefined" && lessons){
+      if(lessons[lang] && lessons[lang][6] && lessons[lang][6].title) return lessons[lang][6].title;
+      if(lessons[resolved] && lessons[resolved][6] && lessons[resolved][6].title) return lessons[resolved][6].title;
+    }
+    if(typeof ui !== "undefined" && ui){
+      if(ui[lang] && ui[lang]["nav.l7"]) return ui[lang]["nav.l7"];
+      if(ui[resolved] && ui[resolved]["nav.l7"]) return ui[resolved]["nav.l7"];
+    }
+    return "Lesson 7";
+  }
+
+  function ensureSourceList(store, lang){
+    if(!store) return null;
+    var resolved = baseLang(lang);
+    if(!Array.isArray(store[lang])){
+      store[lang] = clone(store[resolved] || store.en || []);
+    }
+    return store[lang];
+  }
+
+  function ensureLessonSourceList(store, lang){
+    if(!store) return null;
+    var resolved = baseLang(lang);
+    if(!Array.isArray(store[lang])){
+      store[lang] = clone(store[resolved] || store.en || []);
+    }
+    if(!store[lang][6]) return null;
+    if(!Array.isArray(store[lang][6].sources)){
+      var fallback = store[resolved] && store[resolved][6] && Array.isArray(store[resolved][6].sources)
+        ? clone(store[resolved][6].sources)
+        : [];
+      store[lang][6].sources = fallback;
+    }
+    return store[lang][6].sources;
+  }
+
+  function upsertLibrarySource(list, source, relatedLabel){
+    if(!list.some(function(row){ return row && row[4] === source.url; })){
+      list.push(["scams", source.publisher, source.title, source.desc, source.url, relatedLabel, source.why]);
+    }
+  }
+
+  function upsertLessonSource(list, source){
+    if(!list.some(function(row){ return row && row[2] === source.url; })){
+      list.push([source.title, source.desc, source.url]);
+    }
+  }
+
+  var LANGS = ["en","ko","th","id","pt","br","tr","es","ar","vi","ha"];
+  var PACK = {
+    en:[
+      {
+        publisher:"MetaMask",
+        title:"MetaMask: Address poisoning scam warning",
+        desc:"A reference that helps explain how lookalike wallet addresses can appear in transaction history and why copying from recent history can be risky.",
+        url:"https://support.metamask.io/stay-safe/protect-yourself/social-engineering/spoofing-scams/",
+        why:"Helpful for understanding why recent-history copying can lead to a wrong address."
+      },
+      {
+        publisher:"Coinbase",
+        title:"Coinbase: Address poisoning and wallet safety",
+        desc:"A reference that helps explain why rechecking full wallet addresses and using trusted saved addresses can reduce address poisoning risk.",
+        url:"https://www.coinbase.com/learn/wallet/address-poisoning-scams",
+        why:"Good reminder to verify the full address and use saved trusted addresses."
+      }
+    ],
+    ko:[
+      {
+        publisher:"MetaMask",
+        title:"MetaMask: 주소 오염 공격 경고",
+        desc:"비슷하게 보이는 지갑 주소가 거래 기록에 섞여 사용자가 잘못된 주소를 복사하게 되는 방식과, 왜 최근 거래 기록만 믿으면 위험한지 이해하는 데 도움이 되는 자료입니다.",
+        url:"https://support.metamask.io/stay-safe/protect-yourself/social-engineering/spoofing-scams/",
+        why:"최근 거래 기록만 보고 복사할 때 왜 위험한지 빠르게 이해하는 데 도움이 됩니다."
+      },
+      {
+        publisher:"Coinbase",
+        title:"Coinbase: 주소 오염 공격과 지갑 안전",
+        desc:"주소 오염 공격을 피하기 위해 전체 주소를 다시 확인하고, 저장된 신뢰 주소를 사용하는 습관이 왜 중요한지 이해하는 데 도움이 되는 자료입니다.",
+        url:"https://www.coinbase.com/learn/wallet/address-poisoning-scams",
+        why:"전체 주소 재확인과 저장한 신뢰 주소 사용 습관의 중요성을 짧게 확인하기 좋습니다."
+      }
+    ],
+    th:[
+      {
+        publisher:"MetaMask",
+        title:"MetaMask: คำเตือนเรื่อง address poisoning",
+        desc:"แหล่งอ้างอิงที่ช่วยอธิบายว่าที่อยู่กระเป๋าที่ดูคล้ายกันสามารถโผล่ในประวัติธุรกรรมได้อย่างไร และทำไมการคัดลอกจากประวัติล่าสุดจึงเสี่ยง",
+        url:"https://support.metamask.io/stay-safe/protect-yourself/social-engineering/spoofing-scams/",
+        why:"ช่วยให้ผู้เริ่มต้นเห็นความเสี่ยงของการคัดลอกจากประวัติธุรกรรมเร็วเกินไป"
+      },
+      {
+        publisher:"Coinbase",
+        title:"Coinbase: address poisoning และความปลอดภัยของกระเป๋า",
+        desc:"แหล่งอ้างอิงที่ช่วยอธิบายว่าการตรวจสอบที่อยู่เต็มอีกครั้งและการใช้ที่อยู่ที่บันทึกไว้อย่างเชื่อถือได้ช่วยลดความเสี่ยงจาก address poisoning ได้อย่างไร",
+        url:"https://www.coinbase.com/learn/wallet/address-poisoning-scams",
+        why:"เหมาะสำหรับทบทวนการเช็กที่อยู่เต็มและการใช้ที่อยู่ที่บันทึกไว้อย่างปลอดภัย"
+      }
+    ],
+    id:[
+      {
+        publisher:"MetaMask",
+        title:"MetaMask: peringatan scam peracunan alamat",
+        desc:"Referensi yang membantu menjelaskan bagaimana alamat wallet yang mirip bisa muncul di riwayat transaksi dan mengapa menyalin dari riwayat terbaru bisa berisiko.",
+        url:"https://support.metamask.io/stay-safe/protect-yourself/social-engineering/spoofing-scams/",
+        why:"Membantu pemula memahami risiko menyalin alamat dari riwayat terlalu cepat."
+      },
+      {
+        publisher:"Coinbase",
+        title:"Coinbase: peracunan alamat dan keamanan wallet",
+        desc:"Referensi yang membantu menjelaskan mengapa memeriksa ulang seluruh alamat wallet dan memakai alamat tepercaya yang sudah disimpan bisa mengurangi risiko peracunan alamat.",
+        url:"https://www.coinbase.com/learn/wallet/address-poisoning-scams",
+        why:"Pengingat yang jelas untuk mengecek alamat penuh dan memakai alamat tersimpan yang tepercaya."
+      }
+    ],
+    pt:[
+      {
+        publisher:"MetaMask",
+        title:"MetaMask: alerta de golpe de envenenamento de endereco",
+        desc:"Uma referencia que ajuda a explicar como enderecos de carteira parecidos podem aparecer no historico de transacoes e por que copiar do historico recente pode ser arriscado.",
+        url:"https://support.metamask.io/stay-safe/protect-yourself/social-engineering/spoofing-scams/",
+        why:"Ajuda iniciantes a entender o risco de copiar um endereco do historico com pressa."
+      },
+      {
+        publisher:"Coinbase",
+        title:"Coinbase: envenenamento de endereco e seguranca da carteira",
+        desc:"Uma referencia que ajuda a explicar por que conferir o endereco completo da carteira e usar enderecos confiaveis ja salvos pode reduzir o risco de envenenamento de endereco.",
+        url:"https://www.coinbase.com/learn/wallet/address-poisoning-scams",
+        why:"Bom lembrete para verificar o endereco inteiro e usar enderecos confiaveis salvos."
+      }
+    ],
+    tr:[
+      {
+        publisher:"MetaMask",
+        title:"MetaMask: adres zehirleme dolandiriciligi uyarisi",
+        desc:"Benzer gorunen cuzdan adreslerinin islem gecmisinde nasil gorunebildigini ve son gecmisten kopyalamanin neden riskli oldugunu anlatan bir kaynak.",
+        url:"https://support.metamask.io/stay-safe/protect-yourself/social-engineering/spoofing-scams/",
+        why:"Islem gecmisinden hizli kopyalamanin neden tehlikeli olabildigini gostermeye yardimci olur."
+      },
+      {
+        publisher:"Coinbase",
+        title:"Coinbase: adres zehirleme ve cuzdan guvenligi",
+        desc:"Tam cuzdan adresini yeniden kontrol etmenin ve kaydedilmis guvenilir adresleri kullanmanin adres zehirleme riskini nasil azaltabilecegini anlatan bir kaynak.",
+        url:"https://www.coinbase.com/learn/wallet/address-poisoning-scams",
+        why:"Tam adres kontrolu ve kaydedilmis guvenilir adres kullanimi icin iyi bir hatirlatmadir."
+      }
+    ],
+    es:[
+      {
+        publisher:"MetaMask",
+        title:"MetaMask: alerta sobre estafa de envenenamiento de direcciones",
+        desc:"Un recurso que ayuda a explicar como direcciones de wallet parecidas pueden aparecer en el historial de transacciones y por que copiar desde el historial reciente puede ser riesgoso.",
+        url:"https://support.metamask.io/stay-safe/protect-yourself/social-engineering/spoofing-scams/",
+        why:"Ayuda a ver por que copiar una direccion del historial con prisa puede salir mal."
+      },
+      {
+        publisher:"Coinbase",
+        title:"Coinbase: envenenamiento de direcciones y seguridad de wallet",
+        desc:"Un recurso que ayuda a explicar por que volver a revisar la direccion completa y usar direcciones confiables guardadas puede reducir el riesgo de envenenamiento de direcciones.",
+        url:"https://www.coinbase.com/learn/wallet/address-poisoning-scams",
+        why:"Buen recordatorio para revisar la direccion completa y usar direcciones guardadas de confianza."
+      }
+    ],
+    ar:[
+      {
+        publisher:"MetaMask",
+        title:"MetaMask: تحذير من احتيال تسميم العناوين",
+        desc:"مرجع يساعد على شرح كيف يمكن أن تظهر عناوين محافظ متشابهة في سجل المعاملات ولماذا يكون النسخ من السجل الأخير فقط أمراً خطيراً.",
+        url:"https://support.metamask.io/stay-safe/protect-yourself/social-engineering/spoofing-scams/",
+        why:"مفيد لفهم خطر نسخ العنوان بسرعة من سجل المعاملات الحديثة."
+      },
+      {
+        publisher:"Coinbase",
+        title:"Coinbase: تسميم العناوين وأمان المحفظة",
+        desc:"مرجع يساعد على شرح لماذا تقلل إعادة فحص عنوان المحفظة كاملاً واستخدام العناوين الموثوقة المحفوظة من خطر تسميم العناوين.",
+        url:"https://www.coinbase.com/learn/wallet/address-poisoning-scams",
+        why:"تذكير واضح بأهمية مراجعة العنوان كاملاً واستخدام العناوين المحفوظة الموثوقة."
+      }
+    ],
+    vi:[
+      {
+        publisher:"MetaMask",
+        title:"MetaMask: canh bao lua dao dau doc dia chi",
+        desc:"Tai lieu giup giai thich cach cac dia chi vi giong nhau co the xuat hien trong lich su giao dich va vi sao sao chep tu lich su gan day co the nguy hiem.",
+        url:"https://support.metamask.io/stay-safe/protect-yourself/social-engineering/spoofing-scams/",
+        why:"Giup nguoi moi hieu vi sao sao chep dia chi tu lich su qua nhanh co the gay sai sot."
+      },
+      {
+        publisher:"Coinbase",
+        title:"Coinbase: dau doc dia chi va an toan vi",
+        desc:"Tai lieu giup giai thich vi sao viec kiem tra lai toan bo dia chi vi va dung dia chi dang tin da luu co the giam rui ro dau doc dia chi.",
+        url:"https://www.coinbase.com/learn/wallet/address-poisoning-scams",
+        why:"Nhac ban kiem tra lai day du dia chi va uu tien dia chi tin cay da luu."
+      }
+    ],
+    ha:[
+      {
+        publisher:"MetaMask",
+        title:"MetaMask: gargadin damfarar gurbata adireshi",
+        desc:"Wannan bayani yana taimakawa wajen fahimtar yadda adireshin walat masu kama da juna za su iya bayyana a tarihin muamala da kuma dalilin da ya sa kwafi daga tarihin baya-bayan nan kadai yake da hadari.",
+        url:"https://support.metamask.io/stay-safe/protect-yourself/social-engineering/spoofing-scams/",
+        why:"Yana taimaka wa mai farawa ya fahimci hadarin kwafi daga tarihin muamala cikin sauri."
+      },
+      {
+        publisher:"Coinbase",
+        title:"Coinbase: gurbata adireshi da tsaron walat",
+        desc:"Wannan bayani yana taimakawa wajen fahimtar dalilin da ya sa sake duba cikakken adireshin walat da amfani da amintattun adireshin da aka adana zai iya rage hadarin gurbata adireshi.",
+        url:"https://www.coinbase.com/learn/wallet/address-poisoning-scams",
+        why:"Tuna wa mai amfani muhimmancin sake duba cikakken adireshi da amfani da adireshin da aka riga aka amince da su."
+      }
+    ]
+  };
+  PACK.br = clone(PACK.pt);
+
+  LANGS.forEach(function(lang){
+    var pack = PACK[baseLang(lang)] || PACK.en;
+    var relatedLabel = getRelatedLabel(lang);
+
+    var libraryList = ensureSourceList(typeof sourceLibrary !== "undefined" ? sourceLibrary : null, lang);
+    if(libraryList){
+      pack.forEach(function(entry){
+        upsertLibrarySource(libraryList, entry, relatedLabel);
+      });
+    }
+
+    var overrideList = ensureSourceList(typeof sourceOverrides !== "undefined" ? sourceOverrides : null, lang);
+    if(overrideList){
+      pack.forEach(function(entry){
+        upsertLibrarySource(overrideList, entry, relatedLabel);
+      });
+    }
+
+    var lessonList = ensureLessonSourceList(typeof lessons !== "undefined" ? lessons : null, lang);
+    if(lessonList){
+      pack.forEach(function(entry){
+        upsertLessonSource(lessonList, entry);
+      });
+    }
+
+    var lessonOverrideList = ensureLessonSourceList(typeof lessonOverrides !== "undefined" ? lessonOverrides : null, lang);
+    if(lessonOverrideList){
+      pack.forEach(function(entry){
+        upsertLessonSource(lessonOverrideList, entry);
+      });
+    }
+  });
+
+  if(typeof document !== "undefined"){
+    var lessonSevenPanel = document.getElementById("lesson6");
+    if(lessonSevenPanel && typeof renderLesson === "function"){
+      lessonSevenPanel.innerHTML = renderLesson(6);
+    }
+    var sourcesPanel = document.getElementById("sourcesPanel");
+    if(sourcesPanel && typeof renderSources === "function"){
+      sourcesPanel.innerHTML = renderSources();
+    }
+  }
+
+  if(typeof currentPage !== "undefined" && currentPage === "sources" && typeof showPage === "function"){
+    showPage("sources");
+  }
+  if(typeof currentPage !== "undefined" && /^lesson\\d+$/.test(currentPage) && typeof currentLesson === "number" && currentLesson === 6 && typeof showLesson === "function"){
+    showLesson(6);
+  }
+})();
+</script>
 </body>
 </html>
