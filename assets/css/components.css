@@ -1,0 +1,14 @@
+/* stage1-multi-url-components */
+a.lesson-nav-item{
+  color:inherit;
+  text-decoration:none;
+}
+
+a.lesson-nav-item:hover{
+  color:inherit;
+}
+
+a.lesson-nav-item .nav-title,
+a.lesson-nav-item .nav-sub{
+  color:inherit;
+}
