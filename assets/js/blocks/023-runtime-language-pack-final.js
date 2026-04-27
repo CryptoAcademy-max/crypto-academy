@@ -326,13 +326,23 @@
     try { lastVisit = JSON.parse(localStorage.getItem(key)); } catch (err) {}
     if(lastVisit){
       if(lastVisit.type === 'lesson'){
-        var lessonData = (typeof lessons !== 'undefined') ? (lessons[currentLang] || lessons.en || []) : [];
+        if(typeof window.getLessonTitleFinal === 'function'){
+          return window.getLessonTitleFinal(lastVisit.index);
+        }
+        var lang = (typeof currentLang === 'string' && currentLang) ? currentLang : 'en';
+        if(lang === 'br') lang = 'pt';
+        var lessonData = (typeof lessons !== 'undefined') ? (lessons[lang] || lessons.en || []) : [];
         return lessonData[lastVisit.index] ? lessonData[lastVisit.index].title : ('Lesson ' + (lastVisit.index + 1));
       }
       if(typeof t === 'function') return t('nav.' + lastVisit.name) || lastVisit.name;
       return lastVisit.name;
     }
-    var firstLessons = (typeof lessons !== 'undefined') ? (lessons[currentLang] || lessons.en || []) : [];
+    if(typeof window.getLessonTitleFinal === 'function'){
+      return window.getLessonTitleFinal(0);
+    }
+    var firstLang = (typeof currentLang === 'string' && currentLang) ? currentLang : 'en';
+    if(firstLang === 'br') firstLang = 'pt';
+    var firstLessons = (typeof lessons !== 'undefined') ? (lessons[firstLang] || lessons.en || []) : [];
     return firstLessons[0] ? firstLessons[0].title : 'Lesson 1';
   }
 

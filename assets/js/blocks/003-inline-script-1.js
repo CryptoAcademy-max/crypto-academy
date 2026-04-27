@@ -790,6 +790,16 @@ function renderHome(){
     <div class="home-hero">
       <h1 class="home-title">${t('home.title')}</h1>
       <p class="home-desc">${t('home.desc')}</p>
+      <div class="home-visitor-block" id="homeVisitorBlock" aria-live="polite">
+        <div class="search-visitor-pill">
+          <div class="search-visitor-label" id="visitorTodayLabel">Today Visitors</div>
+          <div class="search-visitor-value is-loading" id="visitorTodayValue">--</div>
+        </div>
+        <div class="search-visitor-pill">
+          <div class="search-visitor-label" id="visitorTotalLabel">Total Visitors</div>
+          <div class="search-visitor-value is-loading" id="visitorTotalValue">--</div>
+        </div>
+      </div>
       <div class="home-grid">
         ${[0,1,2,3,4].map(i=>`<div class="home-card" onclick="showLesson(${i})"><div class="home-card-num">${i+1}</div><div class="home-card-title">${t('nav.l'+(i+1))}</div><div class="home-card-desc">${t('nav.l'+(i+1)+'sub')}</div><div style="margin-top:10px;font-size:.82rem;font-weight:700;color:var(--navy-2)">${t('home.openLesson')} →</div></div>`).join('')}
       </div>

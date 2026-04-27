@@ -38,11 +38,8 @@
     searchBtn.setAttribute('title', text);
   }
 
-  var visitorCounterBlock = document.createElement('div');
-  visitorCounterBlock.className = 'topbar-visitor-block home-visitor-block';
-  visitorCounterBlock.id = 'searchVisitorBlock';
-  visitorCounterBlock.setAttribute('aria-live', 'polite');
-  visitorCounterBlock.innerHTML =
+  var VISITOR_COUNTER_HOST_ID = 'homeVisitorBlock';
+  var VISITOR_COUNTER_MARKUP =
     '<div class="search-visitor-pill">' +
       '<div class="search-visitor-label" id="visitorTodayLabel">Today Visitors</div>' +
       '<div class="search-visitor-value is-loading" id="visitorTodayValue">--</div>' +
@@ -51,11 +48,45 @@
       '<div class="search-visitor-label" id="visitorTotalLabel">Total Visitors</div>' +
       '<div class="search-visitor-value is-loading" id="visitorTotalValue">--</div>' +
     '</div>';
-  visitorCounterBlock.hidden = true;
-  var quickbar = document.querySelector('.content-area .quickbar');
-  if(quickbar && quickbar.parentNode){
-    quickbar.parentNode.insertBefore(visitorCounterBlock, quickbar);
+
+  function getVisitorCounterBlock(){
+    return document.getElementById(VISITOR_COUNTER_HOST_ID);
   }
+
+  function buildVisitorCounterBlock(){
+    var block = document.createElement('div');
+    block.className = 'topbar-visitor-block home-visitor-block';
+    block.id = VISITOR_COUNTER_HOST_ID;
+    block.setAttribute('aria-live', 'polite');
+    block.innerHTML = VISITOR_COUNTER_MARKUP;
+    return block;
+  }
+
+  function ensureVisitorCounterBlockMounted(){
+    var homePanel = document.getElementById('homePanel');
+    if(!homePanel) return null;
+    var homeHero = homePanel.querySelector('.home-hero');
+    var desc = homeHero ? homeHero.querySelector('.home-desc') : null;
+    var block = getVisitorCounterBlock();
+    if(!block){
+      block = buildVisitorCounterBlock();
+      if(desc){
+        desc.insertAdjacentElement('afterend', block);
+      }else if(homeHero){
+        homeHero.insertAdjacentElement('afterbegin', block);
+      }else{
+        homePanel.insertAdjacentElement('afterbegin', block);
+      }
+    }else if(desc && block.previousElementSibling !== desc){
+      desc.insertAdjacentElement('afterend', block);
+    }
+    if(!block.querySelector('#visitorTodayLabel') || !block.querySelector('#visitorTotalLabel') || !block.querySelector('#visitorTodayValue') || !block.querySelector('#visitorTotalValue')){
+      block.innerHTML = VISITOR_COUNTER_MARKUP;
+    }
+    return block;
+  }
+
+  ensureVisitorCounterBlockMounted();
 
   var visitorCounterText = {
     en:{today:'Today Visitors',total:'Total Visitors'},
@@ -71,24 +102,51 @@
   };
 
   visitorCounterText.ha = {today:'Masu ziyara na yau', total:'Jimillar masu ziyara'};
+  visitorCounterText.en = {today:'Today Visitors',total:'Total Visitors'};
+  visitorCounterText.ko = {today:'오늘 방문자',total:'누적 방문자'};
+  visitorCounterText.th = {today:'ผู้เยี่ยมชมวันนี้',total:'ผู้เยี่ยมชมทั้งหมด'};
+  visitorCounterText.id = {today:'Pengunjung Hari Ini',total:'Total Pengunjung'};
+  visitorCounterText.pt = {today:'Visitantes de Hoje',total:'Total de Visitantes'};
+  visitorCounterText.br = {today:'Visitantes de Hoje',total:'Total de Visitantes'};
+  visitorCounterText.tr = {today:'Bugünkü Ziyaretçiler',total:'Toplam Ziyaretçi'};
+  visitorCounterText.ar = {today:'زوار اليوم',total:'إجمالي الزوار'};
+  visitorCounterText.vi = {today:'Khách Hôm Nay',total:'Tổng Khách'};
+  visitorCounterText.es = {today:'Visitantes de Hoy',total:'Visitantes Totales'};
   var VISITOR_COUNTER_NAMESPACE = 'crypto-academy-platform';
   var VISITOR_COUNTER_TOTAL_KEY = 'visitors-total';
-  var visitorTodayLabelEl = document.getElementById('visitorTodayLabel');
-  var visitorTotalLabelEl = document.getElementById('visitorTotalLabel');
-  var visitorTodayValueEl = document.getElementById('visitorTodayValue');
-  var visitorTotalValueEl = document.getElementById('visitorTotalValue');
+  var VISITOR_COUNTER_TOTAL_BASELINE = 580;
+  var VISITOR_COUNTER_FALLBACK_PREFIX = 'cryptoAcademyVisitorFallback';
+  var VISITOR_COUNTER_TOTAL_STORAGE_KEY = 'cryptoAcademyTotalVisitors';
+  var VISITOR_COUNTER_TODAY_STORAGE_KEY = 'cryptoAcademyTodayVisitors';
+  var VISITOR_COUNTER_TODAY_DATE_STORAGE_KEY = 'cryptoAcademyTodayDate';
+  var visitorTodayLabelEl = null;
+  var visitorTotalLabelEl = null;
+  var visitorTodayValueEl = null;
+  var visitorTotalValueEl = null;
+
+  function refreshVisitorCounterRefs(){
+    ensureVisitorCounterBlockMounted();
+    visitorTodayLabelEl = document.getElementById('visitorTodayLabel');
+    visitorTotalLabelEl = document.getElementById('visitorTotalLabel');
+    visitorTodayValueEl = document.getElementById('visitorTodayValue');
+    visitorTotalValueEl = document.getElementById('visitorTotalValue');
+  }
+
+  refreshVisitorCounterRefs();
 
   function getVisitorCounterText(){
     return visitorCounterText[currentLang] || visitorCounterText.en;
   }
 
   function renderVisitorCounterLabels(){
+    refreshVisitorCounterRefs();
     var text = getVisitorCounterText();
     if(visitorTodayLabelEl) visitorTodayLabelEl.textContent = text.today;
     if(visitorTotalLabelEl) visitorTotalLabelEl.textContent = text.total;
   }
 
   function setVisitorCounterValues(today, total){
+    refreshVisitorCounterRefs();
     if(visitorTodayValueEl){
       visitorTodayValueEl.textContent = today;
       visitorTodayValueEl.classList.remove('is-loading');
@@ -100,6 +158,7 @@
   }
 
   function setVisitorCounterLoading(){
+    refreshVisitorCounterRefs();
     if(visitorTodayValueEl){
       visitorTodayValueEl.textContent = '--';
       visitorTodayValueEl.classList.add('is-loading');
@@ -130,6 +189,58 @@
     return null;
   }
 
+  function readVisitorFallbackNumber(key, fallbackValue){
+    try{
+      var raw = localStorage.getItem(key);
+      var value = parseInt(raw, 10);
+      return isFinite(value) && value >= 0 ? value : fallbackValue;
+    }catch(err){
+      return fallbackValue;
+    }
+  }
+
+  function writeVisitorFallbackNumber(key, value){
+    try{
+      localStorage.setItem(key, String(value));
+    }catch(err){}
+  }
+
+  function readVisitorFallbackText(key){
+    try{
+      return localStorage.getItem(key) || '';
+    }catch(err){
+      return '';
+    }
+  }
+
+  function writeVisitorFallbackText(key, value){
+    try{
+      localStorage.setItem(key, String(value));
+    }catch(err){}
+  }
+
+  function getVisitorFallbackCounts(shouldIncrement){
+    var dayKey = getVisitorDayKey();
+    var legacyTodayKey = VISITOR_COUNTER_FALLBACK_PREFIX + ':' + dayKey;
+    var legacyTotalKey = VISITOR_COUNTER_FALLBACK_PREFIX + ':total';
+    var storedDay = readVisitorFallbackText(VISITOR_COUNTER_TODAY_DATE_STORAGE_KEY);
+    var todayCount = storedDay === dayKey
+      ? readVisitorFallbackNumber(VISITOR_COUNTER_TODAY_STORAGE_KEY, readVisitorFallbackNumber(legacyTodayKey, 0))
+      : 0;
+    var totalCount = readVisitorFallbackNumber(VISITOR_COUNTER_TOTAL_STORAGE_KEY, readVisitorFallbackNumber(legacyTotalKey, VISITOR_COUNTER_TOTAL_BASELINE));
+    if(totalCount < VISITOR_COUNTER_TOTAL_BASELINE) totalCount = VISITOR_COUNTER_TOTAL_BASELINE;
+    if(shouldIncrement){
+      todayCount += 1;
+      totalCount += 1;
+    }
+    writeVisitorFallbackText(VISITOR_COUNTER_TODAY_DATE_STORAGE_KEY, dayKey);
+    writeVisitorFallbackNumber(VISITOR_COUNTER_TODAY_STORAGE_KEY, todayCount);
+    writeVisitorFallbackNumber(VISITOR_COUNTER_TOTAL_STORAGE_KEY, totalCount);
+    writeVisitorFallbackNumber(legacyTodayKey, todayCount);
+    writeVisitorFallbackNumber(legacyTotalKey, totalCount);
+    return { today: todayCount, total: totalCount };
+  }
+
   // Shared visitor counts are stored in CounterAPI keys, so every client reads the same source.
   function requestVisitorCounter(path){
     if(typeof window !== 'undefined' && window.location && window.location.protocol === 'file:'){
@@ -147,9 +258,11 @@
   }
 
   function loadVisitorCounters(){
+    ensureVisitorCounterBlockMounted();
     var todayKey = getVisitorDayKey();
     var shouldIncrement = !window.__visitorCountedThisLoad;
     if(shouldIncrement) window.__visitorCountedThisLoad = true;
+    var fallbackCounts = getVisitorFallbackCounts(shouldIncrement);
 
     var totalRequest = shouldIncrement
       ? requestVisitorCounter(VISITOR_COUNTER_NAMESPACE + '/' + VISITOR_COUNTER_TOTAL_KEY + '/up')
@@ -161,17 +274,34 @@
     return Promise.all([todayRequest, totalRequest]).then(function(results){
       var todayCount = extractVisitorCount(results[0]);
       var totalCount = extractVisitorCount(results[1]);
-      setVisitorCounterValues(todayCount == null ? '--' : todayCount, totalCount == null ? '--' : totalCount);
+      if(todayCount == null) todayCount = fallbackCounts.today;
+      if(totalCount == null || totalCount < fallbackCounts.total) totalCount = fallbackCounts.total;
+      if(totalCount > fallbackCounts.total){
+        writeVisitorFallbackNumber(VISITOR_COUNTER_FALLBACK_PREFIX + ':total', totalCount);
+      }
+      setVisitorCounterValues(todayCount, totalCount);
     });
   }
 
-  renderVisitorCounterLabels();
-  setVisitorCounterLoading();
-  loadVisitorCounters();
+  function renderHomeVisitorCounters(){
+    var block = ensureVisitorCounterBlockMounted();
+    if(!block) return Promise.resolve(false);
+    renderVisitorCounterLabels();
+    if(currentPage !== 'home'){
+      block.hidden = true;
+      return Promise.resolve(false);
+    }
+    block.hidden = false;
+    setVisitorCounterLoading();
+    return loadVisitorCounters();
+  }
+
+  renderHomeVisitorCounters();
   renderSearchUiText();
 
   function syncVisitorCounterVisibility(){
-    if(visitorCounterBlock) visitorCounterBlock.hidden = currentPage !== 'home';
+    var block = ensureVisitorCounterBlockMounted();
+    if(block) block.hidden = currentPage !== 'home';
   }
 
   syncVisitorCounterVisibility();
@@ -200,7 +330,7 @@
   if(typeof __visitorSetLang === 'function' && !__visitorSetLang.__visitorCounterWrapped){
     var wrappedSetLang = function(lang){
       __visitorSetLang(lang);
-      renderVisitorCounterLabels();
+      renderHomeVisitorCounters();
       renderSearchUiText();
     };
     wrappedSetLang.__visitorCounterWrapped = true;
@@ -211,7 +341,8 @@
   if(typeof __visitorShowPage === 'function' && !__visitorShowPage.__visitorVisibilityWrapped){
     var wrappedShowPage = function(page){
       __visitorShowPage(page);
-      syncVisitorCounterVisibility();
+      if(page === 'home') renderHomeVisitorCounters();
+      else syncVisitorCounterVisibility();
     };
     wrappedShowPage.__visitorVisibilityWrapped = true;
     window.showPage = wrappedShowPage;
@@ -225,6 +356,18 @@
     };
     wrappedShowLesson.__visitorVisibilityWrapped = true;
     window.showLesson = wrappedShowLesson;
+  }
+
+  var __visitorRenderAllLessons = window.renderAllLessons;
+  if(typeof __visitorRenderAllLessons === 'function' && !__visitorRenderAllLessons.__visitorHomeMountedWrapped){
+    var wrappedRenderAllLessons = function(){
+      var result = __visitorRenderAllLessons.apply(this, arguments);
+      if(currentPage === 'home') renderHomeVisitorCounters();
+      else syncVisitorCounterVisibility();
+      return result;
+    };
+    wrappedRenderAllLessons.__visitorHomeMountedWrapped = true;
+    window.renderAllLessons = wrappedRenderAllLessons;
   }
 
   function getSearchableItems(){
@@ -261,6 +404,30 @@
 
   // ========== 2. CONTINUE LEARNING (localStorage tracking) ==========
   var LAST_VISIT_KEY = 'cryptoAcademyLastVisit';
+
+  function getContinueLessonTitle(index){
+    if(typeof window.getLessonTitleFinal === 'function'){
+      return window.getLessonTitleFinal(index);
+    }
+    var lang = (typeof currentLang === 'string' && currentLang) ? currentLang : 'en';
+    if(lang === 'br') lang = 'pt';
+    var lessonPool = (typeof lessons !== 'undefined' && lessons) ? (lessons[lang] || lessons.en || []) : [];
+    var englishPool = (typeof lessons !== 'undefined' && lessons) ? (lessons.en || []) : [];
+    var localizedTitle = lessonPool[index] && lessonPool[index].title ? String(lessonPool[index].title).trim() : '';
+    var englishTitle = englishPool[index] && englishPool[index].title ? String(englishPool[index].title).trim() : '';
+    var navKey = 'nav.l' + (index + 1);
+    var navTitle = (typeof t === 'function' ? t(navKey) : '');
+    if(navTitle === navKey) navTitle = '';
+    if(localizedTitle){
+      if(lang !== 'en' && englishTitle && localizedTitle === englishTitle && navTitle && navTitle !== englishTitle){
+        return navTitle;
+      }
+      return localizedTitle;
+    }
+    if(navTitle) return navTitle;
+    if(englishTitle) return englishTitle;
+    return 'Lesson ' + (index + 1);
+  }
 
   // Patch showLesson to track
   var _origShowLesson2 = window.showLesson;
@@ -320,17 +487,14 @@
     var continueAction = "showLesson(0)";
     if(lastVisit){
       if(lastVisit.type === 'lesson'){
-        var ld = (typeof lessons !== 'undefined' ? (lessons[currentLang] || lessons.en) : []);
-        var fallbackLesson = (lessons.en && lessons.en[lastVisit.index]) || null;
-        continueLabel = ld[lastVisit.index] ? ld[lastVisit.index].title : (fallbackLesson ? fallbackLesson.title : ('Lesson '+(lastVisit.index+1)));
+        continueLabel = getContinueLessonTitle(lastVisit.index);
         continueAction = 'showLesson('+lastVisit.index+')';
       } else {
         continueLabel = t('nav.'+lastVisit.name) || lastVisit.name;
         continueAction = "showPage('"+lastVisit.name+"')";
       }
     } else {
-      var ld2 = (typeof lessons !== 'undefined' ? (lessons[currentLang] || lessons.en) : []);
-      continueLabel = ld2[0] ? ld2[0].title : 'Lesson 1';
+      continueLabel = getContinueLessonTitle(0);
     }
     extra += '<div class="continue-card" onclick="'+continueAction+'"><div class="continue-icon"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21" fill="#fff" stroke="none"/></svg></div><div><div class="continue-title">'+ct[0]+'</div><div class="continue-sub">'+ct[1]+' → '+continueLabel+'</div></div></div>';
 

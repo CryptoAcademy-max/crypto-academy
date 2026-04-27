@@ -425,13 +425,42 @@
     return 0;
   }
 
+  function getLessonEntryFromPoolFinal(pool, index){
+    return Array.isArray(pool) && pool[index] ? pool[index] : null;
+  }
+
+  function getTranslatedNavLessonTitleFinal(index){
+    if(typeof t !== 'function') return '';
+    var key = 'nav.l' + (index + 1);
+    var value = t(key);
+    if(!value || value === key) return '';
+    return String(value).trim();
+  }
+
   function getLessonTitleFinal(index){
     var lang = homeFixLang();
-    var pool = (typeof lessonOverrides !== 'undefined' && lessonOverrides && lessonOverrides[lang]) || (typeof lessons !== 'undefined' && lessons && lessons[lang]) || (typeof lessons !== 'undefined' && lessons && lessons.en) || [];
-    var lesson = pool[index] || ((typeof lessons !== 'undefined' && lessons && lessons.en) ? lessons.en[index] : null);
-    if(lesson && lesson.title) return lesson.title;
-    return (typeof t === 'function' ? t('nav.l' + (index + 1)) : ('Lesson ' + (index + 1)));
+    var localizedLesson =
+      getLessonEntryFromPoolFinal(typeof lessons !== 'undefined' && lessons ? lessons[lang] : null, index) ||
+      getLessonEntryFromPoolFinal(typeof lessonOverrides !== 'undefined' && lessonOverrides ? lessonOverrides[lang] : null, index);
+    var englishLesson =
+      getLessonEntryFromPoolFinal(typeof lessons !== 'undefined' && lessons ? lessons.en : null, index) ||
+      getLessonEntryFromPoolFinal(typeof lessonOverrides !== 'undefined' && lessonOverrides ? lessonOverrides.en : null, index);
+    var localizedTitle = localizedLesson && localizedLesson.title ? String(localizedLesson.title).trim() : '';
+    var englishTitle = englishLesson && englishLesson.title ? String(englishLesson.title).trim() : '';
+    var navTitle = getTranslatedNavLessonTitleFinal(index);
+
+    if(localizedTitle){
+      if(lang !== 'en' && englishTitle && localizedTitle === englishTitle && navTitle && navTitle !== englishTitle){
+        return navTitle;
+      }
+      return localizedTitle;
+    }
+    if(navTitle) return navTitle;
+    if(englishTitle) return englishTitle;
+    return 'Lesson ' + (index + 1);
   }
+
+  window.getLessonTitleFinal = getLessonTitleFinal;
 
   window.openContinueLessonFinal = function(){
     var index = getContinueLessonIndexFinal();
