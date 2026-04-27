@@ -1485,6 +1485,14 @@ html, body { overflow-x: hidden; }
 .home-premium-pdf-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
 .home-premium-pdf-btn{display:inline-flex;align-items:center;justify-content:center;padding:11px 14px;border-radius:11px;border:1px solid rgba(38,65,99,.14);background:#fff;color:var(--navy);font-size:.8rem;font-weight:800;text-decoration:none;transition:transform .14s var(--ease),box-shadow .14s var(--ease),border-color .14s var(--ease),background .14s var(--ease)}
 .home-premium-pdf-btn:hover{transform:translateY(-1px);box-shadow:var(--shadow);border-color:rgba(38,65,99,.22);background:var(--blue-bg)}
+.home-available-premium-guides{margin:12px 0 0;padding:14px 16px;background:#fff;border:1px solid var(--line);border-radius:14px}
+.home-available-premium-guides-title{font-size:.88rem;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:5px}
+.home-available-premium-guides-body{font-size:.81rem;color:var(--text-2);line-height:1.56}
+.home-available-premium-guides-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.home-available-premium-guide-card{display:flex;flex-direction:column;gap:8px;padding:13px 14px;border-radius:12px;border:1px solid rgba(38,65,99,.12);background:linear-gradient(180deg,#fffefb,#f8f4ec)}
+.home-available-premium-guide-card-title{font-size:.84rem;font-weight:800;color:var(--text);line-height:1.35}
+.home-available-premium-guide-card-body{font-size:.78rem;color:var(--text-2);line-height:1.5;min-height:2.4em}
+.home-available-premium-guide-card .home-premium-pdf-btn{margin-top:auto}
 .lesson7-roadmap-icon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;margin-bottom:6px;opacity:.9}
 .lesson7-roadmap-icon svg{width:18px;height:18px;stroke:var(--navy);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:768px){
@@ -1494,6 +1502,7 @@ html, body { overflow-x: hidden; }
   .home-support-btn{width:100%}
   .home-pdf-grid{grid-template-columns:1fr}
   .home-premium-pdf-actions{grid-template-columns:1fr}
+  .home-available-premium-guides-grid{grid-template-columns:1fr}
 }
 
 /* start-guide-lesson67-final-style */
