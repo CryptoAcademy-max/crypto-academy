@@ -348,6 +348,104 @@
     return packs[lang] || packs.en;
   }
 
+  function getHomeAvailablePremiumGuidesPack(){
+    var lang = homeFixLang();
+    var packs = {
+      en:{
+        title:'Crypto Academy eBook',
+        body:'If you want a more structured and in-depth guide, explore the Crypto Academy eBooks.',
+        card1Title:'Crypto Academy eBook (English Edition)',
+        card2Title:'Crypto Academy eBook (Korean Edition)',
+        card1Body:'Crypto Academy eBook in English',
+        card2Body:'Crypto Academy eBook in Korean',
+        button:'View eBook'
+      },
+      ko:{
+        title:'크립토 아카데미 전자책',
+        body:'정리된 흐름으로 더 깊이 있게 보고 싶다면 크립토 아카데미 전자책을 확인해보세요.',
+        card1Title:'영문 크립토 아카데미 전자책',
+        card2Title:'한글 크립토 아카데미 전자책',
+        card1Body:'영어로 읽는 크립토 아카데미 전자책',
+        card2Body:'한국어로 읽는 크립토 아카데미 전자책',
+        button:'전자책 보기'
+      },
+      th:{
+        title:'Crypto Academy eBook',
+        body:'หากคุณต้องการคู่มือที่เป็นระบบและลึกขึ้น คุณสามารถเปิดดู Crypto Academy eBooks ได้ที่นี่',
+        card1Title:'Crypto Academy eBook (ฉบับภาษาอังกฤษ)',
+        card2Title:'Crypto Academy eBook (ฉบับภาษาเกาหลี)',
+        card1Body:'Crypto Academy eBook ภาษาอังกฤษ',
+        card2Body:'Crypto Academy eBook ภาษาเกาหลี',
+        button:'ดู eBook'
+      },
+      id:{
+        title:'Crypto Academy eBook',
+        body:'Jika Anda ingin panduan yang lebih terstruktur dan mendalam, jelajahi Crypto Academy eBooks.',
+        card1Title:'Crypto Academy eBook (Edisi Bahasa Inggris)',
+        card2Title:'Crypto Academy eBook (Edisi Bahasa Korea)',
+        card1Body:'Crypto Academy eBook dalam bahasa Inggris',
+        card2Body:'Crypto Academy eBook dalam bahasa Korea',
+        button:'Lihat eBook'
+      },
+      pt:{
+        title:'Crypto Academy eBook',
+        body:'Se voce quiser um guia mais estruturado e aprofundado, explore os eBooks da Crypto Academy.',
+        card1Title:'Crypto Academy eBook (Edicao em ingles)',
+        card2Title:'Crypto Academy eBook (Edicao em coreano)',
+        card1Body:'Crypto Academy eBook em ingles',
+        card2Body:'Crypto Academy eBook em coreano',
+        button:'Ver eBook'
+      },
+      tr:{
+        title:'Crypto Academy eBook',
+        body:'Daha duzenli ve derinlikli bir rehber istiyorsaniz Crypto Academy eBook serisini inceleyin.',
+        card1Title:'Crypto Academy eBook (Ingilizce Surum)',
+        card2Title:'Crypto Academy eBook (Korece Surum)',
+        card1Body:'Ingilizce Crypto Academy eBook',
+        card2Body:'Korece Crypto Academy eBook',
+        button:'eBook\u0027u Gor'
+      },
+      es:{
+        title:'Crypto Academy eBook',
+        body:'Si quieres una guia mas estructurada y profunda, explora los eBooks de Crypto Academy.',
+        card1Title:'Crypto Academy eBook (Edicion en Ingles)',
+        card2Title:'Crypto Academy eBook (Edicion en Coreano)',
+        card1Body:'Crypto Academy eBook en ingles',
+        card2Body:'Crypto Academy eBook en coreano',
+        button:'Ver eBook'
+      },
+      ar:{
+        title:'Crypto Academy eBook',
+        body:'إذا أردت دليلاً أكثر تنظيماً وعمقاً، يمكنك استكشاف كتب Crypto Academy الإلكترونية.',
+        card1Title:'Crypto Academy eBook (النسخة الإنجليزية)',
+        card2Title:'Crypto Academy eBook (النسخة الكورية)',
+        card1Body:'كتاب Crypto Academy الإلكتروني باللغة الإنجليزية',
+        card2Body:'كتاب Crypto Academy الإلكتروني باللغة الكورية',
+        button:'عرض الكتاب'
+      },
+      vi:{
+        title:'Crypto Academy eBook',
+        body:'Neu ban muon mot huong dan co cau truc ro rang va sau hon, hay xem Crypto Academy eBooks.',
+        card1Title:'Crypto Academy eBook (Ban tieng Anh)',
+        card2Title:'Crypto Academy eBook (Ban tieng Han)',
+        card1Body:'Crypto Academy eBook bang tieng Anh',
+        card2Body:'Crypto Academy eBook bang tieng Han',
+        button:'Xem eBook'
+      },
+      ha:{
+        title:'Crypto Academy eBook',
+        body:'Idan kana son jagora mafi tsari da zurfi, duba Crypto Academy eBooks.',
+        card1Title:'Crypto Academy eBook (Sigar Turanci)',
+        card2Title:'Crypto Academy eBook (Sigar Koriya)',
+        card1Body:'Crypto Academy eBook a Turanci',
+        card2Body:'Crypto Academy eBook a Koriya',
+        button:'Duba eBook'
+      }
+    };
+    packs.br = packs.pt;
+    return packs[lang] || packs.en;
+  }
+
   var homePdfFiles = [
     {code:'en', label:'English PDF', href:(window.__CA_BASE_PREFIX__ || './') + 'pdf/crypto-safety-guide-en.pdf'},
     {code:'ko', label:'한국어 PDF', href:(window.__CA_BASE_PREFIX__ || './') + 'pdf/crypto-safety-guide-ko.pdf'},
@@ -574,6 +672,27 @@
       + '</section>';
   }
 
+  function buildHomeAvailablePremiumGuidesHtml(){
+    var pack = getHomeAvailablePremiumGuidesPack();
+    return ''
+      + '<section class="home-available-premium-guides">'
+      +   '<div class="home-available-premium-guides-title">' + (pack.title || 'Available Premium Guides') + '</div>'
+      +   '<div class="home-available-premium-guides-body">' + (pack.body || 'If you want more structured paid material, you can open these extra premium PDF guides here.') + '</div>'
+      +   '<div class="home-available-premium-guides-grid">'
+      +     '<article class="home-available-premium-guide-card">'
+      +       '<div class="home-available-premium-guide-card-title">' + (pack.card1Title || 'Premium PDF Guide 1') + '</div>'
+      +       '<div class="home-available-premium-guide-card-body">' + (pack.card1Body || pack.cardBody || 'Paid extended guidebook') + '</div>'
+      +       '<a class="home-premium-pdf-btn" href="https://buymeacoffee.com/BeeNetworkKorea/e/532817" target="_blank" rel="noopener noreferrer">' + (pack.button || 'View Guide') + '</a>'
+      +     '</article>'
+      +     '<article class="home-available-premium-guide-card">'
+      +       '<div class="home-available-premium-guide-card-title">' + (pack.card2Title || 'Premium PDF Guide 2') + '</div>'
+      +       '<div class="home-available-premium-guide-card-body">' + (pack.card2Body || pack.cardBody || 'Paid extended guidebook') + '</div>'
+      +       '<a class="home-premium-pdf-btn" href="https://buymeacoffee.com/BeeNetworkKorea/e/532815" target="_blank" rel="noopener noreferrer">' + (pack.button || 'View Guide') + '</a>'
+      +     '</article>'
+      +   '</div>'
+      + '</section>';
+  }
+
   function enhanceHomeRecentUpdatesFinal(panel){
     panel.querySelectorAll('.home-recent-update-item').forEach(function(item){
       var dateEl = item.querySelector('.home-recent-update-date');
@@ -728,6 +847,29 @@
     if(next) block.replaceWith(next);
   }
 
+  function ensureHomeAvailablePremiumGuidesBlockFinal(panel){
+    var finder = panel.querySelector('.start-finder');
+    if(!finder) return;
+    panel.querySelectorAll('.home-available-premium-guides').forEach(function(node){
+      if(node.parentNode !== finder) node.remove();
+    });
+    var premiumBlock = finder.querySelector('.home-premium-pdf-block');
+    var block = finder.querySelector('.home-available-premium-guides');
+    if(!block){
+      if(premiumBlock){
+        premiumBlock.insertAdjacentHTML('afterend', buildHomeAvailablePremiumGuidesHtml());
+      } else {
+        finder.insertAdjacentHTML('beforeend', buildHomeAvailablePremiumGuidesHtml());
+      }
+      block = finder.querySelector('.home-available-premium-guides');
+    }
+    if(!block) return;
+    var host = document.createElement('div');
+    host.innerHTML = buildHomeAvailablePremiumGuidesHtml();
+    var next = host.firstElementChild;
+    if(next) block.replaceWith(next);
+  }
+
   function syncHomeUiFinal(){
     var panel = document.getElementById('homePanel');
     if(!panel) return;
@@ -741,6 +883,7 @@
     ensureHomeSupportBlockFinal(panel);
     ensureHomePdfBlockFinal(panel);
     ensureHomePremiumPdfBlockFinal(panel);
+    ensureHomeAvailablePremiumGuidesBlockFinal(panel);
   }
 
   function wrapHomeUiFinal(name){

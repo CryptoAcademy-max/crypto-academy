@@ -34,7 +34,11 @@
     en:'https://buymeacoffee.com/beenetworkkorea/e/528650',
     ko:'https://buymeacoffee.com/beenetworkkorea/e/528662'
   };
-  var GROUP_ORDER = ['beginner','safety','wallet','freepdf','premium','official'];
+  var AVAILABLE_PREMIUM_LINKS = [
+    { key:'guide1', href:'https://buymeacoffee.com/BeeNetworkKorea/e/532817' },
+    { key:'guide2', href:'https://buymeacoffee.com/BeeNetworkKorea/e/532815' }
+  ];
+  var GROUP_ORDER = ['beginner','safety','wallet','freepdf','premium','cryptoebook','official'];
   var OFFICIAL_PUBLISHERS = ['FTC','SEC','FSB','ECB','BIS','MetaMask','Coinbase','Ledger','Trezor','Etherscan','Binance Academy'];
   var OFFICIAL_DOMAINS = ['consumer.ftc.gov','support.metamask.io','www.coinbase.com','www.ledger.com','academy.binance.com','info.etherscan.com','www.sec.gov','www.ecb.europa.eu','www.bis.org','www.fsb.org','trezor.io'];
 
@@ -236,6 +240,102 @@
   };
   PACK.br = PACK.pt;
 
+  var AVAILABLE_PREMIUM_GUIDE_PACKS = {
+    en:{
+      section:{title:'Crypto Academy eBook', desc:'Crypto Academy eBooks designed to help beginners understand core crypto concepts and practical real-world usage in a more structured way.'},
+      card1Title:'Crypto Academy eBook (English Edition)',
+      card2Title:'Crypto Academy eBook (Korean Edition)',
+      card1Body:'Crypto Academy eBook in English',
+      card2Body:'Crypto Academy eBook in Korean',
+      button:'View eBook'
+    },
+    ko:{
+      section:{title:'크립토 아카데미 전자책', desc:'초보자가 암호화폐의 핵심 개념과 실제 사용 흐름을 더 체계적으로 이해할 수 있도록 정리한 크립토 아카데미 전자책입니다.'},
+      card1Title:'영문 크립토 아카데미 전자책',
+      card2Title:'한글 크립토 아카데미 전자책',
+      card1Body:'영어로 읽는 크립토 아카데미 전자책',
+      card2Body:'한국어로 읽는 크립토 아카데미 전자책',
+      button:'전자책 보기'
+    },
+    th:{
+      section:{title:'Crypto Academy eBook', desc:'eBook ของ Crypto Academy ที่ช่วยให้ผู้เริ่มต้นเข้าใจแนวคิดคริปโตหลักและการใช้งานจริงได้เป็นระบบมากขึ้น'},
+      card1Title:'Crypto Academy eBook (ฉบับภาษาอังกฤษ)',
+      card2Title:'Crypto Academy eBook (ฉบับภาษาเกาหลี)',
+      card1Body:'Crypto Academy eBook ภาษาอังกฤษ',
+      card2Body:'Crypto Academy eBook ภาษาเกาหลี',
+      button:'ดู eBook'
+    },
+    id:{
+      section:{title:'Crypto Academy eBook', desc:'Crypto Academy eBooks dirancang untuk membantu pemula memahami konsep inti crypto dan penggunaan praktis di dunia nyata dengan alur yang lebih terstruktur.'},
+      card1Title:'Crypto Academy eBook (Edisi Bahasa Inggris)',
+      card2Title:'Crypto Academy eBook (Edisi Bahasa Korea)',
+      card1Body:'Crypto Academy eBook dalam bahasa Inggris',
+      card2Body:'Crypto Academy eBook dalam bahasa Korea',
+      button:'Lihat eBook'
+    },
+    pt:{
+      section:{title:'Crypto Academy eBook', desc:'eBooks da Crypto Academy pensados para ajudar iniciantes a entender os conceitos centrais de crypto e o uso pratico com uma estrutura mais clara.'},
+      card1Title:'Crypto Academy eBook (Edicao em ingles)',
+      card2Title:'Crypto Academy eBook (Edicao em coreano)',
+      card1Body:'Crypto Academy eBook em ingles',
+      card2Body:'Crypto Academy eBook em coreano',
+      button:'Ver eBook'
+    },
+    tr:{
+      section:{title:'Crypto Academy eBook', desc:'Yeni baslayanlarin temel crypto kavramlarini ve gercek dunyadaki kullanim akisini daha duzenli anlamasina yardim eden Crypto Academy eBook serisi.'},
+      card1Title:'Crypto Academy eBook (Ingilizce Surum)',
+      card2Title:'Crypto Academy eBook (Korece Surum)',
+      card1Body:'Ingilizce Crypto Academy eBook',
+      card2Body:'Korece Crypto Academy eBook',
+      button:'eBook\u0027u Gor'
+    },
+    es:{
+      section:{title:'Crypto Academy eBook', desc:'eBooks de Crypto Academy pensados para ayudar a principiantes a entender los conceptos centrales de crypto y su uso practico de una manera mas estructurada.'},
+      card1Title:'Crypto Academy eBook (Edicion en Ingles)',
+      card2Title:'Crypto Academy eBook (Edicion en Coreano)',
+      card1Body:'Crypto Academy eBook en ingles',
+      card2Body:'Crypto Academy eBook en coreano',
+      button:'Ver eBook'
+    },
+    ar:{
+      section:{title:'Crypto Academy eBook', desc:'كتب Crypto Academy الإلكترونية مصممة لمساعدة المبتدئين على فهم مفاهيم الكريبتو الأساسية والاستخدام العملي بشكل أكثر تنظيماً.'},
+      card1Title:'Crypto Academy eBook (النسخة الإنجليزية)',
+      card2Title:'Crypto Academy eBook (النسخة الكورية)',
+      card1Body:'كتاب Crypto Academy الإلكتروني باللغة الإنجليزية',
+      card2Body:'كتاب Crypto Academy الإلكتروني باللغة الكورية',
+      button:'عرض الكتاب'
+    },
+    vi:{
+      section:{title:'Crypto Academy eBook', desc:'Crypto Academy eBooks giup nguoi moi hieu ro hon cac khai niem crypto cot loi va cach ap dung thuc te theo mot cau truc de theo doi hon.'},
+      card1Title:'Crypto Academy eBook (Ban tieng Anh)',
+      card2Title:'Crypto Academy eBook (Ban tieng Han)',
+      card1Body:'Crypto Academy eBook bang tieng Anh',
+      card2Body:'Crypto Academy eBook bang tieng Han',
+      button:'Xem eBook'
+    },
+    ha:{
+      section:{title:'Crypto Academy eBook', desc:'Crypto Academy eBooks da aka shirya domin taimaka wa mai farawa ya fahimci muhimman ka' + "'" + 'idojin crypto da yadda ake amfani da su a zahiri cikin tsari mafi kyau.'},
+      card1Title:'Crypto Academy eBook (Sigar Turanci)',
+      card2Title:'Crypto Academy eBook (Sigar Koriya)',
+      card1Body:'Crypto Academy eBook a Turanci',
+      card2Body:'Crypto Academy eBook a Koriya',
+      button:'Duba eBook'
+    }
+  };
+  AVAILABLE_PREMIUM_GUIDE_PACKS.br = AVAILABLE_PREMIUM_GUIDE_PACKS.pt;
+  Object.keys(PACK).forEach(function(langKey){
+    var extraPack = AVAILABLE_PREMIUM_GUIDE_PACKS[langKey] || AVAILABLE_PREMIUM_GUIDE_PACKS[baseLang(langKey)] || AVAILABLE_PREMIUM_GUIDE_PACKS.en;
+    if(!PACK[langKey] || !extraPack) return;
+    PACK[langKey].sections.cryptoebook = extraPack.section;
+    PACK[langKey].availablePremiumGuides = {
+      card1Title:extraPack.card1Title,
+      card2Title:extraPack.card2Title,
+      card1Body:extraPack.card1Body,
+      card2Body:extraPack.card2Body,
+      button:extraPack.button
+    };
+  });
+
   function getPack(lang){
     return PACK[lang] || PACK[baseLang(lang)] || PACK.en;
   }
@@ -286,6 +386,7 @@
     var blob = sourceBlob(meta);
     if(meta.kind === 'freepdf') return 'freepdf';
     if(meta.kind === 'premium') return 'premium';
+    if(meta.kind === 'cryptoebook' || meta.cat === 'cryptoebook') return 'cryptoebook';
     if(meta.cat === 'reg') return 'official';
     if(isSafetyMeta(meta)) return 'safety';
     if(meta.cat === 'wallet' || meta.cat === 'exchanges') return 'wallet';
@@ -335,12 +436,14 @@
     return [
       { kind:'freepdf', cat:'freepdf', publisher:pack.brand, title:pack.pdf6.title, body:pack.pdf6.body, url:getPdfHref('lesson6', lang), relatedSection:pack.lesson6Label, whyMatters:pack.pdf6.why },
       { kind:'freepdf', cat:'freepdf', publisher:pack.brand, title:pack.pdf7.title, body:pack.pdf7.body, url:getPdfHref('lesson7', lang), relatedSection:pack.lesson7Label, whyMatters:pack.pdf7.why },
-      { kind:'premium', cat:'premium', publisher:pack.brand, title:pack.premiumCard.title, body:pack.premiumCard.body, whyMatters:pack.premiumCard.extra, links:[ { href: PREMIUM_LINKS.en, label: pack.premiumCard.english }, { href: PREMIUM_LINKS.ko, label: pack.premiumCard.korean } ] }
+      { kind:'premium', cat:'premium', publisher:pack.brand, title:pack.premiumCard.title, body:pack.premiumCard.body, whyMatters:pack.premiumCard.extra, links:[ { href: PREMIUM_LINKS.en, label: pack.premiumCard.english }, { href: PREMIUM_LINKS.ko, label: pack.premiumCard.korean } ] },
+      { kind:'cryptoebook', cat:'cryptoebook', publisher:pack.brand, title:pack.availablePremiumGuides.card1Title, body:pack.availablePremiumGuides.card1Body, whyMatters:pack.sections.cryptoebook.desc, links:[ { href: AVAILABLE_PREMIUM_LINKS[0].href, label: pack.availablePremiumGuides.button } ] },
+      { kind:'cryptoebook', cat:'cryptoebook', publisher:pack.brand, title:pack.availablePremiumGuides.card2Title, body:pack.availablePremiumGuides.card2Body, whyMatters:pack.sections.cryptoebook.desc, links:[ { href: AVAILABLE_PREMIUM_LINKS[1].href, label: pack.availablePremiumGuides.button } ] }
     ];
   }
 
   function getGroupKeyResolver(){
-    return { scams:'safety', wallet:'wallet', exchanges:'wallet', cases:'wallet', basics:'beginner', stable:'beginner', defi:'beginner', reg:'official', freepdf:'freepdf', premium:'premium' };
+    return { scams:'safety', wallet:'wallet', exchanges:'wallet', cases:'wallet', basics:'beginner', stable:'beginner', defi:'beginner', reg:'official', freepdf:'freepdf', premium:'premium', cryptoebook:'cryptoebook' };
   }
 
   function normalizeSourceMenuKey(value){
@@ -354,12 +457,15 @@
       wallet:'wallet',
       freepdf:'freePdf',
       premium:'premium',
+      cryptoebook:'cryptoEbook',
       official:'reg'
     }[groupKey] || 'basics';
   }
 
   function getSourceTopMenuKey(groupKey){
-    return groupKey === 'freepdf' ? 'freePdf' : groupKey;
+    if(groupKey === 'freepdf') return 'freePdf';
+    if(groupKey === 'cryptoebook') return 'cryptoEbook';
+    return groupKey;
   }
 
   function getCardTags(meta, pack, groupKey){
@@ -372,7 +478,7 @@
     if(groupKey === 'safety') add(pack.tags.safety);
     if(groupKey === 'wallet') add(pack.tags.wallet);
     if(groupKey === 'freepdf') add(pack.tags.pdf, 'is-pdf');
-    if(groupKey === 'premium') add(pack.tags.premium, 'is-premium');
+    if(groupKey === 'premium' || groupKey === 'cryptoebook') add(pack.tags.premium, 'is-premium');
     if(isOfficial(meta)) add(pack.tags.official, 'is-official');
     if(groupKey === 'freepdf') add(pack.tags.free);
     return labels.slice(0, 2);
@@ -388,12 +494,12 @@
   function renderSourceCard(meta, pack, groupKey, catLabelMap){
     var metaLabel = meta.kind === 'freepdf'
       ? pack.meta.pdf
-      : (meta.kind === 'premium' ? pack.meta.premium : (catLabelMap[meta.cat] || meta.cat || pack.sections[groupKey].title));
+      : ((meta.kind === 'premium' || meta.kind === 'cryptoebook') ? pack.meta.premium : (catLabelMap[meta.cat] || meta.cat || pack.sections[groupKey].title));
     var sourceKey = normalizeSourceTargetKey(meta.url || meta.title || meta.publisher || groupKey);
     var relatedHtml = meta.relatedSection ? '<span class="src-section-tag">&#8594; ' + meta.relatedSection + '</span>' : '';
     var whyHtml = meta.whyMatters ? '<div class="src-why"><strong>' + pack.whyLabel + ':</strong> ' + meta.whyMatters + '</div>' : '';
 
-    if(meta.kind === 'premium'){
+    if(meta.kind === 'premium' || meta.kind === 'cryptoebook'){
       var actionsHtml = '<div class="src-actions">' + (meta.links || []).map(function(link){
         return '<a class="src-action-btn" href="' + link.href + '" target="_blank" rel="noopener noreferrer">' + link.label + '</a>';
       }).join('') + '</div>';
@@ -427,7 +533,7 @@
   function buildGroups(lang){
     var baseItems = typeof getSourceItems === 'function' ? getSourceItems() : [];
     var normalized = baseItems.map(toMeta).filter(Boolean);
-    var groups = { beginner:[], safety:[], wallet:[], freepdf:[], premium:[], official:[] };
+    var groups = { beginner:[], safety:[], wallet:[], freepdf:[], premium:[], cryptoebook:[], official:[] };
     normalized.forEach(function(meta){
       groups[getPrimaryGroup(meta)].push(meta);
     });
@@ -461,6 +567,9 @@
       premium:'premium',
       premiumguide:'premium',
       premiumguides:'premium',
+      cryptoebook:'cryptoEbook',
+      ebook:'cryptoEbook',
+      cryptoacademyebook:'cryptoEbook',
       official:'reg',
       reg:'reg',
       officialreference:'reg',
@@ -538,6 +647,18 @@
     revealSection(10);
   };
   window.scrollToSourceSection = scrollToSourceSection;
+
+  if(typeof document !== 'undefined' && !window.__sourceLibraryTopMenuClickBound20260427){
+    window.__sourceLibraryTopMenuClickBound20260427 = true;
+    document.addEventListener('click', function(event){
+      var chip = event.target && event.target.closest ? event.target.closest('#sourcesPanel .source-cat[data-source-cat], #sourcesPanel [data-source-top-menu]') : null;
+      if(!chip) return;
+      var targetKey = chip.dataset.sourceTopMenu || chip.dataset.sourceCat || chip.dataset.sourceGroup || '';
+      if(!targetKey) return;
+      event.preventDefault();
+      scrollToSourceSection(targetKey);
+    });
+  }
 
   if(typeof document !== 'undefined'){
     var panel = document.getElementById('sourcesPanel');
