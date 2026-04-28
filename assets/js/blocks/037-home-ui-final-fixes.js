@@ -442,6 +442,114 @@
         button:'Duba eBook'
       }
     };
+    var previewPacks = {
+      en:{
+        previewTitle:'Crypto Academy eBook Preview',
+        previewBody:'A structured eBook designed to help beginners understand the crypto concepts and practical usage flows that most people struggle with first.',
+        previewPoints:[
+          'Understand core concepts in a more structured way',
+          'Review the full first-buy and transfer flow in one place',
+          'Learn practical checks to reduce wallet, address, and network mistakes',
+          'Build a deeper understanding of scam prevention and safety signals'
+        ]
+      },
+      ko:{
+        previewTitle:'크립토 아카데미 전자책 미리보기',
+        previewBody:'초보자가 암호화폐를 이해할 때 가장 자주 막히는 개념과 실제 사용 흐름을 더 체계적으로 정리한 전자책입니다.',
+        previewPoints:[
+          '핵심 개념을 더 체계적으로 정리할 수 있습니다',
+          '첫 구매와 전송 흐름을 한 번에 복습할 수 있습니다',
+          '지갑, 주소, 네트워크 실수를 줄이는 기준을 익힐 수 있습니다',
+          '사기 예방과 보안 흐름을 더 깊이 이해할 수 있습니다'
+        ]
+      },
+      th:{
+        previewTitle:'ตัวอย่าง Crypto Academy eBook',
+        previewBody:'eBook ที่จัดโครงสร้างมาเพื่อช่วยให้ผู้เริ่มต้นเข้าใจแนวคิดคริปโตและลำดับการใช้งานจริงที่มักติดขัดในช่วงแรก',
+        previewPoints:[
+          'เข้าใจแนวคิดหลักแบบเป็นระบบมากขึ้น',
+          'ทบทวนขั้นตอนซื้อครั้งแรกและการโอนในที่เดียว',
+          'เรียนรู้จุดตรวจเพื่อลดความผิดพลาดเรื่องกระเป๋า ที่อยู่ และเครือข่าย',
+          'เข้าใจสัญญาณเสี่ยงและการป้องกันสแกมให้ลึกขึ้น'
+        ]
+      },
+      id:{
+        previewTitle:'Pratinjau Crypto Academy eBook',
+        previewBody:'eBook terstruktur yang membantu pemula memahami konsep crypto dan alur penggunaan praktis yang paling sering terasa sulit di awal.',
+        previewPoints:[
+          'Memahami konsep inti dengan alur yang lebih terstruktur',
+          'Meninjau alur pembelian pertama dan transfer di satu tempat',
+          'Mempelajari pemeriksaan praktis untuk mengurangi kesalahan wallet, alamat, dan jaringan',
+          'Membangun pemahaman yang lebih dalam tentang pencegahan scam dan sinyal keamanan'
+        ]
+      },
+      pt:{
+        previewTitle:'Previa do Crypto Academy eBook',
+        previewBody:'Um eBook estruturado para ajudar iniciantes a entender os conceitos de crypto e os fluxos praticos que mais geram duvidas no comeco.',
+        previewPoints:[
+          'Entenda os conceitos centrais de forma mais organizada',
+          'Revise em um so lugar o fluxo de primeira compra e transferencia',
+          'Aprenda verificacoes praticas para reduzir erros de carteira, endereco e rede',
+          'Aprofunde a compreensao sobre prevencao de golpes e sinais de risco'
+        ]
+      },
+      tr:{
+        previewTitle:'Crypto Academy eBook Onizleme',
+        previewBody:'Yeni baslayanlarin ilk basta zorlandigi crypto kavramlarini ve pratik kullanim akislarini daha duzenli anlamasina yardim eden bir eBook.',
+        previewPoints:[
+          'Temel kavramlari daha duzenli bir sekilde anlayin',
+          'Ilk alim ve transfer akisini tek yerde gozden gecirin',
+          'Cuzdan, adres ve ag hatalarini azaltan pratik kontrolleri ogrenin',
+          'Dolandiricilik onleme ve guvenlik sinyallerini daha derin anlayin'
+        ]
+      },
+      es:{
+        previewTitle:'Vista previa de Crypto Academy eBook',
+        previewBody:'Un eBook estructurado para ayudar a principiantes a entender los conceptos de crypto y los flujos practicos que mas cuestan al inicio.',
+        previewPoints:[
+          'Entender los conceptos clave de una forma mas estructurada',
+          'Revisar en un solo lugar el flujo completo de primera compra y transferencia',
+          'Aprender verificaciones practicas para reducir errores de wallet, direccion y red',
+          'Profundizar en la prevencion de estafas y las senales de seguridad'
+        ]
+      },
+      ar:{
+        previewTitle:'معاينة Crypto Academy eBook',
+        previewBody:'كتاب إلكتروني منظم يساعد المبتدئين على فهم مفاهيم الكريبتو ومسارات الاستخدام العملي التي يتعثر فيها كثير من الناس في البداية.',
+        previewPoints:[
+          'فهم المفاهيم الأساسية بطريقة أكثر تنظيماً',
+          'مراجعة مسار الشراء الأول والتحويل الكامل في مكان واحد',
+          'تعلم فحوصات عملية لتقليل أخطاء المحفظة والعنوان والشبكة',
+          'بناء فهم أعمق لإشارات الأمان ومنع الاحتيال'
+        ]
+      },
+      vi:{
+        previewTitle:'Xem truoc Crypto Academy eBook',
+        previewBody:'Mot eBook co cau truc ro rang giup nguoi moi hieu cac khai niem crypto va luong su dung thuc te ma nhieu nguoi thuong vuong luc bat dau.',
+        previewPoints:[
+          'Hieu ro hon cac khai niem cot loi theo mot trinh tu de theo doi',
+          'On lai toan bo quy trinh mua dau tien va chuyen tien trong cung mot noi',
+          'Hoc cac buoc kiem tra thuc te de giam loi ve vi, dia chi va mang',
+          'Hieu sau hon ve dau hieu rui ro va phong tranh lua dao'
+        ]
+      },
+      ha:{
+        previewTitle:'Takaitaccen duba Crypto Academy eBook',
+        previewBody:'eBook ne da aka tsara sosai domin taimaka wa mai farawa ya fahimci ka\'idojin crypto da yadda ake amfani da su a zahiri inda mutane da yawa kan rikice a farko.',
+        previewPoints:[
+          'Ka fahimci muhimman ka\'idoji cikin tsari mafi kyau',
+          'Ka sake duba dukkan tafiyar sayen farko da tura kudi a wuri guda',
+          'Ka koyi bincike na zahiri domin rage kuskuren walat, adireshi, da network',
+          'Ka zurfafa fahimtar kariya daga damfara da alamun hadari'
+        ]
+      }
+    };
+    Object.keys(previewPacks).forEach(function(key){
+      if(!packs[key]) return;
+      packs[key].previewTitle = previewPacks[key].previewTitle;
+      packs[key].previewBody = previewPacks[key].previewBody;
+      packs[key].previewPoints = previewPacks[key].previewPoints.slice();
+    });
     packs.br = packs.pt;
     return packs[lang] || packs.en;
   }
@@ -674,10 +782,20 @@
 
   function buildHomeAvailablePremiumGuidesHtml(){
     var pack = getHomeAvailablePremiumGuidesPack();
+    var previewPoints = Array.isArray(pack.previewPoints) ? pack.previewPoints : [];
+    var previewHtml = ''
+      + '<div class="home-ebook-preview-box">'
+      +   '<div class="home-ebook-preview-title">' + (pack.previewTitle || 'Crypto Academy eBook Preview') + '</div>'
+      +   '<div class="home-ebook-preview-body">' + (pack.previewBody || 'A structured eBook designed to help beginners understand the crypto concepts and practical usage flows that most people struggle with first.') + '</div>'
+      +   (previewPoints.length ? '<ul class="home-ebook-preview-list">' + previewPoints.map(function(point){
+            return '<li>' + point + '</li>';
+          }).join('') + '</ul>' : '')
+      + '</div>';
     return ''
       + '<section class="home-available-premium-guides">'
       +   '<div class="home-available-premium-guides-title">' + (pack.title || 'Available Premium Guides') + '</div>'
       +   '<div class="home-available-premium-guides-body">' + (pack.body || 'If you want more structured paid material, you can open these extra premium PDF guides here.') + '</div>'
+      +   previewHtml
       +   '<div class="home-available-premium-guides-grid">'
       +     '<article class="home-available-premium-guide-card">'
       +       '<div class="home-available-premium-guide-card-title">' + (pack.card1Title || 'Premium PDF Guide 1') + '</div>'

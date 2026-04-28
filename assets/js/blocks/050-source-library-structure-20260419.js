@@ -242,7 +242,7 @@
 
   var AVAILABLE_PREMIUM_GUIDE_PACKS = {
     en:{
-      section:{title:'Crypto Academy eBook', desc:'Crypto Academy eBooks designed to help beginners understand core crypto concepts and practical real-world usage in a more structured way.'},
+      section:{title:'Crypto Academy eBook', desc:'Crypto Academy eBooks designed to help beginners review the site lessons in a more focused and structured way.'},
       card1Title:'Crypto Academy eBook (English Edition)',
       card2Title:'Crypto Academy eBook (Korean Edition)',
       card1Body:'Crypto Academy eBook in English',
@@ -250,7 +250,7 @@
       button:'View eBook'
     },
     ko:{
-      section:{title:'크립토 아카데미 전자책', desc:'초보자가 암호화폐의 핵심 개념과 실제 사용 흐름을 더 체계적으로 이해할 수 있도록 정리한 크립토 아카데미 전자책입니다.'},
+      section:{title:'크립토 아카데미 전자책', desc:'초보자가 사이트 강의와 함께 더 깊이 복습할 수 있도록 정리한 크립토 아카데미 전자책입니다.'},
       card1Title:'영문 크립토 아카데미 전자책',
       card2Title:'한글 크립토 아카데미 전자책',
       card1Body:'영어로 읽는 크립토 아카데미 전자책',
@@ -322,9 +322,102 @@
       button:'Duba eBook'
     }
   };
+  var EBOOK_SECTION_EXTRAS = {
+    en:{
+      sectionNote:'Useful if you want a more organized follow-up after studying the lessons on the site.',
+      previewPoints:[
+        'Understand core concepts in a more structured way',
+        'Review the full first-buy and transfer flow in one place',
+        'Learn practical checks to reduce wallet, address, and network mistakes',
+        'Build a deeper understanding of scam prevention and safety signals'
+      ]
+    },
+    ko:{
+      sectionNote:'사이트에서 배운 내용을 더 정리된 흐름으로 이어서 보고 싶을 때 적합합니다.',
+      previewPoints:[
+        '핵심 개념을 더 체계적으로 정리할 수 있습니다',
+        '첫 구매와 전송 흐름을 한 번에 복습할 수 있습니다',
+        '지갑, 주소, 네트워크 실수를 줄이는 기준을 익힐 수 있습니다',
+        '사기 예방과 보안 흐름을 더 깊이 이해할 수 있습니다'
+      ]
+    },
+    th:{
+      sectionNote:'เหมาะเมื่อคุณต้องการทบทวนสิ่งที่เรียนจากเว็บไซต์ในลำดับที่จัดระเบียบมากขึ้น',
+      previewPoints:[
+        'เข้าใจแนวคิดหลักแบบเป็นระบบมากขึ้น',
+        'ทบทวนขั้นตอนซื้อครั้งแรกและการโอนในที่เดียว',
+        'เรียนรู้จุดตรวจเพื่อลดความผิดพลาดเรื่องกระเป๋า ที่อยู่ และเครือข่าย',
+        'เข้าใจสัญญาณเสี่ยงและการป้องกันสแกมให้ลึกขึ้น'
+      ]
+    },
+    id:{
+      sectionNote:'Cocok jika Anda ingin tindak lanjut yang lebih rapi setelah mempelajari pelajaran di situs ini.',
+      previewPoints:[
+        'Memahami konsep inti dengan alur yang lebih terstruktur',
+        'Meninjau alur pembelian pertama dan transfer di satu tempat',
+        'Mempelajari pemeriksaan praktis untuk mengurangi kesalahan wallet, alamat, dan jaringan',
+        'Membangun pemahaman yang lebih dalam tentang pencegahan scam dan sinyal keamanan'
+      ]
+    },
+    pt:{
+      sectionNote:'Util se voce quiser uma continuacao mais organizada depois de estudar as licoes do site.',
+      previewPoints:[
+        'Entenda os conceitos centrais de forma mais organizada',
+        'Revise em um so lugar o fluxo de primeira compra e transferencia',
+        'Aprenda verificacoes praticas para reduzir erros de carteira, endereco e rede',
+        'Aprofunde a compreensao sobre prevencao de golpes e sinais de risco'
+      ]
+    },
+    tr:{
+      sectionNote:'Sitedeki derslerden sonra daha duzenli bir takip materyali istiyorsaniz faydalidir.',
+      previewPoints:[
+        'Temel kavramlari daha duzenli bir sekilde anlayin',
+        'Ilk alim ve transfer akisini tek yerde gozden gecirin',
+        'Cuzdan, adres ve ag hatalarini azaltan pratik kontrolleri ogrenin',
+        'Dolandiricilik onleme ve guvenlik sinyallerini daha derin anlayin'
+      ]
+    },
+    es:{
+      sectionNote:'Util si quieres una continuacion mas ordenada despues de estudiar las lecciones del sitio.',
+      previewPoints:[
+        'Entender los conceptos clave de una forma mas estructurada',
+        'Revisar en un solo lugar el flujo completo de primera compra y transferencia',
+        'Aprender verificaciones practicas para reducir errores de wallet, direccion y red',
+        'Profundizar en la prevencion de estafas y las senales de seguridad'
+      ]
+    },
+    ar:{
+      sectionNote:'مفيد إذا كنت تريد متابعة أكثر تنظيماً بعد دراسة الدروس الموجودة في الموقع.',
+      previewPoints:[
+        'فهم المفاهيم الأساسية بطريقة أكثر تنظيماً',
+        'مراجعة مسار الشراء الأول والتحويل الكامل في مكان واحد',
+        'تعلم فحوصات عملية لتقليل أخطاء المحفظة والعنوان والشبكة',
+        'بناء فهم أعمق لإشارات الأمان ومنع الاحتيال'
+      ]
+    },
+    vi:{
+      sectionNote:'Phu hop neu ban muon mot luong on tap co to chuc hon sau khi hoc cac bai tren trang web.',
+      previewPoints:[
+        'Hieu ro hon cac khai niem cot loi theo mot trinh tu de theo doi',
+        'On lai toan bo quy trinh mua dau tien va chuyen tien trong cung mot noi',
+        'Hoc cac buoc kiem tra thuc te de giam loi ve vi, dia chi va mang',
+        'Hieu sau hon ve dau hieu rui ro va phong tranh lua dao'
+      ]
+    },
+    ha:{
+      sectionNote:'Ya dace idan kana son karin bita mai tsari bayan ka karanta darussan da ke cikin shafin.',
+      previewPoints:[
+        'Ka fahimci muhimman ka\'idoji cikin tsari mafi kyau',
+        'Ka sake duba dukkan tafiyar sayen farko da tura kudi a wuri guda',
+        'Ka koyi bincike na zahiri domin rage kuskuren walat, adireshi, da network',
+        'Ka zurfafa fahimtar kariya daga damfara da alamun hadari'
+      ]
+    }
+  };
   AVAILABLE_PREMIUM_GUIDE_PACKS.br = AVAILABLE_PREMIUM_GUIDE_PACKS.pt;
   Object.keys(PACK).forEach(function(langKey){
     var extraPack = AVAILABLE_PREMIUM_GUIDE_PACKS[langKey] || AVAILABLE_PREMIUM_GUIDE_PACKS[baseLang(langKey)] || AVAILABLE_PREMIUM_GUIDE_PACKS.en;
+    var sectionExtra = EBOOK_SECTION_EXTRAS[langKey] || EBOOK_SECTION_EXTRAS[baseLang(langKey)] || EBOOK_SECTION_EXTRAS.en;
     if(!PACK[langKey] || !extraPack) return;
     PACK[langKey].sections.cryptoebook = extraPack.section;
     PACK[langKey].availablePremiumGuides = {
@@ -332,7 +425,9 @@
       card2Title:extraPack.card2Title,
       card1Body:extraPack.card1Body,
       card2Body:extraPack.card2Body,
-      button:extraPack.button
+      button:extraPack.button,
+      sectionNote:sectionExtra.sectionNote,
+      previewPoints:(sectionExtra.previewPoints || []).slice()
     };
   });
 
@@ -491,6 +586,17 @@
       return '<span class="src-card-tag ' + (tag.className || '') + '">' + tag.label + '</span>';
     }).join('') + '</div>';
   }
+
+  function renderSourceSectionExtra(pack, groupKey){
+    if(groupKey !== 'cryptoebook' || !pack.availablePremiumGuides) return '';
+    var note = pack.availablePremiumGuides.sectionNote || '';
+    var points = Array.isArray(pack.availablePremiumGuides.previewPoints) ? pack.availablePremiumGuides.previewPoints : [];
+    return ''
+      + (note ? '<p class="src-section-note">' + note + '</p>' : '')
+      + (points.length ? '<ul class="src-preview-points">' + points.map(function(point){
+          return '<li>' + point + '</li>';
+        }).join('') + '</ul>' : '');
+  }
   function renderSourceCard(meta, pack, groupKey, catLabelMap){
     var metaLabel = meta.kind === 'freepdf'
       ? pack.meta.pdf
@@ -603,6 +709,7 @@
       return '<div class="src-section-block' + spotlightClass + '" data-source-section="' + sectionKey + '" data-source-group="' + key + '">'
         + '<div class="src-section-heading">' + section.title + '<span class="src-section-count">' + groups[key].length + '</span></div>'
         + '<p class="src-group-desc">' + section.desc + '</p>'
+        + renderSourceSectionExtra(pack, key)
         + '<div class="source-library-grid">' + groups[key].map(function(meta){
             return renderSourceCard(meta, pack, key, catLabelMap);
           }).join('') + '</div>'
