@@ -348,6 +348,372 @@
     return packs[lang] || packs.en;
   }
 
+  function getHomeSituationPack(){
+    var lang = homeFixLang();
+    var packs = {
+      en:{
+        title:'Quick Start by Situation',
+        body:'Choose the path that fits your situation and get to the right page faster.',
+        cards:[
+          { tag:'START', title:'I’m completely new', desc:'Start with the basics of blockchain and wallets' },
+          { tag:'CHECK', title:'I want to check before my first buy', desc:'Review the key checks before buying crypto for the first time' },
+          { tag:'SAFETY', title:'I’m worried about scams', desc:'Check the most important scam risks first' },
+          { tag:'WORDS', title:'I just need the glossary', desc:'Jump straight to the crypto glossary' },
+          { tag:'EBOOK', title:'I want the eBook version', desc:'Explore the structured eBook version' }
+        ]
+      },
+      ko:{
+        title:'상황별 바로가기',
+        body:'지금 내 상황에 맞는 입구부터 선택해 빠르게 확인해보세요.',
+        cards:[
+          { tag:'시작', title:'처음이라 아무것도 모르겠어요', desc:'블록체인과 지갑 개념부터 천천히 시작합니다' },
+          { tag:'구매', title:'첫 구매 전에 빠르게 확인하고 싶어요', desc:'첫 구매 전에 확인해야 할 흐름을 빠르게 봅니다' },
+          { tag:'보안', title:'사기가 걱정돼요', desc:'가짜 사이트, 시드 문구, 주소 관련 위험부터 확인합니다' },
+          { tag:'용어', title:'용어만 빨리 찾고 싶어요', desc:'자주 헷갈리는 용어를 빠르게 찾아봅니다' },
+          { tag:'전자책', title:'전자책으로 한 번에 정리하고 싶어요', desc:'더 정리된 흐름으로 전자책을 확인합니다' }
+        ]
+      },
+      th:{
+        title:'เริ่มตามสถานการณ์',
+        body:'เลือกเส้นทางที่ตรงกับสถานการณ์ของคุณแล้วไปยังหน้าที่เหมาะได้เร็วขึ้น',
+        cards:[
+          { tag:'เริ่ม', title:'ฉันเพิ่งเริ่มและยังไม่รู้อะไรเลย', desc:'เริ่มจากพื้นฐานของบล็อกเชนและกระเป๋าเงิน' },
+          { tag:'ซื้อ', title:'ฉันอยากเช็กก่อนซื้อครั้งแรก', desc:'ทบทวนจุดสำคัญก่อนซื้อคริปโตครั้งแรก' },
+          { tag:'ระวัง', title:'ฉันกังวลเรื่องสแกม', desc:'เช็กความเสี่ยงสแกมที่สำคัญก่อน' },
+          { tag:'คำศัพท์', title:'ฉันอยากดูคำศัพท์อย่างเดียว', desc:'ไปที่กลอสซารีคริปโตได้ทันที' },
+          { tag:'eBook', title:'ฉันอยากดูเวอร์ชัน eBook', desc:'ดู eBook ที่เรียบเรียงเป็นระบบมากขึ้น' }
+        ]
+      },
+      id:{
+        title:'Jalur Cepat Sesuai Situasi',
+        body:'Pilih jalur yang paling sesuai dengan situasi Anda dan buka halaman yang tepat lebih cepat.',
+        cards:[
+          { tag:'Mulai', title:'Saya benar-benar baru', desc:'Mulai dari dasar blockchain dan wallet' },
+          { tag:'Cek', title:'Saya ingin cek sebelum pembelian pertama', desc:'Tinjau poin penting sebelum membeli crypto pertama kali' },
+          { tag:'Safety', title:'Saya khawatir tentang scam', desc:'Periksa risiko scam yang paling penting terlebih dahulu' },
+          { tag:'Glosarium', title:'Saya hanya butuh glosarium', desc:'Langsung ke glosarium crypto' },
+          { tag:'eBook', title:'Saya ingin versi eBook', desc:'Lihat versi eBook yang lebih terstruktur' }
+        ]
+      },
+      pt:{
+        title:'Atalho por situacao',
+        body:'Escolha o caminho que combina com sua situacao e chegue mais rapido a pagina certa.',
+        cards:[
+          { tag:'Inicio', title:'Sou totalmente iniciante', desc:'Comece pelos fundamentos de blockchain e carteiras' },
+          { tag:'Compra', title:'Quero revisar antes da primeira compra', desc:'Veja as verificacoes principais antes de comprar crypto pela primeira vez' },
+          { tag:'Seguranca', title:'Estou preocupado com golpes', desc:'Confira primeiro os riscos de golpe mais importantes' },
+          { tag:'Glossario', title:'So preciso do glossario', desc:'Vá direto ao glossario de crypto' },
+          { tag:'eBook', title:'Quero a versao em eBook', desc:'Veja a versao em eBook com fluxo mais organizado' }
+        ]
+      },
+      tr:{
+        title:'Duruma Gore Hizli Baslangic',
+        body:'Durumunuza en uygun yolu secin ve dogru sayfaya daha hizli ulasin.',
+        cards:[
+          { tag:'Basla', title:'Tamamen yeniyim', desc:'Blockchain ve cuzdan temelleriyle baslayin' },
+          { tag:'Kontrol', title:'Ilk alimdan once kontrol etmek istiyorum', desc:'Ilk kez crypto almadan once temel kontrolleri gozden gecirin' },
+          { tag:'Guvenlik', title:'Dolandiriciliktan endiseliyim', desc:'Once en onemli scam risklerini kontrol edin' },
+          { tag:'Sozluk', title:'Sadece sozluge ihtiyacim var', desc:'Dogrudan crypto sozlugune gidin' },
+          { tag:'eBook', title:'eBook surumunu istiyorum', desc:'Daha duzenli eBook surumunu inceleyin' }
+        ]
+      },
+      es:{
+        title:'Acceso rapido por situacion',
+        body:'Elige la ruta que mejor encaja con tu situacion y llega mas rapido a la pagina correcta.',
+        cards:[
+          { tag:'Inicio', title:'Soy completamente nuevo', desc:'Empieza con lo basico de blockchain y wallets' },
+          { tag:'Compra', title:'Quiero revisar antes de mi primera compra', desc:'Revisa los puntos clave antes de comprar crypto por primera vez' },
+          { tag:'Seguridad', title:'Me preocupan las estafas', desc:'Consulta primero los riesgos de scam mas importantes' },
+          { tag:'Glosario', title:'Solo necesito el glosario', desc:'Ve directo al glosario de crypto' },
+          { tag:'eBook', title:'Quiero la version eBook', desc:'Explora la version eBook con un flujo mas organizado' }
+        ]
+      },
+      ar:{
+        title:'بداية سريعة حسب حالتك',
+        body:'اختر المسار الذي يناسب حالتك للوصول إلى الصفحة المناسبة بشكل أسرع.',
+        cards:[
+          { tag:'ابدأ', title:'أنا جديد تماماً', desc:'ابدأ بأساسيات البلوك تشين والمحافظ' },
+          { tag:'شراء', title:'أريد المراجعة قبل أول شراء', desc:'راجع أهم النقاط قبل شراء الكريبتو لأول مرة' },
+          { tag:'أمان', title:'أنا قلق من الاحتيال', desc:'تحقق أولاً من أهم مخاطر الاحتيال' },
+          { tag:'مصطلحات', title:'أحتاج فقط إلى المصطلحات', desc:'اذهب مباشرة إلى معجم الكريبتو' },
+          { tag:'eBook', title:'أريد نسخة eBook', desc:'استكشف نسخة eBook الأكثر تنظيماً' }
+        ]
+      },
+      vi:{
+        title:'Loi di nhanh theo tinh huong',
+        body:'Chon lo trinh phu hop voi tinh huong cua ban de den dung trang nhanh hon.',
+        cards:[
+          { tag:'Bat dau', title:'Toi hoan toan moi', desc:'Bat dau voi kien thuc co ban ve blockchain va vi' },
+          { tag:'Kiem tra', title:'Toi muon xem nhanh truoc lan mua dau tien', desc:'On lai cac buoc can kiem tra truoc khi mua crypto lan dau' },
+          { tag:'An toan', title:'Toi lo ve lua dao', desc:'Xem truoc cac rui ro scam quan trong nhat' },
+          { tag:'Thuat ngu', title:'Toi chi can glossary', desc:'Di thang den glossary crypto' },
+          { tag:'eBook', title:'Toi muon ban eBook', desc:'Xem ban eBook co cau truc gon gang hon' }
+        ]
+      },
+      ha:{
+        title:'Hanyar gaggawa bisa halinka',
+        body:'Zabi hanyar da ta fi dacewa da halinka domin ka isa shafin da ya dace cikin sauri.',
+        cards:[
+          { tag:'Fara', title:'Ni sabo ne sosai', desc:'Fara da asalin blockchain da walat' },
+          { tag:'Duba', title:'Ina son dubawa kafin sayen farko', desc:'Duba muhimman abubuwan bincike kafin ka sayi crypto na farko' },
+          { tag:'Tsaro', title:'Ina jin tsoron damfara', desc:'Ka fara duba manyan hadurran scam' },
+          { tag:'Kamus', title:'Ina bukatar glossary kawai', desc:'Je kai tsaye zuwa kamus na crypto' },
+          { tag:'eBook', title:'Ina son sigar eBook', desc:'Duba sigar eBook mai karin tsari' }
+        ]
+      }
+    };
+    packs.br = packs.pt;
+    return packs[lang] || packs.en;
+  }
+
+  function getHomeQuickStartPageRoute(page){
+    if(typeof window.__CA_GET_PAGE_ROUTE === 'function') return window.__CA_GET_PAGE_ROUTE(page);
+    var basePrefix = window.__CA_BASE_PREFIX__ || './';
+    if(page === 'home') return basePrefix + 'index.html';
+    return basePrefix + page + '/index.html';
+  }
+
+  function getHomeQuickStartLessonRoute(index){
+    if(typeof window.__CA_GET_LESSON_ROUTE === 'function') return window.__CA_GET_LESSON_ROUTE(index);
+    var slugs = ['blockchain','wallet','transfer','roles','real-world','first-buy','scams'];
+    var basePrefix = window.__CA_BASE_PREFIX__ || './';
+    return basePrefix + 'lesson/' + (slugs[index] || 'blockchain') + '/index.html';
+  }
+
+  function getHomeSituationEntries(){
+    var pack = getHomeSituationPack();
+    var cards = Array.isArray(pack.cards) ? pack.cards : [];
+    return [
+      Object.assign({ href:getHomeQuickStartLessonRoute(0) }, cards[0] || {}),
+      Object.assign({ href:getHomeQuickStartLessonRoute(5) }, cards[1] || {}),
+      Object.assign({ href:getHomeQuickStartPageRoute('safety') }, cards[2] || {}),
+      Object.assign({ href:getHomeQuickStartPageRoute('glossary') }, cards[3] || {}),
+      Object.assign({ href:'#home-crypto-ebook-section' }, cards[4] || {})
+    ];
+  }
+
+  function buildHomeSituationQuickStartHtml(){
+    var pack = getHomeSituationPack();
+    var cards = getHomeSituationEntries();
+    return ''
+      + '<section class="home-situation-block">'
+      +   '<div class="home-situation-title">' + (pack.title || 'Quick Start by Situation') + '</div>'
+      +   '<div class="home-situation-body">' + (pack.body || 'Choose the path that fits your situation and get to the right page faster.') + '</div>'
+      +   '<div class="home-situation-grid">' + cards.map(function(card){
+            return ''
+              + '<a class="home-situation-card" href="' + (card.href || '#') + '">'
+              +   '<span class="home-situation-tag">' + (card.tag || 'GO') + '</span>'
+              +   '<div class="home-situation-card-title">' + (card.title || '') + '</div>'
+              +   '<div class="home-situation-card-body">' + (card.desc || '') + '</div>'
+              + '</a>';
+          }).join('') + '</div>'
+      + '</section>';
+  }
+
+  function getHomeActionCardsPack(){
+    var lang = homeFixLang();
+    var packs = {
+      en:{
+        title:'30-Second Action Cards',
+        body:'Short practical checks for the moments when you need quick answers.',
+        cards:[
+          {
+            tag:'SEND',
+            title:'5-Second Check Before Sending',
+            points:[
+              'Recheck the wallet address',
+              'Recheck the network',
+              'Use a small test first if possible'
+            ]
+          },
+          {
+            tag:'SEED',
+            title:'Seed Phrase Never-Do List',
+            points:[
+              'Never share it with anyone',
+              'Never send it in a DM',
+              'Be suspicious if a site asks for it'
+            ]
+          },
+          {
+            tag:'SITE',
+            title:'Quick Fake Website Check',
+            points:[
+              'Check the domain in the address bar',
+              'Use bookmarked official links first',
+              'Do not open ad or DM links right away'
+            ]
+          },
+          {
+            tag:'BUY',
+            title:'Final Check Before Your First Buy',
+            points:[
+              'Confirm the platform first',
+              'Check the fees before buying',
+              'Think about how you will store it'
+            ]
+          }
+        ]
+      },
+      ko:{
+        title:'30초 해결 카드',
+        body:'급하게 확인해야 할 핵심만 짧게 정리했습니다.',
+        cards:[
+          {
+            tag:'전송',
+            title:'전송 전 5초 체크',
+            points:[
+              '주소 다시 확인',
+              '네트워크 다시 확인',
+              '가능하면 소액 테스트 먼저'
+            ]
+          },
+          {
+            tag:'시드',
+            title:'시드 문구 절대 금지',
+            points:[
+              '공유하지 않기',
+              'DM으로 보내지 않기',
+              '사이트 입력 요구 시 의심하기'
+            ]
+          },
+          {
+            tag:'도메인',
+            title:'가짜 사이트 빠른 구별',
+            points:[
+              '주소창 도메인 확인',
+              '북마크된 공식 링크 우선',
+              '광고/DM 링크 바로 누르지 않기'
+            ]
+          },
+          {
+            tag:'구매',
+            title:'첫 구매 전 마지막 확인',
+            points:[
+              '플랫폼 확인',
+              '수수료 확인',
+              '보관 방식 생각하기'
+            ]
+          }
+        ]
+      },
+      th:{
+        title:'การ์ดแก้ปัญหา 30 วินาที',
+        body:'สรุปเฉพาะสิ่งสำคัญที่ควรเช็กทันทีแบบสั้น ๆ',
+        cards:[
+          { tag:'ส่ง', title:'เช็ก 5 วินาทีก่อนโอน', points:['เช็กที่อยู่ซ้ำอีกครั้ง','เช็กเครือข่ายซ้ำอีกครั้ง','ถ้าได้ให้ลองโอนจำนวนน้อยก่อน'] },
+          { tag:'Seed', title:'สิ่งที่ห้ามทำกับ Seed Phrase', points:['ห้ามแชร์ให้ใคร','ห้ามส่งทาง DM','ถ้าเว็บขอให้กรอกต้องสงสัยไว้ก่อน'] },
+          { tag:'โดเมน', title:'เช็กเว็บปลอมแบบเร็ว', points:['ตรวจโดเมนในแถบที่อยู่','ใช้ลิงก์ทางการที่บุ๊กมาร์กไว้ก่อน','อย่ากดลิงก์จากโฆษณาหรือ DM ทันที'] },
+          { tag:'ซื้อ', title:'เช็กสุดท้ายก่อนซื้อครั้งแรก', points:['ยืนยันแพลตฟอร์มก่อน','เช็กค่าธรรมเนียมก่อนซื้อ','คิดเรื่องการเก็บรักษาไว้ล่วงหน้า'] }
+        ]
+      },
+      id:{
+        title:'Kartu Tindakan 30 Detik',
+        body:'Ringkasan cek praktis singkat untuk saat Anda butuh jawaban cepat.',
+        cards:[
+          { tag:'Kirim', title:'Cek 5 Detik Sebelum Mengirim', points:['Periksa ulang alamat wallet','Periksa ulang jaringannya','Jika bisa lakukan tes kecil dulu'] },
+          { tag:'Seed', title:'Daftar Larangan Seed Phrase', points:['Jangan pernah membagikannya','Jangan kirim lewat DM','Curigai situs yang memintanya'] },
+          { tag:'Situs', title:'Cek Cepat Situs Palsu', points:['Periksa domain di address bar','Utamakan link resmi yang sudah dibookmark','Jangan langsung buka link iklan atau DM'] },
+          { tag:'Beli', title:'Cek Terakhir Sebelum Pembelian Pertama', points:['Pastikan platformnya','Periksa biayanya','Pikirkan cara penyimpanannya'] }
+        ]
+      },
+      pt:{
+        title:'Cartoes de acao em 30 segundos',
+        body:'Checks praticos e curtos para quando voce precisa de uma resposta rapida.',
+        cards:[
+          { tag:'Envio', title:'Cheque de 5 segundos antes de enviar', points:['Revise o endereco da carteira','Revise a rede','Se puder, faca um teste pequeno antes'] },
+          { tag:'Seed', title:'Lista do que nunca fazer com a seed phrase', points:['Nao compartilhe com ninguem','Nao envie por DM','Desconfie se um site pedir isso'] },
+          { tag:'Site', title:'Cheque rapido de site falso', points:['Confira o dominio na barra de endereco','Use primeiro links oficiais salvos','Nao abra links de anuncio ou DM de imediato'] },
+          { tag:'Compra', title:'Cheque final antes da primeira compra', points:['Confirme a plataforma','Verifique as taxas','Pense em como vai guardar'] }
+        ]
+      },
+      tr:{
+        title:'30 Saniyelik Cozum Kartlari',
+        body:'Hizli cevap gerektiren anlar icin kisa ve pratik kontroller.',
+        cards:[
+          { tag:'Gonder', title:'Gondermeden Once 5 Saniyelik Kontrol', points:['Adresi tekrar kontrol edin','Agi tekrar kontrol edin','Mumkunse once kucuk bir test yapin'] },
+          { tag:'Seed', title:'Seed Phrase Icin Asla Yapma Listesi', points:['Kimseyle paylasmayin','DM ile gondermeyin','Bir site istiyorsa supheyle yaklasin'] },
+          { tag:'Site', title:'Sahte Siteyi Hizli Kontrol', points:['Adres cubugundaki domaini kontrol edin','Once kayitli resmi linkleri kullanin','Reklam veya DM linkine hemen tiklamayin'] },
+          { tag:'Alim', title:'Ilk Alimdan Once Son Kontrol', points:['Platformu dogrulayin','Ucretleri kontrol edin','Nasil saklayacaginizi dusunun'] }
+        ]
+      },
+      es:{
+        title:'Tarjetas de accion en 30 segundos',
+        body:'Checks breves y practicos para los momentos en que necesitas respuestas rapidas.',
+        cards:[
+          { tag:'Envio', title:'Chequeo de 5 segundos antes de enviar', points:['Revisa otra vez la direccion','Revisa otra vez la red','Si puedes, haz primero una prueba pequena'] },
+          { tag:'Seed', title:'Lista de lo que nunca debes hacer con la seed phrase', points:['No la compartas','No la envies por DM','Desconfia si un sitio la pide'] },
+          { tag:'Sitio', title:'Chequeo rapido de sitio falso', points:['Revisa el dominio en la barra','Usa primero enlaces oficiales guardados','No abras de inmediato enlaces de anuncios o DM'] },
+          { tag:'Compra', title:'Chequeo final antes de tu primera compra', points:['Confirma la plataforma','Revisa las comisiones','Piensa como la vas a guardar'] }
+        ]
+      },
+      ar:{
+        title:'بطاقات حل خلال 30 ثانية',
+        body:'فحوصات عملية قصيرة للحظات التي تحتاج فيها إلى جواب سريع.',
+        cards:[
+          { tag:'إرسال', title:'فحص 5 ثوان قبل الإرسال', points:['أعد فحص العنوان','أعد فحص الشبكة','إذا أمكن ابدأ بتحويل صغير'] },
+          { tag:'Seed', title:'قائمة الممنوع مع Seed Phrase', points:['لا تشاركها مع أحد','لا ترسلها عبر DM','اشك في أي موقع يطلبها'] },
+          { tag:'موقع', title:'فحص سريع للموقع المزيف', points:['تحقق من الدومين في شريط العنوان','استخدم الروابط الرسمية المحفوظة أولاً','لا تفتح روابط الإعلانات أو DM مباشرة'] },
+          { tag:'شراء', title:'الفحص الأخير قبل أول شراء', points:['أكد المنصة أولاً','تحقق من الرسوم','فكر في طريقة الحفظ'] }
+        ]
+      },
+      vi:{
+        title:'The hanh dong 30 giay',
+        body:'Nhung buoc kiem tra ngan gon cho luc ban can cau tra loi nhanh.',
+        cards:[
+          { tag:'Gui', title:'Kiem tra 5 giay truoc khi gui', points:['Kiem tra lai dia chi','Kiem tra lai mang','Neu co the hay gui thu so tien nho truoc'] },
+          { tag:'Seed', title:'Danh sach tuyet doi khong lam voi seed phrase', points:['Khong chia se cho bat ky ai','Khong gui qua DM','Canh giac neu website yeu cau nhap'] },
+          { tag:'Web', title:'Kiem tra nhanh trang gia', points:['Kiem tra domain tren thanh dia chi','Uu tien link chinh thuc da bookmark','Khong bam ngay link quang cao hay DM'] },
+          { tag:'Mua', title:'Kiem tra cuoi cung truoc lan mua dau tien', points:['Xac nhan nen tang','Kiem tra phi','Nghi truoc cach luu tru'] }
+        ]
+      },
+      ha:{
+        title:'Katunan warwarewa na dakika 30',
+        body:'Takaitattun bincike masu amfani ga lokutan da kake bukatar amsa cikin sauri.',
+        cards:[
+          { tag:'Aika', title:'Binciken dakika 5 kafin tura kudi', points:['Sake duba adireshin walat','Sake duba network','Idan zai yiwu fara da karamin gwaji'] },
+          { tag:'Seed', title:'Abubuwan da ba za a yi da seed phrase ba', points:['Kada ka raba da kowa','Kada ka aika ta DM','Yi shakka idan wani site ya bukace ta'] },
+          { tag:'Site', title:'Saurin gano shafin bogi', points:['Duba domain a address bar','Fara da official link da ka yi bookmark','Kada ka bude link na talla ko DM nan take'] },
+          { tag:'Saya', title:'Binciken karshe kafin sayen farko', points:['Tabbatar da platform din','Duba kudaden fee','Ka yi tunanin yadda za ka adana shi'] }
+        ]
+      }
+    };
+    packs.br = packs.pt;
+    return packs[lang] || packs.en;
+  }
+
+  function getHomeActionCardEntries(){
+    var pack = getHomeActionCardsPack();
+    var cards = Array.isArray(pack.cards) ? pack.cards : [];
+    return [
+      Object.assign({ href:getHomeQuickStartLessonRoute(2) }, cards[0] || {}),
+      Object.assign({ href:getHomeQuickStartLessonRoute(6) }, cards[1] || {}),
+      Object.assign({ href:getHomeQuickStartPageRoute('safety') }, cards[2] || {}),
+      Object.assign({ href:getHomeQuickStartLessonRoute(5) }, cards[3] || {})
+    ];
+  }
+
+  function buildHomeActionCardsHtml(){
+    var pack = getHomeActionCardsPack();
+    var cards = getHomeActionCardEntries();
+    return ''
+      + '<section class="home-action-cards-block">'
+      +   '<div class="home-action-cards-title">' + (pack.title || '30-Second Action Cards') + '</div>'
+      +   '<div class="home-action-cards-body">' + (pack.body || 'Short practical checks for the moments when you need quick answers.') + '</div>'
+      +   '<div class="home-action-cards-grid">' + cards.map(function(card){
+            var points = Array.isArray(card.points) ? card.points : [];
+            return ''
+              + '<a class="home-action-card" href="' + (card.href || '#') + '">'
+              +   '<span class="home-action-card-tag">' + (card.tag || 'GO') + '</span>'
+              +   '<div class="home-action-card-title">' + (card.title || '') + '</div>'
+              +   '<ul class="home-action-card-list">' + points.map(function(point){
+                    return '<li>' + point + '</li>';
+                  }).join('') + '</ul>'
+              + '</a>';
+          }).join('') + '</div>'
+      + '</section>';
+  }
+
   function getHomeAvailablePremiumGuidesPack(){
     var lang = homeFixLang();
     var packs = {
@@ -792,7 +1158,7 @@
           }).join('') + '</ul>' : '')
       + '</div>';
     return ''
-      + '<section class="home-available-premium-guides">'
+      + '<section class="home-available-premium-guides" id="home-crypto-ebook-section">'
       +   '<div class="home-available-premium-guides-title">' + (pack.title || 'Available Premium Guides') + '</div>'
       +   '<div class="home-available-premium-guides-body">' + (pack.body || 'If you want more structured paid material, you can open these extra premium PDF guides here.') + '</div>'
       +   previewHtml
@@ -965,6 +1331,52 @@
     if(next) block.replaceWith(next);
   }
 
+  function ensureHomeSituationQuickStartBlockFinal(panel){
+    var hero = panel.querySelector('.home-hero');
+    if(!hero) return;
+    panel.querySelectorAll('.home-situation-block').forEach(function(node){
+      if(node.parentNode !== hero) node.remove();
+    });
+    var anchor = hero.querySelector('.home-identity-block') || hero.querySelector('.home-desc');
+    var block = hero.querySelector('.home-situation-block');
+    if(!block){
+      if(anchor){
+        anchor.insertAdjacentHTML('afterend', buildHomeSituationQuickStartHtml());
+      } else {
+        hero.insertAdjacentHTML('afterbegin', buildHomeSituationQuickStartHtml());
+      }
+      block = hero.querySelector('.home-situation-block');
+    }
+    if(!block) return;
+    var host = document.createElement('div');
+    host.innerHTML = buildHomeSituationQuickStartHtml();
+    var next = host.firstElementChild;
+    if(next) block.replaceWith(next);
+  }
+
+  function ensureHomeActionCardsBlockFinal(panel){
+    var hero = panel.querySelector('.home-hero');
+    if(!hero) return;
+    panel.querySelectorAll('.home-action-cards-block').forEach(function(node){
+      if(node.parentNode !== hero) node.remove();
+    });
+    var anchor = hero.querySelector('.home-situation-block') || hero.querySelector('.home-identity-block') || hero.querySelector('.home-desc');
+    var block = hero.querySelector('.home-action-cards-block');
+    if(!block){
+      if(anchor){
+        anchor.insertAdjacentHTML('afterend', buildHomeActionCardsHtml());
+      } else {
+        hero.insertAdjacentHTML('afterbegin', buildHomeActionCardsHtml());
+      }
+      block = hero.querySelector('.home-action-cards-block');
+    }
+    if(!block) return;
+    var host = document.createElement('div');
+    host.innerHTML = buildHomeActionCardsHtml();
+    var next = host.firstElementChild;
+    if(next) block.replaceWith(next);
+  }
+
   function ensureHomeAvailablePremiumGuidesBlockFinal(panel){
     var finder = panel.querySelector('.start-finder');
     if(!finder) return;
@@ -994,9 +1406,13 @@
     panel.querySelectorAll('.home-all-guides').forEach(function(node){ node.remove(); });
     panel.querySelectorAll('.home-grid, .home-mini-grid').forEach(function(node){ node.remove(); });
     panel.querySelectorAll('.home-identity-block').forEach(function(node){ node.remove(); });
+    panel.querySelectorAll('.home-situation-block').forEach(function(node){ node.remove(); });
+    panel.querySelectorAll('.home-action-cards-block').forEach(function(node){ node.remove(); });
     enhanceHomeRecentUpdatesFinal(panel);
     syncContinueCardFinal(panel);
     ensureRoadmapLessonSevenIconFinal(panel);
+    ensureHomeSituationQuickStartBlockFinal(panel);
+    ensureHomeActionCardsBlockFinal(panel);
     expandStartFinderFinal(panel);
     ensureHomeSupportBlockFinal(panel);
     ensureHomePdfBlockFinal(panel);

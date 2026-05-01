@@ -55,7 +55,10 @@
     'blocks/051-lang-scroll-retention-20260419.js',
     'blocks/052-lang-switch-performance-20260419.js',
     'blocks/053-clipboard-swapping-20260424.js',
-    'blocks/054-glossary-clipboard-20260424-fix.js'
+    'blocks/054-glossary-clipboard-20260424-fix.js',
+    'blocks/056-free-core-ebook-flow-20260501.js',
+    'blocks/057-home-share-summary-cards-20260501.js',
+    'blocks/059-free-pdf-lead-magnet-safe-20260501.js'
   ];
 
   for (var i = 0; i < blocks.length; i++) {
