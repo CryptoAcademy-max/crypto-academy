@@ -1540,8 +1540,17 @@ html, body { overflow-x: hidden; }
 .home-free-pdf-value-list li::before{content:'•';position:absolute;left:0;top:0;color:var(--navy);font-weight:900}
 .home-free-pdf-value-compare{margin-top:12px;padding-top:11px;border-top:1px solid rgba(38,65,99,.08);font-size:.79rem;color:var(--text-2);line-height:1.56}
 .home-free-pdf-value-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.home-save-value-block{margin:12px 0 0;padding:15px 16px;background:linear-gradient(180deg,#fff,#f7fafc);border:1px solid var(--line);border-radius:14px}
+.home-save-value-title{font-size:.88rem;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:5px}
+.home-save-value-body{font-size:.81rem;color:var(--text-2);line-height:1.56}
+.home-save-value-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 14px;margin:12px 0 0;padding:0;list-style:none}
+.home-save-value-list li{position:relative;padding-left:14px;font-size:.79rem;color:var(--text-2);line-height:1.52}
+.home-save-value-list li::before{content:'•';position:absolute;left:0;top:0;color:var(--navy);font-weight:900}
+.home-save-value-footer{margin-top:12px;padding-top:11px;border-top:1px solid rgba(38,65,99,.08);display:grid;gap:6px}
+.home-save-value-note{font-size:.79rem;color:var(--text-2);line-height:1.55}
 .src-freepdf-flow-block{margin:0 0 14px;padding:11px 12px;border:1px solid rgba(38,65,99,.08);border-radius:11px;background:linear-gradient(180deg,#fff,#f7fafc)}
 .src-freepdf-flow-compare{margin-top:8px;font-size:.78rem;color:var(--text-3);line-height:1.55}
+.src-save-return-note{margin:0 0 14px;padding:10px 12px;border:1px solid rgba(38,65,99,.08);border-radius:11px;background:#fff}
 .home-share-summary-block{margin:12px 0 0;padding:15px 16px;background:linear-gradient(180deg,#fff,#f8fafc);border:1px solid var(--line);border-radius:14px}
 .home-share-summary-title{font-size:.88rem;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:5px}
 .home-share-summary-body{font-size:.81rem;color:var(--text-2);line-height:1.56;margin-bottom:12px}
@@ -1566,6 +1575,7 @@ html, body { overflow-x: hidden; }
   .home-available-premium-guides-grid{grid-template-columns:1fr}
   .home-free-ebook-flow-grid{grid-template-columns:1fr}
   .home-free-pdf-value-list{grid-template-columns:1fr}
+  .home-save-value-list{grid-template-columns:1fr}
   .home-share-summary-grid{grid-template-columns:1fr}
 }
 
