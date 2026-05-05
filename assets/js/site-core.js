@@ -61,7 +61,10 @@
     'blocks/059-free-pdf-lead-magnet-safe-20260501.js',
     'blocks/060-save-bookmark-flow-20260502.js',
     'blocks/061-checklist-crosslinks-20260505.js',
-    'blocks/062-checklist-entry-sections-20260505.js'
+    'blocks/062-checklist-entry-sections-20260505.js',
+    'blocks/063-home-start-three-20260505.js',
+    'blocks/064-home-hero-gallery-20260505.js',
+    'blocks/065-visitor-start-paths-20260506.js'
   ];
 
   for (var i = 0; i < blocks.length; i++) {

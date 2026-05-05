@@ -190,6 +190,14 @@
         sourceCompare:'PDF na kyauta sun dace da saurin duba aiki, yayin da eBooks suke taimakawa wajen zurfin bita mai tsari.'
       }
     };
+    packs.en.body = 'Best used as quick review sheets before a transfer, first buy, or safety check.';
+    packs.en.compare = 'Free PDFs are for quick checks. The eBooks are for deeper review.';
+    packs.en.sourceNote = 'Short review material for real transfers, purchases, and safety checks.';
+    packs.en.sourceCompare = 'Use PDFs for quick checks and eBooks for deeper review.';
+    packs.ko.body = '\uc804\uc1a1, \uccab \uad6c\ub9e4, \ubcf4\uc548 \ud655\uc778 \uc804\uc5d0 \uc9e7\uac8c \ub2e4\uc2dc \ubcf4\uae30 \uc88b\uc740 \ubb34\ub8cc PDF\uc785\ub2c8\ub2e4.';
+    packs.ko.compare = '\ubb34\ub8cc PDF\ub294 \ube60\ub978 \uccb4\ud06c\uc6a9, \uc804\uc790\ucc45\uc740 \ub354 \uc815\ub9ac\ub41c \uae4a\uc740 \ubcf5\uc2b5\uc6a9\uc785\ub2c8\ub2e4.';
+    packs.ko.sourceNote = '\uc2e4\uc81c \uc804\uc1a1\uacfc \uad6c\ub9e4 \uc804\uc5d0 \uc9e7\uac8c \ub2e4\uc2dc \ubcf4\uae30 \uc88b\uc740 \ubb34\ub8cc \uc790\ub8cc\uc785\ub2c8\ub2e4.';
+    packs.ko.sourceCompare = '\ubb34\ub8cc PDF\ub294 \ube60\ub978 \uccb4\ud06c\uc6a9, \uc804\uc790\ucc45\uc740 \ub354 \uae4a\uc740 \ubcf5\uc2b5\uc6a9\uc785\ub2c8\ub2e4.';
     packs.br = packs.pt;
     return packs[lang] || packs.en;
   }
@@ -200,7 +208,7 @@
       + '<section class="home-free-pdf-value-block">'
       +   '<div class="home-free-pdf-value-title">' + pack.title + '</div>'
       +   '<div class="home-free-pdf-value-body">' + pack.body + '</div>'
-      +   '<ul class="home-free-pdf-value-list">' + (pack.points || []).map(function(point){
+      +   '<ul class="home-free-pdf-value-list">' + (pack.points || []).slice(0, 3).map(function(point){
             return '<li>' + point + '</li>';
           }).join('') + '</ul>'
       +   '<div class="home-free-pdf-value-compare">' + pack.compare + '</div>'

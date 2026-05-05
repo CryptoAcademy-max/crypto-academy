@@ -237,6 +237,8 @@
         }
       }
     };
+    packs.en.homeBody = 'Short pages to reopen before a transfer or safety check.';
+    packs.ko.homeBody = '\uc804\uc1a1 \uc804\uc774\ub098 \ubcf4\uc548 \ud655\uc778 \uc804\uc5d0 \uc9e7\uac8c \ub2e4\uc2dc \ubcf4\ub294 \uccb4\ud06c\ub9ac\uc2a4\ud2b8\uc785\ub2c8\ub2e4.';
     return packs[lang] || packs.en;
   }
 
@@ -320,8 +322,8 @@
       if(node.parentNode !== finder) node.remove();
     });
     upsertNode(finder, '.home-checklist-entry-block', buildHomeChecklistSectionHtml(), function(node){
-      var anchor = finder.querySelector('.home-action-cards-block:not(.home-checklist-entry-block)')
-        || finder.querySelector('.home-situation-block')
+      var anchor = finder.querySelector('.start-finder-grid')
+        || finder.querySelector('.start-finder-desc')
         || finder.querySelector('.home-free-ebook-flow-block');
       if(anchor && anchor.parentNode === finder){
         anchor.insertAdjacentElement('afterend', node);

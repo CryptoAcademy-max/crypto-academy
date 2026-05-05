@@ -141,6 +141,10 @@
         sourceNote:'Wata karamar library ta kayan da za ka iya komawa gare su idan kana bukata.'
       }
     };
+    packs.en.body = 'Most useful when you reopen it before a transfer, first buy, or safety check.';
+    packs.en.sourceNote = 'A simple library to come back to when you need it.';
+    packs.ko.body = '\uc804\uc1a1, \uccab \uad6c\ub9e4, \ubcf4\uc548 \ud655\uc778 \uc804\uc5d0 \ub2e4\uc2dc \ubcfc\uc218\ub85d \ub354 \uc720\uc6a9\ud55c \uc0ac\uc774\ud2b8\uc785\ub2c8\ub2e4.';
+    packs.ko.sourceNote = '\ud544\uc694\ud560 \ub54c \ub2e4\uc2dc \ub4e4\uc5b4\uc640 \ubcf4\uae30 \uc88b\uc740 \uc790\ub8cc\ub97c \ud55c\uacf3\uc5d0 \uc815\ub9ac\ud574\ub450\uc5c8\uc2b5\ub2c8\ub2e4.';
     packs.br = packs.pt;
     return packs[lang] || packs.en;
   }
@@ -151,7 +155,7 @@
       + '<section class="home-save-value-block">'
       +   '<div class="home-save-value-title">' + pack.title + '</div>'
       +   '<div class="home-save-value-body">' + pack.body + '</div>'
-      +   '<ul class="home-save-value-list">' + (pack.points || []).map(function(point){
+      +   '<ul class="home-save-value-list">' + (pack.points || []).slice(0, 3).map(function(point){
             return '<li>' + point + '</li>';
           }).join('') + '</ul>'
       +   '<div class="home-save-value-footer">'

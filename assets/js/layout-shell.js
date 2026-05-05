@@ -20,6 +20,7 @@
 
   var routeMap = {
     home: toIndexRoute(basePrefix),
+    start: toIndexRoute(basePrefix + 'start/beginners/'),
     glossary: toIndexRoute(basePrefix + 'glossary/'),
     faq: toIndexRoute(basePrefix + 'faq/'),
     safety: toIndexRoute(basePrefix + 'safety/'),
@@ -71,6 +72,19 @@
     node = ensureAnchor(node);
     if(node) node.setAttribute('href', routeMap[page]);
     if(page === initialPage){
+      node.setAttribute('aria-current', 'page');
+    }else{
+      node.removeAttribute('aria-current');
+    }
+  });
+
+  document.querySelectorAll('.lesson-nav-item[data-page="start"]:not([data-route-page])').forEach(function(node){
+    node = ensureAnchor(node);
+    if(!node) return;
+    node.setAttribute('data-route-page', 'start');
+    node.setAttribute('href', routeMap.start);
+    node.removeAttribute('onclick');
+    if(initialPage === 'start'){
       node.setAttribute('aria-current', 'page');
     }else{
       node.removeAttribute('aria-current');

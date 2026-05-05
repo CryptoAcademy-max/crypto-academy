@@ -201,6 +201,10 @@
         sourceNote:'Idan kana son karin bita mai tsari bayan ka kalli darussa da kayan kyauta, ci gaba da eBooks.'
       }
     };
+    packs.en.body = 'Free lessons cover the basics. The eBooks help you review them in a more structured way.';
+    packs.en.sourceNote = 'Use the eBooks when you want a more structured review after the free lessons.';
+    packs.ko.body = '\ubb34\ub8cc lesson\uc73c\ub85c \uae30\ucd08\ub97c \ubc30\uc6b0\uace0, \uc804\uc790\ucc45\uc73c\ub85c \ub354 \uc815\ub9ac\ub41c \ud750\ub984\uc73c\ub85c \ubcf5\uc2b5\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4.';
+    packs.ko.sourceNote = '\ubb34\ub8cc lesson\uacfc \uc790\ub8cc\ub97c \ubcf8 \ub4a4 \ub354 \uc815\ub9ac\ub41c \ubcf5\uc2b5\uc774 \ud544\uc694\ud558\uba74 \uc804\uc790\ucc45\uc744 \uc774\uc5b4\uc11c \ubcf4\uc138\uc694.';
     packs.br = packs.pt;
     return packs[lang] || packs.en;
   }

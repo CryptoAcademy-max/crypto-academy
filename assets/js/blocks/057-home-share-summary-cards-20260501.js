@@ -129,6 +129,8 @@
         ]
       }
     };
+    packs.en.body = 'Short cards you can save and revisit quickly.';
+    packs.ko.body = '\uc9e7\uac8c \uc800\uc7a5\ud558\uace0 \ub2e4\uc2dc \ubcf4\uae30 \uc88b\uc740 \ud575\uc2ec \uce74\ub4dc\uc785\ub2c8\ub2e4.';
     packs.br = packs.pt;
     return packs[lang] || packs.en;
   }
@@ -159,7 +161,7 @@
     panel.querySelectorAll('.home-share-summary-block').forEach(function(node){
       if(node.parentNode !== finder) node.remove();
     });
-    var anchor = finder.querySelector('.home-free-ebook-flow-block') || finder.querySelector('.home-available-premium-guides');
+    var anchor = finder.querySelector('.home-available-premium-guides') || finder.querySelector('.home-free-ebook-flow-block');
     var block = finder.querySelector('.home-share-summary-block');
     if(!block){
       if(anchor){
