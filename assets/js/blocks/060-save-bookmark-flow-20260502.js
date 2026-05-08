@@ -155,7 +155,7 @@
       + '<section class="home-save-value-block">'
       +   '<div class="home-save-value-title">' + pack.title + '</div>'
       +   '<div class="home-save-value-body">' + pack.body + '</div>'
-      +   '<ul class="home-save-value-list">' + (pack.points || []).slice(0, 3).map(function(point){
+      +   '<ul class="home-save-value-list">' + (pack.points || []).slice(0, 2).map(function(point){
             return '<li>' + point + '</li>';
           }).join('') + '</ul>'
       +   '<div class="home-save-value-footer">'
@@ -173,26 +173,9 @@
   function ensureHomeSaveValueBlock(){
     var panel = document.getElementById('homePanel');
     if(!panel) return;
-    var finder = panel.querySelector('.start-finder');
-    if(!finder) return;
     panel.querySelectorAll('.home-save-value-block').forEach(function(node){
-      if(node.parentNode !== finder) node.remove();
+      node.remove();
     });
-    var anchor = finder.querySelector('.home-share-summary-block') || finder.querySelector('.home-free-pdf-value-block');
-    var block = finder.querySelector('.home-save-value-block');
-    if(!block){
-      if(anchor){
-        anchor.insertAdjacentHTML('afterend', buildHomeSaveValueHtml());
-      } else {
-        finder.insertAdjacentHTML('beforeend', buildHomeSaveValueHtml());
-      }
-      block = finder.querySelector('.home-save-value-block');
-    }
-    if(!block) return;
-    var host = document.createElement('div');
-    host.innerHTML = buildHomeSaveValueHtml();
-    var next = host.firstElementChild;
-    if(next) block.replaceWith(next);
   }
 
   function ensureSourceSaveValueNote(){

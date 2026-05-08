@@ -213,8 +213,8 @@
           }).join('') + '</ul>'
       +   '<div class="home-free-pdf-value-compare">' + pack.compare + '</div>'
       +   '<div class="home-free-pdf-value-actions">'
-      +     '<a class="home-premium-pdf-btn is-free" href="' + getFreePdfHref() + '" target="_blank" rel="noopener noreferrer">' + pack.ctaFree + '</a>'
-      +     '<a class="home-premium-pdf-btn" href="' + getHomeEbookHref() + '">' + pack.ctaEbook + '</a>'
+      +     '<a class="home-premium-pdf-btn is-free" data-home-track="home.pdf.value.free" data-home-track-label="Free PDF value CTA" href="' + getFreePdfHref() + '" target="_blank" rel="noopener noreferrer">' + pack.ctaFree + '</a>'
+      +     '<a class="home-premium-pdf-btn" data-home-track="home.pdf.value.ebook" data-home-track-label="Free PDF to eBook CTA" href="' + getHomeEbookHref() + '">' + pack.ctaEbook + '</a>'
       +   '</div>'
       + '</section>';
   }

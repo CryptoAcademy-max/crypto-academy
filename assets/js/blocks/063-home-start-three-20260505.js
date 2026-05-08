@@ -300,13 +300,15 @@
   function buildHomeStartThreeHtml(){
     var pack = getStartThreePack();
     var cards = Array.isArray(pack.cards) ? pack.cards : [];
+    var trackKeys = ['home.top3.glossary','home.top3.safety','home.top3.firstbuy'];
+    var trackLabels = ['Top 3 glossary','Top 3 safety','Top 3 first buy'];
     return ''
       + '<section class="home-start-three-block home-situation-block">'
       +   '<div class="home-situation-title">' + (pack.title || '3 Best Places to Start Today') + '</div>'
       +   '<div class="home-situation-body">' + (pack.body || 'If you are new here, these 3 starting points will help you understand the site faster.') + '</div>'
-      +   '<div class="home-situation-grid">' + cards.map(function(card){
+      +   '<div class="home-situation-grid">' + cards.map(function(card, index){
             return ''
-              + '<a class="home-situation-card" href="' + (card.href || '#') + '">'
+              + '<a class="home-situation-card" data-home-track="' + (trackKeys[index] || 'home.top3.card') + '" data-home-track-label="' + (trackLabels[index] || 'Top 3 card') + '" href="' + (card.href || '#') + '">'
               +   '<span class="home-situation-tag">' + (card.tag || 'GO') + '</span>'
               +   '<div class="home-situation-card-title">' + (card.title || '') + '</div>'
               +   '<div class="home-situation-card-body">' + (card.body || '') + '</div>'

@@ -244,8 +244,8 @@
       +     '</article>'
       +   '</div>'
       +   '<div class="home-free-ebook-flow-actions">'
-      +     '<a class="home-premium-pdf-btn is-free" href="' + getFirstLessonRoute() + '">' + pack.ctaFree + '</a>'
-      +     '<a class="home-premium-pdf-btn" href="' + getHomeRoute() + '#home-crypto-ebook-section">' + pack.ctaEbook + '</a>'
+      +     '<a class="home-premium-pdf-btn is-free" data-home-track="home.flow.free" data-home-track-label="Free flow CTA" href="' + getFirstLessonRoute() + '">' + pack.ctaFree + '</a>'
+      +     '<a class="home-premium-pdf-btn" data-home-track="home.flow.ebook" data-home-track-label="eBook flow CTA" href="' + getHomeRoute() + '#home-crypto-ebook-section">' + pack.ctaEbook + '</a>'
       +   '</div>'
       + '</section>';
   }

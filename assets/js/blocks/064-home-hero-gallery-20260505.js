@@ -43,6 +43,14 @@
     return toIndexRoute(base + 'lesson/' + (slugs[index] || 'blockchain') + '/');
   }
 
+  function getStartRoute(slug){
+    return toIndexRoute(getBasePrefix() + 'start/' + String(slug || 'beginners').replace(/^\/+|\/+$/g, '') + '/');
+  }
+
+  function getHomeHashRoute(hash){
+    return getPageRoute('home') + '#' + String(hash || '').replace(/^#/, '');
+  }
+
   function getChecklistRoute(slug){
     var route = toIndexRoute(getBasePrefix() + 'checklists/' + String(slug || '').replace(/^\/+|\/+$/g, '') + '/');
     var lang = heroGalleryLang();
@@ -73,29 +81,126 @@
     var packs = {
       en:{
         chips:['Beginner-friendly','Multilingual','Safety First','Free Lessons'],
-        kicker:'Digital Learning Space',
-        title:'Lessons, glossary, and safety checks arranged like one calm knowledge space.',
-        body:'Start with the basics, revisit quick check tools, and move into real actions with less confusion.',
-        primary:'Start Free Lessons',
-        secondary:'View Safety Guide',
+        kicker:'Practical Beginner Crypto',
+        title:'Practical crypto learning for beginners',
+        body:'Free lessons, safety basics, glossary, and fast checklists for people starting from zero.',
+        primary:'Start Now',
+        secondary:'Quick Check',
         sideChecklistLabel:'Checklist',
-        sideGlossaryValue:'Quick terms',
-        sideChecklistValue:'Before you send',
-        sideSourcesValue:'Trusted references'
+        sideGlossaryValue:'Start with terms',
+        sideChecklistValue:'Fast safety check',
+        sideSourcesValue:'Deeper references'
       },
       ko:{
-        chips:['\ucd08\ubcf4\uc790\uc6a9','\ub2e4\uad6d\uc5b4','\ubcf4\uc548 \uc6b0\uc120','\ubb34\ub8cc \ud559\uc2b5'],
-        kicker:'\ub514\uc9c0\ud138 \ud559\uc2b5 \uacf5\uac04',
-        title:'\uac15\uc758, \uc6a9\uc5b4, \ubcf4\uc548 \ud655\uc778 \ud750\ub984\uc744 \ud558\ub098\uc758 \ucc28\ubd84\ud55c \uc9c0\uc2dd \uacf5\uac04\ucc98\ub7fc \uc815\ub9ac\ud588\uc2b5\ub2c8\ub2e4.',
-        body:'\uae30\ucd08\ubd80\ud130 \uc2dc\uc791\ud558\uace0, \uc9e7\uc740 \uccb4\ud06c \ub3c4\uad6c\ub85c \ub2e4\uc2dc \ud655\uc778\ud558\uba70, \uc2e4\uc81c \ud589\ub3d9 \uc804\uc5d0\ub294 \ub35c \ud5f7\uac08\ub9ac\uac8c \ud750\ub984\uc744 \uc774\uc5b4\uac08 \uc218 \uc788\uc2b5\ub2c8\ub2e4.',
-        primary:'\ubb34\ub8cc lesson \uc2dc\uc791',
-        secondary:'\ubcf4\uc548 \uac00\uc774\ub4dc \ubcf4\uae30',
-        sideChecklistLabel:'\uccb4\ud06c\ub9ac\uc2a4\ud2b8',
-        sideGlossaryValue:'\ud575\uc2ec \uc6a9\uc5b4',
-        sideChecklistValue:'\uc804\uc1a1 \uc804 \ud655\uc778',
-        sideSourcesValue:'\uacf5\uc2dd\u00b7\ucc38\uace0 \uc790\ub8cc'
+        chips:['초보자용','다국어','보안 우선','무료 학습'],
+        kicker:'초보자를 위한 실전 암호화폐',
+        title:'초보자를 위한 실전 암호화폐 학습',
+        body:'무료 lesson, 보안 기초, glossary, 빠른 체크리스트를 한곳에서 바로 시작할 수 있습니다.',
+        primary:'지금 시작하기',
+        secondary:'빠르게 확인하기',
+        sideChecklistLabel:'체크리스트',
+        sideGlossaryValue:'용어부터 보기',
+        sideChecklistValue:'빠른 안전 체크',
+        sideSourcesValue:'더 깊은 참고자료'
+      },
+      th:{
+        chips:['เหมาะกับมือใหม่','หลายภาษา','ความปลอดภัยก่อน','บทเรียนฟรี'],
+        kicker:'คริปโตเชิงปฏิบัติสำหรับมือใหม่',
+        title:'พื้นที่เรียนคริปโตสำหรับผู้เริ่มต้น',
+        body:'เริ่มจากบทเรียนฟรี พื้นฐานความปลอดภัย glossary และ checklist แบบสั้นได้ในที่เดียว',
+        primary:'เริ่มเลย',
+        secondary:'เช็กด่วน',
+        sideChecklistLabel:'เช็กลิสต์',
+        sideGlossaryValue:'เริ่มจากคำศัพท์',
+        sideChecklistValue:'เช็กความปลอดภัย',
+        sideSourcesValue:'แหล่งอ้างอิงเพิ่ม'
+      },
+      id:{
+        chips:['Ramah pemula','Multibahasa','Utamakan keamanan','Pelajaran gratis'],
+        kicker:'Crypto praktis untuk pemula',
+        title:'Belajar crypto praktis untuk pemula',
+        body:'Mulai dari pelajaran gratis, dasar keamanan, glossary, dan checklist cepat dalam satu tempat.',
+        primary:'Mulai Sekarang',
+        secondary:'Cek Cepat',
+        sideChecklistLabel:'Checklist',
+        sideGlossaryValue:'Mulai dari istilah',
+        sideChecklistValue:'Cek keamanan cepat',
+        sideSourcesValue:'Referensi lanjutan'
+      },
+      pt:{
+        chips:['Para iniciantes','Multilingue','Seguranca primeiro','Licoes gratis'],
+        kicker:'Cripto pratica para iniciantes',
+        title:'Aprendizado pratico de cripto para iniciantes',
+        body:'Acesse licoes gratis, bases de seguranca, glossary e checklists rapidos em um so lugar.',
+        primary:'Comecar Agora',
+        secondary:'Cheque Rapido',
+        sideChecklistLabel:'Checklist',
+        sideGlossaryValue:'Comece pelos termos',
+        sideChecklistValue:'Cheque rapido de seguranca',
+        sideSourcesValue:'Referencias mais profundas'
+      },
+      tr:{
+        chips:['Yeni baslayanlara uygun','Cok dilli','Once guvenlik','Ucretsiz dersler'],
+        kicker:'Yeni baslayanlar icin pratik kripto',
+        title:'Yeni baslayanlar icin pratik kripto ogrenimi',
+        body:'Ucretsiz dersler, guvenlik temelleri, glossary ve hizli checklistler ile tek yerde baslayin.',
+        primary:'Simdi Basla',
+        secondary:'Hizli Kontrol',
+        sideChecklistLabel:'Checklist',
+        sideGlossaryValue:'Terimlerle basla',
+        sideChecklistValue:'Hizli guvenlik kontrolu',
+        sideSourcesValue:'Daha derin kaynaklar'
+      },
+      es:{
+        chips:['Para principiantes','Multilingue','Seguridad primero','Lecciones gratis'],
+        kicker:'Cripto practica para principiantes',
+        title:'Aprendizaje practico de crypto para principiantes',
+        body:'Empieza con lecciones gratis, bases de seguridad, glossary y checklists rapidos en un solo lugar.',
+        primary:'Empezar Ahora',
+        secondary:'Chequeo Rapido',
+        sideChecklistLabel:'Checklist',
+        sideGlossaryValue:'Empieza por los terminos',
+        sideChecklistValue:'Chequeo rapido de seguridad',
+        sideSourcesValue:'Referencias mas profundas'
+      },
+      ar:{
+        chips:['مناسب للمبتدئين','متعدد اللغات','السلامة اولا','دروس مجانية'],
+        kicker:'تعلم عملي للكرYPTO للمبتدئين',
+        title:'تعلم عملي للعملات الرقمية للمبتدئين',
+        body:'ابدأ من الدروس المجانية واساسيات الامان وglossary والقوائم السريعة في مكان واحد.',
+        primary:'ابدأ الآن',
+        secondary:'فحص سريع',
+        sideChecklistLabel:'قائمة',
+        sideGlossaryValue:'ابدأ بالمصطلحات',
+        sideChecklistValue:'فحص امان سريع',
+        sideSourcesValue:'مراجع اعمق'
+      },
+      vi:{
+        chips:['Danh cho nguoi moi','Da ngon ngu','Uu tien an toan','Bai hoc mien phi'],
+        kicker:'Crypto thuc te cho nguoi moi',
+        title:'Hoc crypto thuc te cho nguoi moi',
+        body:'Bat dau voi bai hoc mien phi, nen tang an toan, glossary, va checklist nhanh trong cung mot noi.',
+        primary:'Bat Dau Ngay',
+        secondary:'Kiem Tra Nhanh',
+        sideChecklistLabel:'Checklist',
+        sideGlossaryValue:'Bat dau voi thuat ngu',
+        sideChecklistValue:'Kiem tra an toan nhanh',
+        sideSourcesValue:'Tai lieu sau hon'
+      },
+      ha:{
+        chips:['Ga masu farawa','Harsuna da yawa','Tsaro farko','Darussa kyauta'],
+        kicker:'Practical crypto ga masu farawa',
+        title:'Koyon crypto mai amfani ga masu farawa',
+        body:'Fara da darussa kyauta, tushen tsaro, glossary, da checklist masu sauri a wuri guda.',
+        primary:'Fara Yanzu',
+        secondary:'Duba Da Sauri',
+        sideChecklistLabel:'Checklist',
+        sideGlossaryValue:'Fara da kalmomi',
+        sideChecklistValue:'Duba tsaro da sauri',
+        sideSourcesValue:'Karin tushe masu zurfi'
       }
     };
+    packs.br = packs.pt;
     return packs[lang] || packs.en;
   }
 
@@ -118,14 +223,14 @@
       +       '<div class="home-hero-stage-title">' + safeText(pack.title || '') + '</div>'
       +       '<div class="home-hero-stage-body">' + safeText(pack.body || '') + '</div>'
       +       '<div class="home-hero-stage-actions">'
-      +         '<a class="home-hero-btn is-primary" href="' + safeText(getLessonRoute(0)) + '">' + safeText(pack.primary || 'Start Free Lessons') + '</a>'
-      +         '<a class="home-hero-btn" href="' + safeText(getPageRoute('safety')) + '">' + safeText(pack.secondary || 'View Safety Guide') + '</a>'
+      +         '<a class="home-hero-btn is-primary" data-home-track="home.hero.primary.start" data-home-track-label="Hero primary CTA" href="' + safeText(getStartRoute('beginners')) + '">' + safeText(pack.primary || 'Start Now') + '</a>'
+      +         '<a class="home-hero-btn" data-home-track="home.hero.secondary.quickcheck" data-home-track-label="Hero secondary CTA" href="' + safeText(getHomeHashRoute('home-quick-checklists-section')) + '">' + safeText(pack.secondary || 'Quick Check') + '</a>'
       +       '</div>'
       +     '</div>'
       +     '<div class="home-hero-side">'
-      +       '<a class="home-hero-sidecard" href="' + safeText(getPageRoute('glossary')) + '"><div class="home-hero-side-label">' + safeText(glossaryLabel) + '</div><div class="home-hero-side-value">' + safeText(pack.sideGlossaryValue || 'Quick terms') + '</div></a>'
-      +       '<a class="home-hero-sidecard" href="' + safeText(getChecklistRoute('before-send')) + '"><div class="home-hero-side-label">' + safeText(pack.sideChecklistLabel || 'Checklist') + '</div><div class="home-hero-side-value">' + safeText(pack.sideChecklistValue || 'Before you send') + '</div></a>'
-      +       '<a class="home-hero-sidecard is-aux" href="' + safeText(getPageRoute('sources')) + '"><div class="home-hero-side-label">' + safeText(sourcesLabel || safetyLabel || lessonsLabel) + '</div><div class="home-hero-side-value">' + safeText(pack.sideSourcesValue || 'Trusted references') + '</div></a>'
+      +       '<a class="home-hero-sidecard" data-home-track="home.hero.side.glossary" data-home-track-label="Hero glossary card" href="' + safeText(getPageRoute('glossary')) + '"><div class="home-hero-side-label">' + safeText(glossaryLabel) + '</div><div class="home-hero-side-value">' + safeText(pack.sideGlossaryValue || 'Quick terms') + '</div></a>'
+      +       '<a class="home-hero-sidecard" data-home-track="home.hero.side.beforeSend" data-home-track-label="Hero before-send checklist" href="' + safeText(getChecklistRoute('before-send')) + '"><div class="home-hero-side-label">' + safeText(pack.sideChecklistLabel || 'Checklist') + '</div><div class="home-hero-side-value">' + safeText(pack.sideChecklistValue || 'Before you send') + '</div></a>'
+      +       '<a class="home-hero-sidecard is-aux" data-home-track="home.hero.side.sources" data-home-track-label="Hero sources card" href="' + safeText(getPageRoute('sources')) + '"><div class="home-hero-side-label">' + safeText(sourcesLabel || safetyLabel || lessonsLabel) + '</div><div class="home-hero-side-value">' + safeText(pack.sideSourcesValue || 'Trusted references') + '</div></a>'
       +     '</div>'
       +   '</div>'
       + '</section>';

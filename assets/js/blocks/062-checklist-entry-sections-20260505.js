@@ -125,17 +125,17 @@
         }
       },
       th:{
-        homeTitle:'Quick Checklists',
-        homeBody:'Short checklist pages you can reopen quickly before a transfer or a safety check.',
-        sourceMenu:'Checklists',
-        sourceTitle:'Quick Checklists',
-        sourceBody:'Short practical checklists for moments when you want a fast review instead of a long read.',
-        sourceMeta:'Checklist',
-        button:'Open Checklist',
+        homeTitle:'เช็กลิสต์ด่วน',
+        homeBody:'หน้า checklist แบบสั้นที่คุณกลับมาเปิดได้เร็ว ก่อนโอนหรือก่อนเช็กความปลอดภัย',
+        sourceMenu:'เช็กลิสต์',
+        sourceTitle:'เช็กลิสต์ด่วน',
+        sourceBody:'checklist สั้นแบบใช้งานจริง สำหรับเวลาที่คุณอยากทบทวนเร็วแทนการอ่านยาว',
+        sourceMeta:'เช็กลิสต์',
+        button:'เปิดเช็กลิสต์',
         cards:{
-          beforeSend:{ title:'Before You Send Checklist', body:'Quickly review the address, network, and final checks' },
-          seedPhrase:{ title:'Seed Phrase Safety Check', body:'Review the most important seed phrase safety rules' },
-          fakeWebsite:{ title:'Quick Fake Website Check', body:'Recheck domains and links before logging in' }
+          beforeSend:{ title:'เช็กลิสต์ก่อนโอน', body:'ทบทวนที่อยู่ network และการเช็กขั้นสุดท้ายแบบรวดเร็ว' },
+          seedPhrase:{ title:'เช็กความปลอดภัยของ Seed Phrase', body:'ทบทวนกฎสำคัญที่สุดของการปกป้อง seed phrase' },
+          fakeWebsite:{ title:'เช็กเว็บไซต์ปลอมแบบเร็ว', body:'เช็กโดเมนและลิงก์อีกครั้งก่อนล็อกอิน' }
         }
       },
       id:{
@@ -268,8 +268,14 @@
     var pack = getPack();
     var cardsHtml = CHECKLIST_ITEMS.map(function(item){
       var card = pack.cards[item.key];
+      var trackMap = {
+        beforeSend:{ key:'home.checklist.beforeSend', label:'Checklist before send' },
+        seedPhrase:{ key:'home.checklist.seedPhrase', label:'Checklist seed phrase' },
+        fakeWebsite:{ key:'home.checklist.fakeWebsite', label:'Checklist fake website' }
+      };
+      var track = trackMap[item.key] || { key:'home.checklist.' + item.key, label:'Checklist ' + item.key };
       return ''
-        + '<a class="home-share-summary-card home-checklist-entry-card" href="' + escapeHtml(getChecklistRoute(item.slug)) + '">'
+        + '<a class="home-share-summary-card home-checklist-entry-card" data-home-track="' + escapeHtml(track.key) + '" data-home-track-label="' + escapeHtml(track.label) + '" href="' + escapeHtml(getChecklistRoute(item.slug)) + '">'
         +   '<span class="home-share-summary-chip">' + escapeHtml(item.chip) + '</span>'
         +   '<div class="home-share-summary-card-title">' + escapeHtml(card.title) + '</div>'
         +   '<div class="home-share-summary-card-body">' + escapeHtml(card.body) + '</div>'

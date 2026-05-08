@@ -1,6 +1,7 @@
 (function(){
   if(typeof window === 'undefined' || window.__homeShareSummaryCards20260501) return;
   window.__homeShareSummaryCards20260501 = true;
+  var SUMMARY_SECTION_KEY = 'summaries';
 
   function summaryLang(){
     var lang = (typeof currentLang === 'string' && currentLang) ? currentLang : 'en';
@@ -131,20 +132,93 @@
     };
     packs.en.body = 'Short cards you can save and revisit quickly.';
     packs.ko.body = '\uc9e7\uac8c \uc800\uc7a5\ud558\uace0 \ub2e4\uc2dc \ubcf4\uae30 \uc88b\uc740 \ud575\uc2ec \uce74\ub4dc\uc785\ub2c8\ub2e4.';
+    packs.en.sourceMenu = 'Quick Summaries';
+    packs.en.sourceTitle = 'Quick Summaries';
+    packs.en.sourceBody = 'Short summary cards for moments when you want the fast version instead of a long explanation.';
+    packs.en.button = 'Open Summary';
+    packs.ko.sourceMenu = '\ud575\uc2ec \uc694\uc57d';
+    packs.ko.sourceTitle = '\ud575\uc2ec \uc694\uc57d';
+    packs.ko.sourceBody = '\uae34 \uc124\uba85\ubcf4\ub2e4 \uc9e7\uac8c \ub2e4\uc2dc \ud655\uc778\ud558\uace0 \uc2f6\uc744 \ub54c \ubcf4\ub294 \uc694\uc57d \uce74\ub4dc\uc785\ub2c8\ub2e4.';
+    packs.ko.button = '\uc694\uc57d \ubcf4\uae30';
+    packs.th.sourceMenu = 'สรุปสั้น';
+    packs.th.sourceTitle = 'สรุปสั้น';
+    packs.th.sourceBody = 'การ์ดสรุปสั้นสำหรับเวลาที่คุณอยากได้เวอร์ชันเร็วแทนคำอธิบายยาว';
+    packs.th.button = 'เปิดสรุป';
+    packs.id.sourceMenu = 'Ringkasan Cepat';
+    packs.id.sourceTitle = 'Ringkasan Cepat';
+    packs.id.sourceBody = 'Kartu ringkas untuk saat Anda ingin versi cepat tanpa penjelasan panjang.';
+    packs.id.button = 'Buka Ringkasan';
+    packs.pt.sourceMenu = 'Resumos Rápidos';
+    packs.pt.sourceTitle = 'Resumos Rápidos';
+    packs.pt.sourceBody = 'Cartões curtos para quando você quer uma versão rápida em vez de uma explicação longa.';
+    packs.pt.button = 'Abrir Resumo';
+    packs.tr.sourceMenu = 'Hizli Ozetler';
+    packs.tr.sourceTitle = 'Hizli Ozetler';
+    packs.tr.sourceBody = 'Uzun bir anlatim yerine hizli versiyonu istediginiz anlar icin kisa ozet kartlari.';
+    packs.tr.button = 'Ozeti Ac';
+    packs.es.sourceMenu = 'Resumenes Rapidos';
+    packs.es.sourceTitle = 'Resumenes Rapidos';
+    packs.es.sourceBody = 'Tarjetas breves para cuando quieres una version rapida en lugar de una explicacion larga.';
+    packs.es.button = 'Abrir Resumen';
+    packs.ar.sourceMenu = 'ملخصات سريعة';
+    packs.ar.sourceTitle = 'ملخصات سريعة';
+    packs.ar.sourceBody = 'بطاقات مختصرة للحظات التي تريد فيها نسخة سريعة بدلًا من شرح طويل.';
+    packs.ar.button = 'عرض الملخص';
+    packs.vi.sourceMenu = 'Tom Tat Nhanh';
+    packs.vi.sourceTitle = 'Tom Tat Nhanh';
+    packs.vi.sourceBody = 'The tom tat ngan cho nhung luc ban chi muon ban nhanh thay vi doc giai thich dai.';
+    packs.vi.button = 'Mo Tom Tat';
+    packs.ha.sourceMenu = 'Takaitattun Bayanai';
+    packs.ha.sourceTitle = 'Takaitattun Bayanai';
+    packs.ha.sourceBody = 'Katunan takaitawa na gaggawa idan kana son sigar sauri maimakon dogon bayani.';
+    packs.ha.button = 'Bude Takaitawa';
     packs.br = packs.pt;
     return packs[lang] || packs.en;
   }
 
+  function createNodeFromHtml(html){
+    var host = document.createElement('div');
+    host.innerHTML = html;
+    return host.firstElementChild;
+  }
+
+  function upsertNode(container, selector, html, insertFn){
+    if(!container) return null;
+    var nodes = Array.prototype.slice.call(container.querySelectorAll(selector));
+    if(nodes.length > 1){
+      for(var i = 1; i < nodes.length; i++) nodes[i].remove();
+    }
+    var fresh = createNodeFromHtml(html);
+    if(!fresh) return null;
+    if(nodes[0]){
+      nodes[0].replaceWith(fresh);
+      return fresh;
+    }
+    insertFn(fresh);
+    return fresh;
+  }
+
+  function normalizeSummaryTarget(value){
+    var key = String(value || '').toLowerCase().replace(/[^a-z]/g, '');
+    if(!key) return '';
+    if(key === 'summary' || key === 'summaries' || key === 'quicksummary' || key === 'quicksummaries' || key === 'keyideas'){
+      return SUMMARY_SECTION_KEY;
+    }
+    return '';
+  }
+
   function buildHomeShareSummaryHtml(){
     var pack = getSummaryPack();
-    var cards = Array.isArray(pack.cards) ? pack.cards : [];
+    var cards = Array.isArray(pack.cards) ? pack.cards.slice(0, 3) : [];
+    var trackKeys = ['home.summary.seed','home.summary.send','home.summary.startsmall'];
+    var trackLabels = ['Summary seed phrase','Summary address and network','Summary start small'];
     return ''
       + '<section class="home-share-summary-block">'
       +   '<div class="home-share-summary-title">' + (pack.title || 'Key Ideas at a Glance') + '</div>'
       +   '<div class="home-share-summary-body">' + (pack.body || 'Short summary cards you can save, revisit, and share more easily.') + '</div>'
       +   '<div class="home-share-summary-grid">' + cards.map(function(card, index){
             return ''
-              + '<a class="home-share-summary-card" data-share-card-key="summary-' + index + '" href="' + (card.href || '#') + '">'
+              + '<a class="home-share-summary-card" data-share-card-key="summary-' + index + '" data-home-track="' + (trackKeys[index] || ('home.summary.' + index)) + '" data-home-track-label="' + (trackLabels[index] || ('Summary card ' + index)) + '" href="' + (card.href || '#') + '">'
               +   '<span class="home-share-summary-chip">' + (card.chip || 'TIP') + '</span>'
               +   '<div class="home-share-summary-card-title">' + (card.title || '') + '</div>'
               +   '<div class="home-share-summary-card-body">' + (card.body || '') + '</div>'
@@ -156,35 +230,155 @@
   function ensureHomeShareSummaryBlock(){
     var panel = document.getElementById('homePanel');
     if(!panel) return;
-    var finder = panel.querySelector('.start-finder');
-    if(!finder) return;
     panel.querySelectorAll('.home-share-summary-block').forEach(function(node){
-      if(node.parentNode !== finder) node.remove();
+      node.remove();
     });
-    var anchor = finder.querySelector('.home-available-premium-guides') || finder.querySelector('.home-free-ebook-flow-block');
-    var block = finder.querySelector('.home-share-summary-block');
-    if(!block){
+  }
+
+  function buildSourceSummaryChipHtml(){
+    var pack = getSummaryPack();
+    var cards = Array.isArray(pack.cards) ? pack.cards.slice(0, 3) : [];
+    return ''
+      + '<div class="source-cat" data-source-top-menu="' + SUMMARY_SECTION_KEY + '" data-source-cat="' + SUMMARY_SECTION_KEY + '" data-source-group="' + SUMMARY_SECTION_KEY + '">'
+      +   (pack.sourceMenu || pack.title || 'Quick Summaries')
+      +   ' <span style="font-size:.65rem;opacity:.6;margin-left:3px">(' + cards.length + ')</span>'
+      + '</div>';
+  }
+
+  function buildSourceSummarySectionHtml(){
+    var pack = getSummaryPack();
+    var cards = Array.isArray(pack.cards) ? pack.cards.slice(0, 3) : [];
+    return ''
+      + '<div class="src-section-block" data-source-section="' + SUMMARY_SECTION_KEY + '" data-source-group="' + SUMMARY_SECTION_KEY + '">'
+      +   '<div class="src-section-heading">' + (pack.sourceTitle || pack.title || 'Quick Summaries') + '<span class="src-section-count">' + cards.length + '</span></div>'
+      +   '<p class="src-group-desc">' + (pack.sourceBody || pack.body || '') + '</p>'
+      +   '<div class="source-library-grid">' + cards.map(function(card, index){
+            return ''
+              + '<div class="source-library-item" data-source-key="summary-' + index + '">'
+              +   '<div class="source-library-meta">' + (pack.sourceMenu || 'Quick Summaries') + '</div>'
+              +   '<div class="src-card-tags"><span class="src-card-tag">' + (card.chip || 'TIP') + '</span></div>'
+              +   '<h3>' + (card.title || '') + '</h3>'
+              +   '<p>' + (card.body || '') + '</p>'
+              +   '<div class="src-actions"><a class="src-action-btn" href="' + (card.href || '#') + '">' + (pack.button || 'Open Summary') + '</a></div>'
+              + '</div>';
+          }).join('') + '</div>'
+      + '</div>';
+  }
+
+  function ensureSourceSummaryChip(){
+    var panel = document.getElementById('sourcesPanel');
+    if(!panel) return;
+    var cats = panel.querySelector('.source-cats');
+    if(!cats) return;
+    upsertNode(cats, '.source-cat[data-source-group="' + SUMMARY_SECTION_KEY + '"]', buildSourceSummaryChipHtml(), function(node){
+      var anchor = cats.querySelector('.source-cat[data-source-group="checklists"]')
+        || cats.querySelector('.source-cat[data-source-cat="checklists"]')
+        || cats.querySelector('.source-cat[data-source-group="freepdf"]');
       if(anchor){
-        anchor.insertAdjacentHTML('afterend', buildHomeShareSummaryHtml());
+        anchor.insertAdjacentElement('afterend', node);
       } else {
-        finder.insertAdjacentHTML('beforeend', buildHomeShareSummaryHtml());
+        cats.appendChild(node);
       }
-      block = finder.querySelector('.home-share-summary-block');
+    });
+  }
+
+  function ensureSourceSummarySection(){
+    var panel = document.getElementById('sourcesPanel');
+    if(!panel) return;
+    upsertNode(panel, '.src-section-block[data-source-section="' + SUMMARY_SECTION_KEY + '"]', buildSourceSummarySectionHtml(), function(node){
+      var anchor = panel.querySelector('.src-section-block[data-source-section="checklists"]')
+        || panel.querySelector('.src-section-block[data-source-group="checklists"]')
+        || panel.querySelector('.src-section-block[data-source-section="freePdf"]');
+      if(anchor){
+        anchor.insertAdjacentElement('afterend', node);
+      } else {
+        panel.insertAdjacentElement('beforeend', node);
+      }
+    });
+  }
+
+  function focusElement(target){
+    if(!target) return;
+    if(typeof scrollRepresentativeTargetIntoView === 'function'){
+      scrollRepresentativeTargetIntoView(target, 'start');
+    } else if(typeof target.scrollIntoView === 'function'){
+      target.scrollIntoView({ behavior:'smooth', block:'start' });
     }
-    if(!block) return;
-    var host = document.createElement('div');
-    host.innerHTML = buildHomeShareSummaryHtml();
-    var next = host.firstElementChild;
-    if(next) block.replaceWith(next);
+    if(typeof highlightRepresentativeTarget === 'function'){
+      highlightRepresentativeTarget(target);
+      return;
+    }
+    target.classList.add('is-source-spotlight');
+    setTimeout(function(){
+      target.classList.remove('is-source-spotlight');
+    }, 2200);
+  }
+
+  function wrapSourceSummaryHandlers(){
+    var originalSetActive = window.setActiveSourceCategory;
+    if(typeof originalSetActive === 'function' && !originalSetActive.__homeSummaryWrapped){
+      var wrappedSetActive = function(targetCat){
+        if(normalizeSummaryTarget(targetCat) !== SUMMARY_SECTION_KEY){
+          return originalSetActive.apply(this, arguments);
+        }
+        document.querySelectorAll('#sourcesPanel .source-cat[data-source-cat], #sourcesPanel [data-source-top-menu]').forEach(function(chip){
+          var chipKey = chip.dataset.sourceCat || chip.dataset.sourceTopMenu || chip.dataset.sourceGroup || '';
+          chip.classList.toggle('is-active', normalizeSummaryTarget(chipKey) === SUMMARY_SECTION_KEY);
+        });
+      };
+      wrappedSetActive.__homeSummaryWrapped = true;
+      wrappedSetActive.__homeSummaryOriginal = originalSetActive;
+      window.setActiveSourceCategory = wrappedSetActive;
+      try{ setActiveSourceCategory = wrappedSetActive; }catch(err){}
+    }
+
+    var originalScroll = window.scrollToSourceSection;
+    if(typeof originalScroll === 'function' && !originalScroll.__homeSummaryWrapped){
+      var wrappedScroll = function(targetCat){
+        if(normalizeSummaryTarget(targetCat) !== SUMMARY_SECTION_KEY){
+          return originalScroll.apply(this, arguments);
+        }
+        if(typeof showPage === 'function') showPage('sources');
+        ensureSourceSummaryChip();
+        ensureSourceSummarySection();
+        if(typeof window.setActiveSourceCategory === 'function'){
+          window.setActiveSourceCategory(SUMMARY_SECTION_KEY);
+        }
+        function reveal(tries){
+          ensureSourceSummarySection();
+          var target = document.querySelector('#sourcesPanel .src-section-block[data-source-section="' + SUMMARY_SECTION_KEY + '"]');
+          if(target){
+            focusElement(target);
+            return;
+          }
+          if(tries > 0){
+            setTimeout(function(){ reveal(tries - 1); }, 120);
+          }
+        }
+        reveal(10);
+      };
+      wrappedScroll.__homeSummaryWrapped = true;
+      wrappedScroll.__homeSummaryOriginal = originalScroll;
+      window.scrollToSourceSection = wrappedScroll;
+      try{ scrollToSourceSection = wrappedScroll; }catch(err){}
+    }
+  }
+
+  function ensureSourceSummaryEntry(){
+    ensureSourceSummaryChip();
+    ensureSourceSummarySection();
+    wrapSourceSummaryHandlers();
   }
 
   function syncHomeShareSummaryBlock(){
     ensureHomeShareSummaryBlock();
+    ensureSourceSummaryEntry();
   }
 
   function rebindGlobal(name, wrapped){
     try{
       if(name === 'renderHome') renderHome = wrapped;
+      if(name === 'renderSources') renderSources = wrapped;
       if(name === 'renderAllLessons') renderAllLessons = wrapped;
       if(name === 'showPage') showPage = wrapped;
       if(name === 'setLang') setLang = wrapped;
@@ -206,6 +400,7 @@
   }
 
   wrapAndSync('renderHome');
+  wrapAndSync('renderSources');
   wrapAndSync('renderAllLessons');
   wrapAndSync('showPage');
   wrapAndSync('setLang');

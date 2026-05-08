@@ -64,7 +64,9 @@
     'blocks/062-checklist-entry-sections-20260505.js',
     'blocks/063-home-start-three-20260505.js',
     'blocks/064-home-hero-gallery-20260505.js',
-    'blocks/065-visitor-start-paths-20260506.js'
+    'blocks/065-visitor-start-paths-20260506.js',
+    'blocks/066-source-library-tier-structure-20260509.js',
+    'blocks/067-home-learning-spin-20260509.js'
   ];
 
   for (var i = 0; i < blocks.length; i++) {
