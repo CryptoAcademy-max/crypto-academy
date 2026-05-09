@@ -1196,30 +1196,159 @@
       + '</section>';
   }
 
+  function getHomeActionCardVisualKey(index, card){
+    var tag = String(card && card.tag || '').toUpperCase();
+    if(tag === 'SEND') return 'send';
+    if(tag === 'SEED') return 'seed';
+    if(tag === 'SITE') return 'site';
+    if(tag === 'BUY') return 'buy';
+    return ['send','seed','site','buy'][index] || 'send';
+  }
+
+  function getHomeActionBadgePack(){
+    var lang = homeFixLang();
+    var packs = {
+      en:{ send:'Must Review', seed:'Seed Safety', site:'Site Check', buy:'First Buy' },
+      ko:{ send:'꼭 확인', seed:'시드 보안', site:'사이트 확인', buy:'첫 구매' },
+      th:{ send:'ต้องดู', seed:'ความปลอดภัย Seed', site:'เช็กเว็บไซต์', buy:'ซื้อครั้งแรก' },
+      id:{ send:'Wajib Cek', seed:'Keamanan Seed', site:'Cek Situs', buy:'Beli Pertama' },
+      pt:{ send:'Revisao', seed:'Seguranca Seed', site:'Verificar Site', buy:'Primeira Compra' },
+      tr:{ send:'Gerekli Kontrol', seed:'Seed Guvenligi', site:'Site Kontrolu', buy:'Ilk Alim' },
+      es:{ send:'Revision Clave', seed:'Seguridad Seed', site:'Revisar Sitio', buy:'Primera Compra' },
+      ar:{ send:'مراجعة مهمة', seed:'أمان العبارة', site:'فحص الموقع', buy:'الشراء الأول' },
+      vi:{ send:'Can Xem Lai', seed:'Bao Ve Seed', site:'Kiem Tra Web', buy:'Lan Mua Dau' },
+      ha:{ send:'A Duba', seed:'Tsaron Seed', site:'Duba Shafi', buy:'Sayan Farko' }
+    };
+    packs.br = packs.pt;
+    return packs[lang] || packs.en;
+  }
+
+  function getHomeActionStatePack(){
+    if(typeof window.__CA_HOME_CARD_STATE_PACK__ === 'function'){
+      return window.__CA_HOME_CARD_STATE_PACK__();
+    }
+    var lang = homeFixLang();
+    var packs = {
+      en:{
+        labels:{
+          recommended:'Recommended',
+          quickStart:'Quick Start',
+          goodToday:'Good for Today',
+          revisitedOften:'Revisited Often',
+          checklistLinked:'Checklist Linked',
+          pdfAvailable:'PDF Available',
+          ebookConnected:'eBook Connected',
+          safetyEssential:'Safety Essential'
+        },
+        hints:{
+          actionSend:'Can be reviewed again with a free PDF.',
+          actionSeed:'Leads into a stronger safety checklist.',
+          actionSite:'Useful before opening a login page.',
+          actionBuy:'Pairs well with a deeper eBook review.'
+        }
+      },
+      ko:{
+        labels:{
+          recommended:'\ucd94\ucc9c',
+          quickStart:'\ube60\ub978 \uc2dc\uc791',
+          goodToday:'\uc624\ub298 \ubcf4\uae30 \uc88b\uc74c',
+          revisitedOften:'\uc790\uc8fc \ub2e4\uc2dc \ubd04',
+          checklistLinked:'\uccb4\ud06c\ub9ac\uc2a4\ud2b8 \uc5f0\uacb0',
+          pdfAvailable:'PDF \uc788\uc74c',
+          ebookConnected:'\uc804\uc790\ucc45 \uc5f0\uacc4',
+          safetyEssential:'\ubcf4\uc548 \ud544\uc218'
+        },
+        hints:{
+          actionSend:'\ubb34\ub8cc PDF\ub85c \ub2e4\uc2dc \ubcf5\uc2b5\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4.',
+          actionSeed:'\ub354 \uac15\ud55c \ubcf4\uc548 \uccb4\ud06c\ub9ac\uc2a4\ud2b8\ub85c \uc774\uc5b4\uc9d1\ub2c8\ub2e4.',
+          actionSite:'\ub85c\uadf8\uc778 \ud398\uc774\uc9c0\ub97c \uc5f4\uae30 \uc804\uc5d0 \ubcf4\uae30 \uc88b\uc2b5\ub2c8\ub2e4.',
+          actionBuy:'\uc804\uc790\ucc45 \uc2ec\ud654 \ubcf5\uc2b5\uacfc \uc790\uc5f0\uc2a4\ub7fd\uac8c \uc5f0\uacb0\ub429\ub2c8\ub2e4.'
+        }
+      }
+    };
+    return packs[lang] || packs.en;
+  }
+
+  function buildHomeActionStatusRow(keys){
+    var pack = getHomeActionStatePack();
+    var labels = pack.labels || {};
+    var list = Array.isArray(keys) ? keys : [];
+    if(!list.length) return '';
+    return '<div class="home-card-status-row">' + list.map(function(key){
+      return '<span class="home-card-status-chip" data-status-key="' + escapeHtml(key) + '">' + escapeHtml(labels[key] || key) + '</span>';
+    }).join('') + '</div>';
+  }
+
+  function buildHomeActionHint(text){
+    if(!text) return '';
+    return '<div class="home-card-hint">' + escapeHtml(text) + '</div>';
+  }
+
+  function getHomeActionStateMeta(key){
+    if(typeof window.__CA_HOME_QUICK_ACTION_STATE_META__ === 'function'){
+      return window.__CA_HOME_QUICK_ACTION_STATE_META__(key);
+    }
+    var hints = getHomeActionStatePack().hints || {};
+    var map = {
+      send:{ states:['revisitedOften','pdfAvailable'], hint:hints.actionSend || '' },
+      seed:{ states:['safetyEssential','checklistLinked'], hint:hints.actionSeed || '' },
+      site:{ states:['safetyEssential','goodToday'], hint:hints.actionSite || '' },
+      buy:{ states:['goodToday','ebookConnected'], hint:hints.actionBuy || '' }
+    };
+    return map[key] || { states:[], hint:'' };
+  }
+
+  function getHomeActionIconSvg(key){
+    if(key === 'send'){
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h12"></path><path d="M12 6l6 6-6 6"></path><path d="M6 6v12"></path></svg>';
+    }
+    if(key === 'seed'){
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="11" width="12" height="9" rx="2"></rect><path d="M9 11V8a3 3 0 0 1 6 0v3"></path><path d="M12 15v2"></path></svg>';
+    }
+    if(key === 'site'){
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 9h18"></path><path d="M8 14l2 2 5-5"></path></svg>';
+    }
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="M9.5 12.5l1.8 1.8 3.7-4"></path></svg>';
+  }
+
   function buildHomeActionCardsHtml(){
     var pack = getHomeActionCardsPack();
+    var badgePack = getHomeActionBadgePack();
     var cards = pack.cards || [];
     var trackKeys = ['home.quickcards.transfer','home.quickcards.seedphrase','home.quickcards.fakewebsite','home.quickcards.firstbuy'];
     var trackLabels = ['30-second transfer','30-second seed phrase','30-second fake website','30-second first buy'];
     var html = ''
-      + '<section class="home-fast-actions-block home-action-cards-block">'
+      + '<section id="home-30-second-cards-section" class="home-fast-actions-block home-action-cards-block">'
       +   '<div class="home-action-cards-title">' + (pack.title || '30-Second Action Cards') + '</div>'
       +   '<div class="home-action-cards-body">' + (pack.body || '') + '</div>'
       +   '<div class="home-share-summary-grid">';
     for(var i = 0; i < cards.length; i++){
       var card = cards[i];
+      var visualKey = getHomeActionCardVisualKey(i, card);
+      var badge = badgePack[visualKey] || badgePack.send || 'Must Review';
+      var stateMeta = getHomeActionStateMeta(visualKey);
       html += ''
-        + '<a class="home-share-summary-card home-action-card" data-home-track="' + (trackKeys[i] || ('home.quickcards.' + i)) + '" data-home-track-label="' + (trackLabels[i] || ('30-second card ' + i)) + '" href="' + (card.href || '#') + '">'
-        +   '<span class="home-situation-tag">' + (card.tag || 'GO') + '</span>'
-        +   '<div class="home-share-summary-title">' + (card.title || '') + '</div>'
-        +   '<ul class="home-action-card-list">';
+        + '<a class="home-share-summary-card home-action-card" data-card-tone="' + visualKey + '" data-home-track="' + (trackKeys[i] || ('home.quickcards.' + i)) + '" data-home-track-label="' + (trackLabels[i] || ('30-second card ' + i)) + '" href="' + (card.href || '#') + '">'
+        +   '<div class="home-card-visual-row">'
+        +     '<span class="home-card-icon" aria-hidden="true">' + getHomeActionIconSvg(visualKey) + '</span>'
+        +     '<span class="home-situation-tag">' + escapeHtml(card.tag || 'GO') + '</span>'
+        +     '<span class="home-card-badge">' + escapeHtml(badge) + '</span>'
+        +   '</div>'
+        +   '<div class="home-card-copy">'
+        +     '<div class="home-share-summary-title home-action-card-title">' + escapeHtml(card.title || '') + '</div>'
+        +     buildHomeActionStatusRow(stateMeta.states)
+        +     '<ul class="home-action-card-list">';
       var points = card.points || [];
       for(var j = 0; j < points.length; j++){
-        html += '<li>' + points[j] + '</li>';
+        html += '<li>' + escapeHtml(points[j]) + '</li>';
       }
       html += ''
-        +   '</ul>'
-        +   '<span class="home-visitor-path-cta">' + (pack.button || 'Quick Check') + '</span>'
+        +     '</ul>'
+        +     buildHomeActionHint(stateMeta.hint)
+        +   '</div>'
+        +   '<div class="home-card-footer">'
+        +     '<span class="home-visitor-path-cta home-card-footer-cta">' + escapeHtml(pack.button || 'Quick Check') + '</span>'
+        +   '</div>'
         + '</a>';
     }
     html += ''
@@ -1227,6 +1356,8 @@
       + '</section>';
     return html;
   }
+
+  window.buildHomeActionCardsHtmlFinal = buildHomeActionCardsHtml;
 
   function queryAllWithin(root, selector){
     if(!root || !root.querySelectorAll) return [];
@@ -1335,7 +1466,9 @@
     if(!hero) return;
     removeNodes(queryAllWithin(panel, '.home-fast-actions-block'), hero);
     replaceOrInsert(hero, '.home-fast-actions-block', buildHomeActionCardsHtml(), function(node){
+      node.id = 'home-30-second-cards-section';
       var anchor = hero.querySelector('.home-visitor-paths-block')
+        || hero.querySelector('.home-learning-spin-block')
         || hero.querySelector('.home-start-three-block')
         || hero.querySelector('.home-desc');
       if(anchor){

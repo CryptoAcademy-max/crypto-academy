@@ -835,14 +835,458 @@ function renderHome(){
       </div>
     </div>`;
 }
+const PAGE_HERO_UI = {
+  en:{
+    typeLesson:'Lesson',
+    typeChecklist:'Checklist',
+    typeSafety:'Safety',
+    typeGlossary:'Glossary',
+    typeFAQ:'FAQ',
+    typeArchive:'Archive',
+    typeUpdates:'Updates',
+    typeGuide:'Start',
+    beginnerFriendly:'Beginner-friendly',
+    stepByStep:'Step by Step',
+    quickReview:'Quick Review',
+    worthSaving:'Worth Saving',
+    goDeeper:'Go Deeper',
+    revisitedOften:'Revisited Often',
+    checklistLinked:'Checklist Linked',
+    safetyEssential:'Safety Essential',
+    beforeFirstBuy:'Before Your First Buy',
+    quickAction:'Quick Action',
+    freePdf:'Free PDF',
+    beforeSend:'Before You Send Checklist',
+    seedPhrase:'Seed Phrase Safety Check',
+    fakeWebsite:'Quick Fake Website Check'
+  },
+  ko:{
+    typeLesson:'레슨',
+    typeChecklist:'체크리스트',
+    typeSafety:'보안',
+    typeGlossary:'용어사전',
+    typeFAQ:'FAQ',
+    typeArchive:'자료 라이브러리',
+    typeUpdates:'업데이트',
+    typeGuide:'시작',
+    beginnerFriendly:'초보자용',
+    stepByStep:'단계별',
+    quickReview:'빠른 복습',
+    worthSaving:'저장용',
+    goDeeper:'더 깊이 보기',
+    revisitedOften:'자주 다시 봄',
+    checklistLinked:'체크리스트 연결',
+    safetyEssential:'보안 필수',
+    beforeFirstBuy:'첫 구매 전',
+    quickAction:'바로 확인',
+    freePdf:'무료 PDF',
+    beforeSend:'전송 전 체크리스트',
+    seedPhrase:'시드 문구 보안 체크',
+    fakeWebsite:'가짜 사이트 빠른 확인'
+  },
+  th:{
+    typeLesson:'บทเรียน',
+    typeChecklist:'เช็กลิสต์',
+    typeSafety:'ความปลอดภัย',
+    typeGlossary:'อภิธานศัพท์',
+    typeFAQ:'FAQ',
+    typeArchive:'คลังข้อมูล',
+    typeUpdates:'อัปเดต',
+    typeGuide:'เริ่มต้น',
+    beginnerFriendly:'เหมาะกับผู้เริ่มต้น',
+    stepByStep:'ทีละขั้น',
+    quickReview:'ทบทวนเร็ว',
+    worthSaving:'ควรบันทึก',
+    goDeeper:'ดูลึกขึ้น',
+    revisitedOften:'กลับมาดูบ่อย',
+    checklistLinked:'เชื่อมกับเช็กลิสต์',
+    safetyEssential:'เรื่องสำคัญด้านความปลอดภัย',
+    beforeFirstBuy:'ก่อนซื้อครั้งแรก',
+    quickAction:'เปิดดูได้ทันที',
+    freePdf:'PDF ฟรี',
+    beforeSend:'เช็กลิสต์ก่อนโอน',
+    seedPhrase:'เช็กความปลอดภัย Seed Phrase',
+    fakeWebsite:'เช็กเว็บปลอมเร็ว'
+  },
+  id:{
+    typeLesson:'Pelajaran',
+    typeChecklist:'Checklist',
+    typeSafety:'Keamanan',
+    typeGlossary:'Glosarium',
+    typeFAQ:'FAQ',
+    typeArchive:'Arsip',
+    typeUpdates:'Update',
+    typeGuide:'Mulai',
+    beginnerFriendly:'Ramah pemula',
+    stepByStep:'Langkah demi langkah',
+    quickReview:'Tinjauan cepat',
+    worthSaving:'Layak disimpan',
+    goDeeper:'Pelajari lebih dalam',
+    revisitedOften:'Sering ditinjau ulang',
+    checklistLinked:'Terhubung ke checklist',
+    safetyEssential:'Keamanan penting',
+    beforeFirstBuy:'Sebelum pembelian pertama',
+    quickAction:'Lihat sekarang',
+    freePdf:'PDF gratis',
+    beforeSend:'Checklist sebelum kirim',
+    seedPhrase:'Cek keamanan seed phrase',
+    fakeWebsite:'Cek cepat situs palsu'
+  },
+  pt:{
+    typeLesson:'Lição',
+    typeChecklist:'Checklist',
+    typeSafety:'Segurança',
+    typeGlossary:'Glossário',
+    typeFAQ:'FAQ',
+    typeArchive:'Biblioteca',
+    typeUpdates:'Atualizações',
+    typeGuide:'Início',
+    beginnerFriendly:'Para iniciantes',
+    stepByStep:'Passo a passo',
+    quickReview:'Revisão rápida',
+    worthSaving:'Vale salvar',
+    goDeeper:'Aprofundar',
+    revisitedOften:'Revisado com frequência',
+    checklistLinked:'Checklist ligado',
+    safetyEssential:'Segurança essencial',
+    beforeFirstBuy:'Antes da primeira compra',
+    quickAction:'Ver agora',
+    freePdf:'PDF grátis',
+    beforeSend:'Checklist antes de enviar',
+    seedPhrase:'Checklist de segurança da seed phrase',
+    fakeWebsite:'Verificação rápida de site falso'
+  },
+  tr:{
+    typeLesson:'Ders',
+    typeChecklist:'Checklist',
+    typeSafety:'Guvenlik',
+    typeGlossary:'Sozluk',
+    typeFAQ:'FAQ',
+    typeArchive:'Arsiv',
+    typeUpdates:'Guncellemeler',
+    typeGuide:'Baslangic',
+    beginnerFriendly:'Baslangic icin uygun',
+    stepByStep:'Adim adim',
+    quickReview:'Hizli gozden gecirme',
+    worthSaving:'Kaydetmeye deger',
+    goDeeper:'Derine in',
+    revisitedOften:'Sik tekrar bakilir',
+    checklistLinked:'Checklist baglantili',
+    safetyEssential:'Guvenlik icin onemli',
+    beforeFirstBuy:'Ilk alimdan once',
+    quickAction:'Simdi bak',
+    freePdf:'Ucretsiz PDF',
+    beforeSend:'Gondermeden once checklist',
+    seedPhrase:'Seed phrase guvenlik kontrolu',
+    fakeWebsite:'Sahte site hizli kontrol'
+  },
+  es:{
+    typeLesson:'Lección',
+    typeChecklist:'Checklist',
+    typeSafety:'Seguridad',
+    typeGlossary:'Glosario',
+    typeFAQ:'FAQ',
+    typeArchive:'Archivo',
+    typeUpdates:'Actualizaciones',
+    typeGuide:'Inicio',
+    beginnerFriendly:'Apto para principiantes',
+    stepByStep:'Paso a paso',
+    quickReview:'Revisión rápida',
+    worthSaving:'Vale guardarlo',
+    goDeeper:'Profundizar',
+    revisitedOften:'Se revisa a menudo',
+    checklistLinked:'Con checklist relacionado',
+    safetyEssential:'Seguridad esencial',
+    beforeFirstBuy:'Antes de la primera compra',
+    quickAction:'Ver ahora',
+    freePdf:'PDF gratis',
+    beforeSend:'Checklist antes de enviar',
+    seedPhrase:'Chequeo de seguridad de la seed phrase',
+    fakeWebsite:'Revisión rápida de sitio falso'
+  },
+  ar:{
+    typeLesson:'الدرس',
+    typeChecklist:'قائمة التحقق',
+    typeSafety:'الأمان',
+    typeGlossary:'المصطلحات',
+    typeFAQ:'الأسئلة الشائعة',
+    typeArchive:'الأرشيف',
+    typeUpdates:'التحديثات',
+    typeGuide:'البداية',
+    beginnerFriendly:'مناسب للمبتدئين',
+    stepByStep:'خطوة بخطوة',
+    quickReview:'مراجعة سريعة',
+    worthSaving:'يستحق الحفظ',
+    goDeeper:'تعمق أكثر',
+    revisitedOften:'يعود إليه كثيراً',
+    checklistLinked:'مرتبط بقائمة تحقق',
+    safetyEssential:'أساسي للأمان',
+    beforeFirstBuy:'قبل أول شراء',
+    quickAction:'إجراء سريع',
+    freePdf:'PDF مجاني',
+    beforeSend:'قائمة التحقق قبل الإرسال',
+    seedPhrase:'فحص أمان العبارة الأولية',
+    fakeWebsite:'فحص سريع للموقع المزيف'
+  },
+  vi:{
+    typeLesson:'Bài học',
+    typeChecklist:'Checklist',
+    typeSafety:'An toàn',
+    typeGlossary:'Thuật ngữ',
+    typeFAQ:'FAQ',
+    typeArchive:'Kho tài liệu',
+    typeUpdates:'Cập nhật',
+    typeGuide:'Bắt đầu',
+    beginnerFriendly:'Phù hợp cho người mới',
+    stepByStep:'Từng bước',
+    quickReview:'Xem lại nhanh',
+    worthSaving:'Nên lưu lại',
+    goDeeper:'Xem sâu hơn',
+    revisitedOften:'Hay xem lại',
+    checklistLinked:'Có checklist liên quan',
+    safetyEssential:'Thiết yếu về an toàn',
+    beforeFirstBuy:'Trước lần mua đầu tiên',
+    quickAction:'Xem ngay',
+    freePdf:'PDF miễn phí',
+    beforeSend:'Checklist trước khi gửi',
+    seedPhrase:'Kiểm tra an toàn seed phrase',
+    fakeWebsite:'Kiểm tra web giả nhanh'
+  },
+  ha:{
+    typeLesson:'Darasi',
+    typeChecklist:'Checklist',
+    typeSafety:'Tsaro',
+    typeGlossary:'Kamus',
+    typeFAQ:'FAQ',
+    typeArchive:'Laburaren Bayanai',
+    typeUpdates:'Sabuntawa',
+    typeGuide:'Fara',
+    beginnerFriendly:'Ya dace da masu farawa',
+    stepByStep:'Mataki zuwa mataki',
+    quickReview:'Bita cikin sauri',
+    worthSaving:'Ya cancanci ajiya',
+    goDeeper:'Kara zurfafa',
+    revisitedOften:'Ana yawan komawa',
+    checklistLinked:'An hada da checklist',
+    safetyEssential:'Muhimmin tsaro',
+    beforeFirstBuy:'Kafin sayen farko',
+    quickAction:'Duba yanzu',
+    freePdf:'PDF na kyauta',
+    beforeSend:'Checklist kafin turawa',
+    seedPhrase:'Duba tsaron seed phrase',
+    fakeWebsite:'Duba shafin karya da sauri'
+  }
+};
+PAGE_HERO_UI.br = PAGE_HERO_UI.pt;
+const PAGE_HERO_LESSON_SLUGS = ['blockchain','wallet','transfer','roles','real-world','first-buy','scams'];
+const PAGE_HERO_FREE_PDFS = {
+  en:'pdf/crypto-safety-guide-en.pdf',
+  ko:'pdf/crypto-safety-guide-ko.pdf',
+  th:'pdf/crypto-safety-guide-th.pdf',
+  id:'pdf/crypto-safety-guide-id.pdf',
+  pt:'pdf/crypto-safety-guide-pt.pdf',
+  br:'pdf/crypto-safety-guide-br.pdf',
+  tr:'pdf/crypto-safety-guide-tr.pdf',
+  es:'pdf/crypto-safety-guide-es.pdf',
+  ar:'pdf/crypto-safety-guide-ar.pdf',
+  vi:'pdf/crypto-safety-guide-vi.pdf',
+  ha:'pdf/crypto-safety-guide-ha.pdf'
+};
+
+function normalizePageHeroLang(value){
+  const raw = String(value || 'en').toLowerCase().trim();
+  if(!raw) return 'en';
+  if(raw === 'br' || raw.indexOf('pt-br') === 0) return 'br';
+  if(raw.indexOf('pt') === 0) return 'pt';
+  if(raw.indexOf('ko') === 0) return 'ko';
+  if(raw.indexOf('th') === 0) return 'th';
+  if(raw.indexOf('id') === 0) return 'id';
+  if(raw.indexOf('tr') === 0) return 'tr';
+  if(raw.indexOf('es') === 0) return 'es';
+  if(raw.indexOf('ar') === 0) return 'ar';
+  if(raw.indexOf('vi') === 0) return 'vi';
+  if(raw.indexOf('ha') === 0) return 'ha';
+  return 'en';
+}
+function currentPageHeroLang(){
+  if(typeof currentLang === 'string' && currentLang) return normalizePageHeroLang(currentLang);
+  if(typeof document !== 'undefined' && document.documentElement && document.documentElement.lang) return normalizePageHeroLang(document.documentElement.lang);
+  return 'en';
+}
+function currentPageHeroRouteLang(){
+  if(typeof currentLang === 'string' && currentLang) return String(currentLang).toLowerCase();
+  if(typeof document !== 'undefined' && document.documentElement && document.documentElement.lang) return String(document.documentElement.lang).toLowerCase();
+  return currentPageHeroLang();
+}
+function pageHeroText(key){
+  const lang = currentPageHeroLang();
+  const pack = PAGE_HERO_UI[lang] || PAGE_HERO_UI.en;
+  return pack[key] || PAGE_HERO_UI.en[key] || key;
+}
+function escapePageHeroHtml(value){
+  return String(value == null ? '' : value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function getPageHeroBasePrefix(){
+  if(typeof window !== 'undefined' && typeof window.__CA_BASE_PREFIX__ === 'string' && window.__CA_BASE_PREFIX__) return window.__CA_BASE_PREFIX__;
+  if(typeof document !== 'undefined' && document.body && document.body.dataset && document.body.dataset.basePrefix) return document.body.dataset.basePrefix;
+  return './';
+}
+function toPageHeroIndexRoute(path){
+  if(typeof window !== 'undefined' && typeof window.__CA_TO_INDEX_ROUTE === 'function') return window.__CA_TO_INDEX_ROUTE(path);
+  const value = String(path || '');
+  if(!value) return 'index.html';
+  if(/index\.html(?:[?#].*)?$/i.test(value)) return value;
+  return /\/$/.test(value) ? (value + 'index.html') : (value + '/index.html');
+}
+function withPageHeroLang(route){
+  const lang = currentPageHeroRouteLang();
+  if(!lang) return route;
+  return route + (route.indexOf('?') === -1 ? '?lang=' : '&lang=') + encodeURIComponent(lang);
+}
+function getPageHeroPageRoute(page){
+  const base = getPageHeroBasePrefix();
+  if(page === 'home') return withPageHeroLang(toPageHeroIndexRoute(base));
+  return withPageHeroLang(toPageHeroIndexRoute(base + String(page || '').replace(/^\/+|\/+$/g,'') + '/'));
+}
+function getPageHeroLessonRoute(index){
+  const slug = PAGE_HERO_LESSON_SLUGS[index] || PAGE_HERO_LESSON_SLUGS[0];
+  return withPageHeroLang(toPageHeroIndexRoute(getPageHeroBasePrefix() + 'lesson/' + slug + '/'));
+}
+function getPageHeroChecklistRoute(slug){
+  return withPageHeroLang(toPageHeroIndexRoute(getPageHeroBasePrefix() + 'checklists/' + String(slug || '').replace(/^\/+|\/+$/g,'') + '/'));
+}
+function getPageHeroFreePdfRoute(){
+  const rawLang = currentPageHeroRouteLang();
+  const lang = currentPageHeroLang();
+  const file = PAGE_HERO_FREE_PDFS[rawLang] || PAGE_HERO_FREE_PDFS[lang] || PAGE_HERO_FREE_PDFS.en;
+  return getPageHeroBasePrefix() + file;
+}
+function getPageHeroIcon(iconKey){
+  switch(iconKey){
+    case 'glossary':
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2V19a1 1 0 0 1-1.6.8L13 17.5l-3.4 2.3A1 1 0 0 1 8 19V5.5"/><path d="M8 6h8"/><path d="M8 10h8"/><path d="M8 14h5"/></svg>';
+    case 'wallet':
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8.5A2.5 2.5 0 0 1 5.5 6H18a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5.5A2.5 2.5 0 0 1 3 15.5v-7Z"/><path d="M15 12h5"/><circle cx="15.5" cy="12" r=".9"/></svg>';
+    case 'transfer':
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h11"/><path d="m13 5 4 3-4 3"/><path d="M18 16H7"/><path d="m11 13-4 3 4 3"/></svg>';
+    case 'roles':
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="7" height="6" rx="1.5"/><rect x="13" y="5" width="7" height="6" rx="1.5"/><rect x="8.5" y="13" width="7" height="6" rx="1.5"/></svg>';
+    case 'real':
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18c2.5-5.5 6-8.5 10.5-9.2"/><path d="m14 6 3.5 2.8-3.5 2.7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="9" r="2"/></svg>';
+    case 'buy':
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="12" r="4.5"/><path d="M15.5 8.5h4.5v7h-4.5"/><path d="m16.5 12 1.6 1.6L21 10.7"/></svg>';
+    case 'safety':
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 19 6v5.4c0 4.1-2.6 7.9-7 9.1-4.4-1.2-7-5-7-9.1V6l7-2.5Z"/><path d="m9.2 12.2 1.9 1.9 3.7-4.1"/></svg>';
+    case 'faq':
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 9a2.5 2.5 0 1 1 4.2 1.8c-.9.8-1.7 1.3-1.7 2.7"/><circle cx="12" cy="17.2" r=".8"/><circle cx="12" cy="12" r="9"/></svg>';
+    case 'archive':
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h4v14H5z"/><path d="M10 5h4v14h-4z"/><path d="M15 7h4v12h-4z"/></svg>';
+    case 'updates':
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/><path d="M7 4 5.5 6"/><path d="M17 4 18.5 6"/></svg>';
+    case 'checklist':
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h10"/><path d="M9 12h10"/><path d="M9 18h10"/><path d="m4.5 6 1.5 1.5L8.5 5"/><path d="m4.5 12 1.5 1.5L8.5 11"/><path d="m4.5 18 1.5 1.5L8.5 17"/></svg>';
+    default:
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16"/><path d="M4 12h16"/></svg>';
+  }
+}
+function buildPageHeroAction(action, index){
+  if(!action || !action.label || !action.href) return '';
+  const classes = 'nav-action' + (index === 0 ? ' primary' : '');
+  const attrs = action.external ? ' target="_blank" rel="noopener noreferrer"' : '';
+  return '<a class="' + classes + '" href="' + escapePageHeroHtml(action.href) + '"' + attrs + '>' + escapePageHeroHtml(action.label) + '</a>';
+}
+function renderUnifiedPageHero(config){
+  if(!config) return '';
+  const tags = (config.tags || []).filter(Boolean);
+  const actions = (config.actions || []).filter(function(action){ return action && action.href && action.label; });
+  const eyebrow = config.eyebrow ? '<span class="page-hero-mini">' + escapePageHeroHtml(config.eyebrow) + '</span>' : '';
+  return ''
+    + '<div class="lc-header page-hero-shell" data-page-hero-tone="' + escapePageHeroHtml(config.tone || 'lesson') + '">'
+    +   '<div class="page-hero-ambient" aria-hidden="true"></div>'
+    +   '<div class="page-hero-grid">'
+    +     '<div class="page-hero-heading">'
+    +       '<span class="home-card-icon page-hero-icon" aria-hidden="true">' + getPageHeroIcon(config.iconKey || 'glossary') + '</span>'
+    +       '<div class="page-hero-copy">'
+    +         '<div class="page-hero-kicker"><span class="home-card-badge">' + escapePageHeroHtml(config.badge || '') + '</span>' + eyebrow + '</div>'
+    +         '<h1 class="lc-title">' + escapePageHeroHtml(config.title || '') + '</h1>'
+    +         '<p class="lc-intro">' + escapePageHeroHtml(config.intro || '') + '</p>'
+    +       '</div>'
+    +     '</div>'
+    +     (tags.length ? '<div class="page-hero-status-row">' + tags.map(function(tag){ return '<span class="home-card-status-chip">' + escapePageHeroHtml(tag) + '</span>'; }).join('') + '</div>' : '')
+    +     (actions.length ? '<div class="page-hero-actions">' + actions.map(buildPageHeroAction).join('') + '</div>' : '')
+    +   '</div>'
+    + '</div>';
+}
+function getStaticPageHeroConfig(kind, title, intro){
+  switch(kind){
+    case 'glossary':
+      return { tone:'glossary', iconKey:'glossary', badge:pageHeroText('typeGlossary'), title:title, intro:intro, tags:[pageHeroText('beginnerFriendly'), pageHeroText('quickReview')], actions:[{ label:t('nav.l1') || 'Blockchain', href:getPageHeroLessonRoute(0) }, { label:t('nav.safety') || 'Safety', href:getPageHeroPageRoute('safety') }] };
+    case 'sources':
+      return { tone:'archive', iconKey:'archive', badge:pageHeroText('typeArchive'), title:title, intro:intro, tags:[pageHeroText('worthSaving'), pageHeroText('goDeeper')], actions:[{ label:pageHeroText('quickReview'), href:'#sources-tier-quick' }, { label:pageHeroText('goDeeper'), href:'#sources-tier-deep' }] };
+    case 'faq':
+      return { tone:'faq', iconKey:'faq', badge:pageHeroText('typeFAQ'), title:title, intro:intro, tags:[pageHeroText('beginnerFriendly'), pageHeroText('revisitedOften')], actions:[{ label:t('nav.glossary') || 'Glossary', href:getPageHeroPageRoute('glossary') }, { label:t('nav.safety') || 'Safety', href:getPageHeroPageRoute('safety') }] };
+    case 'safety':
+      return { tone:'safety', iconKey:'safety', badge:pageHeroText('typeSafety'), title:title, intro:intro, tags:[pageHeroText('safetyEssential'), pageHeroText('checklistLinked')], actions:[{ label:pageHeroText('seedPhrase'), href:getPageHeroChecklistRoute('seed-phrase-safety') }, { label:pageHeroText('fakeWebsite'), href:getPageHeroChecklistRoute('fake-website-check') }] };
+    case 'updates':
+      return { tone:'updates', iconKey:'updates', badge:pageHeroText('typeUpdates'), title:title, intro:intro, tags:[pageHeroText('worthSaving'), pageHeroText('revisitedOften')], actions:[{ label:t('nav.sources') || 'Source Library', href:getPageHeroPageRoute('sources') }, { label:t('nav.home') || 'Home', href:getPageHeroPageRoute('home') }] };
+    case 'start':
+      return { tone:'lesson', iconKey:'glossary', badge:pageHeroText('typeGuide'), title:title, intro:intro, tags:[pageHeroText('beginnerFriendly'), pageHeroText('stepByStep')], actions:[{ label:t('nav.l1') || 'Blockchain', href:getPageHeroLessonRoute(0) }, { label:t('nav.glossary') || 'Glossary', href:getPageHeroPageRoute('glossary') }] };
+    default:
+      return { tone:'lesson', iconKey:'glossary', badge:title || '', title:title, intro:intro, tags:[], actions:[] };
+  }
+}
+function getLessonHeroConfig(index, lesson, totalLessons){
+  const base = { tone:'lesson', badge:pageHeroText('typeLesson'), eyebrow:(t('breadcrumb.prefix') || 'Lesson') + ' ' + (index + 1) + ' / ' + totalLessons, title:lesson.title, intro:lesson.intro, iconKey:'glossary', tags:[pageHeroText('beginnerFriendly')], actions:[] };
+  switch(index){
+    case 0:
+      base.iconKey = 'glossary';
+      base.tags = [pageHeroText('beginnerFriendly'), pageHeroText('stepByStep')];
+      base.actions = [{ label:t('nav.glossary') || 'Glossary', href:getPageHeroPageRoute('glossary') }, { label:t('nav.sources') || 'Source Library', href:getPageHeroPageRoute('sources') }];
+      break;
+    case 1:
+      base.iconKey = 'wallet';
+      base.tags = [pageHeroText('beginnerFriendly'), pageHeroText('safetyEssential')];
+      base.actions = [{ label:t('nav.glossary') || 'Glossary', href:getPageHeroPageRoute('glossary') }, { label:t('nav.safety') || 'Safety', href:getPageHeroPageRoute('safety') }];
+      break;
+    case 2:
+      base.iconKey = 'transfer';
+      base.tags = [pageHeroText('quickReview'), pageHeroText('checklistLinked')];
+      base.actions = [{ label:pageHeroText('beforeSend'), href:getPageHeroChecklistRoute('before-send') }, { label:t('nav.safety') || 'Safety', href:getPageHeroPageRoute('safety') }];
+      break;
+    case 3:
+      base.iconKey = 'roles';
+      base.tags = [pageHeroText('beginnerFriendly'), pageHeroText('worthSaving')];
+      base.actions = [{ label:t('nav.glossary') || 'Glossary', href:getPageHeroPageRoute('glossary') }, { label:t('nav.sources') || 'Source Library', href:getPageHeroPageRoute('sources') }];
+      break;
+    case 4:
+      base.iconKey = 'real';
+      base.tags = [pageHeroText('worthSaving'), pageHeroText('goDeeper')];
+      base.actions = [{ label:t('nav.sources') || 'Source Library', href:getPageHeroPageRoute('sources') }, { label:t('nav.safety') || 'Safety', href:getPageHeroPageRoute('safety') }];
+      break;
+    case 5:
+      base.iconKey = 'buy';
+      base.tags = [pageHeroText('beforeFirstBuy'), pageHeroText('checklistLinked')];
+      base.actions = [{ label:pageHeroText('beforeSend'), href:getPageHeroChecklistRoute('before-send') }, { label:pageHeroText('freePdf'), href:getPageHeroFreePdfRoute() }];
+      break;
+    case 6:
+      base.tone = 'safety';
+      base.iconKey = 'safety';
+      base.tags = [pageHeroText('safetyEssential'), pageHeroText('checklistLinked')];
+      base.actions = [{ label:pageHeroText('seedPhrase'), href:getPageHeroChecklistRoute('seed-phrase-safety') }, { label:pageHeroText('fakeWebsite'), href:getPageHeroChecklistRoute('fake-website-check') }];
+      break;
+    default:
+      base.actions = [{ label:t('nav.glossary') || 'Glossary', href:getPageHeroPageRoute('glossary') }];
+      break;
+  }
+  return base;
+}
+window.renderUnifiedPageHero = renderUnifiedPageHero;
+window.getStaticPageHeroConfig = getStaticPageHeroConfig;
 function renderGlossary(){
   const items = getGlossaryItems();
+  const hero = renderUnifiedPageHero(getStaticPageHeroConfig('glossary', t('glossary.title'), t('glossary.desc')));
   return `
-    <div class="lc-header">
-      <div class="lc-meta"><span class="meta-pill">G</span><span class="meta-cat">${t('nav.glossary')}</span></div>
-      <h1 class="lc-title">${t('glossary.title')}</h1>
-      <p class="lc-intro">${t('glossary.desc')}</p>
-    </div>
+    ${hero}
     <div class="glossary-grid">
       ${items.map(([term, body])=>`<div class="glossary-card"><div class="glossary-term">${term}</div><div class="glossary-meaning">${typeof body==='function' ? body(t) : body}</div></div>`).join('')}
     </div>`;
@@ -920,12 +1364,9 @@ function renderSources(){
     </div>`;
   }).join('');
 
+  const hero = renderUnifiedPageHero(getStaticPageHeroConfig('sources', t('sources.pageTitle'), t('sources.pageDesc')));
   return `
-    <div class="lc-header">
-      <div class="lc-meta"><span class="meta-pill">S</span><span class="meta-cat">${t('nav.sources')}</span></div>
-      <h1 class="lc-title">${t('sources.pageTitle')}</h1>
-      <p class="lc-intro">${t('sources.pageDesc')}</p>
-    </div>
+    ${hero}
     <div class="source-cats">${chipHtml}</div>
     ${sectionsHtml}`;
 }
@@ -3494,14 +3935,11 @@ function renderLesson(i){
       <li class="step-item"><div class="step-n">4</div><div><div class="step-title">Learn self-custody</div><div class="step-desc">Understand why many users later move assets into a wallet they control themselves.</div></div></li>
     </ul>` : '';
   const completeClass = completed.has(i) ? 'active' : '';
+  const hero = renderUnifiedPageHero(getLessonHeroConfig(i, lesson, totalLessons));
   return `
-    <div class="lc-header">
-      <div class="lc-meta"><span class="meta-pill">${t('breadcrumb.prefix')} ${i+1} / ${totalLessons}</span><span class="meta-cat">${lesson.cat}</span></div>
-      <h1 class="lc-title">${lesson.title}</h1>
-      <p class="lc-intro">${lesson.intro}</p>
-      <div class="callout info"><strong>${t('callout.quick')}:</strong> ${lesson.sections[0].ps[0]}</div>
-    </div>
+    ${hero}
     <div class="lesson-body">
+      <div class="callout info"><strong>${t('callout.quick')}:</strong> ${lesson.sections[0].ps[0]}</div>
       ${visualForLesson(i)}
       ${sectionHtml}
       ${defs}

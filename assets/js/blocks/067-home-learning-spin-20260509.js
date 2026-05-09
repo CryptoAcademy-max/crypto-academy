@@ -862,6 +862,23 @@
     if(!block) return;
     bindSpinSection(block);
 
+    if(!hero.querySelector('.home-fast-actions-block') && typeof window.buildHomeActionCardsHtmlFinal === 'function'){
+      var actionHost = document.createElement('div');
+      actionHost.innerHTML = window.buildHomeActionCardsHtmlFinal();
+      var actionBlock = actionHost.firstElementChild;
+      if(actionBlock){
+        var actionAnchor = hero.querySelector('.home-learning-spin-block')
+          || hero.querySelector('.home-visitor-paths-block')
+          || hero.querySelector('.home-start-three-block')
+          || hero.querySelector('.home-desc');
+        if(actionAnchor){
+          actionAnchor.insertAdjacentElement('afterend', actionBlock);
+        } else {
+          hero.appendChild(actionBlock);
+        }
+      }
+    }
+
     if(state.spinning && state.currentCandidate){
       renderSpinResult(block, state.currentCandidate, true);
       var liveButton = block.querySelector('[data-spin-trigger]');

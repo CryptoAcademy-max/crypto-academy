@@ -800,6 +800,489 @@
     return getStartLocalePack();
   }
 
+  function getVisitorPathBadgePack(){
+    var lang = getCurrentLang();
+    var packs = {
+      en:{ beginners:'Beginner', 'first-buy':'First Buy', safety:'Safety', 'quick-checks':'Fast Path' },
+      ko:{ beginners:'입문용', 'first-buy':'첫 구매', safety:'보안', 'quick-checks':'빠른 확인' },
+      th:{ beginners:'เริ่มต้น', 'first-buy':'ซื้อครั้งแรก', safety:'ความปลอดภัย', 'quick-checks':'เช็กเร็ว' },
+      id:{ beginners:'Pemula', 'first-buy':'Beli Pertama', safety:'Keamanan', 'quick-checks':'Cek Cepat' },
+      pt:{ beginners:'Iniciante', 'first-buy':'Primeira Compra', safety:'Seguranca', 'quick-checks':'Rota Rapida' },
+      tr:{ beginners:'Baslangic', 'first-buy':'Ilk Alim', safety:'Guvenlik', 'quick-checks':'Hizli Kontrol' },
+      es:{ beginners:'Principiante', 'first-buy':'Primera Compra', safety:'Seguridad', 'quick-checks':'Revision Rapida' },
+      ar:{ beginners:'للمبتدئين', 'first-buy':'الشراء الأول', safety:'الأمان', 'quick-checks':'مراجعة سريعة' },
+      vi:{ beginners:'Nhap Mon', 'first-buy':'Lan Mua Dau', safety:'An Toan', 'quick-checks':'Kiem Tra Nhanh' },
+      ha:{ beginners:'Farko', 'first-buy':'Sayan Farko', safety:'Tsaro', 'quick-checks':'Duba Da Sauri' }
+    };
+    packs.br = packs.pt;
+    return packs[lang] || packs.en;
+  }
+
+  function getVisitorPathIconSvg(slug){
+    if(slug === 'beginners'){
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"></circle><path d="M12 2v3"></path><path d="M12 19v3"></path><path d="M2 12h3"></path><path d="M19 12h3"></path><path d="M12 12l4-3"></path></svg>';
+    }
+    if(slug === 'first-buy'){
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18"></path><path d="M5 7l1.2 10.2A2 2 0 0 0 8.2 19h7.1a2 2 0 0 0 2-1.8L18.5 7"></path><path d="M9 11h6"></path><path d="M12 9v4"></path></svg>';
+    }
+    if(slug === 'safety'){
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3z"></path><path d="M12 8v5"></path><path d="M12 16h.01"></path></svg>';
+    }
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L4 14h6l-1 7 9-11h-6l1-7z"></path></svg>';
+  }
+
+  function getHomeCardStateLocalePack(){
+    var lang = getCurrentLang();
+    var packs = {
+      en:{
+        labels:{
+          recommended:'Recommended',
+          quickStart:'Quick Start',
+          goodToday:'Good for Today',
+          revisitedOften:'Revisited Often',
+          checklistLinked:'Checklist Linked',
+          pdfAvailable:'PDF Available',
+          ebookConnected:'eBook Connected',
+          safetyEssential:'Safety Essential'
+        },
+        hints:{
+          visitorBeginners:'Glossary, basics, and wallets in one path.',
+          visitorFirstBuy:'Leads into the buy flow and a send checklist.',
+          visitorSafety:'Connects safety basics with scam checks.',
+          visitorQuick:'Fast route to checklists and short summary cards.',
+          actionSend:'Can be reviewed again with a free PDF.',
+          actionSeed:'Leads into a stronger safety checklist.',
+          actionSite:'Useful right before opening a login page.',
+          actionBuy:'Pairs well with a deeper eBook review.'
+        }
+      },
+      ko:{
+        labels:{
+          recommended:'추천',
+          quickStart:'빠른 시작',
+          goodToday:'오늘 보기 좋음',
+          revisitedOften:'자주 다시 봄',
+          checklistLinked:'체크리스트 연결',
+          pdfAvailable:'PDF 있음',
+          ebookConnected:'전자책 연계',
+          safetyEssential:'보안 필수'
+        },
+        hints:{
+          visitorBeginners:'용어, 기초, 지갑 흐름을 한 번에 이어서 볼 수 있습니다.',
+          visitorFirstBuy:'구매 흐름과 전송 전 체크리스트로 바로 이어집니다.',
+          visitorSafety:'보안 기본과 사기 점검 흐름을 함께 연결합니다.',
+          visitorQuick:'체크리스트와 짧은 요약 카드로 빠르게 이어집니다.',
+          actionSend:'무료 PDF와 함께 다시 복습하기 좋습니다.',
+          actionSeed:'더 강한 보안 체크리스트로 바로 이어집니다.',
+          actionSite:'로그인 전에 짧게 다시 보기 좋은 카드입니다.',
+          actionBuy:'더 정리된 전자책 복습과 함께 보기 좋습니다.'
+        }
+      },
+      th:{
+        labels:{
+          recommended:'แนะนำ',
+          quickStart:'เริ่มเร็ว',
+          goodToday:'เหมาะกับวันนี้',
+          revisitedOften:'กลับมาดูบ่อย',
+          checklistLinked:'มีลิงก์เช็กลิสต์',
+          pdfAvailable:'มี PDF',
+          ebookConnected:'เชื่อมกับ eBook',
+          safetyEssential:'สำคัญด้านความปลอดภัย'
+        },
+        hints:{
+          visitorBeginners:'รวมคำศัพท์ พื้นฐาน และกระเป๋าเงินไว้ในเส้นทางเดียว',
+          visitorFirstBuy:'เชื่อมต่อไปยังขั้นตอนซื้อและเช็กลิสต์ก่อนโอน',
+          visitorSafety:'เชื่อมพื้นฐานความปลอดภัยกับการเช็กเรื่องหลอกลวง',
+          visitorQuick:'ไปยังเช็กลิสต์และการ์ดสรุปแบบสั้นได้ทันที',
+          actionSend:'กลับมาทบทวนอีกครั้งคู่กับ PDF ฟรีได้',
+          actionSeed:'เชื่อมต่อไปยังเช็กลิสต์ความปลอดภัยที่เข้มขึ้น',
+          actionSite:'เหมาะกับการดูสั้น ๆ ก่อนเปิดหน้าเข้าสู่ระบบ',
+          actionBuy:'ดูต่อกับการทบทวน eBook ที่เป็นระบบมากขึ้นได้'
+        }
+      },
+      id:{
+        labels:{
+          recommended:'Rekomendasi',
+          quickStart:'Mulai Cepat',
+          goodToday:'Cocok Hari Ini',
+          revisitedOften:'Sering Dilihat Lagi',
+          checklistLinked:'Terhubung ke Checklist',
+          pdfAvailable:'Ada PDF',
+          ebookConnected:'Terhubung ke eBook',
+          safetyEssential:'Penting untuk Keamanan'
+        },
+        hints:{
+          visitorBeginners:'Glossary, dasar, dan wallet tersusun dalam satu jalur.',
+          visitorFirstBuy:'Langsung terhubung ke alur beli dan checklist sebelum kirim.',
+          visitorSafety:'Menghubungkan dasar safety dengan cek scam.',
+          visitorQuick:'Rute cepat ke checklist dan kartu ringkas.',
+          actionSend:'Bisa ditinjau lagi bersama PDF gratis.',
+          actionSeed:'Terhubung langsung ke checklist safety yang lebih kuat.',
+          actionSite:'Cocok dilihat tepat sebelum membuka halaman login.',
+          actionBuy:'Cocok dipasangkan dengan review eBook yang lebih dalam.'
+        }
+      },
+      pt:{
+        labels:{
+          recommended:'Recomendado',
+          quickStart:'Inicio Rapido',
+          goodToday:'Bom para Hoje',
+          revisitedOften:'Revisado com Frequencia',
+          checklistLinked:'Ligado ao Checklist',
+          pdfAvailable:'PDF Disponivel',
+          ebookConnected:'Conectado ao eBook',
+          safetyEssential:'Essencial de Seguranca'
+        },
+        hints:{
+          visitorBeginners:'Glossario, bases e wallet em um unico fluxo.',
+          visitorFirstBuy:'Leva ao fluxo de compra e ao checklist antes de enviar.',
+          visitorSafety:'Liga as bases de seguranca com checks de golpe.',
+          visitorQuick:'Rota rapida para checklists e cartoes de resumo.',
+          actionSend:'Pode ser revisto depois com um PDF gratuito.',
+          actionSeed:'Leva para um checklist de seguranca mais forte.',
+          actionSite:'Util antes de abrir uma pagina de login.',
+          actionBuy:'Combina bem com uma revisao mais profunda no eBook.'
+        }
+      },
+      tr:{
+        labels:{
+          recommended:'Onerilen',
+          quickStart:'Hizli Baslangic',
+          goodToday:'Bugun Iyi',
+          revisitedOften:'Sik Donulen',
+          checklistLinked:'Checklist Bagli',
+          pdfAvailable:'PDF Var',
+          ebookConnected:'eBook Baglantili',
+          safetyEssential:'Guvenlik Onemli'
+        },
+        hints:{
+          visitorBeginners:'Terimler, temel bilgiler ve wallet tek akista.',
+          visitorFirstBuy:'Alim akisina ve gonderim checklistine baglanir.',
+          visitorSafety:'Guvenlik temellerini scam kontrolleriyle birlestirir.',
+          visitorQuick:'Checklist ve kisa ozet kartlarina hizli rota.',
+          actionSend:'Ucretsiz PDF ile yeniden gozden gecirilebilir.',
+          actionSeed:'Daha guclu bir guvenlik checklistine baglanir.',
+          actionSite:'Giris sayfasi acilmadan once faydalidir.',
+          actionBuy:'Daha derin eBook gozden gecirmesiyle uyumludur.'
+        }
+      },
+      es:{
+        labels:{
+          recommended:'Recomendado',
+          quickStart:'Inicio Rapido',
+          goodToday:'Bueno para Hoy',
+          revisitedOften:'Muy Revisitado',
+          checklistLinked:'Con Checklist',
+          pdfAvailable:'PDF Disponible',
+          ebookConnected:'Con eBook',
+          safetyEssential:'Seguridad Esencial'
+        },
+        hints:{
+          visitorBeginners:'Glosario, bases y wallet en una sola ruta.',
+          visitorFirstBuy:'Conecta con el flujo de compra y el checklist antes de enviar.',
+          visitorSafety:'Une las bases de seguridad con checks de scam.',
+          visitorQuick:'Ruta rapida hacia checklist y tarjetas de resumen.',
+          actionSend:'Se puede revisar otra vez con un PDF gratuito.',
+          actionSeed:'Conecta con un checklist de seguridad mas fuerte.',
+          actionSite:'Util justo antes de abrir una pagina de inicio de sesion.',
+          actionBuy:'Encaja bien con una revision mas profunda en el eBook.'
+        }
+      },
+      ar:{
+        labels:{
+          recommended:'موصى به',
+          quickStart:'بداية سريعة',
+          goodToday:'مناسب لليوم',
+          revisitedOften:'يراجع كثيرا',
+          checklistLinked:'مرتبط بقائمة تحقق',
+          pdfAvailable:'يوجد PDF',
+          ebookConnected:'مرتبط بالكتاب الإلكتروني',
+          safetyEssential:'أساسي للأمان'
+        },
+        hints:{
+          visitorBeginners:'يمكنك متابعة المصطلحات والأساسيات والمحفظة في مسار واحد.',
+          visitorFirstBuy:'ينتقل مباشرة إلى مسار الشراء وقائمة التحقق قبل الإرسال.',
+          visitorSafety:'يربط أساسيات الأمان مع فحوصات الاحتيال.',
+          visitorQuick:'مسار سريع إلى قوائم التحقق وبطاقات الملخص القصير.',
+          actionSend:'يمكن مراجعته مرة أخرى مع ملف PDF مجاني.',
+          actionSeed:'ينتقل إلى قائمة تحقق أمنية أقوى.',
+          actionSite:'مفيد قبل فتح صفحة تسجيل الدخول مباشرة.',
+          actionBuy:'يناسب المراجعة الأعمق عبر الكتاب الإلكتروني.'
+        }
+      },
+      vi:{
+        labels:{
+          recommended:'Nen Xem',
+          quickStart:'Bat Dau Nhanh',
+          goodToday:'Hop Hom Nay',
+          revisitedOften:'Hay Xem Lai',
+          checklistLinked:'Co Checklist',
+          pdfAvailable:'Co PDF',
+          ebookConnected:'Lien Ket eBook',
+          safetyEssential:'Can Thiet Ve An Toan'
+        },
+        hints:{
+          visitorBeginners:'Glossary, phan co ban va wallet nam trong mot luong duy nhat.',
+          visitorFirstBuy:'Dan thang vao luong mua va checklist truoc khi gui.',
+          visitorSafety:'Noi co ban ve an toan voi cac kiem tra scam.',
+          visitorQuick:'Duong nhanh toi checklist va the tom tat ngan.',
+          actionSend:'Co the xem lai cung voi PDF mien phi.',
+          actionSeed:'Dan toi checklist an toan manh hon.',
+          actionSite:'Phu hop de xem nhanh truoc khi mo trang dang nhap.',
+          actionBuy:'Hop voi mot luong review sau hon trong eBook.'
+        }
+      },
+      ha:{
+        labels:{
+          recommended:'An Ba da Shawara',
+          quickStart:'Fara da Sauri',
+          goodToday:'Ya Dace da Yau',
+          revisitedOften:'Ana Komawa Sau da Yawa',
+          checklistLinked:'Yana da Checklist',
+          pdfAvailable:'Akwai PDF',
+          ebookConnected:'Yana da eBook',
+          safetyEssential:'Muhimmiyar Tsaro'
+        },
+        hints:{
+          visitorBeginners:'Glossary, tushe da wallet suna cikin hanya daya.',
+          visitorFirstBuy:'Yana kaiwa zuwa tsarin saye da checklist kafin tura kudi.',
+          visitorSafety:'Yana hada tushen tsaro da duban scam.',
+          visitorQuick:'Hanya mai sauri zuwa checklist da katunan takaitawa.',
+          actionSend:'Za a iya sake dubawa tare da PDF na kyauta.',
+          actionSeed:'Yana kaiwa zuwa checklist na tsaro mafi karfi.',
+          actionSite:'Yana da amfani kafin bude shafin shiga.',
+          actionBuy:'Yana dacewa da zurfin bita ta eBook.'
+        }
+      }
+    };
+    packs.br = packs.pt;
+    return packs[lang] || packs.en;
+  }
+
+  function buildHomeCardStatusRow(keys){
+    var pack = getHomeCardStateLocalePack();
+    var labels = pack.labels || {};
+    var list = Array.isArray(keys) ? keys : [];
+    if(!list.length) return '';
+    return '<div class="home-card-status-row">' + list.map(function(key){
+      return '<span class="home-card-status-chip" data-status-key="' + escapeHtml(key) + '">' + escapeHtml(labels[key] || key) + '</span>';
+    }).join('') + '</div>';
+  }
+
+  function buildHomeCardHint(text){
+    if(!text) return '';
+    return '<div class="home-card-hint">' + escapeHtml(text) + '</div>';
+  }
+
+  function getVisitorPathStateMeta(slug){
+    var hints = getHomeCardStateLocalePack().hints || {};
+    var map = {
+      beginners:{ states:['recommended','quickStart'], hint:hints.visitorBeginners || '' },
+      'first-buy':{ states:['goodToday','checklistLinked'], hint:hints.visitorFirstBuy || '' },
+      safety:{ states:['safetyEssential','revisitedOften'], hint:hints.visitorSafety || '' },
+      'quick-checks':{ states:['quickStart','revisitedOften'], hint:hints.visitorQuick || '' }
+    };
+    return map[slug] || { states:[], hint:'' };
+  }
+
+  function getQuickActionStateMeta(key){
+    var hints = getHomeCardStateLocalePack().hints || {};
+    var map = {
+      send:{ states:['revisitedOften','pdfAvailable'], hint:hints.actionSend || '' },
+      seed:{ states:['safetyEssential','checklistLinked'], hint:hints.actionSeed || '' },
+      site:{ states:['safetyEssential','goodToday'], hint:hints.actionSite || '' },
+      buy:{ states:['goodToday','ebookConnected'], hint:hints.actionBuy || '' }
+    };
+    return map[key] || { states:[], hint:'' };
+  }
+
+  window.__CA_HOME_CARD_STATE_PACK__ = getHomeCardStateLocalePack;
+  window.__CA_HOME_QUICK_ACTION_STATE_META__ = getQuickActionStateMeta;
+
+  function getQuickActionLocalePack(){
+    var lang = getCurrentLang();
+    var packs = {
+      en:{
+        title:'30-Second Action Cards',
+        body:'Short practical checks for the moments when you need quick answers.',
+        button:'Quick Check',
+        badges:{ send:'Must Review', seed:'Seed Safety', site:'Site Check', buy:'First Buy' },
+        cards:[
+          { tag:'SEND', key:'send', href:getLessonRoute(2), title:'5-Second Check Before Sending', points:['Recheck the wallet address','Recheck the network','Use a small test first if possible'] },
+          { tag:'SEED', key:'seed', href:getLessonRoute(6), title:'Seed Phrase Never-Do List', points:['Never share it with anyone','Never send it in a DM','Be suspicious if a site asks for it'] },
+          { tag:'SITE', key:'site', href:getPageRoute('safety'), title:'Quick Fake Website Check', points:['Check the domain in the address bar','Use bookmarked official links first','Do not open ad or DM links right away'] },
+          { tag:'BUY', key:'buy', href:getLessonRoute(5), title:'Final Check Before Your First Buy', points:['Confirm the platform first','Check the fees before buying','Think about where you will store it'] }
+        ]
+      },
+      ko:{
+        title:'30초 해결 카드',
+        body:'급하게 확인해야 할 핵심만 짧게 정리했습니다.',
+        button:'빠른 확인',
+        badges:{ send:'꼭 확인', seed:'시드 보안', site:'사이트 확인', buy:'첫 구매' },
+        cards:[
+          { tag:'SEND', key:'send', href:getLessonRoute(2), title:'전송 전 5초 체크', points:['주소 다시 확인','네트워크 다시 확인','가능하면 소액 테스트 먼저'] },
+          { tag:'SEED', key:'seed', href:getLessonRoute(6), title:'시드 문구 절대 금지', points:['공유하지 않기','DM으로 보내지 않기','입력 요구 사이트 의심하기'] },
+          { tag:'SITE', key:'site', href:getPageRoute('safety'), title:'가짜 사이트 빠른 확인', points:['주소창 도메인 확인','북마크한 공식 링크 우선','광고나 DM 링크 바로 누르지 않기'] },
+          { tag:'BUY', key:'buy', href:getLessonRoute(5), title:'첫 구매 전 마지막 확인', points:['플랫폼 확인','수수료 확인','보관 방식 생각하기'] }
+        ]
+      },
+      th:{
+        title:'การ์ดเช็กเร็ว 30 วินาที',
+        body:'สรุปสิ่งสำคัญแบบสั้น ๆ สำหรับเวลาที่ต้องการคำตอบเร็ว',
+        button:'เช็กเร็ว',
+        badges:{ send:'ต้องเช็ก', seed:'ความปลอดภัย Seed', site:'ตรวจเว็บไซต์', buy:'ซื้อครั้งแรก' },
+        cards:[
+          { tag:'SEND', key:'send', href:getLessonRoute(2), title:'เช็ก 5 วินาทีก่อนโอน', points:['เช็กที่อยู่อีกครั้ง','เช็ก network อีกครั้ง','ถ้าได้ให้โอนทดสอบจำนวนน้อยก่อน'] },
+          { tag:'SEED', key:'seed', href:getLessonRoute(6), title:'สิ่งที่ห้ามทำกับ Seed Phrase', points:['อย่าแชร์ให้ใคร','อย่าส่งทาง DM','ถ้าเว็บขอให้กรอกต้องสงสัยไว้ก่อน'] },
+          { tag:'SITE', key:'site', href:getPageRoute('safety'), title:'เช็กเว็บไซต์ปลอมแบบเร็ว', points:['ดูโดเมนในแถบที่อยู่','ใช้ลิงก์ทางการที่บันทึกไว้ก่อน','อย่ากดลิงก์โฆษณาหรือ DM ทันที'] },
+          { tag:'BUY', key:'buy', href:getLessonRoute(5), title:'เช็กสุดท้ายก่อนซื้อครั้งแรก', points:['ยืนยันแพลตฟอร์มก่อน','เช็กค่าธรรมเนียมก่อนซื้อ','คิดเรื่องการเก็บรักษาไว้ก่อน'] }
+        ]
+      },
+      id:{
+        title:'Kartu Aksi 30 Detik',
+        body:'Pemeriksaan singkat untuk saat Anda butuh jawaban cepat.',
+        button:'Cek Cepat',
+        badges:{ send:'Wajib Cek', seed:'Seed Safety', site:'Cek Situs', buy:'Beli Pertama' },
+        cards:[
+          { tag:'SEND', key:'send', href:getLessonRoute(2), title:'Cek 5 Detik Sebelum Mengirim', points:['Periksa lagi alamat wallet','Periksa lagi network','Kirim test kecil dulu jika memungkinkan'] },
+          { tag:'SEED', key:'seed', href:getLessonRoute(6), title:'Daftar Larangan Seed Phrase', points:['Jangan bagikan ke siapa pun','Jangan kirim lewat DM','Curigai situs yang memintanya'] },
+          { tag:'SITE', key:'site', href:getPageRoute('safety'), title:'Cek Cepat Situs Palsu', points:['Periksa domain di address bar','Gunakan link resmi yang disimpan','Jangan langsung buka link iklan atau DM'] },
+          { tag:'BUY', key:'buy', href:getLessonRoute(5), title:'Cek Terakhir Sebelum Pembelian Pertama', points:['Pastikan platformnya dulu','Periksa biaya sebelum membeli','Pikirkan tempat penyimpanannya'] }
+        ]
+      },
+      pt:{
+        title:'Cartoes de Acao em 30 Segundos',
+        body:'Checks praticos e curtos para quando voce precisa de uma resposta rapida.',
+        button:'Cheque Rapido',
+        badges:{ send:'Revisao', seed:'Seed Segura', site:'Checar Site', buy:'Primeira Compra' },
+        cards:[
+          { tag:'SEND', key:'send', href:getLessonRoute(2), title:'Check de 5 Segundos Antes de Enviar', points:['Revise o endereco da wallet','Revise a network','Use um pequeno teste antes, se possivel'] },
+          { tag:'SEED', key:'seed', href:getLessonRoute(6), title:'O Que Nunca Fazer com a Seed Phrase', points:['Nao compartilhe com ninguem','Nao envie por DM','Desconfie de sites que a pedem'] },
+          { tag:'SITE', key:'site', href:getPageRoute('safety'), title:'Check Rapido de Site Falso', points:['Confira o dominio na barra de endereco','Use primeiro links oficiais salvos','Nao abra links de anuncio ou DM de imediato'] },
+          { tag:'BUY', key:'buy', href:getLessonRoute(5), title:'Check Final Antes da Primeira Compra', points:['Confirme a plataforma','Cheque as taxas antes de comprar','Pense em como vai guardar'] }
+        ]
+      },
+      tr:{
+        title:'30 Saniyelik Aksiyon Kartlari',
+        body:'Hizli bir cevaba ihtiyaciniz oldugunda kisa pratik kontroller.',
+        button:'Hizli Kontrol',
+        badges:{ send:'Kontrol Et', seed:'Seed Guvenligi', site:'Site Kontrol', buy:'Ilk Alim' },
+        cards:[
+          { tag:'SEND', key:'send', href:getLessonRoute(2), title:'Gondermeden Once 5 Saniyelik Kontrol', points:['Wallet adresini yeniden kontrol edin','Networku yeniden kontrol edin','Mumkunse once kucuk bir test yapin'] },
+          { tag:'SEED', key:'seed', href:getLessonRoute(6), title:'Seed Phrase Icin Asla Yapma Listesi', points:['Kimseyle paylasmayin','DM ile gondermeyin','Bir site isterse suphelenin'] },
+          { tag:'SITE', key:'site', href:getPageRoute('safety'), title:'Sahte Site Icin Hizli Kontrol', points:['Adres cubugundaki domaine bakin','Kayitli resmi linkleri once kullanin','Reklam veya DM linklerini hemen acmayin'] },
+          { tag:'BUY', key:'buy', href:getLessonRoute(5), title:'Ilk Alimdan Once Son Kontrol', points:['Platformu once dogrulayin','Alimdan once ucretleri kontrol edin','Nerede saklayacaginizi dusunun'] }
+        ]
+      },
+      es:{
+        title:'Tarjetas de Accion de 30 Segundos',
+        body:'Revisiones cortas para cuando necesitas respuestas rapidas.',
+        button:'Revision Rapida',
+        badges:{ send:'Revisar', seed:'Seed Segura', site:'Ver Sitio', buy:'Primera Compra' },
+        cards:[
+          { tag:'SEND', key:'send', href:getLessonRoute(2), title:'Check de 5 Segundos Antes de Enviar', points:['Vuelve a revisar la direccion de la wallet','Vuelve a revisar la network','Haz primero una prueba pequena si es posible'] },
+          { tag:'SEED', key:'seed', href:getLessonRoute(6), title:'Lista de Lo Que Nunca Hacer con la Seed Phrase', points:['No la compartas con nadie','No la envies por DM','Sospecha si un sitio la pide'] },
+          { tag:'SITE', key:'site', href:getPageRoute('safety'), title:'Revision Rapida de Sitio Falso', points:['Comprueba el dominio en la barra','Usa primero enlaces oficiales guardados','No abras enseguida enlaces de anuncios o DM'] },
+          { tag:'BUY', key:'buy', href:getLessonRoute(5), title:'Revision Final Antes de Tu Primera Compra', points:['Confirma primero la plataforma','Revisa las comisiones antes de comprar','Piensa donde lo vas a guardar'] }
+        ]
+      },
+      ar:{
+        title:'بطاقات مراجعة 30 ثانية',
+        body:'مراجعات قصيرة للحظات التي تحتاج فيها إجابة سريعة.',
+        button:'فحص سريع',
+        badges:{ send:'مهم', seed:'أمان Seed', site:'فحص الموقع', buy:'الشراء الأول' },
+        cards:[
+          { tag:'SEND', key:'send', href:getLessonRoute(2), title:'فحص 5 ثوان قبل الارسال', points:['راجع عنوان wallet مرة اخرى','راجع network مرة اخرى','ارسل مبلغا صغيرا للتجربة اذا امكن'] },
+          { tag:'SEED', key:'seed', href:getLessonRoute(6), title:'ما لا يجب فعله مع Seed Phrase', points:['لا تشاركها مع احد','لا ترسلها في DM','اشك في اي موقع يطلبها'] },
+          { tag:'SITE', key:'site', href:getPageRoute('safety'), title:'فحص سريع للموقع المزيف', points:['تحقق من الدومين في شريط العنوان','استخدم الروابط الرسمية المحفوظة اولا','لا تفتح روابط الاعلان او DM مباشرة'] },
+          { tag:'BUY', key:'buy', href:getLessonRoute(5), title:'الفحص الاخير قبل اول شراء', points:['اكد المنصة اولا','راجع الرسوم قبل الشراء','فكر اين ستحتفظ بها'] }
+        ]
+      },
+      vi:{
+        title:'The Hanh Dong 30 Giay',
+        body:'Kiem tra ngan cho nhung luc ban can cau tra loi nhanh.',
+        button:'Kiem Tra Nhanh',
+        badges:{ send:'Can Xem', seed:'Seed An Toan', site:'Kiem Tra Site', buy:'Lan Mua Dau' },
+        cards:[
+          { tag:'SEND', key:'send', href:getLessonRoute(2), title:'Kiem Tra 5 Giay Truoc Khi Gui', points:['Kiem tra lai dia chi wallet','Kiem tra lai network','Neu co the hay gui mot khoan test nho truoc'] },
+          { tag:'SEED', key:'seed', href:getLessonRoute(6), title:'Nhung Dieu Tuyet Doi Khong Lam Voi Seed Phrase', points:['Khong chia se cho ai','Khong gui qua DM','Hay nghi ngo neu co website yeu cau'] },
+          { tag:'SITE', key:'site', href:getPageRoute('safety'), title:'Kiem Tra Nhanh Trang Web Gia', points:['Kiem tra domain tren thanh dia chi','Dung lien ket chinh thuc da luu truoc','Khong mo ngay link quang cao hoac DM'] },
+          { tag:'BUY', key:'buy', href:getLessonRoute(5), title:'Kiem Tra Cuoi Cung Truoc Lan Mua Dau', points:['Xac nhan platform truoc','Kiem tra phi truoc khi mua','Nghi truoc ve cach luu tru'] }
+        ]
+      },
+      ha:{
+        title:'Katunan Aiki na Sakan 30',
+        body:'Takaitattun dubawa idan kana bukatar amsa cikin sauri.',
+        button:'Duba Da Sauri',
+        badges:{ send:'A Duba', seed:'Tsaron Seed', site:'Duba Site', buy:'Sayan Farko' },
+        cards:[
+          { tag:'SEND', key:'send', href:getLessonRoute(2), title:'Dubawar Sakan 5 Kafin Tura Kudi', points:['Sake duba adireshin wallet','Sake duba network','Idan zai yiwu fara da karamin test'] },
+          { tag:'SEED', key:'seed', href:getLessonRoute(6), title:'Abin da Kada a Yi da Seed Phrase', points:['Kada ka raba shi da kowa','Kada ka tura ta DM','Ka yi zargi idan wani site ya nema'] },
+          { tag:'SITE', key:'site', href:getPageRoute('safety'), title:'Duban Gaggawa na Shafin Bogi', points:['Duba domain a address bar','Yi amfani da official links da ka ajiye','Kada ka bude link na talla ko DM nan take'] },
+          { tag:'BUY', key:'buy', href:getLessonRoute(5), title:'Dubawa Ta Karshe Kafin Sayen Farko', points:['Tabbatar da platform da farko','Duba kudin caji kafin saye','Ka yi tunanin yadda za ka ajiye shi'] }
+        ]
+      }
+    };
+    packs.br = packs.pt;
+    return packs[lang] || packs.en;
+  }
+
+  function getQuickActionIconSvg(key){
+    if(key === 'send'){
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h11"></path><path d="M12 5l7 7-7 7"></path><path d="M5 7v10"></path></svg>';
+    }
+    if(key === 'seed'){
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a4 4 0 0 1 4 4v2h1a2 2 0 0 1 2 2v7H5v-7a2 2 0 0 1 2-2h1V7a4 4 0 0 1 4-4z"></path><path d="M9 18l6-6"></path></svg>';
+    }
+    if(key === 'site'){
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M7 9h10"></path><path d="M8 13l2 2 4-4"></path></svg>';
+    }
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"></circle><path d="M12 8v4l3 2"></path></svg>';
+  }
+
+  function buildHomeQuickActionsHtml(){
+    var pack = getQuickActionLocalePack();
+    var cards = Array.isArray(pack.cards) ? pack.cards : [];
+    var html = ''
+      + '<section id="' + HOME_SECTION_IDS.quickActions + '" class="home-fast-actions-block home-action-cards-block">'
+      +   '<div class="home-action-cards-title">' + escapeHtml(pack.title || '30-Second Action Cards') + '</div>'
+      +   '<div class="home-action-cards-body">' + escapeHtml(pack.body || '') + '</div>'
+      +   '<div class="home-share-summary-grid">';
+    for(var i = 0; i < cards.length; i++){
+      var card = cards[i] || {};
+      var tone = card.key || 'send';
+      var badge = pack.badges && pack.badges[tone] ? pack.badges[tone] : 'Quick Check';
+      var stateMeta = getQuickActionStateMeta(tone);
+      html += ''
+        + '<a class="home-share-summary-card home-action-card" data-card-tone="' + escapeHtml(tone) + '" data-home-track="home.quickcards.' + escapeHtml(tone) + '" data-home-track-label="' + escapeHtml('30-second ' + tone) + '" href="' + escapeHtml(card.href || '#') + '">'
+        +   '<div class="home-card-visual-row">'
+        +     '<span class="home-card-icon" aria-hidden="true">' + getQuickActionIconSvg(tone) + '</span>'
+        +     '<span class="home-situation-tag">' + escapeHtml(card.tag || 'GO') + '</span>'
+        +     '<span class="home-card-badge">' + escapeHtml(badge) + '</span>'
+        +   '</div>'
+        +   '<div class="home-card-copy">'
+        +     '<div class="home-share-summary-title home-action-card-title">' + escapeHtml(card.title || '') + '</div>'
+        +     buildHomeCardStatusRow(stateMeta.states)
+        +     '<ul class="home-action-card-list">';
+      var points = Array.isArray(card.points) ? card.points : [];
+      for(var j = 0; j < points.length; j++){
+        html += '<li>' + escapeHtml(points[j]) + '</li>';
+      }
+      html += ''
+        +     '</ul>'
+        +     buildHomeCardHint(stateMeta.hint)
+        +   '</div>'
+        +   '<div class="home-card-footer">'
+        +     '<span class="home-visitor-path-cta home-card-footer-cta">' + escapeHtml(pack.button || 'Quick Check') + '</span>'
+        +   '</div>'
+        + '</a>';
+    }
+    html += '</div></section>';
+    return html;
+  }
+
+  window.buildHomeActionCardsHtmlFinal = buildHomeQuickActionsHtml;
+
   function getItemConfig(key){
     var pack = getPack();
     var labels = pack.labels;
@@ -824,6 +1307,7 @@
 
   function buildHomeVisitorPathsHtml(){
     var pack = getPack();
+    var badgePack = getVisitorPathBadgePack();
     var slugs = ['beginners','first-buy','safety','quick-checks'];
     var trackLabels = {
       beginners:'Visitor path beginners',
@@ -838,11 +1322,24 @@
       +   '<div class="home-visitor-paths-grid">'
       +     slugs.map(function(slug){
               var card = pack.cards[slug];
+              var badge = badgePack[slug] || badgePack.beginners || 'Beginner';
+              var tone = slug === 'beginners' ? 'beginner' : (slug === 'first-buy' ? 'buy' : (slug === 'safety' ? 'safety' : 'quick'));
+              var stateMeta = getVisitorPathStateMeta(slug);
               return ''
-                + '<a class="home-visitor-path-card" data-home-track="home.visitor.' + escapeHtml(slug.replace(/-/g, '')) + '" data-home-track-label="' + escapeHtml(trackLabels[slug] || ('Visitor path ' + slug)) + '" href="' + escapeHtml(getStartRoute(slug)) + '">'
-                +   '<div class="home-visitor-path-title">' + escapeHtml(card.title) + '</div>'
-                +   '<div class="home-visitor-path-body">' + escapeHtml(card.body) + '</div>'
-                +   '<span class="home-visitor-path-cta">' + escapeHtml(pack.homeButton) + '</span>'
+                + '<a class="home-visitor-path-card" data-card-tone="' + escapeHtml(tone) + '" data-home-track="home.visitor.' + escapeHtml(slug.replace(/-/g, '')) + '" data-home-track-label="' + escapeHtml(trackLabels[slug] || ('Visitor path ' + slug)) + '" href="' + escapeHtml(getStartRoute(slug)) + '">'
+                +   '<div class="home-card-visual-row">'
+                +     '<span class="home-card-icon" aria-hidden="true">' + getVisitorPathIconSvg(slug) + '</span>'
+                +     '<span class="home-card-badge">' + escapeHtml(badge) + '</span>'
+                +   '</div>'
+                +   '<div class="home-card-copy">'
+                +     '<div class="home-visitor-path-title">' + escapeHtml(card.title) + '</div>'
+                +     buildHomeCardStatusRow(stateMeta.states)
+                +     '<div class="home-visitor-path-body">' + escapeHtml(card.body) + '</div>'
+                +     buildHomeCardHint(stateMeta.hint)
+                +   '</div>'
+                +   '<div class="home-card-footer">'
+                +     '<span class="home-visitor-path-cta home-card-footer-cta">' + escapeHtml(pack.homeButton) + '</span>'
+                +   '</div>'
                 + '</a>';
             }).join('')
       +   '</div>'
@@ -942,6 +1439,26 @@
     var finder = panel.querySelector('.start-finder');
     if(!hero || !finder || finder.parentNode === panel) return;
     hero.insertAdjacentElement('afterend', finder);
+  }
+
+  function ensureHeroQuickActions(panel){
+    var hero = panel.querySelector('.home-hero');
+    if(!hero || hero.querySelector('.home-fast-actions-block')) return;
+    if(typeof window.buildHomeActionCardsHtmlFinal !== 'function') return;
+    var host = document.createElement('div');
+    host.innerHTML = window.buildHomeActionCardsHtmlFinal();
+    var block = host.firstElementChild;
+    if(!block) return;
+    block.id = HOME_SECTION_IDS.quickActions;
+    var anchor = hero.querySelector('.home-learning-spin-block')
+      || hero.querySelector('.home-visitor-paths-block')
+      || hero.querySelector('.home-start-three-block')
+      || hero.querySelector('.home-desc');
+    if(anchor){
+      anchor.insertAdjacentElement('afterend', block);
+    } else {
+      hero.appendChild(block);
+    }
   }
 
   function reorderHeroIntroSections(panel){
@@ -1047,6 +1564,7 @@
     var panel = document.getElementById('homePanel');
     if(!panel) return;
     removeLegacyHomeGrids(panel);
+    ensureHeroQuickActions(panel);
     moveFinderBelowHero(panel);
     reorderHeroIntroSections(panel);
     tuneFinderExploreCopy(panel);

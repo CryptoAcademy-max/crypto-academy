@@ -394,14 +394,15 @@
     var data = updateHistory[currentLang] || updateHistory.en;
     var title = (typeof t === 'function') ? t('updates.title') : 'Update History';
     var desc  = (typeof t === 'function') ? t('updates.desc')  : '';
-    var metaCat = (typeof t === 'function') ? t('nav.updates') : 'Update History';
+    var hero = (typeof renderUnifiedPageHero === 'function' && typeof getStaticPageHeroConfig === 'function')
+      ? renderUnifiedPageHero(getStaticPageHeroConfig('updates', title, desc))
+      : '<div class="lc-header">'
+        + '<div class="lc-meta"><span class="meta-pill">U</span><span class="meta-cat">' + ((typeof t === 'function') ? t('nav.updates') : 'Update History') + '</span></div>'
+        + '<h1 class="lc-title">' + title + '</h1>'
+        + '<p class="lc-intro">' + desc + '</p>'
+        + '</div>';
 
-    var html = '<div class="lc-header">'
-      + '<div class="lc-meta"><span class="meta-pill">U</span><span class="meta-cat">'+metaCat+'</span></div>'
-      + '<h1 class="lc-title">'+title+'</h1>'
-      + '<p class="lc-intro">'+desc+'</p>'
-      + '</div>'
-      + '<div class="update-timeline">';
+    var html = hero + '<div class="update-timeline">';
 
     data.forEach(function(entry, idx){
       html += '<div class="update-entry">'

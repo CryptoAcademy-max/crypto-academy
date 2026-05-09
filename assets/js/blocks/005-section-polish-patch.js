@@ -183,12 +183,16 @@ const polishedSectionContent = {
 
 function renderStartHere(){
   const c = polishedSectionContent[currentLang] || polishedSectionContent.en;
-  return `
+  var hero = (typeof renderUnifiedPageHero === 'function' && typeof getStaticPageHeroConfig === 'function')
+    ? renderUnifiedPageHero(getStaticPageHeroConfig('start', c.startTitle, c.startIntro))
+    : `
     <div class="lc-header">
       <div class="lc-meta"><span class="meta-pill">${t('nav.start') || 'Start Here'}</span><span class="meta-cat">${c.startTitle}</span></div>
       <h1 class="lc-title">${c.startTitle}</h1>
       <p class="lc-intro">${c.startIntro}</p>
-    </div>
+    </div>`;
+  return `
+    ${hero}
     <div class="lesson-body">
       <div class="steps-list">
         ${c.startSteps.map((item, i)=>`<div class="step-item"><div class="step-n">${i+1}</div><div><div class="step-title">${item[0]}</div><div class="step-desc">${item[1]}</div></div></div>`).join('')}
@@ -199,12 +203,16 @@ function renderStartHere(){
 
 function renderFAQPage(){
   const c = polishedSectionContent[currentLang] || polishedSectionContent.en;
-  return `
+  var hero = (typeof renderUnifiedPageHero === 'function' && typeof getStaticPageHeroConfig === 'function')
+    ? renderUnifiedPageHero(getStaticPageHeroConfig('faq', c.faqTitle, c.faqIntro))
+    : `
     <div class="lc-header">
       <div class="lc-meta"><span class="meta-pill">${t('nav.faqPage') || 'FAQ'}</span><span class="meta-cat">${c.faqTitle}</span></div>
       <h1 class="lc-title">${c.faqTitle}</h1>
       <p class="lc-intro">${c.faqIntro}</p>
-    </div>
+    </div>`;
+  return `
+    ${hero}
     <div class="lesson-body">
       ${c.faqItems.map(([q,a])=>`<div class="faq-item"><div class="faq-q">${q}</div><div class="faq-a">${a}</div></div>`).join('')}
     </div>`;
@@ -212,12 +220,16 @@ function renderFAQPage(){
 
 function renderSafetyPage(){
   const c = polishedSectionContent[currentLang] || polishedSectionContent.en;
-  return `
+  var hero = (typeof renderUnifiedPageHero === 'function' && typeof getStaticPageHeroConfig === 'function')
+    ? renderUnifiedPageHero(getStaticPageHeroConfig('safety', c.safetyTitle, c.safetyIntro))
+    : `
     <div class="lc-header">
       <div class="lc-meta"><span class="meta-pill">${t('nav.safety') || 'Safety'}</span><span class="meta-cat">${c.safetyTitle}</span></div>
       <h1 class="lc-title">${c.safetyTitle}</h1>
       <p class="lc-intro">${c.safetyIntro}</p>
-    </div>
+    </div>`;
+  return `
+    ${hero}
     <div class="lesson-body">
       ${c.safetyItems.map(([title,body])=>`<div class="mistake-card"><div class="mistake-label">${title}</div><div class="mistake-body">${body}</div></div>`).join('')}
     </div>`;
