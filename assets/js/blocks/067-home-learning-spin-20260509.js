@@ -49,7 +49,9 @@
   var state = {
     timer:null,
     spinning:false,
-    lastId:''
+    lastId:'',
+    currentCandidate:null,
+    currentSpinning:false
   };
 
   function normalizeLang(value){
@@ -144,6 +146,12 @@
       state.timer = null;
     }
     state.spinning = false;
+    state.currentSpinning = false;
+  }
+
+  function getActiveSpinSection(fallback){
+    var current = document.getElementById(SPIN_SECTION_ID);
+    return current || fallback || null;
   }
 
   function saveLastSpin(id){
@@ -479,107 +487,112 @@
     return { role:role, kind:kind, href:href, external:!!external };
   }
 
-  function getCandidateById(id){
-    var pack = getSpinPack();
-    var meta = getCandidateMeta(id, pack);
-    var candidate = {
-      id:id,
-      type:meta.type,
-      group:getCandidateGroup(id),
-      mode:getCandidateMode(id),
-      title:meta.title,
-      body:meta.body,
-      actions:[]
-    };
-
+  function getCandidateActions(id){
     switch(id){
       case 'glossary':
-        candidate.actions = [
+        return [
           createAction('primary', 'openNow', getPageRoute('glossary')),
           createAction('secondary', 'openLesson', getLessonRoute(0)),
           createAction('deep', 'exploreEbook', getHomeHashRoute(HOME_HASH_IDS.ebook))
         ];
-        break;
       case 'safety':
-        candidate.actions = [
+        return [
           createAction('primary', 'openNow', getPageRoute('safety')),
           createAction('secondary', 'relatedFreePdf', getFreePdfHref(), true),
           createAction('deep', 'exploreEbook', getHomeHashRoute(HOME_HASH_IDS.ebook))
         ];
-        break;
       case 'lessonBlockchain':
-        candidate.actions = [
+        return [
           createAction('primary', 'openNow', getLessonRoute(0)),
           createAction('secondary', 'openGlossary', getPageRoute('glossary')),
           createAction('deep', 'exploreEbook', getHomeHashRoute(HOME_HASH_IDS.ebook))
         ];
-        break;
       case 'lessonWallet':
-        candidate.actions = [
+        return [
           createAction('primary', 'openNow', getLessonRoute(1)),
           createAction('secondary', 'relatedChecklist', getChecklistRoute('before-send')),
           createAction('deep', 'exploreEbook', getHomeHashRoute(HOME_HASH_IDS.ebook))
         ];
-        break;
       case 'lessonFirstBuy':
-        candidate.actions = [
+        return [
           createAction('primary', 'openNow', getLessonRoute(5)),
           createAction('secondary', 'relatedFreePdf', getFreePdfHref(), true),
           createAction('deep', 'exploreEbook', getHomeHashRoute(HOME_HASH_IDS.ebook))
         ];
-        break;
       case 'lessonScams':
-        candidate.actions = [
+        return [
           createAction('primary', 'openNow', getLessonRoute(6)),
           createAction('secondary', 'relatedChecklist', getChecklistRoute('seed-phrase-safety')),
           createAction('deep', 'exploreEbook', getHomeHashRoute(HOME_HASH_IDS.ebook))
         ];
-        break;
       case 'beforeSendChecklist':
-        candidate.actions = [
+        return [
           createAction('primary', 'openNow', getChecklistRoute('before-send')),
           createAction('secondary', 'relatedFreePdf', getFreePdfHref(), true),
           createAction('deep', 'exploreEbook', getHomeHashRoute(HOME_HASH_IDS.ebook))
         ];
-        break;
       case 'seedPhraseChecklist':
-        candidate.actions = [
+        return [
           createAction('primary', 'openNow', getChecklistRoute('seed-phrase-safety')),
           createAction('secondary', 'openSafety', getPageRoute('safety')),
           createAction('deep', 'exploreEbook', getHomeHashRoute(HOME_HASH_IDS.ebook))
         ];
-        break;
       case 'fakeWebsiteChecklist':
-        candidate.actions = [
+        return [
           createAction('primary', 'openNow', getChecklistRoute('fake-website-check')),
           createAction('secondary', 'openSafety', getPageRoute('safety')),
           createAction('deep', 'exploreEbook', getHomeHashRoute(HOME_HASH_IDS.ebook))
         ];
-        break;
       case 'freePdf':
-        candidate.actions = [
+        return [
           createAction('primary', 'openFreePdf', getFreePdfHref(), true),
           createAction('secondary', 'relatedChecklist', getChecklistRoute('before-send')),
           createAction('deep', 'exploreEbook', getHomeHashRoute(HOME_HASH_IDS.ebook))
         ];
-        break;
       case 'ebookEnglish':
-        candidate.actions = [
+        return [
           createAction('primary', 'viewEbook', EBOOK_LINKS.english, true),
           createAction('secondary', 'openLesson', getLessonRoute(5)),
           createAction('deep', 'relatedFreePdf', getFreePdfHref(), true)
         ];
-        break;
       case 'ebookKorean':
-        candidate.actions = [
+        return [
           createAction('primary', 'viewEbook', EBOOK_LINKS.korean, true),
           createAction('secondary', 'openLesson', getLessonRoute(5)),
           createAction('deep', 'relatedFreePdf', getFreePdfHref(), true)
         ];
-        break;
     }
+    return [];
+  }
 
-    return candidate;
+  function getCandidateById(id){
+    var resolvedId = String(id || '');
+    var pack = getSpinPack();
+    var meta = getCandidateMeta(resolvedId, pack);
+    return {
+      id:resolvedId,
+      type:meta.type,
+      group:getCandidateGroup(resolvedId),
+      mode:getCandidateMode(resolvedId),
+      title:meta.title,
+      body:meta.body,
+      actions:getCandidateActions(resolvedId)
+    };
+  }
+
+  function resolveCandidate(candidate){
+    if(!candidate) return null;
+    if(typeof candidate === 'string') return getCandidateById(candidate);
+    var id = typeof candidate.id === 'string' ? candidate.id : '';
+    if(!id) return candidate;
+    var normalized = getCandidateById(id);
+    if(candidate.mode) normalized.mode = candidate.mode;
+    if(candidate.group) normalized.group = candidate.group;
+    if(candidate.type) normalized.type = candidate.type;
+    if(candidate.title) normalized.title = candidate.title;
+    if(candidate.body) normalized.body = candidate.body;
+    if(Array.isArray(candidate.actions) && candidate.actions.length) normalized.actions = candidate.actions.slice();
+    return normalized;
   }
 
   function getActionLabel(kind, pack){
@@ -630,7 +643,7 @@
     if(restoreNote){
       restoreNote.hidden = !lastId;
       if(lastId){
-        var lastCandidate = candidate && candidate.id === lastId ? candidate : getCandidateById(lastId);
+        var lastCandidate = candidate && candidate.id === lastId ? resolveCandidate(candidate) : getCandidateById(lastId);
         restoreNote.textContent = upgradePack.restoreNote + ': ' + lastCandidate.title;
       } else {
         restoreNote.textContent = '';
@@ -653,91 +666,15 @@
       +       '<div class="home-learning-spin-last-note" data-spin-restore-note hidden></div>'
       +     '</div>'
       +     '<article class="home-learning-spin-result" data-spin-result aria-live="polite">'
-      +       '<div class="home-learning-spin-kicker" data-spin-kicker></div>'
-      +       '<div class="home-learning-spin-head"><span class="home-learning-spin-mode" data-spin-mode></span><span class="home-learning-spin-type" data-spin-type></span></div>'
-      +       '<div class="home-learning-spin-title" data-spin-title></div>'
-      +       '<div class="home-learning-spin-body" data-spin-body></div>'
-      +       '<a class="home-learning-spin-mission" data-spin-mission aria-disabled="true"><div class="home-learning-spin-mission-title" data-spin-mission-title></div><div class="home-learning-spin-mission-body" data-spin-mission-body></div></a>'
-      +       '<div class="home-learning-spin-actions" data-spin-actions></div>'
+      +       buildSpinResultInnerHtml(null, false, pack, upgradePack)
       +     '</article>'
       +   '</div>'
       + '</section>';
   }
 
-  function renderSpinResult(section, candidate, spinning){
-    if(!section) return;
-    var pack = getSpinPack();
-    var upgradePack = getSpinUpgradePack();
-    var result = section.querySelector('[data-spin-result]');
-    var kicker = section.querySelector('[data-spin-kicker]');
-    var mode = section.querySelector('[data-spin-mode]');
-    var type = section.querySelector('[data-spin-type]');
-    var title = section.querySelector('[data-spin-title]');
-    var body = section.querySelector('[data-spin-body]');
-    var mission = section.querySelector('[data-spin-mission]');
-    var missionTitle = section.querySelector('[data-spin-mission-title]');
-    var missionBody = section.querySelector('[data-spin-mission-body]');
-    var actions = section.querySelector('[data-spin-actions]');
-    if(!result || !kicker || !mode || !type || !title || !body || !mission || !missionTitle || !missionBody || !actions) return;
-
-    result.classList.toggle('is-spinning', !!spinning);
-    result.classList.remove('is-settled');
-    kicker.textContent = spinning ? pack.spinningHeading : pack.resultHeading;
-    result.dataset.spinMode = candidate && candidate.mode ? candidate.mode : 'pick';
-    result.dataset.spinGroup = candidate && candidate.group ? candidate.group : 'review';
-
-    if(!candidate){
-      mode.textContent = getModeLabel('pick', upgradePack);
-      type.textContent = pack.idleType;
-      title.textContent = pack.idleTitle;
-      body.textContent = pack.idleBody;
-      missionTitle.textContent = upgradePack.missionTitle;
-      missionBody.textContent = upgradePack.genericMissions.review;
-      mission.removeAttribute('href');
-      mission.removeAttribute('target');
-      mission.removeAttribute('rel');
-      mission.removeAttribute('data-home-track');
-      mission.removeAttribute('data-home-track-label');
-      mission.removeAttribute('data-spin-role');
-      mission.removeAttribute('data-spin-id');
-      mission.setAttribute('aria-disabled', 'true');
-      actions.innerHTML = '';
-      updateLastPickState(section, null);
-      return;
-    }
-
-    var missionAction = getMissionAction(candidate);
-    mode.textContent = getModeLabel(candidate.mode, upgradePack);
-    type.textContent = getGroupLabel(candidate.group, upgradePack);
-    title.textContent = candidate.title;
-    body.textContent = candidate.body;
-    missionTitle.textContent = upgradePack.missionTitle;
-    missionBody.textContent = getMissionText(candidate, upgradePack);
-    if(missionAction && missionAction.href){
-      mission.setAttribute('href', missionAction.href);
-      mission.setAttribute('data-home-track', 'home.spin.mission.' + safeText(candidate.id));
-      mission.setAttribute('data-home-track-label', 'Spin mission ' + safeText(candidate.id));
-      mission.setAttribute('data-spin-role', 'mission');
-      mission.setAttribute('data-spin-id', safeText(candidate.id));
-      mission.setAttribute('aria-disabled', 'false');
-      if(missionAction.external){
-        mission.setAttribute('target', '_blank');
-        mission.setAttribute('rel', 'noopener noreferrer');
-      } else {
-        mission.removeAttribute('target');
-        mission.removeAttribute('rel');
-      }
-    } else {
-      mission.removeAttribute('href');
-      mission.removeAttribute('target');
-      mission.removeAttribute('rel');
-      mission.removeAttribute('data-home-track');
-      mission.removeAttribute('data-home-track-label');
-      mission.removeAttribute('data-spin-role');
-      mission.removeAttribute('data-spin-id');
-      mission.setAttribute('aria-disabled', 'true');
-    }
-    actions.innerHTML = candidate.actions.map(function(action){
+  function buildSpinActionsHtml(candidate, pack){
+    if(!candidate || !Array.isArray(candidate.actions) || !candidate.actions.length) return '';
+    return candidate.actions.map(function(action){
       var label = getActionLabel(action.kind, pack);
       var classes = ['home-learning-spin-action'];
       if(action.role === 'primary') classes.push('is-primary');
@@ -754,6 +691,54 @@
         + safeText(label)
         + '</a>';
     }).join('');
+  }
+
+  function buildSpinMissionAttrs(candidate){
+    var missionAction = getMissionAction(candidate);
+    if(!missionAction || !missionAction.href) return ' data-spin-mission aria-disabled="true"';
+    return ''
+      + ' data-spin-mission'
+      + ' href="' + safeText(missionAction.href) + '"'
+      + ' data-home-track="home.spin.mission.' + safeText(candidate.id) + '"'
+      + ' data-home-track-label="Spin mission ' + safeText(candidate.id) + '"'
+      + ' data-spin-role="mission"'
+      + ' data-spin-id="' + safeText(candidate.id) + '"'
+      + ' aria-disabled="false"'
+      + (missionAction.external ? ' target="_blank" rel="noopener noreferrer"' : '');
+  }
+
+  function buildSpinResultInnerHtml(candidate, spinning, pack, upgradePack){
+    var resolved = resolveCandidate(candidate);
+    var kicker = spinning ? pack.spinningHeading : pack.resultHeading;
+    var modeLabel = resolved ? getModeLabel(resolved.mode, upgradePack) : getModeLabel('pick', upgradePack);
+    var typeLabel = resolved ? getGroupLabel(resolved.group, upgradePack) : pack.idleType;
+    var titleText = resolved && resolved.title ? resolved.title : pack.idleTitle;
+    var bodyText = resolved && resolved.body ? resolved.body : pack.idleBody;
+    var missionBodyText = resolved ? getMissionText(resolved, upgradePack) : upgradePack.genericMissions.review;
+    return ''
+      + '<div class="home-learning-spin-kicker" data-spin-kicker>' + safeText(kicker) + '</div>'
+      + '<div class="home-learning-spin-head"><span class="home-learning-spin-mode" data-spin-mode>' + safeText(modeLabel) + '</span><span class="home-learning-spin-type" data-spin-type>' + safeText(typeLabel) + '</span></div>'
+      + '<div class="home-learning-spin-title" data-spin-title>' + safeText(titleText) + '</div>'
+      + '<div class="home-learning-spin-body" data-spin-body>' + safeText(bodyText) + '</div>'
+      + '<a class="home-learning-spin-mission"' + buildSpinMissionAttrs(resolved) + '><div class="home-learning-spin-mission-title" data-spin-mission-title>' + safeText(upgradePack.missionTitle) + '</div><div class="home-learning-spin-mission-body" data-spin-mission-body>' + safeText(missionBodyText) + '</div></a>'
+      + '<div class="home-learning-spin-actions" data-spin-actions>' + buildSpinActionsHtml(resolved, pack) + '</div>';
+  }
+
+  function renderSpinResult(section, candidate, spinning){
+    if(!section) return;
+    candidate = resolveCandidate(candidate);
+    var pack = getSpinPack();
+    var upgradePack = getSpinUpgradePack();
+    var result = section.querySelector('[data-spin-result]');
+    if(!result) return;
+
+    result.classList.toggle('is-spinning', !!spinning);
+    result.classList.remove('is-settled');
+    result.dataset.spinMode = candidate && candidate.mode ? candidate.mode : 'pick';
+    result.dataset.spinGroup = candidate && candidate.group ? candidate.group : 'review';
+    state.currentCandidate = candidate || null;
+    state.currentSpinning = !!spinning;
+    result.innerHTML = buildSpinResultInnerHtml(candidate, spinning, pack, upgradePack);
     updateLastPickState(section, candidate);
   }
 
@@ -775,6 +760,8 @@
     if(!section || state.spinning) return;
     clearSpinTimer();
     state.spinning = true;
+    state.currentCandidate = null;
+    state.currentSpinning = true;
     var button = section.querySelector('[data-spin-trigger]');
     if(button){
       button.disabled = true;
@@ -784,21 +771,28 @@
     var step = 0;
 
     function finishSpin(){
-      clearSpinTimer();
       var finalCandidate = getCandidateById(pickRandomId());
-      renderSpinResult(section, finalCandidate, false);
+      var liveSection = getActiveSpinSection(section);
+      clearSpinTimer();
+      renderSpinResult(liveSection, finalCandidate, false);
       saveLastSpin(finalCandidate.id);
       trackSpinResult(finalCandidate);
-      emphasizeSpinResult(section);
+      emphasizeSpinResult(liveSection);
       if(button){
         button.disabled = false;
         button.removeAttribute('aria-busy');
+      }
+      var liveButton = liveSection && liveSection !== section ? liveSection.querySelector('[data-spin-trigger]') : null;
+      if(liveButton){
+        liveButton.disabled = false;
+        liveButton.removeAttribute('aria-busy');
       }
     }
 
     function spinStep(){
       var preview = getCandidateById(pickRandomId());
-      renderSpinResult(section, preview, true);
+      var liveSection = getActiveSpinSection(section);
+      renderSpinResult(liveSection, preview, true);
       if(step >= delays.length - 1){
         finishSpin();
         return;
@@ -866,12 +860,17 @@
     }
 
     if(!block) return;
-    var host = document.createElement('div');
-    host.innerHTML = buildSpinSectionHtml();
-    var next = host.firstElementChild;
-    if(next && block !== next) block.replaceWith(next);
-    block = hero.querySelector('.home-learning-spin-block');
     bindSpinSection(block);
+
+    if(state.spinning && state.currentCandidate){
+      renderSpinResult(block, state.currentCandidate, true);
+      var liveButton = block.querySelector('[data-spin-trigger]');
+      if(liveButton){
+        liveButton.disabled = true;
+        liveButton.setAttribute('aria-busy', 'true');
+      }
+      return;
+    }
 
     var lastId = loadLastSpin();
     var candidate = lastId ? getCandidateById(lastId) : null;
@@ -879,7 +878,6 @@
   }
 
   function syncHomeLearningSpin(){
-    clearSpinTimer();
     ensureHomeLearningSpinSection();
   }
 
