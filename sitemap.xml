@@ -2,7 +2,53 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://cryptoacademy-max.github.io/crypto-academy/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://cryptoacademy-max.github.io/crypto-academy/glossary/</loc>
+  </url>
+  <url>
+    <loc>https://cryptoacademy-max.github.io/crypto-academy/faq/</loc>
+  </url>
+  <url>
+    <loc>https://cryptoacademy-max.github.io/crypto-academy/safety/</loc>
+  </url>
+  <url>
+    <loc>https://cryptoacademy-max.github.io/crypto-academy/sources/</loc>
+  </url>
+  <url>
+    <loc>https://cryptoacademy-max.github.io/crypto-academy/updates/</loc>
+  </url>
+  <url>
+    <loc>https://cryptoacademy-max.github.io/crypto-academy/start/beginners/</loc>
+  </url>
+  <url>
+    <loc>https://cryptoacademy-max.github.io/crypto-academy/start/first-buy/</loc>
+  </url>
+  <url>
+    <loc>https://cryptoacademy-max.github.io/crypto-academy/start/safety/</loc>
+  </url>
+  <url>
+    <loc>https://cryptoacademy-max.github.io/crypto-academy/start/quick-checks/</loc>
+  </url>
+  <url>
+    <loc>https://cryptoacademy-max.github.io/crypto-academy/lesson/blockchain/</loc>
+  </url>
+  <url>
+    <loc>https://cryptoacademy-max.github.io/crypto-academy/lesson/wallet/</loc>
+  </url>
+  <url>
+    <loc>https://cryptoacademy-max.github.io/crypto-academy/lesson/transfer/</loc>
+  </url>
+  <url>
+    <loc>https://cryptoacademy-max.github.io/crypto-academy/lesson/roles/</loc>
+  </url>
+  <url>
+    <loc>https://cryptoacademy-max.github.io/crypto-academy/lesson/real-world/</loc>
+  </url>
+  <url>
+    <loc>https://cryptoacademy-max.github.io/crypto-academy/lesson/first-buy/</loc>
+  </url>
+  <url>
+    <loc>https://cryptoacademy-max.github.io/crypto-academy/lesson/scams/</loc>
   </url>
 </urlset>

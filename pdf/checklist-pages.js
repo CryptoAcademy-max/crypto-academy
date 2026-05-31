@@ -51,7 +51,7 @@
   }
 
   var EN_PACK = pack(
-    'Crypto Academy Checklist',
+    'Coin ProofPath Checklist',
     {
       title: 'Before You Send Checklist',
       subtitle: 'Check these 4 things before you send.',
@@ -94,7 +94,7 @@
   );
 
   var KO_PACK = pack(
-    '\ud06c\ub9bd\ud1a0 \uc544\uce74\ub370\ubbf8 \uccb4\ud06c\ub9ac\uc2a4\ud2b8',
+    'Coin ProofPath 체크리스트',
     {
       title: '\uc804\uc1a1 \uc804 \uccb4\ud06c\ub9ac\uc2a4\ud2b8',
       subtitle: '\ubcf4\ub0b4\uae30 \uc804\uc5d0 \uc774 4\uac00\uc9c0\ub9cc \ub2e4\uc2dc \ud655\uc778\ud558\uc138\uc694.',
@@ -139,9 +139,50 @@
   var PACKS = {
     en: EN_PACK,
     ko: KO_PACK,
-    th: EN_PACK,
+    th: pack(
+      'เช็กลิสต์ Coin ProofPath',
+      {
+        title: 'เช็กลิสต์ก่อนส่ง',
+        subtitle: 'ตรวจ 4 อย่างนี้ก่อนส่งจริง',
+        points: [
+          'ตรวจที่อยู่กระเป๋าอีกครั้ง',
+          'ตรวจเครือข่ายอีกครั้ง',
+          'ถ้าเป็นไปได้ ให้ลองส่งจำนวนน้อยก่อน',
+          'ตรวจที่อยู่สุดท้ายหลังวางข้อความ'
+        ],
+        bottomLine: 'การโอนให้ถูกต้องสำคัญกว่าการโอนให้เร็ว',
+        saveLine: 'บันทึกการ์ดนี้ไว้ แล้วทบทวนก่อนส่ง',
+        compact: ['ที่อยู่', 'เครือข่าย', 'ลองส่งน้อย', 'ตรวจสุดท้าย']
+      },
+      {
+        title: 'เช็กความปลอดภัย Seed Phrase',
+        subtitle: 'Seed phrase สำคัญกว่าตัวแอปกระเป๋าเงิน',
+        points: [
+          'ห้ามแชร์กับใครเด็ดขาด',
+          'ห้ามส่งผ่าน DM หรือแชต',
+          'สงสัยไว้ก่อนถ้าเว็บไซต์ขอให้กรอก',
+          'เก็บแบบออฟไลน์อย่างปลอดภัย'
+        ],
+        bottomLine: 'การให้ seed phrase ก็เหมือนการให้กระเป๋าทั้งใบ',
+        saveLine: 'บันทึกไว้ เพราะนี่คือกฎความปลอดภัยที่สำคัญมาก',
+        compact: ['ห้ามแชร์', 'ไม่ส่ง DM', 'สงสัยคำขอ', 'เก็บออฟไลน์']
+      },
+      {
+        title: 'เช็กเว็บไซต์ปลอมแบบเร็ว',
+        subtitle: 'ดูแถบที่อยู่ก่อนเข้าสู่ระบบ',
+        points: [
+          'ตรวจโดเมนอีกครั้ง',
+          'ใช้ลิงก์ทางการที่บันทึกไว้ก่อน',
+          'อย่ากดลิงก์โฆษณาหรือ DM ทันที',
+          'ตรวจแถบที่อยู่อีกครั้งก่อนล็อกอิน'
+        ],
+        bottomLine: 'โดเมนที่ถูกต้องสำคัญกว่าหน้าตาเว็บที่คุ้นเคย',
+        saveLine: 'บันทึกไว้เพื่อทบทวนเมื่อเว็บไซต์ดูน่าสงสัย',
+        compact: ['ตรวจโดเมน', 'ลิงก์ทางการ', 'ระวังโฆษณา/DM', 'ตรวจอีกครั้ง']
+      }
+    ),
     id: pack(
-      'Checklist Crypto Academy',
+      'Checklist Coin ProofPath',
       {
         title: 'Checklist Sebelum Mengirim',
         subtitle: 'Periksa 4 hal ini sebelum Anda mengirim.',
@@ -183,7 +224,7 @@
       }
     ),
     pt: pack(
-      'Checklist da Crypto Academy',
+      'Checklist da Coin ProofPath',
       {
         title: 'Checklist Antes de Enviar',
         subtitle: 'Confira estas 4 coisas antes de enviar.',
@@ -225,7 +266,7 @@
       }
     ),
     tr: pack(
-      'Crypto Academy Kontrol Listesi',
+      'Coin ProofPath Kontrol Listesi',
       {
         title: 'Gondermeden Once Kontrol Listesi',
         subtitle: 'Gondermeden once bu 4 seyi tekrar kontrol edin.',
@@ -267,7 +308,7 @@
       }
     ),
     es: pack(
-      'Checklist de Crypto Academy',
+      'Checklist de Coin ProofPath',
       {
         title: 'Checklist Antes de Enviar',
         subtitle: 'Revisa estas 4 cosas antes de enviar.',
@@ -308,9 +349,50 @@
         compact: ['Revisa dominio', 'Enlace oficial', 'Evita anuncios o DM', 'Revisa otra vez']
       }
     ),
-    ar: EN_PACK,
+    ar: pack(
+      'قائمة تحقق Coin ProofPath',
+      {
+        title: 'قائمة تحقق قبل الإرسال',
+        subtitle: 'راجع هذه النقاط الأربع قبل أي إرسال.',
+        points: [
+          'أعد فحص عنوان المحفظة',
+          'أعد فحص الشبكة',
+          'أرسل مبلغاً صغيراً أولاً إن أمكن',
+          'تحقق من العنوان النهائي بعد اللصق'
+        ],
+        bottomLine: 'الإرسال الصحيح أهم من الإرسال السريع.',
+        saveLine: 'احفظ هذه البطاقة وراجعها قبل الإرسال.',
+        compact: ['العنوان', 'الشبكة', 'اختبار صغير', 'فحص نهائي']
+      },
+      {
+        title: 'فحص أمان عبارة الاسترداد',
+        subtitle: 'عبارة الاسترداد أهم من تطبيق المحفظة نفسه.',
+        points: [
+          'لا تشاركها مع أي شخص',
+          'لا ترسلها عبر الرسائل أو الدردشة',
+          'اشكّ في أي موقع يطلبها',
+          'احفظها بأمان دون اتصال'
+        ],
+        bottomLine: 'إعطاء عبارة الاسترداد يشبه إعطاء المحفظة نفسها.',
+        saveLine: 'احفظ هذا. إنه من أهم قواعد الأمان.',
+        compact: ['لا تشارك', 'لا رسائل', 'اشكّ في الطلب', 'حفظ دون اتصال']
+      },
+      {
+        title: 'فحص سريع للموقع المزيف',
+        subtitle: 'افحص شريط العنوان قبل تسجيل الدخول.',
+        points: [
+          'أعد فحص النطاق',
+          'استخدم الروابط الرسمية المحفوظة أولاً',
+          'لا تضغط فوراً على روابط إعلان أو رسالة',
+          'افحص شريط العنوان مرة أخرى قبل الدخول'
+        ],
+        bottomLine: 'النطاق الصحيح أهم من تصميم يبدو مألوفاً.',
+        saveLine: 'احفظ هذا لتراجعه عندما يبدو الموقع مريباً.',
+        compact: ['فحص النطاق', 'روابط رسمية', 'تجنب إعلان/رسالة', 'فحص مرة أخرى']
+      }
+    ),
     vi: pack(
-      'Checklist Crypto Academy',
+      'Checklist Coin ProofPath',
       {
         title: 'Checklist Truoc Khi Gui',
         subtitle: 'Hay kiem tra lai 4 dieu nay truoc khi gui.',
@@ -352,7 +434,7 @@
       }
     ),
     ha: pack(
-      'Jerin Dubawar Crypto Academy',
+      'Jerin Dubawar Coin ProofPath',
       {
         title: 'Jerin Dubawa Kafin Aika',
         subtitle: 'Duba wadannan abubuwa 4 kafin ka aika.',
@@ -429,18 +511,18 @@
       }
     },
     th: EN_PACK['before-send'] && {
-      title: 'Save this and come back when you need it',
-      description: 'A practical checklist to revisit before a transfer, a first buy, or whenever you want a quick safety check.',
+      title: 'บันทึกไว้ แล้วกลับมาดูเมื่อจำเป็น',
+      description: 'เช็กลิสต์สั้น ๆ สำหรับทบทวนก่อนโอน ก่อนซื้อครั้งแรก หรือเมื่อต้องการเช็กความปลอดภัยเร็ว ๆ',
       points: [
-        'Useful to review before real actions',
-        'Easy to revisit in a few seconds',
-        'More helpful when bookmarked'
+        'เหมาะสำหรับทบทวนก่อนลงมือจริง',
+        'กลับมาดูใหม่ได้ในไม่กี่วินาที',
+        'มีประโยชน์ยิ่งขึ้นเมื่อบันทึกไว้'
       ],
-      note: 'This checklist is most useful when you save it and revisit it when needed.',
+      note: 'เช็กลิสต์นี้มีประโยชน์ที่สุดเมื่อบันทึกไว้และเปิดดูในเวลาที่ต้องใช้จริง',
       links: {
-        transfer: 'Open Transfer Lesson',
-        safety: 'Open Safety Page',
-        scams: 'Open Scam Lesson'
+        transfer: 'เปิดบทเรียนการโอน',
+        safety: 'เปิดหน้าความปลอดภัย',
+        scams: 'เปิดบทเรียนเรื่อง scam'
       }
     },
     id: {
@@ -504,18 +586,18 @@
       }
     },
     ar: {
-      title: 'Save this and come back when you need it',
-      description: 'A practical checklist to revisit before a transfer, a first buy, or whenever you want a quick safety check.',
+      title: 'احفظ هذا وارجع إليه عند الحاجة',
+      description: 'قائمة عملية تراجعها قبل التحويل أو أول شراء أو عند الحاجة إلى فحص أمان سريع.',
       points: [
-        'Useful to review before real actions',
-        'Easy to revisit in a few seconds',
-        'More helpful when bookmarked'
+        'مفيدة قبل أي خطوة حقيقية',
+        'يسهل الرجوع إليها خلال ثوانٍ',
+        'تصبح أفضل عندما تحفظها'
       ],
-      note: 'This checklist is most useful when you save it and revisit it when needed.',
+      note: 'هذه القائمة مفيدة أكثر عندما تحفظها وتعود إليها وقت الحاجة.',
       links: {
-        transfer: 'Open Transfer Lesson',
-        safety: 'Open Safety Page',
-        scams: 'Open Scam Lesson'
+        transfer: 'افتح درس التحويل',
+        safety: 'افتح صفحة الأمان',
+        scams: 'افتح درس الاحتيال'
       }
     },
     vi: {
@@ -685,11 +767,85 @@
     ]
   };
 
+  var HERO_UI_PACKS = {
+    en:{
+      typeChecklist:'Checklist',
+      quickAction:'Quick Action',
+      quickReview:'Quick Review',
+      revisitedOften:'Revisited Often',
+      safetyEssential:'Safety Essential'
+    },
+    ko:{
+      typeChecklist:'체크리스트',
+      quickAction:'바로 확인',
+      quickReview:'빠른 복습',
+      revisitedOften:'자주 다시 봄',
+      safetyEssential:'보안 필수'
+    },
+    th:{
+      typeChecklist:'เช็กลิสต์',
+      quickAction:'เปิดดูได้ทันที',
+      quickReview:'ทบทวนเร็ว',
+      revisitedOften:'กลับมาดูบ่อย',
+      safetyEssential:'เรื่องสำคัญด้านความปลอดภัย'
+    },
+    id:{
+      typeChecklist:'Checklist',
+      quickAction:'Lihat sekarang',
+      quickReview:'Tinjauan cepat',
+      revisitedOften:'Sering ditinjau ulang',
+      safetyEssential:'Keamanan penting'
+    },
+    pt:{
+      typeChecklist:'Checklist',
+      quickAction:'Ver agora',
+      quickReview:'Revisao rapida',
+      revisitedOften:'Revisado com frequencia',
+      safetyEssential:'Seguranca essencial'
+    },
+    tr:{
+      typeChecklist:'Checklist',
+      quickAction:'Simdi bak',
+      quickReview:'Hizli gozden gecirme',
+      revisitedOften:'Sik tekrar bakilir',
+      safetyEssential:'Guvenlik icin onemli'
+    },
+    es:{
+      typeChecklist:'Checklist',
+      quickAction:'Ver ahora',
+      quickReview:'Revision rapida',
+      revisitedOften:'Se revisa a menudo',
+      safetyEssential:'Seguridad esencial'
+    },
+    ar:{
+      typeChecklist:'قائمة التحقق',
+      quickAction:'إجراء سريع',
+      quickReview:'مراجعة سريعة',
+      revisitedOften:'يعود إليه كثيراً',
+      safetyEssential:'أساسي للأمان'
+    },
+    vi:{
+      typeChecklist:'Checklist',
+      quickAction:'Xem ngay',
+      quickReview:'Xem lai nhanh',
+      revisitedOften:'Hay xem lai',
+      safetyEssential:'Thiet yeu ve an toan'
+    },
+    ha:{
+      typeChecklist:'Checklist',
+      quickAction:'Duba yanzu',
+      quickReview:'Bita cikin sauri',
+      revisitedOften:'Ana yawan komawa',
+      safetyEssential:'Muhimmin tsaro'
+    }
+  };
+  HERO_UI_PACKS.br = HERO_UI_PACKS.pt;
+
   function applyDocumentMeta(lang, page){
     document.documentElement.lang = lang === 'br' ? 'pt-BR' : lang;
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
     document.body.classList.toggle('is-rtl', lang === 'ar');
-    document.title = page.title + ' | Crypto Academy';
+    document.title = page.title + ' | Coin ProofPath';
     var meta = document.querySelector('meta[name="description"]');
     if(meta) meta.setAttribute('content', page.subtitle);
   }
@@ -730,6 +886,57 @@
 
   function getSiteHref(route, requestedLang){
     return toIndexRoute(getSitePrefix() + route) + '?lang=' + encodeURIComponent(requestedLang);
+  }
+
+  function getHeroUiLocale(requestedLang){
+    return HERO_UI_PACKS[requestedLang] || HERO_UI_PACKS[contentLang(requestedLang)] || HERO_UI_PACKS.en;
+  }
+
+  function getChecklistHeroIcon(key){
+    if(key === 'before-send'){
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h11"/><path d="m13 5 4 3-4 3"/><path d="M18 16H7"/><path d="m11 13-4 3 4 3"/></svg>';
+    }
+    if(key === 'seed-phrase'){
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 19 6v5.4c0 4.1-2.6 7.9-7 9.1-4.4-1.2-7-5-7-9.1V6l7-2.5Z"/><path d="m9.2 12.2 1.9 1.9 3.7-4.1"/></svg>';
+    }
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h10"/><path d="M9 12h10"/><path d="M9 18h10"/><path d="m4.5 6 1.5 1.5L8.5 5"/><path d="m4.5 12 1.5 1.5L8.5 11"/><path d="m4.5 18 1.5 1.5L8.5 17"/></svg>';
+  }
+
+  function getChecklistHeroTone(key){
+    return key === 'before-send' ? 'review' : 'safety';
+  }
+
+  function getChecklistHeroTags(key, ui){
+    if(key === 'before-send') return [ui.quickAction, ui.revisitedOften];
+    if(key === 'seed-phrase') return [ui.safetyEssential, ui.revisitedOften];
+    return [ui.safetyEssential, ui.quickReview];
+  }
+
+  function buildChecklistHeroActions(key, requestedLang, cta){
+    var items = (CHECKLIST_LINKS[key] || []).slice(0, 2);
+    return items.map(function(item, index){
+      var label = (cta.links && cta.links[item.labelKey]) || CTA_PACKS.en.links[item.labelKey] || 'Open';
+      return '<a class="checklist-hero-action' + (index === 0 ? ' is-primary' : '') + '" href="' + escapeHtml(getSiteHref(item.route, requestedLang)) + '">' + escapeHtml(label) + '</a>';
+    }).join('');
+  }
+
+  function buildChecklistHero(key, requestedLang, pack, page, cta){
+    var ui = getHeroUiLocale(requestedLang);
+    var tags = getChecklistHeroTags(key, ui);
+    return ''
+      + '<section class="checklist-hero" data-hero-tone="' + escapeHtml(getChecklistHeroTone(key)) + '">'
+      +   '<div class="checklist-hero-ambient" aria-hidden="true"></div>'
+      +   '<div class="checklist-hero-heading">'
+      +     '<span class="checklist-hero-icon" aria-hidden="true">' + getChecklistHeroIcon(key) + '</span>'
+      +     '<div class="checklist-hero-copy">'
+      +       '<div class="checklist-hero-kicker"><span class="checklist-hero-badge">' + escapeHtml(ui.typeChecklist) + '</span><span class="checklist-hero-mini">' + escapeHtml(pack.eyebrow || 'Coin ProofPath Checklist') + '</span></div>'
+      +       '<h1 class="checklist-hero-title">' + escapeHtml(page.title) + '</h1>'
+      +       '<p class="checklist-hero-lead">' + escapeHtml(page.subtitle) + '</p>'
+      +     '</div>'
+      +   '</div>'
+      +   '<div class="checklist-hero-chips">' + tags.map(function(tag){ return '<span class="checklist-hero-chip">' + escapeHtml(tag) + '</span>'; }).join('') + '</div>'
+      +   '<div class="checklist-hero-actions">' + buildChecklistHeroActions(key, requestedLang, cta) + '</div>'
+      + '</section>';
   }
 
   function getShareUrl(requestedLang){
@@ -795,6 +1002,74 @@
     }).join('');
   }
 
+  function getChecklistVisualPack(requestedLang){
+    var lang = contentLang(requestedLang);
+    var packs = {
+      en:{
+        kicker:'Visual quick check',
+        note:'Scan this first, then read the checklist below.',
+        beforeTitle:'Before you send',
+        beforeDesc:'Address, network, memo, test amount, final review.',
+        seedTitle:'Before you type secrets',
+        seedDesc:'Seed phrase and private key requests are stop signs.',
+        siteTitle:'Before you log in',
+        siteDesc:'Compare the domain, source, request, and pressure.',
+        labels:['Address','Network','Memo','Small test','Final review'],
+        seed:['Seed phrase','Private key','Recovery screen','Support DM'],
+        site:['Official source','Domain spelling','Wallet request','Urgency']
+      },
+      ko:{
+        kicker:'시각 빠른 확인',
+        note:'먼저 시각 카드로 흐름을 보고, 아래 체크리스트를 읽으세요.',
+        beforeTitle:'전송하기 전에',
+        beforeDesc:'주소, 네트워크, 메모, 소액 테스트, 최종 확인.',
+        seedTitle:'비밀을 입력하기 전에',
+        seedDesc:'시드 문구와 개인 키 요청은 즉시 멈춤 신호입니다.',
+        siteTitle:'로그인하기 전에',
+        siteDesc:'공식 출처, 도메인, 요구 내용, 압박 문구를 비교하세요.',
+        labels:['주소','네트워크','메모','소액 테스트','최종 확인'],
+        seed:['시드 문구','개인 키','복구 화면','DM 고객지원'],
+        site:['공식 출처','도메인 철자','지갑 요청','긴급 압박']
+      }
+    };
+    return packs[lang] || packs.en;
+  }
+
+  function getChecklistVisualPack(requestedLang){
+    var lang = contentLang(requestedLang);
+    var packs = {
+      en:{kicker:'Visual quick check',note:'Scan this first, then read the checklist below.',beforeTitle:'Before you send',beforeDesc:'Address, network, memo, test amount, final review.',seedTitle:'Before you type secrets',seedDesc:'Seed phrase and private key requests are stop signs.',siteTitle:'Before you log in',siteDesc:'Compare the domain, source, request, and pressure.',labels:['Address','Network','Memo','Small test','Final review'],seed:['Seed phrase','Private key','Recovery screen','Support DM'],site:['Official source','Domain spelling','Wallet request','Urgency']},
+      ko:{kicker:'시각 빠른 확인',note:'먼저 시각 카드로 흐름을 보고, 아래 체크리스트를 읽어보세요.',beforeTitle:'전송하기 전에',beforeDesc:'주소, 네트워크, 메모, 소액 테스트, 최종 확인.',seedTitle:'비밀 정보를 입력하기 전에',seedDesc:'시드 문구와 개인 키 요청은 즉시 멈춤 신호입니다.',siteTitle:'로그인하기 전에',siteDesc:'공식 출처, 도메인, 요청 내용, 압박 문구를 비교하세요.',labels:['주소','네트워크','메모','소액 테스트','최종 확인'],seed:['시드 문구','개인 키','복구 화면','DM 고객지원'],site:['공식 출처','도메인 철자','지갑 요청','긴급 압박']},
+      th:{kicker:'เช็กด้วยภาพ',note:'ดูการ์ดภาพก่อน แล้วอ่านเช็กลิสต์ด้านล่าง',beforeTitle:'ก่อนส่ง',beforeDesc:'ที่อยู่ เครือข่าย เมโม ทดสอบน้อย และตรวจสุดท้าย',seedTitle:'ก่อนพิมพ์ข้อมูลลับ',seedDesc:'คำขอ seed phrase หรือ private key คือสัญญาณให้หยุด',siteTitle:'ก่อนเข้าสู่ระบบ',siteDesc:'เทียบแหล่งทางการ โดเมน คำขอ และความเร่งด่วน',labels:['ที่อยู่','เครือข่าย','เมโม','ทดสอบน้อย','ตรวจสุดท้าย'],seed:['Seed phrase','Private key','หน้ากู้คืน','DM support'],site:['แหล่งทางการ','สะกดโดเมน','คำขอ wallet','ความเร่งด่วน']},
+      id:{kicker:'Cek visual cepat',note:'Pindai kartu ini dulu, lalu baca checklist di bawah.',beforeTitle:'Sebelum mengirim',beforeDesc:'Alamat, jaringan, memo, tes kecil, cek akhir.',seedTitle:'Sebelum mengetik rahasia',seedDesc:'Permintaan seed phrase atau private key adalah tanda berhenti.',siteTitle:'Sebelum login',siteDesc:'Bandingkan sumber resmi, domain, permintaan, dan tekanan.',labels:['Alamat','Jaringan','Memo','Tes kecil','Cek akhir'],seed:['Seed phrase','Private key','Layar pemulihan','DM support'],site:['Sumber resmi','Ejaan domain','Permintaan wallet','Urgensi']},
+      pt:{kicker:'Cheque visual rapido',note:'Veja este cartao primeiro e depois leia o checklist abaixo.',beforeTitle:'Antes de enviar',beforeDesc:'Endereco, rede, memo, teste pequeno e revisao final.',seedTitle:'Antes de digitar segredos',seedDesc:'Pedidos de seed phrase ou chave privada sao sinal de parar.',siteTitle:'Antes de entrar',siteDesc:'Compare fonte oficial, dominio, pedido e pressa.',labels:['Endereco','Rede','Memo','Teste pequeno','Revisao final'],seed:['Seed phrase','Chave privada','Tela de recuperacao','DM de suporte'],site:['Fonte oficial','Grafia do dominio','Pedido da wallet','Urgencia']},
+      tr:{kicker:'Hizli gorsel kontrol',note:'Once bu karti tara, sonra asagidaki kontrol listesini oku.',beforeTitle:'Gondermeden once',beforeDesc:'Adres, ag, memo, kucuk test ve son kontrol.',seedTitle:'Gizli bilgi yazmadan once',seedDesc:'Seed phrase veya private key istegi dur isaretidir.',siteTitle:'Giris yapmadan once',siteDesc:'Resmi kaynak, domain, istek ve baskiyi karsilastir.',labels:['Adres','Ag','Memo','Kucuk test','Son kontrol'],seed:['Seed phrase','Private key','Kurtarma ekrani','Destek DM'],site:['Resmi kaynak','Domain yazimi','Wallet istegi','Acele baskisi']},
+      es:{kicker:'Chequeo visual rapido',note:'Mira esta tarjeta primero y luego lee el checklist de abajo.',beforeTitle:'Antes de enviar',beforeDesc:'Direccion, red, memo, prueba pequena y revision final.',seedTitle:'Antes de escribir secretos',seedDesc:'Pedir seed phrase o private key es una senal de alto.',siteTitle:'Antes de iniciar sesion',siteDesc:'Compara fuente oficial, dominio, solicitud y presion.',labels:['Direccion','Red','Memo','Prueba pequena','Revision final'],seed:['Seed phrase','Private key','Pantalla de recuperacion','DM soporte'],site:['Fuente oficial','Dominio escrito','Solicitud wallet','Urgencia']},
+      ar:{kicker:'فحص بصري سريع',note:'افحص هذه البطاقة أولاً، ثم اقرأ القائمة أدناه.',beforeTitle:'قبل الإرسال',beforeDesc:'العنوان، الشبكة، المذكرة، اختبار صغير، فحص نهائي.',seedTitle:'قبل كتابة الأسرار',seedDesc:'طلب عبارة الاسترداد أو المفتاح الخاص يعني توقف فوراً.',siteTitle:'قبل تسجيل الدخول',siteDesc:'قارن المصدر الرسمي، النطاق، الطلب، والضغط.',labels:['العنوان','الشبكة','المذكرة','اختبار صغير','فحص نهائي'],seed:['عبارة الاسترداد','المفتاح الخاص','شاشة الاسترداد','رسالة دعم'],site:['مصدر رسمي','تهجئة النطاق','طلب المحفظة','الاستعجال']},
+      vi:{kicker:'Kiểm tra nhanh bằng hình',note:'Xem thẻ này trước, rồi đọc checklist bên dưới.',beforeTitle:'Trước khi gửi',beforeDesc:'Địa chỉ, mạng, memo, gửi thử nhỏ và kiểm tra cuối.',seedTitle:'Trước khi nhập bí mật',seedDesc:'Yêu cầu seed phrase hoặc private key là tín hiệu dừng.',siteTitle:'Trước khi đăng nhập',siteDesc:'So sánh nguồn chính thức, tên miền, yêu cầu và áp lực.',labels:['Địa chỉ','Mạng','Memo','Gửi thử','Kiểm tra cuối'],seed:['Seed phrase','Private key','Màn hình khôi phục','DM hỗ trợ'],site:['Nguồn chính thức','Chính tả domain','Yêu cầu ví','Sự khẩn cấp']},
+      ha:{kicker:'Saurin dubawa da hoto',note:'Duba wannan kati da farko, sannan karanta checklist a kasa.',beforeTitle:'Kafin aika',beforeDesc:'Adireshi, network, memo, karamin gwaji, dubawa ta karshe.',seedTitle:'Kafin rubuta sirri',seedDesc:'Neman seed phrase ko private key alamar tsayawa ce.',siteTitle:'Kafin login',siteDesc:'Kwatanta tushe na hukuma, domain, bukata, da matsin lamba.',labels:['Adireshi','Network','Memo','Karamin gwaji','Duba karshe'],seed:['Seed phrase','Private key','Allon recovery','DM support'],site:['Tushe na hukuma','Rubutun domain','Neman wallet','Gaggawa']}
+    };
+    packs.br = packs.pt;
+    return packs[lang] || packs.en;
+  }
+
+  function buildChecklistVisual(key, requestedLang){
+    var pack = getChecklistVisualPack(requestedLang);
+    var title = key === 'seed-phrase' ? pack.seedTitle : key === 'fake-website' ? pack.siteTitle : pack.beforeTitle;
+    var desc = key === 'seed-phrase' ? pack.seedDesc : key === 'fake-website' ? pack.siteDesc : pack.beforeDesc;
+    var items = key === 'seed-phrase' ? pack.seed : key === 'fake-website' ? pack.site : pack.labels;
+    return ''
+      + '<section class="check-visual-panel" aria-label="' + escapeHtml(pack.kicker) + '">'
+      +   '<div class="check-visual-head"><span>' + escapeHtml(pack.kicker) + '</span><strong>' + escapeHtml(title) + '</strong><p>' + escapeHtml(desc) + '</p></div>'
+      +   '<div class="check-visual-flow">'
+      +     items.map(function(item, index){
+              return '<div class="check-visual-step"><b>' + String(index + 1).padStart(2, '0') + '</b><span>' + escapeHtml(item) + '</span></div>';
+            }).join('')
+      +   '</div>'
+      +   '<p class="check-visual-note">' + escapeHtml(pack.note) + '</p>'
+      + '</section>';
+  }
+
   function buildSharePanel(key, requestedLang, page){
     var shareUi = getShareUiLocale(requestedLang);
     var shareText = getShareCopyText(key, requestedLang, page);
@@ -855,7 +1130,7 @@
       nativeButton.addEventListener('click', function(){
         try{
           navigator.share({
-            title: page.title + ' | Crypto Academy',
+            title: page.title + ' | Coin ProofPath',
             text: shareText,
             url: shareUrl
           });
@@ -880,9 +1155,8 @@
 
     root.innerHTML = ''
       + '<div class="page">'
-      +   '<div class="eyebrow">' + escapeHtml(pack.eyebrow || 'Crypto Academy Checklist') + '</div>'
-      +   '<h1>' + escapeHtml(page.title) + '</h1>'
-      +   '<p class="lead">' + escapeHtml(page.subtitle) + '</p>'
+      +   buildChecklistHero(key, requestedLang, pack, page, cta)
+      +   buildChecklistVisual(key, requestedLang)
       +   '<section class="check-card">'
       +     '<ul class="check-list">' + buildList(page.points) + '</ul>'
       +   '</section>'
