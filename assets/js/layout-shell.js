@@ -34,12 +34,22 @@
     { index: 3, slug: 'roles' },
     { index: 4, slug: 'real-world' },
     { index: 5, slug: 'first-buy' },
-    { index: 6, slug: 'scams' }
+    { index: 6, slug: 'scams' },
+    { index: 7, slug: 'exchange-wallets', hash: 'lesson8' },
+    { index: 8, slug: 'networks-fees', hash: 'lesson9' },
+    { index: 9, slug: 'stablecoins', hash: 'lesson10' },
+    { index: 10, slug: 'defi-basics', hash: 'lesson11' },
+    { index: 11, slug: 'nft-token-projects', hash: 'lesson12' },
+    { index: 12, slug: 'bridges-multichain', hash: 'lesson13' },
+    { index: 13, slug: 'verify-information', hash: 'lesson14' }
   ];
 
   function getLessonRoute(index){
     for(var i = 0; i < lessonRoutes.length; i++){
-      if(lessonRoutes[i].index === index) return toIndexRoute(basePrefix + 'lesson/' + lessonRoutes[i].slug + '/');
+      if(lessonRoutes[i].index === index){
+        if(lessonRoutes[i].hash) return toIndexRoute(basePrefix) + '#' + lessonRoutes[i].hash;
+        return toIndexRoute(basePrefix + 'lesson/' + lessonRoutes[i].slug + '/');
+      }
     }
     return routeMap.home;
   }
@@ -165,6 +175,17 @@
 
   function restoreInitialRoute(){
     upgradeLessonLinks();
+    var hashLesson = String(window.location.hash || '').match(/^#lesson(\d+)$/);
+    if(hashLesson && typeof window.__CA_OPEN_INTERMEDIATE_LESSON === 'function'){
+      var hashIndex = parseInt(hashLesson[1], 10) - 1;
+      if(isFinite(hashIndex) && hashIndex >= 7){
+        try{
+          var handledHashLesson = window.__CA_OPEN_INTERMEDIATE_LESSON(hashIndex, false);
+          upgradeLessonLinks();
+          if(handledHashLesson !== false) return;
+        }catch(error){}
+      }
+    }
     if(isLessonPage){
       var lessonPanel = document.getElementById('lesson' + initialLesson);
       if(lessonPanel && typeof window.renderLesson === 'function'){
