@@ -18,8 +18,8 @@
           safetySub:'Scam prevention and safer habits',
           faqSub:'Quick beginner questions',
           startSub:'Recommended first route for brand-new learners',
-          supportTitle:'Support Crypto Academy',
-          supportBody:'Crypto Academy stays free to use. If it helped you, you can support future updates here.',
+          supportTitle:'Support Coin ProofPath',
+          supportBody:'Coin ProofPath stays free to use. If it helped you, you can support future updates here.',
           supportButton:'Buy Me a Coffee',
           updateLabels:{Search:'Search',Lessons:'Lessons',Languages:'Languages',Updates:'Updates',Safety:'Safety',Home:'Home'}
         },
@@ -32,14 +32,14 @@
           body:'Useful free PDFs to reopen before a transfer, a first buy, or a safety check.'
         },
         ebook:{
-          title:'Crypto Academy eBook',
+          title:'Coin ProofPath eBook',
           body:'Choose the edition that fits you when you want a more structured review.',
-          card1Title:'Crypto Academy eBook (English Edition)',
-          card2Title:'Crypto Academy eBook (Korean Edition)',
-          card1Body:'Crypto Academy eBook in English',
-          card2Body:'Crypto Academy eBook in Korean',
+          card1Title:'Coin ProofPath eBook (English Edition)',
+          card2Title:'Coin ProofPath eBook (Korean Edition)',
+          card1Body:'Coin ProofPath eBook in English',
+          card2Body:'Coin ProofPath eBook in Korean',
           button:'View eBook',
-          previewTitle:'Crypto Academy eBook Preview',
+          previewTitle:'Coin ProofPath eBook Preview',
           previewBody:'A structured eBook for reviewing the concepts and practical flows beginners usually struggle with first.',
           previewPoints:[
             'Understand core concepts in a clearer order',
@@ -100,8 +100,8 @@
           safetySub:'사기 예방과 더 안전한 습관',
           faqSub:'초보자용 빠른 질문 모음',
           startSub:'완전 초보자를 위한 추천 시작 경로',
-          supportTitle:'Crypto Academy 후원하기',
-          supportBody:'Crypto Academy는 무료로 열려 있습니다. 도움이 되었다면 다음 업데이트를 후원으로 응원할 수 있습니다.',
+          supportTitle:'Coin ProofPath 후원하기',
+          supportBody:'Coin ProofPath는 무료로 열려 있습니다. 도움이 되었다면 다음 업데이트를 후원으로 응원할 수 있습니다.',
           supportButton:'Buy Me a Coffee',
           updateLabels:{Search:'검색',Lessons:'강의',Languages:'언어',Updates:'업데이트',Safety:'보안',Home:'홈'}
         },
@@ -114,14 +114,14 @@
           body:'전송 전, 첫 구매 전, 보안 확인 전에 다시 보기 좋은 무료 PDF입니다.'
         },
         ebook:{
-          title:'크립토 아카데미 전자책',
+          title:'코인 프루프패스 전자책',
           body:'더 정리된 흐름으로 복습하고 싶을 때 맞는 언어판 전자책을 골라보세요.',
-          card1Title:'영문 크립토 아카데미 전자책',
-          card2Title:'한글 크립토 아카데미 전자책',
-          card1Body:'영어로 읽는 크립토 아카데미 전자책',
-          card2Body:'한국어로 읽는 크립토 아카데미 전자책',
+          card1Title:'영문 코인 프루프패스 전자책',
+          card2Title:'한글 코인 프루프패스 전자책',
+          card1Body:'영어로 읽는 코인 프루프패스 전자책',
+          card2Body:'한국어로 읽는 코인 프루프패스 전자책',
           button:'전자책 보기',
-          previewTitle:'크립토 아카데미 전자책 미리보기',
+          previewTitle:'코인 프루프패스 전자책 미리보기',
           previewBody:'초보자가 자주 막히는 개념과 실제 사용 흐름을 더 체계적으로 복습하는 전자책입니다.',
           previewPoints:[
             '핵심 개념을 더 차분하게 정리할 수 있습니다',
@@ -166,8 +166,8 @@
           safetySub:'การป้องกันสแกมและนิสัยที่ปลอดภัยกว่า',
           faqSub:'คำถามด่วนสำหรับมือใหม่',
           startSub:'เส้นทางเริ่มต้นที่แนะนำสำหรับมือใหม่มาก',
-          supportTitle:'สนับสนุน Crypto Academy',
-          supportBody:'Crypto Academy เปิดให้ใช้งานฟรี หากเว็บไซต์นี้ช่วยคุณได้ คุณสามารถสนับสนุนการอัปเดตต่อไปได้ที่นี่',
+          supportTitle:'สนับสนุน Coin ProofPath',
+          supportBody:'Coin ProofPath เปิดให้ใช้งานฟรี หากเว็บไซต์นี้ช่วยคุณได้ คุณสามารถสนับสนุนการอัปเดตต่อไปได้ที่นี่',
           supportButton:'Buy Me a Coffee',
           updateLabels:{Search:'ค้นหา',Lessons:'บทเรียน',Languages:'ภาษา',Updates:'อัปเดต',Safety:'ความปลอดภัย',Home:'หน้าหลัก'}
         },
@@ -180,14 +180,14 @@
           body:'PDF ฟรีที่เหมาะกับการกลับมาเปิดอีกครั้งก่อนโอน ก่อนซื้อครั้งแรก หรือก่อนเช็กความปลอดภัย'
         },
         ebook:{
-          title:'Crypto Academy eBook',
+          title:'Coin ProofPath eBook',
           body:'เลือกเวอร์ชันที่เหมาะกับคุณเมื่ออยากทบทวนแบบเป็นระบบมากขึ้น',
-          card1Title:'Crypto Academy eBook (ฉบับภาษาอังกฤษ)',
-          card2Title:'Crypto Academy eBook (ฉบับภาษาเกาหลี)',
-          card1Body:'eBook ของ Crypto Academy ภาษาอังกฤษ',
-          card2Body:'eBook ของ Crypto Academy ภาษาเกาหลี',
+          card1Title:'Coin ProofPath eBook (ฉบับภาษาอังกฤษ)',
+          card2Title:'Coin ProofPath eBook (ฉบับภาษาเกาหลี)',
+          card1Body:'eBook ของ Coin ProofPath ภาษาอังกฤษ',
+          card2Body:'eBook ของ Coin ProofPath ภาษาเกาหลี',
           button:'ดู eBook',
-          previewTitle:'ตัวอย่าง Crypto Academy eBook',
+          previewTitle:'ตัวอย่าง Coin ProofPath eBook',
           previewBody:'eBook ที่จัดลำดับแนวคิดและขั้นตอนใช้งานจริงสำหรับมือใหม่ให้ชัดขึ้น',
           previewPoints:[
             'เข้าใจแนวคิดหลักได้เป็นระบบมากขึ้น',
@@ -232,8 +232,8 @@
           safetySub:'Pencegahan scam dan kebiasaan yang lebih aman',
           faqSub:'Pertanyaan cepat untuk pemula',
           startSub:'Rute awal yang disarankan untuk pemula total',
-          supportTitle:'Dukung Crypto Academy',
-          supportBody:'Crypto Academy tetap gratis digunakan. Jika situs ini membantu, Anda bisa mendukung pembaruan berikutnya di sini.',
+          supportTitle:'Dukung Coin ProofPath',
+          supportBody:'Coin ProofPath tetap gratis digunakan. Jika situs ini membantu, Anda bisa mendukung pembaruan berikutnya di sini.',
           supportButton:'Buy Me a Coffee',
           updateLabels:{Search:'Cari',Lessons:'Pelajaran',Languages:'Bahasa',Updates:'Pembaruan',Safety:'Keamanan',Home:'Beranda'}
         },
@@ -246,14 +246,14 @@
           body:'PDF gratis yang berguna untuk dibuka lagi sebelum transfer, pembelian pertama, atau cek keamanan.'
         },
         ebook:{
-          title:'Crypto Academy eBook',
+          title:'Coin ProofPath eBook',
           body:'Pilih edisi yang cocok untuk Anda saat ingin meninjau materi dengan alur yang lebih rapi.',
-          card1Title:'Crypto Academy eBook (Edisi Inggris)',
-          card2Title:'Crypto Academy eBook (Edisi Korea)',
-          card1Body:'Crypto Academy eBook dalam bahasa Inggris',
-          card2Body:'Crypto Academy eBook dalam bahasa Korea',
+          card1Title:'Coin ProofPath eBook (Edisi Inggris)',
+          card2Title:'Coin ProofPath eBook (Edisi Korea)',
+          card1Body:'Coin ProofPath eBook dalam bahasa Inggris',
+          card2Body:'Coin ProofPath eBook dalam bahasa Korea',
           button:'Lihat eBook',
-          previewTitle:'Pratinjau Crypto Academy eBook',
+          previewTitle:'Pratinjau Coin ProofPath eBook',
           previewBody:'eBook terstruktur untuk meninjau konsep dan alur praktis yang paling sering membuat pemula bingung.',
           previewPoints:[
             'Memahami konsep inti dengan urutan yang lebih jelas',
@@ -298,8 +298,8 @@
           safetySub:'Prevencao de golpes e habitos mais seguros',
           faqSub:'Perguntas rapidas para iniciantes',
           startSub:'Primeira rota recomendada para quem esta comecando do zero',
-          supportTitle:'Apoie a Crypto Academy',
-          supportBody:'A Crypto Academy continua gratuita. Se ela ajudou voce, e possivel apoiar as proximas atualizacoes aqui.',
+          supportTitle:'Apoie a Coin ProofPath',
+          supportBody:'A Coin ProofPath continua gratuita. Se ela ajudou voce, e possivel apoiar as proximas atualizacoes aqui.',
           supportButton:'Buy Me a Coffee',
           updateLabels:{Search:'Busca',Lessons:'Licoes',Languages:'Idiomas',Updates:'Atualizacoes',Safety:'Seguranca',Home:'Inicio'}
         },
@@ -312,14 +312,14 @@
           body:'PDFs gratuitos para reabrir antes de uma transferencia, da primeira compra ou de uma checagem de seguranca.'
         },
         ebook:{
-          title:'Crypto Academy eBook',
+          title:'Coin ProofPath eBook',
           body:'Escolha a edicao que combina com voce quando quiser uma revisao mais organizada.',
-          card1Title:'Crypto Academy eBook (Edicao em Ingles)',
-          card2Title:'Crypto Academy eBook (Edicao em Coreano)',
-          card1Body:'Crypto Academy eBook em ingles',
-          card2Body:'Crypto Academy eBook em coreano',
+          card1Title:'Coin ProofPath eBook (Edicao em Ingles)',
+          card2Title:'Coin ProofPath eBook (Edicao em Coreano)',
+          card1Body:'Coin ProofPath eBook em ingles',
+          card2Body:'Coin ProofPath eBook em coreano',
           button:'Ver eBook',
-          previewTitle:'Preview do Crypto Academy eBook',
+          previewTitle:'Preview do Coin ProofPath eBook',
           previewBody:'Um eBook estruturado para revisar os conceitos e fluxos praticos que mais travam iniciantes.',
           previewPoints:[
             'Entender os conceitos centrais em uma ordem mais clara',
@@ -364,8 +364,8 @@
           safetySub:'Dolandiricilik onleme ve daha guvenli aliskanliklar',
           faqSub:'Yeni baslayanlar icin hizli sorular',
           startSub:'Tam yeni baslayanlar icin onerilen ilk rota',
-          supportTitle:'Crypto Academyye Destek Ol',
-          supportBody:'Crypto Academy ucretsiz kalir. Yardimci olduysa sonraki guncellemeleri burada destekleyebilirsiniz.',
+          supportTitle:'Coin ProofPathye Destek Ol',
+          supportBody:'Coin ProofPath ucretsiz kalir. Yardimci olduysa sonraki guncellemeleri burada destekleyebilirsiniz.',
           supportButton:'Buy Me a Coffee',
           updateLabels:{Search:'Arama',Lessons:'Dersler',Languages:'Diller',Updates:'Guncellemeler',Safety:'Guvenlik',Home:'Ana Sayfa'}
         },
@@ -378,14 +378,14 @@
           body:'Transferden, ilk alimdan veya guvenlik kontrolunden once yeniden acilabilecek ucretsiz PDFler.'
         },
         ebook:{
-          title:'Crypto Academy eBook',
+          title:'Coin ProofPath eBook',
           body:'Daha duzenli bir tekrar istediginizde size uyan surumu secin.',
-          card1Title:'Crypto Academy eBook (Ingilizce Surum)',
-          card2Title:'Crypto Academy eBook (Korece Surum)',
-          card1Body:'Ingilizce Crypto Academy eBook',
-          card2Body:'Korece Crypto Academy eBook',
+          card1Title:'Coin ProofPath eBook (Ingilizce Surum)',
+          card2Title:'Coin ProofPath eBook (Korece Surum)',
+          card1Body:'Ingilizce Coin ProofPath eBook',
+          card2Body:'Korece Coin ProofPath eBook',
           button:'eBooku Ac',
-          previewTitle:'Crypto Academy eBook On Izleme',
+          previewTitle:'Coin ProofPath eBook On Izleme',
           previewBody:'Yeni baslayanlarin en cok zorlandigi kavramlari ve pratik akisları daha duzenli tekrar etmeye yardim eden eBook.',
           previewPoints:[
             'Temel kavramlari daha acik bir sirayla anlamak',
@@ -430,8 +430,8 @@
           safetySub:'Prevencion de estafas y habitos mas seguros',
           faqSub:'Preguntas rapidas para principiantes',
           startSub:'Primera ruta recomendada para quien empieza desde cero',
-          supportTitle:'Apoya a Crypto Academy',
-          supportBody:'Crypto Academy sigue siendo gratis. Si te ayudo, puedes apoyar las proximas actualizaciones aqui.',
+          supportTitle:'Apoya a Coin ProofPath',
+          supportBody:'Coin ProofPath sigue siendo gratis. Si te ayudo, puedes apoyar las proximas actualizaciones aqui.',
           supportButton:'Buy Me a Coffee',
           updateLabels:{Search:'Buscar',Lessons:'Lecciones',Languages:'Idiomas',Updates:'Actualizaciones',Safety:'Seguridad',Home:'Inicio'}
         },
@@ -444,14 +444,14 @@
           body:'PDF gratis para volver a abrir antes de una transferencia, de la primera compra o de una revision de seguridad.'
         },
         ebook:{
-          title:'Crypto Academy eBook',
+          title:'Coin ProofPath eBook',
           body:'Elige la edicion que te encaja mejor cuando quieras un repaso mas ordenado.',
-          card1Title:'Crypto Academy eBook (Edicion en Ingles)',
-          card2Title:'Crypto Academy eBook (Edicion en Coreano)',
-          card1Body:'Crypto Academy eBook en ingles',
-          card2Body:'Crypto Academy eBook en coreano',
+          card1Title:'Coin ProofPath eBook (Edicion en Ingles)',
+          card2Title:'Coin ProofPath eBook (Edicion en Coreano)',
+          card1Body:'Coin ProofPath eBook en ingles',
+          card2Body:'Coin ProofPath eBook en coreano',
           button:'Ver eBook',
-          previewTitle:'Vista Previa del Crypto Academy eBook',
+          previewTitle:'Vista Previa del Coin ProofPath eBook',
           previewBody:'Un eBook estructurado para repasar los conceptos y flujos practicos que mas suelen costar a los principiantes.',
           previewPoints:[
             'Entender los conceptos clave en un orden mas claro',
@@ -496,8 +496,8 @@
           safetySub:'منع الاحتيال وعادات اكثر امانا',
           faqSub:'اسئلة سريعة للمبتدئين',
           startSub:'اول مسار مقترح لمن يبدأ من الصفر',
-          supportTitle:'ادعم Crypto Academy',
-          supportBody:'تبقى Crypto Academy مجانية. اذا افادتك، يمكنك دعم التحديثات القادمة من هنا.',
+          supportTitle:'ادعم Coin ProofPath',
+          supportBody:'تبقى Coin ProofPath مجانية. اذا افادتك، يمكنك دعم التحديثات القادمة من هنا.',
           supportButton:'Buy Me a Coffee',
           updateLabels:{Search:'بحث',Lessons:'دروس',Languages:'اللغات',Updates:'تحديثات',Safety:'الامان',Home:'الرئيسية'}
         },
@@ -510,14 +510,14 @@
           body:'ملفات PDF مجانية للعودة اليها قبل التحويل او قبل اول شراء او قبل فحص الامان.'
         },
         ebook:{
-          title:'Crypto Academy eBook',
+          title:'Coin ProofPath eBook',
           body:'اختر النسخة التي تناسبك عندما تريد مراجعة اكثر ترتيبا.',
-          card1Title:'Crypto Academy eBook (النسخة الانجليزية)',
-          card2Title:'Crypto Academy eBook (النسخة الكورية)',
-          card1Body:'Crypto Academy eBook باللغة الانجليزية',
-          card2Body:'Crypto Academy eBook باللغة الكورية',
+          card1Title:'Coin ProofPath eBook (النسخة الانجليزية)',
+          card2Title:'Coin ProofPath eBook (النسخة الكورية)',
+          card1Body:'Coin ProofPath eBook باللغة الانجليزية',
+          card2Body:'Coin ProofPath eBook باللغة الكورية',
           button:'عرض eBook',
-          previewTitle:'معاينة Crypto Academy eBook',
+          previewTitle:'معاينة Coin ProofPath eBook',
           previewBody:'كتاب منظم لمراجعة المفاهيم والمسارات العملية التي يتعثر فيها المبتدئون غالبا.',
           previewPoints:[
             'فهم المفاهيم الاساسية بترتيب اوضح',
@@ -562,8 +562,8 @@
           safetySub:'Phong tranh scam va thoi quen an toan hon',
           faqSub:'Cau hoi nhanh cho nguoi moi',
           startSub:'Lo trinh dau tien duoc goi y cho nguoi moi hoan toan',
-          supportTitle:'Ung Ho Crypto Academy',
-          supportBody:'Crypto Academy van mien phi. Neu no huu ich cho ban, ban co the ung ho cac cap nhat tiep theo tai day.',
+          supportTitle:'Ung Ho Coin ProofPath',
+          supportBody:'Coin ProofPath van mien phi. Neu no huu ich cho ban, ban co the ung ho cac cap nhat tiep theo tai day.',
           supportButton:'Buy Me a Coffee',
           updateLabels:{Search:'Tim Kiem',Lessons:'Bai Hoc',Languages:'Ngon Ngu',Updates:'Cap Nhat',Safety:'An Toan',Home:'Trang Chu'}
         },
@@ -576,14 +576,14 @@
           body:'PDF mien phi de mo lai truoc khi chuyen tien, truoc lan mua dau tien, hoac truoc khi kiem tra an toan.'
         },
         ebook:{
-          title:'Crypto Academy eBook',
+          title:'Coin ProofPath eBook',
           body:'Chon phien ban phu hop khi ban muon on tap theo mot luong ro rang hon.',
-          card1Title:'Crypto Academy eBook (Ban Tieng Anh)',
-          card2Title:'Crypto Academy eBook (Ban Tieng Han)',
-          card1Body:'Crypto Academy eBook bang tieng Anh',
-          card2Body:'Crypto Academy eBook bang tieng Han',
+          card1Title:'Coin ProofPath eBook (Ban Tieng Anh)',
+          card2Title:'Coin ProofPath eBook (Ban Tieng Han)',
+          card1Body:'Coin ProofPath eBook bang tieng Anh',
+          card2Body:'Coin ProofPath eBook bang tieng Han',
           button:'Xem eBook',
-          previewTitle:'Xem Truoc Crypto Academy eBook',
+          previewTitle:'Xem Truoc Coin ProofPath eBook',
           previewBody:'eBook co cau truc giup on lai cac khai niem va luong thuc te ma nguoi moi thuong gap kho.',
           previewPoints:[
             'Hieu cac khai niem cot loi theo trinh tu ro hon',
@@ -628,8 +628,8 @@
           safetySub:'Kariyar damfara da halaye masu aminci',
           faqSub:'Tambayoyi masu sauri ga masu farawa',
           startSub:'Hanyar farko da aka fi ba da shawara ga sabon mai koyo',
-          supportTitle:'Tallafa wa Crypto Academy',
-          supportBody:'Crypto Academy tana nan kyauta. Idan ta taimaka maka, za ka iya tallafa wa sabbin sabuntawa daga nan.',
+          supportTitle:'Tallafa wa Coin ProofPath',
+          supportBody:'Coin ProofPath tana nan kyauta. Idan ta taimaka maka, za ka iya tallafa wa sabbin sabuntawa daga nan.',
           supportButton:'Buy Me a Coffee',
           updateLabels:{Search:'Bincike',Lessons:'Darussa',Languages:'Harsuna',Updates:'Sabuntawa',Safety:'Tsaro',Home:'Gida'}
         },
@@ -642,14 +642,14 @@
           body:'PDF na kyauta da za ka iya bude su kafin tura kudi, kafin sayen farko, ko kafin duba tsaro.'
         },
         ebook:{
-          title:'Crypto Academy eBook',
+          title:'Coin ProofPath eBook',
           body:'Zabi sigar da ta dace da kai idan kana son bita mai tsari fiye da haka.',
-          card1Title:'Crypto Academy eBook (Sigar Turanci)',
-          card2Title:'Crypto Academy eBook (Sigar Koriya)',
-          card1Body:'Crypto Academy eBook a Turanci',
-          card2Body:'Crypto Academy eBook a Koriya',
+          card1Title:'Coin ProofPath eBook (Sigar Turanci)',
+          card2Title:'Coin ProofPath eBook (Sigar Koriya)',
+          card1Body:'Coin ProofPath eBook a Turanci',
+          card2Body:'Coin ProofPath eBook a Koriya',
           button:'Duba eBook',
-          previewTitle:'Gabatarwar Crypto Academy eBook',
+          previewTitle:'Gabatarwar Coin ProofPath eBook',
           previewBody:'eBook mai tsari da ke taimaka wa masu farawa su sake duba kaidoji da hanyoyin amfani na zahiri.',
           previewPoints:[
             'Fahimtar muhimman kaidoji cikin tsari mafi bayyani',
@@ -1055,8 +1055,471 @@
     if(typeof showLesson === 'function') showLesson(index);
   };
 
-  function getLessonSevenRoadmapIconHtml(){
-    return '<span class="lesson7-roadmap-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3z"></path><path d="M12 8v5"></path><path d="M12 16h.01"></path></svg></span>';
+  function safeT(key, fallback){
+    if(typeof t === 'function'){
+      var value = t(key);
+      if(value && value !== key) return value;
+    }
+    return fallback || '';
+  }
+
+  function getRoadmapLocalePackFinal(){
+    var lang = homeFixLang();
+    var packs = {
+      en:{
+        heading:'Beginner Roadmap',
+        labels:['Blockchain','Wallets','Safe Transfers','5 Roles of Crypto','Real-World Lessons','Buying Your First Crypto','Spotting Crypto Scams'],
+        sublines:['Shared ledger basics','Keys and access','Sending safely','Understanding token roles','Why structure matters','A safe first purchase flow','Simple scam red flags'],
+        prev:'Scroll to previous lessons',
+        next:'Scroll to next lessons',
+        day:function(n){ return 'Day ' + n; }
+      },
+      ko:{
+        heading:'초보자 로드맵',
+        labels:['블록체인','지갑','안전한 전송','암호화폐의 5가지 역할','실제 교훈','첫 암호화폐 구매하기','암호화폐 사기 구별하기'],
+        sublines:['공유 원장 기초','키와 접근 권한','실수 없이 보내기','토큰 역할 쉽게 이해하기','구조를 알아야 하는 이유','안전한 첫 구매 흐름','초보자용 경고 신호'],
+        prev:'이전 카드 보기',
+        next:'다음 카드 보기',
+        day:function(n){ return n + '일차'; }
+      },
+      th:{
+        heading:'โรดแมปสำหรับมือใหม่',
+        labels:['บล็อกเชน','วอลเล็ต','การโอนอย่างปลอดภัย','5 บทบาทของคริปโต','บทเรียนจากโลกจริง','ซื้อคริปโตครั้งแรก','แยกแยะกลโกงคริปโต'],
+        sublines:['พื้นฐานของบัญชีแยกประเภทแบบแชร์','คีย์และสิทธิ์การเข้าถึง','ส่งอย่างปลอดภัย','เข้าใจบทบาทของโทเคน','ทำไมโครงสร้างจึงสำคัญ','ขั้นตอนซื้อครั้งแรกอย่างปลอดภัย','สัญญาณเตือนภัยสำหรับมือใหม่'],
+        prev:'ดูการ์ดก่อนหน้า',
+        next:'ดูการ์ดถัดไป',
+        day:function(n){ return 'วันที่ ' + n; }
+      },
+      id:{
+        heading:'Roadmap Pemula',
+        labels:['Blockchain','Wallet','Transfer Aman','5 Peran Crypto','Pelajaran Dunia Nyata','Membeli Crypto Pertama','Mengenali Scam Crypto'],
+        sublines:['Dasar buku besar bersama','Kunci dan akses','Kirim dengan aman','Memahami peran token','Mengapa struktur itu penting','Alur pembelian pertama yang aman','Tanda bahaya scam sederhana'],
+        prev:'Lihat kartu sebelumnya',
+        next:'Lihat kartu berikutnya',
+        day:function(n){ return 'Hari ' + n; }
+      },
+      pt:{
+        heading:'Roteiro para Iniciantes',
+        labels:['Blockchain','Carteiras','Transferências Seguras','5 Papéis do Cripto','Lições do Mundo Real','Comprar sua primeira cripto','Identificar golpes de cripto'],
+        sublines:['Base do livro-razão compartilhado','Chaves e acesso','Enviar com segurança','Entender o papel dos tokens','Por que a estrutura importa','Um fluxo seguro de primeira compra','Sinais simples de golpe'],
+        prev:'Ver cards anteriores',
+        next:'Ver próximos cards',
+        day:function(n){ return 'Dia ' + n; }
+      },
+      tr:{
+        heading:'Yol Haritası',
+        labels:['Blockchain','Cüzdanlar','Güvenli Transferler','Kriptonun 5 Rolü','Gerçek Dünya Dersleri','İlk Kriptonu Satın Almak','Kripto Dolandırıcılıklarını Tanımak'],
+        sublines:['Paylaşılan defter temeli','Anahtarlar ve erişim','Güvenli gönderim','Token rollerini anlama','Yapının neden önemli olduğu','Güvenli ilk alım akışı','Basit dolandırıcılık işaretleri'],
+        prev:'Önceki kartları göster',
+        next:'Sonraki kartları göster',
+        day:function(n){ return n + '. Gün'; }
+      },
+      es:{
+        heading:'Ruta para Principiantes',
+        labels:['Blockchain','Billeteras','Transferencias Seguras','5 Roles del Cripto','Lecciones del Mundo Real','Comprar tu primera cripto','Detectar estafas cripto'],
+        sublines:['Base del libro mayor compartido','Claves y acceso','Enviar con seguridad','Entender el papel de los tokens','Por qué importa la estructura','Un flujo seguro de primera compra','Señales simples de estafa'],
+        prev:'Ver tarjetas anteriores',
+        next:'Ver tarjetas siguientes',
+        day:function(n){ return 'Día ' + n; }
+      },
+      ar:{
+        heading:'خارطة طريق للمبتدئين',
+        labels:['البلوكتشين','المحافظ','التحويلات الآمنة','5 أدوار للكريبتو','دروس من العالم الحقيقي','شراء أول عملة رقمية','اكتشاف عمليات الاحتيال في الكريبتو'],
+        sublines:['أساس السجل المشترك','المفاتيح وإمكانية الوصول','الإرسال بأمان','فهم دور التوكنات','لماذا يهم التنظيم','خطوات أول شراء بشكل آمن','إشارات احتيال بسيطة'],
+        prev:'عرض البطاقات السابقة',
+        next:'عرض البطاقات التالية',
+        day:function(n){ return 'اليوم ' + n; }
+      },
+      vi:{
+        heading:'Lộ trình cho người mới',
+        labels:['Blockchain','Ví tiền','Chuyển tiền an toàn','5 vai trò của crypto','Bài học từ thế giới thực','Mua crypto đầu tiên','Nhận biết lừa đảo crypto'],
+        sublines:['Nền tảng sổ cái chung','Khóa và quyền truy cập','Gửi an toàn','Hiểu vai trò của token','Vì sao cấu trúc quan trọng','Quy trình mua đầu tiên an toàn','Dấu hiệu lừa đảo cơ bản'],
+        prev:'Xem thẻ trước',
+        next:'Xem thẻ tiếp theo',
+        day:function(n){ return 'Ngày ' + n; }
+      },
+      ha:{
+        heading:'Taswirar Hanya ga Masu Farawa',
+        labels:['Sarkar bayanai','Walat','Canja Wuri Cikin Aminci','Ayyuka 5 na tokan','Darussan Duniya ta Gaskiya','Siyan kudin dijital na farko','Gane zamban crypto'],
+        sublines:['Asalin kundin rabawa','Makullai da damar shiga','Aika ba tare da kuskure ba','Fahimtar rawar tokan','Me ya sa tsari yake da muhimmanci','Hanyar saye ta farko cikin aminci','Sauƙaƙan alamar zamba'],
+        prev:'Duba katunan baya',
+        next:'Duba katunan gaba',
+        day:function(n){ return 'Rana ta ' + n; }
+      }
+    };
+    return packs[lang] || packs.en;
+  }
+
+  function getRoadmapDayLabelFinal(index){
+    return getRoadmapLocalePackFinal().day(index + 1);
+    var day = index + 1;
+    var lang = homeFixLang();
+    var map = {
+      en:'Day ' + day,
+      ko:day + '일차',
+      th:'วันที่ ' + day,
+      id:'Hari ' + day,
+      pt:'Dia ' + day,
+      tr:day + '. Gün',
+      es:'Día ' + day,
+      ar:'اليوم ' + day,
+      vi:'Ngày ' + day,
+      ha:'Rana ta ' + day
+    };
+    return map[lang] || ('Day ' + day);
+  }
+
+  function getRoadmapToneFinal(index){
+    return ['beginner','wallet','transfer','roles','real-world','first-buy','safety'][index] || 'beginner';
+  }
+
+  function getRoadmapSublineFinal(index){
+    var pack = getRoadmapLocalePackFinal();
+    return safeT('nav.l' + (index + 1) + 'sub', pack.sublines[index] || '');
+    var lang = homeFixLang();
+    var fallbackMap = {
+      en:[
+        'Shared ledger basics',
+        'Keys and access',
+        'Sending safely',
+        'Understanding token roles',
+        'Why structure matters',
+        'A safe first purchase flow',
+        'Simple scam red flags'
+      ],
+      ko:[
+        '공유 원장 기초',
+        '키와 접근 권한',
+        '실수 없이 보내기',
+        '토큰 역할 쉽게 이해하기',
+        '구조를 알아야 하는 이유',
+        '안전한 첫 구매 흐름',
+        '초보자용 경고 신호'
+      ],
+      th:[
+        'พื้นฐานบัญชีแยกประเภท',
+        'กุญแจและการเข้าถึง',
+        'ส่งอย่างปลอดภัย',
+        'เข้าใจบทบาทของโทเค็น',
+        'ทำไมโครงสร้างจึงสำคัญ',
+        'เส้นทางซื้อครั้งแรกอย่างปลอดภัย',
+        'สัญญาณเตือนภัยหลอกลวง'
+      ],
+      id:[
+        'Dasar buku besar bersama',
+        'Kunci dan akses',
+        'Kirim dengan aman',
+        'Memahami peran token',
+        'Mengapa struktur itu penting',
+        'Alur beli pertama yang aman',
+        'Tanda bahaya scam sederhana'
+      ],
+      pt:[
+        'Base do livro-razão compartilhado',
+        'Chaves e acesso',
+        'Enviar com segurança',
+        'Entender o papel dos tokens',
+        'Por que a estrutura importa',
+        'Fluxo seguro da primeira compra',
+        'Sinais simples de golpe'
+      ],
+      tr:[
+        'Paylaşılan defter temeli',
+        'Anahtarlar ve erişim',
+        'Güvenli gönderim',
+        'Token rollerini anlama',
+        'Yapının neden önemli olduğu',
+        'Güvenli ilk alım akışı',
+        'Basit dolandırıcılık işaretleri'
+      ],
+      es:[
+        'Base del libro compartido',
+        'Claves y acceso',
+        'Enviar con seguridad',
+        'Entender el papel de los tokens',
+        'Por qué importa la estructura',
+        'Flujo seguro de primera compra',
+        'Señales simples de estafa'
+      ],
+      ar:[
+        'أساس الدفتر المشترك',
+        'المفاتيح والوصول',
+        'الإرسال بأمان',
+        'فهم دور التوكنات',
+        'لماذا يهم هذا الترتيب',
+        'مسار شراء أول آمن',
+        'إشارات احتيال بسيطة'
+      ],
+      vi:[
+        'Nền tảng sổ cái chung',
+        'Khóa và quyền truy cập',
+        'Gửi an toàn',
+        'Hiểu vai trò của token',
+        'Vì sao cấu trúc quan trọng',
+        'Quy trình mua đầu tiên an toàn',
+        'Dấu hiệu lừa đảo cơ bản'
+      ],
+      ha:[
+        'Asalin kundin raba bayanai',
+        'Maballi da shiga',
+        'Aika cikin aminci',
+        'Fahimtar rawar token',
+        'Dalilin da tsarin yake da muhimmanci',
+        'Tsarin sayen farko cikin aminci',
+        'Sauƙaƙan alamar zamba'
+      ]
+    };
+    var list = fallbackMap[lang] || fallbackMap.en;
+    return safeT('nav.l' + (index + 1) + 'sub', list[index] || '');
+  }
+
+  function getRoadmapLabelFinal(index, fallback){
+    var pack = getRoadmapLocalePackFinal();
+    return safeT('nav.l' + (index + 1), pack.labels[index] || fallback || ('Lesson ' + (index + 1)));
+  }
+
+  function getRoadmapHeadingFinal(){
+    return getRoadmapLocalePackFinal().heading;
+  }
+
+  function getRoadmapStatusPackFinal(){
+    var lang = homeFixLang();
+    var packs = {
+      en:{ completed:'Completed', continueText:'Continue', notStarted:'Not started', open:'Open lesson', review:'Review' },
+      ko:{ completed:'완료', continueText:'이어보기', notStarted:'시작 전', open:'강의 열기', review:'복습하기' },
+      th:{ completed:'เสร็จแล้ว', continueText:'เรียนต่อ', notStarted:'ยังไม่เริ่ม', open:'เปิดบทเรียน', review:'ทบทวน' },
+      id:{ completed:'Selesai', continueText:'Lanjutkan', notStarted:'Belum mulai', open:'Buka pelajaran', review:'Tinjau' },
+      pt:{ completed:'Concluído', continueText:'Continuar', notStarted:'Não iniciado', open:'Abrir lição', review:'Rever' },
+      br:{ completed:'Concluído', continueText:'Continuar', notStarted:'Não iniciado', open:'Abrir aula', review:'Revisar' },
+      tr:{ completed:'Tamamlandı', continueText:'Devam et', notStarted:'Başlamadı', open:'Dersi aç', review:'Gözden geçir' },
+      es:{ completed:'Completado', continueText:'Continuar', notStarted:'Sin iniciar', open:'Abrir lección', review:'Repasar' },
+      ar:{ completed:'مكتمل', continueText:'متابعة', notStarted:'لم يبدأ', open:'افتح الدرس', review:'مراجعة' },
+      vi:{ completed:'Đã hoàn thành', continueText:'Tiếp tục', notStarted:'Chưa bắt đầu', open:'Mở bài học', review:'Ôn lại' },
+      ha:{ completed:'An kammala', continueText:'Ci gaba', notStarted:'Ba a fara ba', open:'Bude darasi', review:'Bita' }
+    };
+    return packs[lang] || packs.en;
+  }
+
+  function getRoadmapRecommendationFinal(completedList){
+    return getFirstIncompleteLessonFinal(completedList || [], 7);
+  }
+
+  function getRoadmapScrollerAriaFinal(direction){
+    var pack = getRoadmapLocalePackFinal();
+    return direction < 0 ? pack.prev : pack.next;
+  }
+
+  function getRoadmapScrollStepFinal(grid){
+    if(!grid) return 240;
+    var firstCard = grid.querySelector('.roadmap-card');
+    var step = Math.max(Math.round(grid.clientWidth * 0.78), 220);
+    if(!firstCard || !window.getComputedStyle) return step;
+    var styles = window.getComputedStyle(grid);
+    var gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+    return Math.max(Math.round(firstCard.getBoundingClientRect().width + gap), 220);
+  }
+
+  function updateRoadmapScrollerStateFinal(shell, grid){
+    if(!shell || !grid) return;
+    var maxScroll = Math.max(0, grid.scrollWidth - grid.clientWidth - 2);
+    var left = Math.max(0, grid.scrollLeft || 0);
+    shell.classList.toggle('is-start', left <= 2);
+    shell.classList.toggle('is-end', left >= maxScroll);
+    var prev = shell.querySelector('.roadmap-scroll-btn.is-prev');
+    var next = shell.querySelector('.roadmap-scroll-btn.is-next');
+    if(prev) prev.disabled = left <= 2;
+    if(next) next.disabled = left >= maxScroll;
+  }
+
+  function createRoadmapScrollButtonFinal(direction){
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'roadmap-scroll-btn ' + (direction < 0 ? 'is-prev' : 'is-next');
+    button.setAttribute('aria-label', getRoadmapScrollerAriaFinal(direction));
+    button.innerHTML = direction < 0
+      ? '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.5 6 8.5 12l6 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+      : '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9.5 6 6 6-6 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    return button;
+  }
+
+  function ensureRoadmapScrollerFinal(panel){
+    if(!panel) return;
+    var section = panel.querySelector('.roadmap-section');
+    if(!section) return;
+    var grid = section.querySelector('.roadmap-grid');
+    if(!grid) return;
+
+    grid.setAttribute('tabindex', '0');
+
+    var shell = section.querySelector('.roadmap-shell');
+    if(!shell){
+      shell = document.createElement('div');
+      shell.className = 'roadmap-shell is-start';
+      grid.parentNode.insertBefore(shell, grid);
+      shell.appendChild(grid);
+    }
+
+    var prev = shell.querySelector('.roadmap-scroll-btn.is-prev');
+    if(!prev){
+      prev = createRoadmapScrollButtonFinal(-1);
+      shell.insertBefore(prev, shell.firstChild);
+    }
+    prev.setAttribute('aria-label', getRoadmapScrollerAriaFinal(-1));
+
+    var next = shell.querySelector('.roadmap-scroll-btn.is-next');
+    if(!next){
+      next = createRoadmapScrollButtonFinal(1);
+      shell.appendChild(next);
+    }
+    next.setAttribute('aria-label', getRoadmapScrollerAriaFinal(1));
+
+    if(!shell.__roadmapScrollerBound){
+      var dragState = { active:false, pointerId:null, startX:0, startLeft:0, moved:false };
+      prev.addEventListener('click', function(){
+        grid.scrollBy({ left: -getRoadmapScrollStepFinal(grid), behavior: 'smooth' });
+      });
+      next.addEventListener('click', function(){
+        grid.scrollBy({ left: getRoadmapScrollStepFinal(grid), behavior: 'smooth' });
+      });
+      grid.addEventListener('scroll', function(){
+        updateRoadmapScrollerStateFinal(shell, grid);
+      }, { passive: true });
+      grid.addEventListener('wheel', function(event){
+        if(event.ctrlKey || event.shiftKey) return;
+        if(Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+        grid.scrollLeft += event.deltaY;
+        if(event.cancelable) event.preventDefault();
+      }, { passive: false });
+      grid.addEventListener('keydown', function(event){
+        if(event.key === 'ArrowRight'){
+          grid.scrollBy({ left: getRoadmapScrollStepFinal(grid), behavior: 'smooth' });
+          event.preventDefault();
+        } else if(event.key === 'ArrowLeft'){
+          grid.scrollBy({ left: -getRoadmapScrollStepFinal(grid), behavior: 'smooth' });
+          event.preventDefault();
+        }
+      });
+      grid.addEventListener('pointerdown', function(event){
+        if(event.pointerType !== 'mouse' || event.button !== 0) return;
+        dragState.active = true;
+        dragState.pointerId = event.pointerId;
+        dragState.startX = event.clientX;
+        dragState.startLeft = grid.scrollLeft;
+        dragState.moved = false;
+        shell.classList.add('is-dragging');
+        if(typeof grid.setPointerCapture === 'function'){
+          try{ grid.setPointerCapture(event.pointerId); }catch(err){}
+        }
+      });
+      grid.addEventListener('pointermove', function(event){
+        if(!dragState.active) return;
+        var delta = event.clientX - dragState.startX;
+        if(Math.abs(delta) > 4) dragState.moved = true;
+        grid.scrollLeft = dragState.startLeft - delta;
+      });
+      function endRoadmapDrag(event){
+        if(!dragState.active) return;
+        dragState.active = false;
+        shell.classList.remove('is-dragging');
+        if(dragState.moved) shell.__roadmapSuppressClickUntil = Date.now() + 180;
+        if(typeof grid.releasePointerCapture === 'function' && dragState.pointerId != null){
+          try{ grid.releasePointerCapture(dragState.pointerId); }catch(err){}
+        }
+        dragState.pointerId = null;
+        if(dragState.moved && event && event.cancelable) event.preventDefault();
+      }
+      grid.addEventListener('pointerup', endRoadmapDrag);
+      grid.addEventListener('pointercancel', endRoadmapDrag);
+      grid.addEventListener('lostpointercapture', endRoadmapDrag);
+      shell.addEventListener('click', function(event){
+        if(shell.__roadmapSuppressClickUntil && Date.now() < shell.__roadmapSuppressClickUntil){
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }, true);
+      shell.__roadmapScrollerBound = true;
+    }
+
+    if(!window.__roadmapScrollerResizeBound){
+      window.addEventListener('resize', function(){
+        var shells = document.querySelectorAll('.roadmap-shell');
+        for(var i = 0; i < shells.length; i++){
+          var currentShell = shells[i];
+          if(!currentShell) continue;
+          updateRoadmapScrollerStateFinal(currentShell, currentShell.querySelector('.roadmap-grid'));
+        }
+      });
+      window.__roadmapScrollerResizeBound = true;
+    }
+
+    updateRoadmapScrollerStateFinal(shell, grid);
+    if(typeof requestAnimationFrame === 'function'){
+      requestAnimationFrame(function(){
+        updateRoadmapScrollerStateFinal(shell, grid);
+      });
+    }
+  }
+
+  function syncRoadmapCardsFinal(panel){
+    var section = queryWithin(panel, '.roadmap-section:not(.intermediate-roadmap-section)');
+    if(!section) return;
+    var heading = section.querySelector('h2');
+    if(heading) heading.textContent = '📚 ' + getRoadmapHeadingFinal();
+    var cards = queryAllWithin(section, '.roadmap-card');
+    var completedList = getCompletedSetFinal();
+    var recommendedIndex = getRoadmapRecommendationFinal(completedList);
+    var statusPack = getRoadmapStatusPackFinal();
+    for(var i = 0; i < cards.length; i++){
+      var card = cards[i];
+      if(!card) continue;
+      card.setAttribute('data-roadmap-tone', getRoadmapToneFinal(i));
+      removeNodes(queryAllWithin(card, '.lesson7-roadmap-icon'));
+
+      var icon = card.querySelector('.sec-icon');
+      var day = card.querySelector('.roadmap-day');
+      var label = card.querySelector('.roadmap-label');
+      if(!day || !label) continue;
+
+      var top = card.querySelector('.roadmap-card-top') || document.createElement('div');
+      var body = card.querySelector('.roadmap-card-body') || document.createElement('div');
+      var subline = card.querySelector('.roadmap-subline') || document.createElement('div');
+      var foot = card.querySelector('.roadmap-card-foot') || document.createElement('div');
+      var status = card.querySelector('.roadmap-status') || document.createElement('span');
+      var cta = card.querySelector('.roadmap-card-cta') || document.createElement('strong');
+      top.className = 'roadmap-card-top';
+      body.className = 'roadmap-card-body';
+      subline.className = 'roadmap-subline';
+      foot.className = 'roadmap-card-foot';
+      status.className = 'roadmap-status';
+      cta.className = 'roadmap-card-cta';
+
+      day.textContent = getRoadmapDayLabelFinal(i);
+      label.textContent = getRoadmapLabelFinal(i, (label.textContent || '').trim());
+      subline.textContent = getRoadmapSublineFinal(i);
+      var isDone = hasCompletedLessonFinal(completedList, i);
+      var isRecommended = !isDone && i === recommendedIndex;
+      status.textContent = (isDone ? '✓ ' : '') + (isDone ? statusPack.completed : (isRecommended ? statusPack.continueText : statusPack.notStarted));
+      cta.textContent = (isDone ? statusPack.review : (isRecommended ? statusPack.continueText : statusPack.open)) + ' →';
+      card.classList.toggle('is-complete', isDone);
+      card.classList.toggle('is-recommended', isRecommended);
+
+      while(top.firstChild) top.removeChild(top.firstChild);
+      while(body.firstChild) body.removeChild(body.firstChild);
+      while(foot.firstChild) foot.removeChild(foot.firstChild);
+
+      if(icon) top.appendChild(icon);
+      top.appendChild(day);
+      body.appendChild(label);
+      if(subline.textContent) body.appendChild(subline);
+      foot.appendChild(status);
+      foot.appendChild(cta);
+
+      card.appendChild(top);
+      card.appendChild(body);
+      card.appendChild(foot);
+      card.setAttribute('aria-label', day.textContent + ' - ' + label.textContent);
+    }
+    ensureRoadmapScrollerFinal(panel);
   }
 
   function getHomeMenuItemsFinal(){
@@ -1117,8 +1580,8 @@
     return ''
       + '<section class="home-support-block">'
       +   '<div class="home-support-copy">'
-      +     '<div class="home-support-title">' + (pack.supportTitle || 'Support Crypto Academy') + '</div>'
-      +     '<div class="home-support-body">' + (pack.supportBody || 'Crypto Academy stays free to use. If it helped you, you can support future updates here.') + '</div>'
+      +     '<div class="home-support-title">' + (pack.supportTitle || 'Support Coin ProofPath') + '</div>'
+      +     '<div class="home-support-body">' + (pack.supportBody || 'Coin ProofPath stays free to use. If it helped you, you can support future updates here.') + '</div>'
       +   '</div>'
       +   '<a class="home-support-btn" data-home-track="home.support.buymeacoffee" data-home-track-label="Support Buy Me a Coffee" href="https://buymeacoffee.com/beenetworkkorea" target="_blank" rel="noopener noreferrer">' + (pack.supportButton || 'Buy Me a Coffee') + '</a>'
       + '</section>';
@@ -1128,8 +1591,8 @@
     var pack = getHomeFixPack();
     return ''
       + '<div class="src-section-block src-support-carryover-block" data-source-section="supportNote" data-source-group="supportNote">'
-      +   '<div class="src-section-heading">' + (pack.supportTitle || 'Support Crypto Academy') + '</div>'
-      +   '<p class="src-group-desc">' + (pack.supportBody || 'Crypto Academy stays free to use. If it helped you, you can support future updates here.') + '</p>'
+      +   '<div class="src-section-heading">' + (pack.supportTitle || 'Support Coin ProofPath') + '</div>'
+      +   '<p class="src-group-desc">' + (pack.supportBody || 'Coin ProofPath stays free to use. If it helped you, you can support future updates here.') + '</p>'
       +   '<div class="src-actions"><a class="src-action-btn" href="https://buymeacoffee.com/beenetworkkorea" target="_blank" rel="noopener noreferrer">' + (pack.supportButton || 'Buy Me a Coffee') + '</a></div>'
       + '</div>';
   }
@@ -1166,7 +1629,7 @@
   function buildHomeAvailablePremiumGuidesHtml(){
     var pack = getHomeAvailablePremiumGuidesPack();
     var previewHtml = '<div class="home-ebook-preview-box">'
-      + '<div class="home-ebook-preview-title">' + (pack.previewTitle || 'Crypto Academy eBook Preview') + '</div>'
+      + '<div class="home-ebook-preview-title">' + (pack.previewTitle || 'Coin ProofPath eBook Preview') + '</div>'
       + '<div class="home-ebook-preview-body">' + (pack.previewBody || '') + '</div>';
     if(pack.previewPoints && pack.previewPoints.length){
       previewHtml += '<ul class="home-ebook-preview-list">';
@@ -1178,7 +1641,7 @@
     previewHtml += '</div>';
     return ''
       + '<section class="home-available-premium-guides" id="home-crypto-ebook-section">'
-      +   '<div class="home-available-premium-guides-title">' + (pack.title || 'Crypto Academy eBook') + '</div>'
+      +   '<div class="home-available-premium-guides-title">' + (pack.title || 'Coin ProofPath eBook') + '</div>'
       +   '<div class="home-available-premium-guides-body">' + (pack.body || '') + '</div>'
       +   previewHtml
       +   '<div class="home-available-premium-guides-grid">'
@@ -1359,6 +1822,11 @@
 
   window.buildHomeActionCardsHtmlFinal = buildHomeActionCardsHtml;
 
+  function queryWithin(root, selector){
+    if(!root || !root.querySelector) return null;
+    return root.querySelector(selector);
+  }
+
   function queryAllWithin(root, selector){
     if(!root || !root.querySelectorAll) return [];
     var found = root.querySelectorAll(selector);
@@ -1448,16 +1916,6 @@
       prefix = prefix.trim();
       if(!prefix) prefix = baseText.trim();
       sub.textContent = prefix + ' - ' + getLessonTitleFinal(targetIndex);
-    }
-  }
-
-  function ensureRoadmapLessonSevenIconFinal(panel){
-    var cards = queryAllWithin(panel, '.roadmap-card');
-    if(cards.length < 7) return;
-    var card = cards[6];
-    if(card && !card.querySelector('.lesson7-roadmap-icon')){
-      var day = card.querySelector('.roadmap-day');
-      if(day) day.insertAdjacentHTML('beforebegin', getLessonSevenRoadmapIconHtml());
     }
   }
 
@@ -1577,7 +2035,7 @@
       ensureHomeTrustValueBlockFinal(panel);
       enhanceHomeRecentUpdatesFinal(panel);
       syncContinueCardFinal(panel);
-      ensureRoadmapLessonSevenIconFinal(panel);
+      syncRoadmapCardsFinal(panel);
       ensureHomeActionCardsBlockFinal(panel);
       expandStartFinderFinal(panel);
       ensureHomePdfBlockFinal(panel);
@@ -1605,11 +2063,21 @@
     var wrapped = function(){
       var result = original.apply(this, arguments);
       syncHomeUiFinal();
+      scheduleHomeUiFinalSync();
       return result;
     };
     wrapped.__homeUiFinalWrapped = true;
     window[name] = wrapped;
     rebindGlobal(name, wrapped);
+  }
+
+  var homeUiFinalSyncTimer = null;
+  function scheduleHomeUiFinalSync(){
+    if(homeUiFinalSyncTimer) return;
+    homeUiFinalSyncTimer = setTimeout(function(){
+      homeUiFinalSyncTimer = null;
+      syncHomeUiFinal();
+    }, 60);
   }
 
   wrapHomeUiFinal('renderHome');
@@ -1619,5 +2087,6 @@
   wrapHomeUiFinal('setLang');
 
   syncHomeUiFinal();
+  scheduleHomeUiFinalSync();
 })();
 

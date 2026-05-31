@@ -21,7 +21,7 @@
   }
 
   var HA_UI_FULL = {
-    'brand.name':"Crypto Academy",
+    'brand.name':"Coin ProofPath",
     'brand.sub':"Darussa masu sauki ga masu farawa",
     'sidebar.lessons':"Darussan koyo",
     'sidebar.topics':"Batutuwa masu sauri",

@@ -23,7 +23,8 @@
     page.faqItems = [];
     page.safetyItems = [];
     Object.keys(faqStore || {}).forEach(function(key){
-      page.faqItems.push([faqStore[key].title, faqStore[key].body]);
+      var entry = faqStore[key] || {};
+      page.faqItems.push([entry.title, entry.body, entry.category || "", entry.keywords || [], entry.id || key]);
     });
     Object.keys(safetyStore || {}).forEach(function(key){
       page.safetyItems.push([safetyStore[key].title, safetyStore[key].body]);
@@ -248,7 +249,7 @@
         date:'2026-03-29',
         title:'Kaddamarwar farko',
         items:[
-          'An fara Crypto Academy',
+          'An fara Coin ProofPath',
           'An gina babban tsarin ilimi mai harsuna da yawa',
           'An kafa ainihin tafiyar darussa',
           'An shirya tsarin farko na Fara, Darussa, Kamus, da Laburaren Madogara'
@@ -354,8 +355,8 @@
 
     var searchInput = document.getElementById('searchInput');
     var searchResults = document.getElementById('searchResults');
-    if(searchInput && pack.search && pack.search.trigger){
-      searchInput.placeholder = pack.search.trigger;
+    if(searchInput && pack.search && (pack.search.empty || pack.search.trigger)){
+      searchInput.placeholder = pack.search.empty || pack.search.trigger;
     }
     if(searchResults && pack.search && pack.search.empty){
       searchResults.setAttribute('data-empty', pack.search.empty);

@@ -46,7 +46,7 @@
           'Quickly review the key checks before sending',
           'Revisit the essential flow before your first buy',
           'Recheck scam warning signs in a shorter format',
-          'Save the site\\'s core ideas as a simpler reference'
+          'Save the site\'s core ideas as a simpler reference'
         ],
         compare:'The free PDFs work more like quick review checklists, while the eBooks are better for deeper and more structured review.',
         ctaFree:'Open Free PDF',
@@ -70,6 +70,22 @@
         sourceCompare:'무료 PDF는 빠른 실전 체크에 가깝고, 전자책은 더 정리된 흐름으로 깊이 복습하는 데 적합합니다.'
       },
       th:{
+        title:'PDF ฟรีที่ควรบันทึกไว้',
+        body:'PDF ฟรีเหล่านี้มีประโยชน์เมื่อกลับมาทบทวนก่อนโอนจริง ซื้อจริง หรือเช็กความปลอดภัยจริง',
+        points:[
+          'ทบทวนจุดตรวจสำคัญอย่างรวดเร็วก่อนส่ง',
+          'กลับมาดูลำดับสำคัญก่อนซื้อครั้งแรก',
+          'ตรวจสัญญาณเตือนการหลอกลวงในรูปแบบที่สั้นลง',
+          'บันทึกแนวคิดหลักของเว็บไซต์ไว้เป็นคู่มืออ้างอิงที่ง่ายขึ้น'
+        ],
+        compare:'PDF ฟรีเหมาะกับการทบทวนแบบ checklist อย่างรวดเร็ว ส่วน eBook เหมาะกับการทบทวนที่ลึกและเป็นระบบกว่า',
+        ctaFree:'เปิด PDF ฟรี',
+        ctaEbook:'ดู eBook',
+        sourceNote:'เหมาะสำหรับทบทวนสั้น ๆ ก่อนโอนจริง ซื้อจริง หรือเช็กความปลอดภัยจริง',
+        sourceCompare:'PDF ฟรีช่วยทบทวนภาคปฏิบัติได้เร็ว ส่วน eBook ช่วยติดตามและทบทวนอย่างลึกและเป็นระบบกว่า'
+      },
+      /* legacy corrupted Thai pack disabled:
+      th:{
         title:'PDF ฟรีที่ควรเก็บไว้',
         body:'PDF ฟรีเหล่านี้มีประโยชน์มากเมื่อกลับมาเปิดดูก่อนโอน ซื้อ หรือเช็กความปลอดภัยจริง',
         points:[
@@ -84,6 +100,7 @@
         sourceNote:'เหมาะสำหรับเปิดทบทวนสั้น ๆ ก่อนโอน ซื้อ หรือเช็กความปลอดภัยจริง',
         sourceCompare:'PDF ฟรีเหมาะกับการเช็กใช้งานเร็ว ส่วน eBook เหมาะกับการทบทวนเชิงลึกที่เป็นระเบียบกว่า'
       },
+      */
       id:{
         title:'PDF Gratis yang Layak Disimpan',
         body:'PDF gratis ini sangat berguna saat Anda membukanya lagi sebelum transfer, pembelian, atau pengecekan keamanan yang nyata.',

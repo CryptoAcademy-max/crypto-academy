@@ -17,7 +17,7 @@
   langLabels.ha = 'HA';
 
   ui.ha = Object.assign({}, ui.ha || {}, {
-    "brand.name":"Crypto Academy",
+    "brand.name":"Coin ProofPath",
     "brand.sub":"Darussa masu sauki ga masu farawa",
     "sidebar.lessons":"Darussan koyo",
     "sidebar.topics":"Batutuwa masu sauri",
@@ -160,7 +160,7 @@
   }
 
   ui.tr = Object.assign({}, ui.en || {}, ui.tr || {}, {
-    "brand.name":"Crypto Academy",
+    "brand.name":"Coin ProofPath",
     "brand.sub":"Yeni başlayanlar için net ve sade dersler",
     "sidebar.lessons":"Dersler",
     "sidebar.topics":"Hızlı konular",

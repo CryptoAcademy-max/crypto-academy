@@ -65,7 +65,7 @@
     premiumCard:{title:'Premium PDF Guidebooks', body:'If you want something more detailed than a quick checklist, you can open the longer beginner guidebook editions here.', extra:'English and Korean editions are available now. More language editions can be added later.', english:'English Edition', korean:'Korean Edition'},
     lesson6Label:'Lesson 6',
     lesson7Label:'Lesson 7',
-    brand:'Crypto Academy'
+    brand:'Coin ProofPath'
   };
   PACK.ko = {
     sections:{
@@ -84,7 +84,7 @@
     premiumCard:{title:'프리미엄 PDF 가이드북', body:'빠른 체크리스트보다 더 자세한 초보자용 정리 자료를 보고 싶다면 여기에서 확장판 가이드북을 볼 수 있습니다.', extra:'현재는 영어판과 한국어판이 준비되어 있고, 다른 언어판은 순차적으로 추가될 수 있습니다.', english:'영어판 보기', korean:'한국어판 보기'},
     lesson6Label:'Lesson 6',
     lesson7Label:'Lesson 7',
-    brand:'크립토 아카데미'
+    brand:'코인 프루프패스'
   };
   PACK.th = {
     sections:{
@@ -103,7 +103,7 @@
     premiumCard:{title:'คู่มือ PDF แบบพรีเมียม', body:'ถ้าคุณต้องการคู่มือสำหรับผู้เริ่มต้นที่ละเอียดกว่ารายการเช็กสั้น ๆ คุณสามารถเปิดฉบับขยายได้ที่นี่.', extra:'ตอนนี้มีฉบับภาษาอังกฤษและภาษาเกาหลีแล้ว และภาษาอื่นสามารถเพิ่มภายหลังได้.', english:'เปิดฉบับอังกฤษ', korean:'เปิดฉบับเกาหลี'},
     lesson6Label:'Lesson 6',
     lesson7Label:'Lesson 7',
-    brand:'Crypto Academy'
+    brand:'Coin ProofPath'
   };
   PACK.id = {
     sections:{
@@ -122,7 +122,7 @@
     premiumCard:{title:'Guidebook PDF Premium', body:'Jika Anda ingin materi pemula yang lebih rinci daripada checklist singkat, Anda bisa membuka guidebook versi panjang di sini.', extra:'Edisi bahasa Inggris dan Korea sudah tersedia. Bahasa lain bisa ditambahkan nanti.', english:'Lihat Edisi Inggris', korean:'Lihat Edisi Korea'},
     lesson6Label:'Lesson 6',
     lesson7Label:'Lesson 7',
-    brand:'Crypto Academy'
+    brand:'Coin ProofPath'
   };
   PACK.pt = {
     sections:{
@@ -141,7 +141,7 @@
     premiumCard:{title:'Guias PDF Premium', body:'Se você quer algo mais detalhado do que um checklist rápido, pode abrir aqui as edições estendidas do guia para iniciantes.', extra:'As edições em inglês e coreano já estão disponíveis. Outras línguas podem ser adicionadas depois.', english:'Ver edição em inglês', korean:'Ver edição em coreano'},
     lesson6Label:'Lesson 6',
     lesson7Label:'Lesson 7',
-    brand:'Crypto Academy'
+    brand:'Coin ProofPath'
   };
   PACK.tr = {
     sections:{
@@ -160,7 +160,7 @@
     premiumCard:{title:'Premium PDF Rehberleri', body:'Hizli bir kontrol listesinden daha ayrintili bir baslangic rehberi istiyorsaniz uzun rehber surumlerini burada acabilirsiniz.', extra:'Su anda Ingilizce ve Korece surumler mevcut. Diger dil surumleri daha sonra eklenebilir.', english:'Ingilizce surum', korean:'Korece surum'},
     lesson6Label:'Lesson 6',
     lesson7Label:'Lesson 7',
-    brand:'Crypto Academy'
+    brand:'Coin ProofPath'
   };
   PACK.es = {
     sections:{
@@ -179,7 +179,7 @@
     premiumCard:{title:'Guías PDF Premium', body:'Si quieres algo más detallado que un checklist rápido, aquí puedes abrir las ediciones extendidas de la guía para principiantes.', extra:'Las ediciones en inglés y coreano ya están disponibles. Más idiomas pueden añadirse después.', english:'Ver edición en inglés', korean:'Ver edición en coreano'},
     lesson6Label:'Lesson 6',
     lesson7Label:'Lesson 7',
-    brand:'Crypto Academy'
+    brand:'Coin ProofPath'
   };
   PACK.ar = {
     sections:{
@@ -198,7 +198,7 @@
     premiumCard:{title:'أدلة PDF مدفوعة', body:'إذا كنت تريد دليلاً أكثر تفصيلاً من قائمة سريعة، يمكنك فتح النسخ المطولة من دليل المبتدئين هنا.', extra:'الإصداران الإنجليزي والكوري متاحان الآن، ويمكن إضافة لغات أخرى لاحقاً.', english:'عرض النسخة الإنجليزية', korean:'عرض النسخة الكورية'},
     lesson6Label:'Lesson 6',
     lesson7Label:'Lesson 7',
-    brand:'Crypto Academy'
+    brand:'Coin ProofPath'
   };
   PACK.vi = {
     sections:{
@@ -217,7 +217,7 @@
     premiumCard:{title:'Guidebook PDF Premium', body:'Neu ban muon mot tai lieu chi tiet hon checklist nhanh, ban co the mo cac ban guidebook mo rong tai day.', extra:'Hien da co ban tieng Anh va tieng Han. Cac ngon ngu khac co the duoc bo sung sau.', english:'Xem ban tieng Anh', korean:'Xem ban tieng Han'},
     lesson6Label:'Lesson 6',
     lesson7Label:'Lesson 7',
-    brand:'Crypto Academy'
+    brand:'Coin ProofPath'
   };
   PACK.ha = {
     sections:{
@@ -236,89 +236,89 @@
     premiumCard:{title:'Jagororin PDF Premium', body:'Idan kana son wani abu da ya fi checklist gajere bayani sosai, za ka iya bude tsawaitattun guidebook na masu farawa a nan.', extra:'A yanzu akwai sigar Turanci da Koriya. Ana iya kara wasu harsuna daga baya.', english:'Duba sigar Turanci', korean:'Duba sigar Koriya'},
     lesson6Label:'Lesson 6',
     lesson7Label:'Lesson 7',
-    brand:'Crypto Academy'
+    brand:'Coin ProofPath'
   };
   PACK.br = PACK.pt;
 
   var AVAILABLE_PREMIUM_GUIDE_PACKS = {
     en:{
-      section:{title:'Crypto Academy eBook', desc:'Crypto Academy eBooks designed to help beginners review the site lessons in a more focused and structured way.'},
-      card1Title:'Crypto Academy eBook (English Edition)',
-      card2Title:'Crypto Academy eBook (Korean Edition)',
-      card1Body:'Crypto Academy eBook in English',
-      card2Body:'Crypto Academy eBook in Korean',
+      section:{title:'Coin ProofPath eBook', desc:'Coin ProofPath eBooks designed to help beginners review the site lessons in a more focused and structured way.'},
+      card1Title:'Coin ProofPath eBook (English Edition)',
+      card2Title:'Coin ProofPath eBook (Korean Edition)',
+      card1Body:'Coin ProofPath eBook in English',
+      card2Body:'Coin ProofPath eBook in Korean',
       button:'View eBook'
     },
     ko:{
-      section:{title:'크립토 아카데미 전자책', desc:'초보자가 사이트 강의와 함께 더 깊이 복습할 수 있도록 정리한 크립토 아카데미 전자책입니다.'},
-      card1Title:'영문 크립토 아카데미 전자책',
-      card2Title:'한글 크립토 아카데미 전자책',
-      card1Body:'영어로 읽는 크립토 아카데미 전자책',
-      card2Body:'한국어로 읽는 크립토 아카데미 전자책',
+      section:{title:'코인 프루프패스 전자책', desc:'초보자가 사이트 강의와 함께 더 깊이 복습할 수 있도록 정리한 코인 프루프패스 전자책입니다.'},
+      card1Title:'영문 코인 프루프패스 전자책',
+      card2Title:'한글 코인 프루프패스 전자책',
+      card1Body:'영어로 읽는 코인 프루프패스 전자책',
+      card2Body:'한국어로 읽는 코인 프루프패스 전자책',
       button:'전자책 보기'
     },
     th:{
-      section:{title:'Crypto Academy eBook', desc:'eBook ของ Crypto Academy ที่ช่วยให้ผู้เริ่มต้นเข้าใจแนวคิดคริปโตหลักและการใช้งานจริงได้เป็นระบบมากขึ้น'},
-      card1Title:'Crypto Academy eBook (ฉบับภาษาอังกฤษ)',
-      card2Title:'Crypto Academy eBook (ฉบับภาษาเกาหลี)',
-      card1Body:'Crypto Academy eBook ภาษาอังกฤษ',
-      card2Body:'Crypto Academy eBook ภาษาเกาหลี',
+      section:{title:'Coin ProofPath eBook', desc:'eBook ของ Coin ProofPath ที่ช่วยให้ผู้เริ่มต้นเข้าใจแนวคิดคริปโตหลักและการใช้งานจริงได้เป็นระบบมากขึ้น'},
+      card1Title:'Coin ProofPath eBook (ฉบับภาษาอังกฤษ)',
+      card2Title:'Coin ProofPath eBook (ฉบับภาษาเกาหลี)',
+      card1Body:'Coin ProofPath eBook ภาษาอังกฤษ',
+      card2Body:'Coin ProofPath eBook ภาษาเกาหลี',
       button:'ดู eBook'
     },
     id:{
-      section:{title:'Crypto Academy eBook', desc:'Crypto Academy eBooks dirancang untuk membantu pemula memahami konsep inti crypto dan penggunaan praktis di dunia nyata dengan alur yang lebih terstruktur.'},
-      card1Title:'Crypto Academy eBook (Edisi Bahasa Inggris)',
-      card2Title:'Crypto Academy eBook (Edisi Bahasa Korea)',
-      card1Body:'Crypto Academy eBook dalam bahasa Inggris',
-      card2Body:'Crypto Academy eBook dalam bahasa Korea',
+      section:{title:'Coin ProofPath eBook', desc:'Coin ProofPath eBooks dirancang untuk membantu pemula memahami konsep inti crypto dan penggunaan praktis di dunia nyata dengan alur yang lebih terstruktur.'},
+      card1Title:'Coin ProofPath eBook (Edisi Bahasa Inggris)',
+      card2Title:'Coin ProofPath eBook (Edisi Bahasa Korea)',
+      card1Body:'Coin ProofPath eBook dalam bahasa Inggris',
+      card2Body:'Coin ProofPath eBook dalam bahasa Korea',
       button:'Lihat eBook'
     },
     pt:{
-      section:{title:'Crypto Academy eBook', desc:'eBooks da Crypto Academy pensados para ajudar iniciantes a entender os conceitos centrais de crypto e o uso pratico com uma estrutura mais clara.'},
-      card1Title:'Crypto Academy eBook (Edicao em ingles)',
-      card2Title:'Crypto Academy eBook (Edicao em coreano)',
-      card1Body:'Crypto Academy eBook em ingles',
-      card2Body:'Crypto Academy eBook em coreano',
+      section:{title:'Coin ProofPath eBook', desc:'eBooks da Coin ProofPath pensados para ajudar iniciantes a entender os conceitos centrais de crypto e o uso pratico com uma estrutura mais clara.'},
+      card1Title:'Coin ProofPath eBook (Edicao em ingles)',
+      card2Title:'Coin ProofPath eBook (Edicao em coreano)',
+      card1Body:'Coin ProofPath eBook em ingles',
+      card2Body:'Coin ProofPath eBook em coreano',
       button:'Ver eBook'
     },
     tr:{
-      section:{title:'Crypto Academy eBook', desc:'Yeni baslayanlarin temel crypto kavramlarini ve gercek dunyadaki kullanim akisini daha duzenli anlamasina yardim eden Crypto Academy eBook serisi.'},
-      card1Title:'Crypto Academy eBook (Ingilizce Surum)',
-      card2Title:'Crypto Academy eBook (Korece Surum)',
-      card1Body:'Ingilizce Crypto Academy eBook',
-      card2Body:'Korece Crypto Academy eBook',
+      section:{title:'Coin ProofPath eBook', desc:'Yeni baslayanlarin temel crypto kavramlarini ve gercek dunyadaki kullanim akisini daha duzenli anlamasina yardim eden Coin ProofPath eBook serisi.'},
+      card1Title:'Coin ProofPath eBook (Ingilizce Surum)',
+      card2Title:'Coin ProofPath eBook (Korece Surum)',
+      card1Body:'Ingilizce Coin ProofPath eBook',
+      card2Body:'Korece Coin ProofPath eBook',
       button:'eBook\u0027u Gor'
     },
     es:{
-      section:{title:'Crypto Academy eBook', desc:'eBooks de Crypto Academy pensados para ayudar a principiantes a entender los conceptos centrales de crypto y su uso practico de una manera mas estructurada.'},
-      card1Title:'Crypto Academy eBook (Edicion en Ingles)',
-      card2Title:'Crypto Academy eBook (Edicion en Coreano)',
-      card1Body:'Crypto Academy eBook en ingles',
-      card2Body:'Crypto Academy eBook en coreano',
+      section:{title:'Coin ProofPath eBook', desc:'eBooks de Coin ProofPath pensados para ayudar a principiantes a entender los conceptos centrales de crypto y su uso practico de una manera mas estructurada.'},
+      card1Title:'Coin ProofPath eBook (Edicion en Ingles)',
+      card2Title:'Coin ProofPath eBook (Edicion en Coreano)',
+      card1Body:'Coin ProofPath eBook en ingles',
+      card2Body:'Coin ProofPath eBook en coreano',
       button:'Ver eBook'
     },
     ar:{
-      section:{title:'Crypto Academy eBook', desc:'كتب Crypto Academy الإلكترونية مصممة لمساعدة المبتدئين على فهم مفاهيم الكريبتو الأساسية والاستخدام العملي بشكل أكثر تنظيماً.'},
-      card1Title:'Crypto Academy eBook (النسخة الإنجليزية)',
-      card2Title:'Crypto Academy eBook (النسخة الكورية)',
-      card1Body:'كتاب Crypto Academy الإلكتروني باللغة الإنجليزية',
-      card2Body:'كتاب Crypto Academy الإلكتروني باللغة الكورية',
+      section:{title:'Coin ProofPath eBook', desc:'كتب Coin ProofPath الإلكترونية مصممة لمساعدة المبتدئين على فهم مفاهيم الكريبتو الأساسية والاستخدام العملي بشكل أكثر تنظيماً.'},
+      card1Title:'Coin ProofPath eBook (النسخة الإنجليزية)',
+      card2Title:'Coin ProofPath eBook (النسخة الكورية)',
+      card1Body:'كتاب Coin ProofPath الإلكتروني باللغة الإنجليزية',
+      card2Body:'كتاب Coin ProofPath الإلكتروني باللغة الكورية',
       button:'عرض الكتاب'
     },
     vi:{
-      section:{title:'Crypto Academy eBook', desc:'Crypto Academy eBooks giup nguoi moi hieu ro hon cac khai niem crypto cot loi va cach ap dung thuc te theo mot cau truc de theo doi hon.'},
-      card1Title:'Crypto Academy eBook (Ban tieng Anh)',
-      card2Title:'Crypto Academy eBook (Ban tieng Han)',
-      card1Body:'Crypto Academy eBook bang tieng Anh',
-      card2Body:'Crypto Academy eBook bang tieng Han',
+      section:{title:'Coin ProofPath eBook', desc:'Coin ProofPath eBooks giup nguoi moi hieu ro hon cac khai niem crypto cot loi va cach ap dung thuc te theo mot cau truc de theo doi hon.'},
+      card1Title:'Coin ProofPath eBook (Ban tieng Anh)',
+      card2Title:'Coin ProofPath eBook (Ban tieng Han)',
+      card1Body:'Coin ProofPath eBook bang tieng Anh',
+      card2Body:'Coin ProofPath eBook bang tieng Han',
       button:'Xem eBook'
     },
     ha:{
-      section:{title:'Crypto Academy eBook', desc:'Crypto Academy eBooks da aka shirya domin taimaka wa mai farawa ya fahimci muhimman ka' + "'" + 'idojin crypto da yadda ake amfani da su a zahiri cikin tsari mafi kyau.'},
-      card1Title:'Crypto Academy eBook (Sigar Turanci)',
-      card2Title:'Crypto Academy eBook (Sigar Koriya)',
-      card1Body:'Crypto Academy eBook a Turanci',
-      card2Body:'Crypto Academy eBook a Koriya',
+      section:{title:'Coin ProofPath eBook', desc:'Coin ProofPath eBooks da aka shirya domin taimaka wa mai farawa ya fahimci muhimman ka' + "'" + 'idojin crypto da yadda ake amfani da su a zahiri cikin tsari mafi kyau.'},
+      card1Title:'Coin ProofPath eBook (Sigar Turanci)',
+      card2Title:'Coin ProofPath eBook (Sigar Koriya)',
+      card1Body:'Coin ProofPath eBook a Turanci',
+      card2Body:'Coin ProofPath eBook a Koriya',
       button:'Duba eBook'
     }
   };

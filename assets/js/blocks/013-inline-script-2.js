@@ -27,7 +27,7 @@
   function ic(name){return '<span class="sec-icon">'+ICONS[name]+'</span>';}
 
   // Lesson index → icon mapping
-  var lessonIcons = ['blockchain','wallet','transfer','layers','filetext','search'];
+  var lessonIcons = ['blockchain','wallet','transfer','layers','filetext','search','shield'];
   // Page → icon mapping
   var pageIcons = {home:'home',start:'compass',faq:'faq',safety:'shield',glossary:'book',sources:'library'};
   // Mistake card icons

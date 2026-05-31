@@ -351,7 +351,7 @@
   // ===================== VIETNAMESE (vi) =====================
 
   ui.vi = {
-    "brand.name":"Crypto Academy",
+    "brand.name":"Coin ProofPath",
     "brand.sub":"Bài học dễ hiểu cho người mới",
     "sidebar.lessons":"Các bài học",
     "sidebar.topics":"Chủ đề nhanh",

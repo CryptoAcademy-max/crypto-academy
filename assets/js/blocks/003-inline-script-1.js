@@ -2,7 +2,7 @@ const langLabels={en:'EN',ko:'KO',th:'TH',id:'ID',pt:'PT',br:'BR',tr:'TR',es:'ES
 
 const ui = {
   en:{
-    "brand.name":"Crypto Academy","brand.sub":"Clear lessons for beginners","sidebar.lessons":"Course lessons","sidebar.topics":"Quick topics",
+    "brand.name":"Coin ProofPath","brand.sub":"Clear lessons for beginners","sidebar.lessons":"Course lessons","sidebar.topics":"Quick topics",
     "nav.l1":"Blockchain","nav.l1sub":"Shared ledger basics","nav.l2":"Wallets","nav.l2sub":"Keys and access","nav.l3":"Safe Transfers","nav.l3sub":"Sending safely","nav.l4":"5 Roles of Crypto","nav.l4sub":"Understanding token roles","nav.l5":"Real-World Lessons","nav.l5sub":"Why structure matters","nav.l6":"Buying Your First Crypto","nav.l6sub":"A safe first purchase flow",
     "topic.blockchain":"What is a blockchain?","topic.wallet":"What is a wallet?","topic.transfer":"How do safe transfers work?","topic.roles":"How do token roles differ?","topic.real":"Why do real cases matter?","topic.buy":"How do I buy my first crypto safely?",
     "footer.byline":"A free educational resource by Bee Network Korea","overview.chip1":"Beginner-first","overview.chip2":"Multilingual","overview.chip3":"Visual learning",
@@ -15,7 +15,7 @@ const ui = {
     "home.startCardTitle":"Start Here","home.startCardDesc":"Know exactly where to begin if this is your first time here.","home.faqCardTitle":"FAQ","home.faqCardDesc":"Read the most common beginner questions in one place.","home.safetyCardTitle":"Safety","home.safetyCardDesc":"Learn practical scam prevention and wallet safety habits.","home.openStart":"Open Start Here","home.openFaq":"Open FAQ","home.openSafety":"Open Safety",
     "nav.updates":"Update History","nav.updatessub":"What changed and when","updates.title":"Update History","updates.desc":"A log of improvements made to this platform over time."},
   ko:{
-    "brand.name":"크립토 아카데미","brand.sub":"초보자를 위한 쉬운 강의","sidebar.lessons":"강의 목록","sidebar.topics":"빠른 주제 찾기",
+    "brand.name":"코인 프루프패스","brand.sub":"초보자를 위한 쉬운 강의","sidebar.lessons":"강의 목록","sidebar.topics":"빠른 주제 찾기",
     "nav.l1":"블록체인","nav.l1sub":"공유 원장 기초","nav.l2":"지갑","nav.l2sub":"키와 접근 권한","nav.l3":"안전한 전송","nav.l3sub":"실수 없이 보내기","nav.l4":"암호화폐의 5가지 역할","nav.l4sub":"토큰 역할 쉽게 이해하기","nav.l5":"실제 교훈","nav.l5sub":"구조를 알아야 하는 이유",
     "topic.blockchain":"블록체인이란 무엇인가요?","topic.wallet":"지갑이란 무엇인가요?","topic.transfer":"안전한 전송은 어떻게 하나요?","topic.roles":"토큰 역할은 어떻게 다른가요?","topic.real":"실제 사례는 왜 중요한가요?",
     "footer.byline":"Bee Network Korea가 제공하는 무료 교육 자료","overview.chip1":"초보자 중심","overview.chip2":"다국어 지원","overview.chip3":"시각 학습",
@@ -28,7 +28,7 @@ const ui = {
     "nav.updates":"업데이트 기록","nav.updatessub":"변경 내역 및 날짜","updates.title":"업데이트 기록","updates.desc":"플랫폼에 추가된 개선 사항을 날짜순으로 정리한 로그입니다.",
     "home.startCardTitle":"시작 가이드","home.startCardDesc":"처음 온 사람이 어디부터 봐야 하는지 바로 알 수 있게 도와줍니다.","home.faqCardTitle":"자주 묻는 질문","home.faqCardDesc":"초보자가 가장 많이 헷갈리는 질문을 한 번에 볼 수 있습니다.","home.safetyCardTitle":"안전 가이드","home.safetyCardDesc":"실제로 도움이 되는 사기 예방과 지갑 보안 습관을 배울 수 있습니다.","home.openStart":"시작 가이드 열기","home.openFaq":"자주 묻는 질문 열기","home.openSafety":"안전 가이드 열기"},
   th:{
-    "brand.name":"Crypto Academy","brand.sub":"บทเรียนที่เข้าใจง่ายสำหรับผู้เริ่มต้น","sidebar.lessons":"บทเรียน","sidebar.topics":"หัวข้อด่วน",
+    "brand.name":"Coin ProofPath","brand.sub":"บทเรียนที่เข้าใจง่ายสำหรับผู้เริ่มต้น","sidebar.lessons":"บทเรียน","sidebar.topics":"หัวข้อด่วน",
     "nav.l1":"บล็อกเชน","nav.l1sub":"พื้นฐานของบัญชีแยกประเภทแบบแชร์","nav.l2":"วอลเล็ต","nav.l2sub":"คีย์และสิทธิ์การเข้าถึง","nav.l3":"การโอนอย่างปลอดภัย","nav.l3sub":"ส่งอย่างปลอดภัย","nav.l4":"5 บทบาทของคริปโต","nav.l4sub":"เข้าใจบทบาทของโทเคน","nav.l5":"บทเรียนจากโลกจริง","nav.l5sub":"ทำไมโครงสร้างจึงสำคัญ",
     "topic.blockchain":"บล็อกเชนคืออะไร?","topic.wallet":"วอลเล็ตคืออะไร?","topic.transfer":"การโอนอย่างปลอดภัยทำอย่างไร?","topic.roles":"บทบาทของโทเคนต่างกันอย่างไร?","topic.real":"ทำไมกรณีจริงจึงสำคัญ?",
     "footer.byline":"แหล่งเรียนรู้ฟรีจาก Bee Network Korea","overview.chip1":"เน้นผู้เริ่มต้น","overview.chip2":"รองรับหลายภาษา","overview.chip3":"เรียนรู้ผ่านภาพ",
@@ -41,7 +41,7 @@ const ui = {
     "nav.updates":"ประวัติการอัปเดต","nav.updatessub":"สิ่งที่เปลี่ยนแปลงและเวลาที่เปลี่ยน","updates.title":"ประวัติการอัปเดต","updates.desc":"บันทึกการปรับปรุงที่เพิ่มเข้ามาในแพลตฟอร์มนี้ตามลำดับเวลา",
     "home.startCardTitle":"เริ่มตรงนี้","home.startCardDesc":"ช่วยให้ผู้มาใหม่รู้ชัดว่าควรเริ่มจากตรงไหนก่อน","home.faqCardTitle":"คำถามพบบ่อย","home.faqCardDesc":"รวมคำถามที่มือใหม่สับสนบ่อยไว้ในที่เดียว","home.safetyCardTitle":"ความปลอดภัย","home.safetyCardDesc":"เรียนรู้นิสัยการป้องกันกลโกงและการปกป้องวอลเล็ตที่ใช้ได้จริง","home.openStart":"เปิดหน้าเริ่มต้น","home.openFaq":"เปิดคำถามพบบ่อย","home.openSafety":"เปิดหน้าความปลอดภัย"},
   id:{
-    "brand.name":"Crypto Academy","brand.sub":"Pelajaran mudah untuk pemula","sidebar.lessons":"Daftar pelajaran","sidebar.topics":"Topik cepat",
+    "brand.name":"Coin ProofPath","brand.sub":"Pelajaran mudah untuk pemula","sidebar.lessons":"Daftar pelajaran","sidebar.topics":"Topik cepat",
     "nav.l1":"Blockchain","nav.l1sub":"Dasar buku besar bersama","nav.l2":"Wallet","nav.l2sub":"Kunci dan akses","nav.l3":"Transfer Aman","nav.l3sub":"Kirim dengan aman","nav.l4":"5 Peran Crypto","nav.l4sub":"Memahami peran token","nav.l5":"Pelajaran Dunia Nyata","nav.l5sub":"Mengapa struktur penting",
     "topic.blockchain":"Apa itu blockchain?","topic.wallet":"Apa itu wallet?","topic.transfer":"Bagaimana transfer aman bekerja?","topic.roles":"Bagaimana peran token berbeda?","topic.real":"Mengapa kasus nyata penting?",
     "footer.byline":"Sumber belajar gratis dari Bee Network Korea","overview.chip1":"Fokus pemula","overview.chip2":"Multibahasa","overview.chip3":"Pembelajaran visual",
@@ -54,7 +54,7 @@ const ui = {
     "nav.updates":"Riwayat Pembaruan","nav.updatessub":"Apa yang berubah dan kapan","updates.title":"Riwayat Pembaruan","updates.desc":"Catatan peningkatan yang ditambahkan ke platform ini dari waktu ke waktu.",
     "home.startCardTitle":"Mulai di sini","home.startCardDesc":"Membantu pengunjung baru tahu persis dari mana harus memulai.","home.faqCardTitle":"FAQ","home.faqCardDesc":"Lihat pertanyaan yang paling sering membingungkan pemula di satu tempat.","home.safetyCardTitle":"Keamanan","home.safetyCardDesc":"Pelajari kebiasaan praktis untuk mencegah penipuan dan melindungi dompet.","home.openStart":"Buka Mulai di sini","home.openFaq":"Buka FAQ","home.openSafety":"Buka Keamanan"},
   pt:{
-    "brand.name":"Crypto Academy","brand.sub":"Lições claras para iniciantes","sidebar.lessons":"Lições do curso","sidebar.topics":"Tópicos rápidos",
+    "brand.name":"Coin ProofPath","brand.sub":"Lições claras para iniciantes","sidebar.lessons":"Lições do curso","sidebar.topics":"Tópicos rápidos",
     "nav.l1":"Blockchain","nav.l1sub":"Base do livro-razão compartilhado","nav.l2":"Carteiras","nav.l2sub":"Chaves e acesso","nav.l3":"Transferências Seguras","nav.l3sub":"Enviar com segurança","nav.l4":"5 Papéis do Cripto","nav.l4sub":"Entendendo o papel dos tokens","nav.l5":"Lições do Mundo Real","nav.l5sub":"Por que a estrutura importa",
     "topic.blockchain":"O que é blockchain?","topic.wallet":"O que é uma carteira?","topic.transfer":"Como funcionam transferências seguras?","topic.roles":"Como os papéis dos tokens diferem?","topic.real":"Por que casos reais importam?",
     "footer.byline":"Recurso educacional gratuito da Bee Network Korea","overview.chip1":"Foco em iniciantes","overview.chip2":"Multilíngue","overview.chip3":"Aprendizado visual",
@@ -67,7 +67,7 @@ const ui = {
     "nav.updates":"Histórico de Atualizações","nav.updatessub":"O que mudou e quando","updates.title":"Histórico de Atualizações","updates.desc":"Um registro de melhorias feitas nesta plataforma ao longo do tempo.",
     "home.startCardTitle":"Comece aqui","home.startCardDesc":"Ajuda quem chegou agora a saber exatamente por onde começar.","home.faqCardTitle":"FAQ","home.faqCardDesc":"Veja em um só lugar as dúvidas mais comuns de iniciantes.","home.safetyCardTitle":"Segurança","home.safetyCardDesc":"Aprenda hábitos práticos para evitar golpes e proteger a carteira.","home.openStart":"Abrir Comece aqui","home.openFaq":"Abrir FAQ","home.openSafety":"Abrir Segurança"},
   br:{
-    "brand.name":"Crypto Academy","brand.sub":"Lições claras para iniciantes","sidebar.lessons":"Lições do curso","sidebar.topics":"Tópicos rápidos",
+    "brand.name":"Coin ProofPath","brand.sub":"Lições claras para iniciantes","sidebar.lessons":"Lições do curso","sidebar.topics":"Tópicos rápidos",
     "nav.l1":"Blockchain","nav.l1sub":"Base do livro-razão compartilhado","nav.l2":"Carteiras","nav.l2sub":"Chaves e acesso","nav.l3":"Transferências Seguras","nav.l3sub":"Enviar com segurança","nav.l4":"5 Papéis do Cripto","nav.l4sub":"Entendendo o papel dos tokens","nav.l5":"Lições do Mundo Real","nav.l5sub":"Por que a estrutura importa",
     "topic.blockchain":"O que é blockchain?","topic.wallet":"O que é uma carteira?","topic.transfer":"Como funcionam transferências seguras?","topic.roles":"Como os papéis dos tokens diferem?","topic.real":"Por que casos reais importam?",
     "footer.byline":"Recurso educacional gratuito da Bee Network Korea","overview.chip1":"Foco em iniciantes","overview.chip2":"Multilíngue","overview.chip3":"Aprendizado visual",
@@ -82,7 +82,7 @@ const ui = {
     "nav.updates":"Histórico de Atualizações","nav.updatessub":"O que mudou e quando","updates.title":"Histórico de Atualizações","updates.desc":"Um registro de melhorias adicionadas a esta plataforma ao longo do tempo."
   },
   tr:{
-    "brand.name":"Crypto Academy","brand.sub":"Yeni başlayanlar için anlaşılır dersler","sidebar.lessons":"Dersler","sidebar.topics":"Hızlı konular",
+    "brand.name":"Coin ProofPath","brand.sub":"Yeni başlayanlar için anlaşılır dersler","sidebar.lessons":"Dersler","sidebar.topics":"Hızlı konular",
     "nav.l1":"Blockchain","nav.l1sub":"Paylaşılan defter temeli","nav.l2":"Cüzdanlar","nav.l2sub":"Anahtarlar ve erişim","nav.l3":"Güvenli Transferler","nav.l3sub":"Güvenli gönderim","nav.l4":"Kriptonun 5 Rolü","nav.l4sub":"Token rollerini anlama","nav.l5":"Gerçek Dünya Dersleri","nav.l5sub":"Yapının neden önemli olduğu",
     "topic.blockchain":"Blockchain nedir?","topic.wallet":"Cüzdan nedir?","topic.transfer":"Güvenli transfer nasıl yapılır?","topic.roles":"Token rolleri nasıl farklıdır?","topic.real":"Gerçek örnekler neden önemlidir?",
     "footer.byline":"Bee Network Korea tarafından sunulan ücretsiz eğitim kaynağı","overview.chip1":"Yeni başlayan odaklı","overview.chip2":"Çok dilli","overview.chip3":"Görsel öğrenme",
@@ -97,7 +97,7 @@ const ui = {
     "nav.updates":"Güncelleme Geçmişi","nav.updatessub":"Son iyileştirmeler","updates.title":"Güncelleme Geçmişi","updates.desc":"Bu sayfa, platformda zaman içinde yapılan geliştirmeleri gösterir."
   },
   es:{
-    "brand.name":"Crypto Academy","brand.sub":"Lecciones claras para principiantes","sidebar.lessons":"Lecciones del curso","sidebar.topics":"Temas rápidos",
+    "brand.name":"Coin ProofPath","brand.sub":"Lecciones claras para principiantes","sidebar.lessons":"Lecciones del curso","sidebar.topics":"Temas rápidos",
     "nav.l1":"Blockchain","nav.l1sub":"Base del libro mayor compartido","nav.l2":"Billeteras","nav.l2sub":"Claves y acceso","nav.l3":"Transferencias Seguras","nav.l3sub":"Enviar con seguridad","nav.l4":"5 Roles del Cripto","nav.l4sub":"Entender el papel de los tokens","nav.l5":"Lecciones del Mundo Real","nav.l5sub":"Por qué importa la estructura",
     "topic.blockchain":"¿Qué es blockchain?","topic.wallet":"¿Qué es una billetera?","topic.transfer":"¿Cómo funcionan las transferencias seguras?","topic.roles":"¿Cómo se diferencian los roles de los tokens?","topic.real":"¿Por qué importan los casos reales?",
     "footer.byline":"Recurso educativo gratuito de Bee Network Korea","overview.chip1":"Enfoque para principiantes","overview.chip2":"Multilingüe","overview.chip3":"Aprendizaje visual",
@@ -792,11 +792,11 @@ function renderHome(){
       <p class="home-desc">${t('home.desc')}</p>
       <div class="home-visitor-block" id="homeVisitorBlock" aria-live="polite">
         <div class="search-visitor-pill">
-          <div class="search-visitor-label" id="visitorTodayLabel">Today Visitors</div>
+          <div class="search-visitor-label" id="visitorTodayLabel">${t('visitor.today')}</div>
           <div class="search-visitor-value is-loading" id="visitorTodayValue">--</div>
         </div>
         <div class="search-visitor-pill">
-          <div class="search-visitor-label" id="visitorTotalLabel">Total Visitors</div>
+          <div class="search-visitor-label" id="visitorTotalLabel">${t('visitor.total')}</div>
           <div class="search-visitor-value is-loading" id="visitorTotalValue">--</div>
         </div>
       </div>
@@ -1177,6 +1177,18 @@ function getPageHeroIcon(iconKey){
       return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="12" r="4.5"/><path d="M15.5 8.5h4.5v7h-4.5"/><path d="m16.5 12 1.6 1.6L21 10.7"/></svg>';
     case 'safety':
       return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 19 6v5.4c0 4.1-2.6 7.9-7 9.1-4.4-1.2-7-5-7-9.1V6l7-2.5Z"/><path d="m9.2 12.2 1.9 1.9 3.7-4.1"/></svg>';
+    case 'network':
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M6 8h11"/><path d="m13 5 4 3-4 3"/><path d="M18 16H7"/><path d="m11 13-4 3 4 3"/></svg>';
+    case 'stablecoin':
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M9 12h6"/><path d="M12 8v8"/><path d="M7 17c2.8-1.4 7.2-1.4 10 0"/></svg>';
+    case 'defi':
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14"/><path d="M7 8v8a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V8"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/><path d="M9 13h6"/></svg>';
+    case 'project':
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v13H4z"/><path d="m7 9 2 2 4-4"/><path d="M7 15h10"/><path d="M14 10h3"/></svg>';
+    case 'bridge':
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h5a5 5 0 0 1 0 10H7"/><path d="M17 7h-5a5 5 0 0 0 0 10h5"/><path d="M8 12h8"/></svg>';
+    case 'verify':
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2V19a1 1 0 0 1-1.6.8L13 17.5l-3.4 2.3A1 1 0 0 1 8 19V5.5"/><path d="m9 12 2 2 4-5"/><path d="M8 7h8"/></svg>';
     case 'faq':
       return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 9a2.5 2.5 0 1 1 4.2 1.8c-.9.8-1.7 1.3-1.7 2.7"/><circle cx="12" cy="17.2" r=".8"/><circle cx="12" cy="12" r="9"/></svg>';
     case 'archive':
@@ -1200,8 +1212,9 @@ function renderUnifiedPageHero(config){
   const tags = (config.tags || []).filter(Boolean);
   const actions = (config.actions || []).filter(function(action){ return action && action.href && action.label; });
   const eyebrow = config.eyebrow ? '<span class="page-hero-mini">' + escapePageHeroHtml(config.eyebrow) + '</span>' : '';
+  const heroClass = 'lc-header page-hero-shell' + (config.compact ? ' page-hero-compact' : '') + (config.extraClass ? ' ' + escapePageHeroHtml(config.extraClass) : '');
   return ''
-    + '<div class="lc-header page-hero-shell" data-page-hero-tone="' + escapePageHeroHtml(config.tone || 'lesson') + '">'
+    + '<div class="' + heroClass + '" data-page-hero-tone="' + escapePageHeroHtml(config.tone || 'lesson') + '">'
     +   '<div class="page-hero-ambient" aria-hidden="true"></div>'
     +   '<div class="page-hero-grid">'
     +     '<div class="page-hero-heading">'
@@ -1237,6 +1250,8 @@ function getStaticPageHeroConfig(kind, title, intro){
 }
 function getLessonHeroConfig(index, lesson, totalLessons){
   const base = { tone:'lesson', badge:pageHeroText('typeLesson'), eyebrow:(t('breadcrumb.prefix') || 'Lesson') + ' ' + (index + 1) + ' / ' + totalLessons, title:lesson.title, intro:lesson.intro, iconKey:'glossary', tags:[pageHeroText('beginnerFriendly')], actions:[] };
+  const intermediateBadgeRaw = typeof t === 'function' ? t('intermediate.badge') : '';
+  const intermediateBadge = intermediateBadgeRaw && intermediateBadgeRaw !== 'intermediate.badge' ? intermediateBadgeRaw : pageHeroText('typeLesson');
   switch(index){
     case 0:
       base.iconKey = 'glossary';
@@ -1274,9 +1289,55 @@ function getLessonHeroConfig(index, lesson, totalLessons){
       base.tags = [pageHeroText('safetyEssential'), pageHeroText('checklistLinked')];
       base.actions = [{ label:pageHeroText('seedPhrase'), href:getPageHeroChecklistRoute('seed-phrase-safety') }, { label:pageHeroText('fakeWebsite'), href:getPageHeroChecklistRoute('fake-website-check') }];
       break;
+    case 7:
+      base.badge = intermediateBadge;
+      base.iconKey = 'wallet';
+      base.tags = [pageHeroText('worthSaving'), pageHeroText('checklistLinked')];
+      base.actions = [{ label:pageHeroText('seedPhrase'), href:getPageHeroChecklistRoute('seed-phrase-safety') }, { label:t('nav.glossary') || 'Glossary', href:getPageHeroPageRoute('glossary') }];
+      break;
+    case 8:
+      base.badge = intermediateBadge;
+      base.iconKey = 'network';
+      base.tags = [pageHeroText('quickReview'), pageHeroText('checklistLinked')];
+      base.actions = [{ label:pageHeroText('beforeSend'), href:getPageHeroChecklistRoute('before-send') }, { label:t('nav.safety') || 'Safety', href:getPageHeroPageRoute('safety') }];
+      break;
+    case 9:
+      base.badge = intermediateBadge;
+      base.iconKey = 'stablecoin';
+      base.tags = [pageHeroText('quickReview'), pageHeroText('worthSaving')];
+      base.actions = [{ label:t('nav.sources') || 'Source Library', href:getPageHeroPageRoute('sources') }, { label:pageHeroText('freePdf'), href:getPageHeroFreePdfRoute() }];
+      break;
+    case 10:
+      base.badge = intermediateBadge;
+      base.iconKey = 'defi';
+      base.tags = [pageHeroText('safetyEssential'), pageHeroText('checklistLinked')];
+      base.actions = [{ label:t('nav.safety') || 'Safety', href:getPageHeroPageRoute('safety') }, { label:t('nav.sources') || 'Source Library', href:getPageHeroPageRoute('sources') }];
+      break;
+    case 11:
+      base.badge = intermediateBadge;
+      base.iconKey = 'project';
+      base.tags = [pageHeroText('goDeeper'), pageHeroText('checklistLinked')];
+      base.actions = [{ label:pageHeroText('fakeWebsite'), href:getPageHeroChecklistRoute('fake-website-check') }, { label:t('nav.sources') || 'Source Library', href:getPageHeroPageRoute('sources') }];
+      break;
+    case 12:
+      base.badge = intermediateBadge;
+      base.iconKey = 'bridge';
+      base.tags = [pageHeroText('quickReview'), pageHeroText('safetyEssential')];
+      base.actions = [{ label:pageHeroText('beforeSend'), href:getPageHeroChecklistRoute('before-send') }, { label:t('nav.sources') || 'Source Library', href:getPageHeroPageRoute('sources') }];
+      break;
+    case 13:
+      base.badge = intermediateBadge;
+      base.iconKey = 'verify';
+      base.tags = [pageHeroText('safetyEssential'), pageHeroText('revisitedOften')];
+      base.actions = [{ label:pageHeroText('fakeWebsite'), href:getPageHeroChecklistRoute('fake-website-check') }, { label:t('nav.safety') || 'Safety', href:getPageHeroPageRoute('safety') }];
+      break;
     default:
       base.actions = [{ label:t('nav.glossary') || 'Glossary', href:getPageHeroPageRoute('glossary') }];
       break;
+  }
+  if(index >= 7 && index <= 13){
+    base.compact = true;
+    base.extraClass = ((base.extraClass || '') + ' page-hero-intermediate').trim();
   }
   return base;
 }
@@ -1761,7 +1822,7 @@ langLabels.ha = 'HA';
   }
 
   ui.ha = Object.assign({}, ui.ha || {}, {
-    "brand.name":"Crypto Academy",
+    "brand.name":"Coin ProofPath",
     "brand.sub":"Darussa masu sauƙi ga masu farawa",
     "sidebar.lessons":"Darussan karatu",
     "sidebar.topics":"Batutuwa masu sauri",
@@ -3907,6 +3968,51 @@ function renderQuiz(items){
   `;
 }
 
+const RELATED_RESOURCE_LINK_TEXT = {
+  en:{ open:'Open resource', sources:'Open Source Library', glossary:'Open glossary', checklist:'Open checklist', pdf:'Open PDF', ebook:'View eBook' },
+  ko:{ open:'자료 열기', sources:'자료 라이브러리 열기', glossary:'용어 보기', checklist:'체크리스트 열기', pdf:'PDF 열기', ebook:'전자책 보기' },
+  th:{ open:'เปิดแหล่งข้อมูล', sources:'เปิดคลังแหล่งข้อมูล', glossary:'ดูคำศัพท์', checklist:'เปิดเช็กลิสต์', pdf:'เปิด PDF', ebook:'ดู eBook' },
+  id:{ open:'Buka resource', sources:'Buka perpustakaan sumber', glossary:'Buka glosarium', checklist:'Buka checklist', pdf:'Buka PDF', ebook:'Lihat eBook' },
+  pt:{ open:'Abrir recurso', sources:'Abrir biblioteca de fontes', glossary:'Abrir glossário', checklist:'Abrir checklist', pdf:'Abrir PDF', ebook:'Ver eBook' },
+  br:{ open:'Abrir recurso', sources:'Abrir biblioteca de fontes', glossary:'Abrir glossário', checklist:'Abrir checklist', pdf:'Abrir PDF', ebook:'Ver eBook' },
+  tr:{ open:'Kaynağı aç', sources:'Kaynak kütüphanesini aç', glossary:'Sözlüğü aç', checklist:'Kontrol listesini aç', pdf:'PDF aç', ebook:'eBook görüntüle' },
+  es:{ open:'Abrir recurso', sources:'Abrir biblioteca de fuentes', glossary:'Abrir glosario', checklist:'Abrir checklist', pdf:'Abrir PDF', ebook:'Ver eBook' },
+  ar:{ open:'افتح المورد', sources:'افتح مكتبة المصادر', glossary:'افتح المسرد', checklist:'افتح قائمة التحقق', pdf:'افتح PDF', ebook:'عرض الكتاب' },
+  vi:{ open:'Mở tài nguyên', sources:'Mở thư viện nguồn', glossary:'Mở thuật ngữ', checklist:'Mở checklist', pdf:'Mở PDF', ebook:'Xem eBook' },
+  ha:{ open:'Bude albarkatu', sources:'Bude laburaren tushe', glossary:'Bude ƙamus', checklist:'Bude jerin dubawa', pdf:'Bude PDF', ebook:'Duba eBook' }
+};
+
+function getRelatedResourceKind(url){
+  const value = String(url || '').toLowerCase();
+  if(value.indexOf('sources') !== -1) return 'sources';
+  if(value.indexOf('glossary') !== -1) return 'glossary';
+  if(value.indexOf('checklists') !== -1) return 'checklist';
+  if(value.indexOf('.pdf') !== -1 || value.indexOf('pdf') !== -1) return 'pdf';
+  if(value.indexOf('ebook') !== -1 || value.indexOf('premium-pdf') !== -1) return 'ebook';
+  return 'open';
+}
+
+function getRelatedResourceLinkText(url){
+  const lang = typeof currentPageHeroLang === 'function' ? currentPageHeroLang() : normalizePageHeroLang(currentLang || 'en');
+  const pack = RELATED_RESOURCE_LINK_TEXT[lang] || RELATED_RESOURCE_LINK_TEXT.en;
+  const kind = getRelatedResourceKind(url);
+  return pack[kind] || pack.open;
+}
+
+function renderLessonSourceCard(title, body, url){
+  const safeTitle = escapePageHeroHtml(title || t('sources.title'));
+  const safeBody = escapePageHeroHtml(body || '');
+  const safeUrl = escapePageHeroHtml(url || '#');
+  const safeLabel = escapePageHeroHtml(t('source.title'));
+  const linkText = escapePageHeroHtml(getRelatedResourceLinkText(url));
+  return `<div class="source-card related-resource-card">
+    <span class="related-card-label">${safeLabel}</span>
+    <strong class="related-card-title">${safeTitle}</strong>
+    ${safeBody ? `<p class="related-card-desc">${safeBody}</p>` : ''}
+    ${url ? `<a class="related-card-link" href="${safeUrl}" target="_blank" rel="noopener">${linkText}</a>` : ''}
+  </div>`;
+}
+
 function renderLesson(i){
   const totalLessons = getTotalLessons();
   const lesson=(lessonOverrides[currentLang]&&lessonOverrides[currentLang][i]) || (lessons[currentLang]&&lessons[currentLang][i]) || lessons.en[i];
@@ -3915,11 +4021,13 @@ function renderLesson(i){
   const sectionHtml = lesson.sections.map(sec=>`<h2>${sec.h}</h2>${sec.ps.map(p=>`<p>${p}</p>`).join('')}`).join('');
   const defs = lesson.defs ? `<div class="def-grid">${lesson.defs.map(([term,body])=>`<div class="def-block"><div class="def-term">${term}</div><div class="def-body">${body}</div></div>`).join('')}</div>` : '';
   const example = lesson.example ? `<h3>${t('example.title')}</h3><div class="example-card"><div class="example-label">${t('example.title')}</div><div class="example-body">${lesson.example}</div></div>` : '';
+  const guidedVisualsTop = typeof window.renderLessonGuidedVisualsTop === 'function' ? (window.renderLessonGuidedVisualsTop(i, lesson) || '') : '';
+  const guidedVisualsLower = typeof window.renderLessonGuidedVisualsLower === 'function' ? (window.renderLessonGuidedVisualsLower(i, lesson) || '') : '';
   const mistakes = lesson.mistakes ? `<h3>${t('mistakes.title')}</h3>${lesson.mistakes.map(m=>`<div class="mistake-card"><div class="mistake-label">${t('mistakes.title')}</div><div class="mistake-body">${m}</div></div>`).join('')}` : '';
   const faqs = lesson.faqs ? `<h3>${t('faq.title')}</h3>${lesson.faqs.map(([q,a])=>`<div class="faq-item"><div class="faq-q">${q}</div><div class="faq-a">${a}</div></div>`).join('')}` : '';
   const checks = lesson.checkpoints ? `<h3>${t('check.title')}</h3><div class="checkpoint-list">${lesson.checkpoints.map(c=>`<div class="checkpoint-item"><div class="check-icon">✓</div><div>${c}</div></div>`).join('')}</div>` : '';
   const quiz = lesson.quiz ? renderQuiz(lesson.quiz) : '';
-  const sources = lesson.sources ? `<h3>${t('sources.title')}</h3>${lesson.sources.map(([title,body,url])=>`<div class="source-card"><div class="source-label">${t('source.title')}: ${title}</div><div class="source-body">${body}<br><a href="${url}" target="_blank" rel="noopener">${url}</a></div></div>`).join('')}` : '';
+  const sources = lesson.sources ? `<section class="lesson-related-resources"><h3>${t('sources.title')}</h3><div class="lesson-related-grid">${lesson.sources.map(([title,body,url])=>renderLessonSourceCard(title, body, url)).join('')}</div></section>` : '';
   const transferFlow = i===2 ? `
     <ul class="steps-list">
       <li class="step-item"><div class="step-n">1</div><div><div class="step-title">${t('v.network')}</div><div class="step-desc">${t('v.networkDesc')}</div></div></li>
@@ -3929,10 +4037,10 @@ function renderLesson(i){
     </ul>` : '';
   const purchaseFlow = i===5 ? `
     <ul class="steps-list">
-      <li class="step-item"><div class="step-n">1</div><div><div class="step-title">Choose carefully</div><div class="step-desc">Look for clear fees, local currency support, and readable withdrawal details.</div></div></li>
-      <li class="step-item"><div class="step-n">2</div><div><div class="step-title">Complete KYC</div><div class="step-desc">Many beginner-friendly platforms require a simple identity check first.</div></div></li>
-      <li class="step-item"><div class="step-n">3</div><div><div class="step-title">Start small</div><div class="step-desc">Deposit fiat, review the asset and fees, then make a small first buy.</div></div></li>
-      <li class="step-item"><div class="step-n">4</div><div><div class="step-title">Learn self-custody</div><div class="step-desc">Understand why many users later move assets into a wallet they control themselves.</div></div></li>
+      <li class="step-item"><div class="step-n">1</div><div><div class="step-title">${t('purchase.flow.choose.title')}</div><div class="step-desc">${t('purchase.flow.choose.desc')}</div></div></li>
+      <li class="step-item"><div class="step-n">2</div><div><div class="step-title">${t('purchase.flow.kyc.title')}</div><div class="step-desc">${t('purchase.flow.kyc.desc')}</div></div></li>
+      <li class="step-item"><div class="step-n">3</div><div><div class="step-title">${t('purchase.flow.small.title')}</div><div class="step-desc">${t('purchase.flow.small.desc')}</div></div></li>
+      <li class="step-item"><div class="step-n">4</div><div><div class="step-title">${t('purchase.flow.custody.title')}</div><div class="step-desc">${t('purchase.flow.custody.desc')}</div></div></li>
     </ul>` : '';
   const completeClass = completed.has(i) ? 'active' : '';
   const hero = renderUnifiedPageHero(getLessonHeroConfig(i, lesson, totalLessons));
@@ -3941,11 +4049,13 @@ function renderLesson(i){
     <div class="lesson-body">
       <div class="callout info"><strong>${t('callout.quick')}:</strong> ${lesson.sections[0].ps[0]}</div>
       ${visualForLesson(i)}
+      ${guidedVisualsTop}
       ${sectionHtml}
       ${defs}
       ${transferFlow}
       ${purchaseFlow}
       ${example}
+      ${guidedVisualsLower}
       ${mistakes}
       ${faqs}
       ${checks}

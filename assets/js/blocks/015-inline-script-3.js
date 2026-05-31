@@ -152,7 +152,7 @@
       html = html.replace(re, function(match){
         if(replaced) return match; // Only replace first occurrence per term
         replaced = true;
-        return '<span class="term-tip" onclick="this.classList.toggle(\'tip-active\')">' + match + '<span class="tip-box">' + def + '</span></span>';
+        return '<span class="term-tip" role="button" tabindex="0" onclick="this.classList.toggle(\'tip-active\')">' + match + '<span class="tip-box">' + def + '</span></span>';
       });
     });
     return html;
@@ -178,6 +178,18 @@
     var html = __shTip();
     return applyTooltips(typeof html === 'string' ? html : '');
   };
+
+  document.addEventListener('keydown', function(event){
+    var target = event.target;
+    if(!target || !target.classList || !target.classList.contains('term-tip')) return;
+    if(event.key === 'Enter' || event.key === ' '){
+      event.preventDefault();
+      target.classList.toggle('tip-active');
+    }
+    if(event.key === 'Escape'){
+      target.classList.remove('tip-active');
+    }
+  });
 
   // ============ 2. ENHANCED MINI QUIZZES ============
   var quizData = {
@@ -411,53 +423,53 @@ quizData.ha = quizData.en;
 
   var startFinderSupportData = {
     en:{
-      title:'Support Crypto Academy',
-      body:'Crypto Academy is free to use. If this project helps you, you can support future updates here.',
+      title:'Support Coin ProofPath',
+      body:'Coin ProofPath is free to use. If this project helps you, you can support future updates here.',
       button:'Buy Me a Coffee'
     },
     ko:{
-      title:'Crypto Academy 후원하기',
-      body:'Crypto Academy는 무료로 제공되고 있습니다. 이 프로젝트가 도움이 되었다면, 앞으로의 업데이트를 후원으로 응원하실 수 있습니다.',
+      title:'Coin ProofPath 후원하기',
+      body:'Coin ProofPath는 무료로 제공되고 있습니다. 이 프로젝트가 도움이 되었다면, 앞으로의 업데이트를 후원으로 응원하실 수 있습니다.',
       button:'Buy Me a Coffee'
     },
     th:{
-      title:'สนับสนุน Crypto Academy',
-      body:'Crypto Academy เปิดให้ใช้งานฟรี หากโปรเจกต์นี้มีประโยชน์กับคุณ คุณสามารถสนับสนุนการอัปเดตต่อไปได้ที่นี่',
+      title:'สนับสนุน Coin ProofPath',
+      body:'Coin ProofPath เปิดให้ใช้งานฟรี หากโปรเจกต์นี้มีประโยชน์กับคุณ คุณสามารถสนับสนุนการอัปเดตต่อไปได้ที่นี่',
       button:'Buy Me a Coffee'
     },
     id:{
-      title:'Dukung Crypto Academy',
-      body:'Crypto Academy dapat digunakan secara gratis. Jika proyek ini membantu Anda, Anda bisa mendukung pembaruan berikutnya di sini.',
+      title:'Dukung Coin ProofPath',
+      body:'Coin ProofPath dapat digunakan secara gratis. Jika proyek ini membantu Anda, Anda bisa mendukung pembaruan berikutnya di sini.',
       button:'Buy Me a Coffee'
     },
     pt:{
-      title:'Apoie a Crypto Academy',
-      body:'A Crypto Academy é gratuita. Se este projeto está ajudando você, pode apoiar as próximas atualizações aqui.',
+      title:'Apoie a Coin ProofPath',
+      body:'A Coin ProofPath é gratuita. Se este projeto está ajudando você, pode apoiar as próximas atualizações aqui.',
       button:'Buy Me a Coffee'
     },
     tr:{
-      title:'Crypto Academy\'yi Destekleyin',
-      body:'Crypto Academy ücretsiz kullanılabilir. Bu proje size yardımcı oluyorsa, gelecek güncellemeleri buradan destekleyebilirsiniz.',
+      title:'Coin ProofPath\'yi Destekleyin',
+      body:'Coin ProofPath ücretsiz kullanılabilir. Bu proje size yardımcı oluyorsa, gelecek güncellemeleri buradan destekleyebilirsiniz.',
       button:'Buy Me a Coffee'
     },
     es:{
-      title:'Apoya a Crypto Academy',
-      body:'Crypto Academy es gratis. Si este proyecto te ayuda, puedes apoyar aquí las próximas actualizaciones.',
+      title:'Apoya a Coin ProofPath',
+      body:'Coin ProofPath es gratis. Si este proyecto te ayuda, puedes apoyar aquí las próximas actualizaciones.',
       button:'Buy Me a Coffee'
     },
     ar:{
-      title:'ادعم Crypto Academy',
-      body:'يمكنك استخدام Crypto Academy مجانًا. إذا كان هذا المشروع مفيدًا لك، يمكنك دعم التحديثات القادمة من هنا.',
+      title:'ادعم Coin ProofPath',
+      body:'يمكنك استخدام Coin ProofPath مجانًا. إذا كان هذا المشروع مفيدًا لك، يمكنك دعم التحديثات القادمة من هنا.',
       button:'Buy Me a Coffee'
     },
     vi:{
-      title:'Ủng hộ Crypto Academy',
-      body:'Crypto Academy được sử dụng miễn phí. Nếu dự án này hữu ích với bạn, bạn có thể ủng hộ các bản cập nhật tiếp theo tại đây.',
+      title:'Ủng hộ Coin ProofPath',
+      body:'Coin ProofPath được sử dụng miễn phí. Nếu dự án này hữu ích với bạn, bạn có thể ủng hộ các bản cập nhật tiếp theo tại đây.',
       button:'Buy Me a Coffee'
     },
     ha:{
-      title:'Tallafa wa Crypto Academy',
-      body:'Ana ba da Crypto Academy kyauta. Idan wannan aiki yana taimaka maka, za ka iya tallafa wa sabbin abubuwan da za a kara a nan.',
+      title:'Tallafa wa Coin ProofPath',
+      body:'Ana ba da Coin ProofPath kyauta. Idan wannan aiki yana taimaka maka, za ka iya tallafa wa sabbin abubuwan da za a kara a nan.',
       button:'Buy Me a Coffee'
     }
   };

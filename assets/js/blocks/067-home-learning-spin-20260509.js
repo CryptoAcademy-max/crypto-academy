@@ -1,4 +1,4 @@
-﻿(function(){
+(function(){
   if(typeof window === 'undefined' || typeof document === 'undefined') return;
   if(window.__homeLearningSpin20260509) return;
   window.__homeLearningSpin20260509 = true;
@@ -227,9 +227,9 @@
         special:{
           freePdfTitle:'Free Practical Review PDF',
           freePdfBody:'Open a free PDF that is useful to revisit before real actions.',
-          ebookEnglishTitle:'Crypto Academy eBook (English Edition)',
+          ebookEnglishTitle:'Coin ProofPath eBook (English Edition)',
           ebookEnglishBody:'Explore the structured English eBook when you want a deeper review.',
-          ebookKoreanTitle:'Crypto Academy eBook (Korean Edition)',
+          ebookKoreanTitle:'Coin ProofPath eBook (Korean Edition)',
           ebookKoreanBody:'Explore the structured Korean eBook when you want a deeper review.'
         }
       },
@@ -271,9 +271,9 @@
         special:{
           freePdfTitle:'무료 복습용 실전 PDF',
           freePdfBody:'실제 행동 전에 짧게 다시 확인할 수 있는 무료 PDF를 엽니다.',
-          ebookEnglishTitle:'영문 크립토 아카데미 전자책',
+          ebookEnglishTitle:'영문 코인 프루프패스 전자책',
           ebookEnglishBody:'더 깊게 복습하고 싶을 때 정리된 영문 전자책을 살펴보세요.',
-          ebookKoreanTitle:'한글 크립토 아카데미 전자책',
+          ebookKoreanTitle:'한글 코인 프루프패스 전자책',
           ebookKoreanBody:'더 깊게 복습하고 싶을 때 정리된 한글 전자책을 살펴보세요.'
         }
       },
@@ -315,9 +315,9 @@
         special:{
           freePdfTitle:'PDF ฟรีสำหรับทบทวน',
           freePdfBody:'เปิด PDF ฟรีที่เหมาะสำหรับทบทวนสั้น ๆ ก่อนลงมือจริง',
-          ebookEnglishTitle:'Crypto Academy eBook (English Edition)',
+          ebookEnglishTitle:'Coin ProofPath eBook (English Edition)',
           ebookEnglishBody:'หากอยากทบทวนแบบเป็นระบบมากขึ้น ให้ดู eBook ภาษาอังกฤษ',
-          ebookKoreanTitle:'Crypto Academy eBook (Korean Edition)',
+          ebookKoreanTitle:'Coin ProofPath eBook (Korean Edition)',
           ebookKoreanBody:'หากอยากทบทวนแบบเป็นระบบมากขึ้น ให้ดู eBook ภาษาเกาหลี'
         }
       }
@@ -480,7 +480,7 @@
       case 'ebookKorean':
         return { type:'ebook', title:pack.special.ebookKoreanTitle, body:pack.special.ebookKoreanBody };
     }
-    return { type:'lesson', title:'Crypto Academy', body:'' };
+    return { type:'lesson', title:'Coin ProofPath', body:'' };
   }
 
   function createAction(role, kind, href, external){

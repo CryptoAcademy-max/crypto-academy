@@ -41,11 +41,11 @@
   var VISITOR_COUNTER_HOST_ID = 'homeVisitorBlock';
   var VISITOR_COUNTER_MARKUP =
     '<div class="search-visitor-pill">' +
-      '<div class="search-visitor-label" id="visitorTodayLabel">Today Visitors</div>' +
+      '<div class="search-visitor-label" id="visitorTodayLabel"></div>' +
       '<div class="search-visitor-value is-loading" id="visitorTodayValue">--</div>' +
     '</div>' +
     '<div class="search-visitor-pill">' +
-      '<div class="search-visitor-label" id="visitorTotalLabel">Total Visitors</div>' +
+      '<div class="search-visitor-label" id="visitorTotalLabel"></div>' +
       '<div class="search-visitor-value is-loading" id="visitorTotalValue">--</div>' +
     '</div>';
 
@@ -112,6 +112,12 @@
   visitorCounterText.ar = {today:'زوار اليوم',total:'إجمالي الزوار'};
   visitorCounterText.vi = {today:'Khách Hôm Nay',total:'Tổng Khách'};
   visitorCounterText.es = {today:'Visitantes de Hoy',total:'Visitantes Totales'};
+  visitorCounterText.ko = {today:'오늘 방문자',total:'전체 방문자'};
+  visitorCounterText.th = {today:'ผู้เข้าชมวันนี้',total:'ผู้เข้าชมทั้งหมด'};
+  visitorCounterText.tr = {today:'Bugünkü ziyaretçiler',total:'Toplam ziyaretçi'};
+  visitorCounterText.ar = {today:'زوار اليوم',total:'إجمالي الزوار'};
+  visitorCounterText.vi = {today:'Khách hôm nay',total:'Tổng lượt khách'};
+  visitorCounterText.ha = {today:'Maziyarta yau',total:'Jimillar maziyarta'};
   var VISITOR_COUNTER_NAMESPACE = 'crypto-academy-platform';
   var VISITOR_COUNTER_TOTAL_KEY = 'visitors-total';
   var VISITOR_COUNTER_TOTAL_BASELINE = 580;
@@ -448,25 +454,6 @@
     var base = _origRenderHome();
     var extra = '';
 
-    // Language Update Notice
-    var noticeDismissed = localStorage.getItem('cryptoAcademyNoticeDismissed');
-    if(!noticeDismissed){
-      var noticeTexts = {
-        en: '🌐 Turkish, Brazilian Portuguese, Arabic, and Vietnamese are now available.',
-        ko: '🌐 터키어, 브라질 포르투갈어, 아랍어, 베트남어가 추가되었습니다.',
-        th: '🌐 ภาษาตุรกี โปรตุเกสบราซิล อาหรับ และเวียดนาม พร้อมใช้งานแล้ว',
-        id: '🌐 Bahasa Turki, Portugis Brasil, Arab, dan Vietnam sekarang tersedia.',
-        pt: '🌐 Turco, Português Brasileiro, Árabe e Vietnamita agora estão disponíveis.',
-        br: '🌐 Turco, Português Brasileiro, Árabe e Vietnamita agora estão disponíveis.',
-        tr: '🌐 Türkçe, Brezilya Portekizcesi, Arapça ve Vietnamca artık mevcut.',
-        es: '🌐 Turco, Portugués Brasileño, Árabe y Vietnamita ya están disponibles.',
-        ar: '🌐 التركية والبرتغالية البرازيلية والعربية والفيتنامية متوفرة الآن.',
-        vi: '🌐 Tiếng Thổ Nhĩ Kỳ, Bồ Đào Nha Brazil, Ả Rập và Việt Nam hiện đã có sẵn.'
-      };
-      var noticeText = noticeTexts[currentLang] || noticeTexts.en;
-      extra += '<div class="lang-notice" id="langNotice"><span class="lang-notice-icon">🌍</span><span>'+noticeText+'</span><button class="lang-notice-close" onclick="document.getElementById(\'langNotice\').style.display=\'none\';localStorage.setItem(\'cryptoAcademyNoticeDismissed\',\'1\')">✕</button></div>';
-    }
-
     // Continue Learning card
     var lastVisit = null;
     try { lastVisit = JSON.parse(localStorage.getItem(LAST_VISIT_KEY)); } catch(e){}
@@ -498,18 +485,81 @@
     }
     extra += '<div class="continue-card" onclick="'+continueAction+'"><div class="continue-icon"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21" fill="#fff" stroke="none"/></svg></div><div><div class="continue-title">'+ct[0]+'</div><div class="continue-sub">'+ct[1]+' → '+continueLabel+'</div></div></div>';
 
+    var roadmapLangHome = (typeof currentLang === 'string' && currentLang) ? currentLang : 'en';
+    if(roadmapLangHome === 'br') roadmapLangHome = 'pt';
+    var roadmapHeadingHome = {
+      en:'Beginner Roadmap',
+      ko:'초보자 로드맵',
+      th:'โรดแมปสำหรับมือใหม่',
+      id:'Roadmap Pemula',
+      pt:'Roteiro para Iniciantes',
+      tr:'Yol Haritası',
+      es:'Ruta para Principiantes',
+      ar:'خارطة طريق للمبتدئين',
+      vi:'Lộ trình cho người mới',
+      ha:'Taswirar Hanya ga Masu Farawa'
+    };
+    var roadmapLabelsHome = {
+      en:['Blockchain','Wallets','Safe Transfers','5 Roles of Crypto','Real-World Lessons','Buying Your First Crypto','Spotting Crypto Scams'],
+      ko:['블록체인','지갑','안전한 전송','암호화폐의 5가지 역할','실제 교훈','첫 암호화폐 구매하기','암호화폐 사기 구별하기'],
+      th:['บล็อกเชน','วอลเล็ต','การโอนอย่างปลอดภัย','5 บทบาทของคริปโต','บทเรียนจากโลกจริง','ซื้อคริปโตครั้งแรก','แยกแยะกลโกงคริปโต'],
+      id:['Blockchain','Wallet','Transfer Aman','5 Peran Crypto','Pelajaran Dunia Nyata','Membeli Crypto Pertama','Mengenali Scam Crypto'],
+      pt:['Blockchain','Carteiras','Transferências Seguras','5 Papéis do Cripto','Lições do Mundo Real','Comprar sua primeira cripto','Identificar golpes de cripto'],
+      tr:['Blockchain','Cüzdanlar','Güvenli Transferler','Kriptonun 5 Rolü','Gerçek Dünya Dersleri','İlk Kriptonu Satın Almak','Kripto Dolandırıcılıklarını Tanımak'],
+      es:['Blockchain','Billeteras','Transferencias Seguras','5 Roles del Cripto','Lecciones del Mundo Real','Comprar tu primera cripto','Detectar estafas cripto'],
+      ar:['البلوكتشين','المحافظ','التحويلات الآمنة','5 أدوار للكريبتو','دروس من العالم الحقيقي','شراء أول عملة رقمية','اكتشاف عمليات الاحتيال في الكريبتو'],
+      vi:['Blockchain','Ví tiền','Chuyển tiền an toàn','5 vai trò của crypto','Bài học từ thế giới thực','Mua crypto đầu tiên','Nhận biết lừa đảo crypto'],
+      ha:['Sarkar bayanai','Walat','Canja Wuri Cikin Aminci','Ayyuka 5 na tokan','Darussan Duniya ta Gaskiya','Siyan kudin dijital na farko','Gane zamban crypto']
+    };
+    var roadmapSublinesHome = {
+      en:['Shared ledger basics','Keys and access','Sending safely','Understanding token roles','Why structure matters','A safe first purchase flow','Simple scam red flags'],
+      ko:['공유 원장 기초','키와 접근 권한','실수 없이 보내기','토큰 역할 쉽게 이해하기','구조를 알아야 하는 이유','안전한 첫 구매 흐름','초보자용 경고 신호'],
+      th:['พื้นฐานของบัญชีแยกประเภทแบบแชร์','คีย์และสิทธิ์การเข้าถึง','ส่งอย่างปลอดภัย','เข้าใจบทบาทของโทเคน','ทำไมโครงสร้างจึงสำคัญ','ขั้นตอนซื้อครั้งแรกอย่างปลอดภัย','สัญญาณเตือนภัยสำหรับมือใหม่'],
+      id:['Dasar buku besar bersama','Kunci dan akses','Kirim dengan aman','Memahami peran token','Mengapa struktur itu penting','Alur pembelian pertama yang aman','Tanda bahaya scam sederhana'],
+      pt:['Base do livro-razão compartilhado','Chaves e acesso','Enviar com segurança','Entender o papel dos tokens','Por que a estrutura importa','Um fluxo seguro de primeira compra','Sinais simples de golpe'],
+      tr:['Paylaşılan defter temeli','Anahtarlar ve erişim','Güvenli gönderim','Token rollerini anlama','Yapının neden önemli olduğu','Güvenli ilk alım akışı','Basit dolandırıcılık işaretleri'],
+      es:['Base del libro mayor compartido','Claves y acceso','Enviar con seguridad','Entender el papel de los tokens','Por qué importa la estructura','Un flujo seguro de primera compra','Señales simples de estafa'],
+      ar:['أساس السجل المشترك','المفاتيح وإمكانية الوصول','الإرسال بأمان','فهم دور التوكنات','لماذا يهم التنظيم','خطوات أول شراء بشكل آمن','إشارات احتيال بسيطة'],
+      vi:['Nền tảng sổ cái chung','Khóa và quyền truy cập','Gửi an toàn','Hiểu vai trò của token','Vì sao cấu trúc quan trọng','Quy trình mua đầu tiên an toàn','Dấu hiệu lừa đảo cơ bản'],
+      ha:['Asalin kundin rabawa','Makullai da damar shiga','Aika ba tare da kuskure ba','Fahimtar rawar tokan','Me ya sa tsari yake da muhimmanci','Hanyar saye ta farko cikin aminci','Sauƙaƙan alamar zamba']
+    };
+    function getRoadmapDayTextHome(day){
+      if(roadmapLangHome === 'ko') return day + '일차';
+      if(roadmapLangHome === 'th') return 'วันที่ ' + day;
+      if(roadmapLangHome === 'id') return 'Hari ' + day;
+      if(roadmapLangHome === 'pt') return 'Dia ' + day;
+      if(roadmapLangHome === 'tr') return day + '. Gün';
+      if(roadmapLangHome === 'es') return 'Día ' + day;
+      if(roadmapLangHome === 'ar') return 'اليوم ' + day;
+      if(roadmapLangHome === 'vi') return 'Ngày ' + day;
+      if(roadmapLangHome === 'ha') return 'Rana ta ' + day;
+      return 'Day ' + day;
+    }
+    extra += '<div class="roadmap-section"><h2>📚 '+(roadmapHeadingHome[roadmapLangHome] || roadmapHeadingHome.en)+'</h2><div class="roadmap-grid">';
+    var roadmapCountHome = Math.min((typeof getTotalLessons === 'function') ? getTotalLessons() : 7, 7);
+    var roadmapLabelListHome = roadmapLabelsHome[roadmapLangHome] || roadmapLabelsHome.en;
+    var roadmapSublineListHome = roadmapSublinesHome[roadmapLangHome] || roadmapSublinesHome.en;
+    for(var roadmapIndex = 0; roadmapIndex < roadmapCountHome; roadmapIndex++){
+      var roadmapDayHome = getRoadmapDayTextHome(roadmapIndex + 1);
+      var roadmapLabelHome = (typeof t === 'function' ? t('nav.l' + (roadmapIndex + 1)) : '') || roadmapLabelListHome[roadmapIndex] || ('Lesson ' + (roadmapIndex + 1));
+      var roadmapSublineHome = (typeof t === 'function' ? t('nav.l' + (roadmapIndex + 1) + 'sub') : '') || roadmapSublineListHome[roadmapIndex] || '';
+      extra += '<div class="roadmap-card" onclick="showLesson('+roadmapIndex+')"><div class="roadmap-day">'+roadmapDayHome+'</div><div class="roadmap-label">'+roadmapLabelHome+'</div><div class="roadmap-subline">'+roadmapSublineHome+'</div></div>';
+    }
+    extra += '</div></div>';
+
+    if(false){
     // Beginner Roadmap
     var roadmapTexts = {
-      en:{h:'Beginner Roadmap',days:['Day 1','Day 2','Day 3','Day 4','Day 5','Day 6'],labels:['Blockchain','Wallets','Safe Transfers','Token Roles','Real-world Lessons','Buying Your First Crypto']},
-      ko:{h:'초보자 로드맵',days:['1일차','2일차','3일차','4일차','5일차'],labels:['블록체인','지갑','안전한 전송','토큰 역할','실제 교훈']},
-      th:{h:'แผนการเรียนสำหรับผู้เริ่มต้น',days:['วันที่ 1','วันที่ 2','วันที่ 3','วันที่ 4','วันที่ 5'],labels:['บล็อกเชน','วอลเล็ต','การโอนอย่างปลอดภัย','บทบาทของโทเคน','บทเรียนจากโลกจริง']},
-      id:{h:'Roadmap Pemula',days:['Hari 1','Hari 2','Hari 3','Hari 4','Hari 5'],labels:['Blockchain','Wallet','Transfer Aman','Peran Token','Pelajaran Dunia Nyata']},
-      pt:{h:'Roteiro para Iniciantes',days:['Dia 1','Dia 2','Dia 3','Dia 4','Dia 5'],labels:['Blockchain','Carteiras','Transferências Seguras','Papéis dos Tokens','Lições do Mundo Real']},
-      br:{h:'Roteiro para Iniciantes',days:['Dia 1','Dia 2','Dia 3','Dia 4','Dia 5'],labels:['Blockchain','Carteiras','Transferências Seguras','Papéis dos Tokens','Lições do Mundo Real']},
-      tr:{h:'Başlangıç Yol Haritası',days:['1. Gün','2. Gün','3. Gün','4. Gün','5. Gün'],labels:['Blockchain','Cüzdanlar','Güvenli Transferler','Token Rolleri','Gerçek Dünya Dersleri']},
-      es:{h:'Ruta para Principiantes',days:['Día 1','Día 2','Día 3','Día 4','Día 5'],labels:['Blockchain','Billeteras','Transferencias Seguras','Roles de Tokens','Lecciones del Mundo Real']},
-      ar:{h:'خارطة طريق المبتدئين',days:['اليوم 1','اليوم 2','اليوم 3','اليوم 4','اليوم 5'],labels:['البلوكشين','المحافظ','التحويلات الآمنة','أدوار الرموز','دروس من الواقع']},
-      vi:{h:'Lộ trình cho người mới',days:['Ngày 1','Ngày 2','Ngày 3','Ngày 4','Ngày 5'],labels:['Blockchain','Ví tiền','Chuyển tiền an toàn','Vai trò Token','Bài học thực tế']}
+      en:{h:'Beginner Roadmap',days:['Day 1','Day 2','Day 3','Day 4','Day 5','Day 6','Day 7'],labels:['Blockchain','Wallets','Safe Transfers','Token Roles','Real-world Lessons','Buying Your First Crypto','Spotting Crypto Scams']},
+      ko:{h:'초보자 로드맵',days:['1일차','2일차','3일차','4일차','5일차','6일차','7일차'],labels:['블록체인','지갑','안전한 전송','토큰 역할','실제 교훈','첫 구매','사기 구별']},
+      th:{h:'แผนการเรียนสำหรับผู้เริ่มต้น',days:['วันที่ 1','วันที่ 2','วันที่ 3','วันที่ 4','วันที่ 5','วันที่ 6','วันที่ 7'],labels:['บล็อกเชน','วอลเล็ต','การโอนอย่างปลอดภัย','บทบาทของโทเคน','บทเรียนจากโลกจริง','ซื้อครั้งแรก','สังเกตกลโกง']},
+      id:{h:'Roadmap Pemula',days:['Hari 1','Hari 2','Hari 3','Hari 4','Hari 5','Hari 6','Hari 7'],labels:['Blockchain','Wallet','Transfer Aman','Peran Token','Pelajaran Dunia Nyata','Pembelian Pertama','Waspadai Scam']},
+      pt:{h:'Roteiro para Iniciantes',days:['Dia 1','Dia 2','Dia 3','Dia 4','Dia 5','Dia 6','Dia 7'],labels:['Blockchain','Carteiras','Transferências Seguras','Papéis dos Tokens','Lições do Mundo Real','Primeira Compra','Golpes de Crypto']},
+      br:{h:'Roteiro para Iniciantes',days:['Dia 1','Dia 2','Dia 3','Dia 4','Dia 5','Dia 6','Dia 7'],labels:['Blockchain','Carteiras','Transferências Seguras','Papéis dos Tokens','Lições do Mundo Real','Primeira Compra','Golpes de Crypto']},
+      tr:{h:'Başlangıç Yol Haritası',days:['1. Gün','2. Gün','3. Gün','4. Gün','5. Gün','6. Gün','7. Gün'],labels:['Blockchain','Cüzdanlar','Güvenli Transferler','Token Rolleri','Gerçek Dünya Dersleri','İlk Alım','Scam Uyarıları']},
+      es:{h:'Ruta para Principiantes',days:['Día 1','Día 2','Día 3','Día 4','Día 5','Día 6','Día 7'],labels:['Blockchain','Billeteras','Transferencias Seguras','Roles de Tokens','Lecciones del Mundo Real','Primera Compra','Señales de Estafa']},
+      ar:{h:'خارطة طريق المبتدئين',days:['اليوم 1','اليوم 2','اليوم 3','اليوم 4','اليوم 5','اليوم 6','اليوم 7'],labels:['البلوكشين','المحافظ','التحويلات الآمنة','أدوار الرموز','دروس من الواقع','الشراء الأول','إشارات الاحتيال']},
+      vi:{h:'Lộ trình cho người mới',days:['Ngày 1','Ngày 2','Ngày 3','Ngày 4','Ngày 5','Ngày 6','Ngày 7'],labels:['Blockchain','Ví tiền','Chuyển tiền an toàn','Vai trò Token','Bài học thực tế','Mua lần đầu','Dấu hiệu lừa đảo']}
     };
     var rm = roadmapTexts[currentLang] || roadmapTexts.en;
     extra += '<div class="roadmap-section"><h2>📚 '+rm.h+'</h2><div class="roadmap-grid">';
@@ -520,6 +570,8 @@
       extra += '<div class="roadmap-card" onclick="showLesson('+r+')"><div class="roadmap-day">'+roadmapDay+'</div><div class="roadmap-label">'+roadmapLabel+'</div></div>';
     }
     extra += '</div></div>';
+
+    }
 
     // Top 5 Beginner Mistakes
     var mistakeTexts = {

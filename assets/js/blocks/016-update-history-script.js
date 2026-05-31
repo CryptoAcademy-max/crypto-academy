@@ -15,7 +15,7 @@
       {date:'2026-03-30', title:'Beginner Learning Flow Refined',
        items:['Beginner-focused learning structure improved','Lesson flow refined for easier understanding','More beginner-friendly content organization added','Educational direction clarified for broader users']},
       {date:'2026-03-29', title:'Initial Launch',
-       items:['Crypto Academy initial launch','Core multilingual education structure created','Basic lesson flow established','Home / Lessons / Glossary / Source Library initial structure prepared']}
+       items:['Coin ProofPath initial launch','Core multilingual education structure created','Basic lesson flow established','Home / Lessons / Glossary / Source Library initial structure prepared']}
     ],
     ko:[
       {date:'2026-04-04', title:'코인 인식 검색 구조 확장',
@@ -31,7 +31,7 @@
       {date:'2026-03-30', title:'초보자 학습 흐름 개선',
        items:['초보자 중심 학습 구조 개선','더 쉬운 이해를 위한 강의 흐름 정제','초보자 친화적 콘텐츠 구성 추가','더 많은 사용자를 위한 교육 방향 명확화']},
       {date:'2026-03-29', title:'최초 출시',
-       items:['Crypto Academy 최초 출시','핵심 다국어 교육 구조 생성','기본 강의 흐름 구축','홈 / 강의 / 용어사전 / Source Library 초기 구조 완성']}
+       items:['Coin ProofPath 최초 출시','핵심 다국어 교육 구조 생성','기본 강의 흐름 구축','홈 / 강의 / 용어사전 / Source Library 초기 구조 완성']}
     ],
     th:[
       {date:'2026-04-04', title:'โครงสร้างการค้นหาเหรียญขยายเพิ่มเติม',
@@ -47,7 +47,7 @@
       {date:'2026-03-30', title:'ปรับแต่งกระบวนการเรียนรู้สำหรับผู้เริ่มต้น',
        items:['ปรับปรุงโครงสร้างการเรียนรู้ที่เน้นผู้เริ่มต้น','ปรับแต่งขั้นตอนบทเรียนให้เข้าใจง่ายขึ้น','เพิ่มการจัดเนื้อหาที่เป็นมิตรกับผู้เริ่มต้นมากขึ้น','ชี้แจงทิศทางการศึกษาสำหรับผู้ใช้กลุ่มกว้างขึ้น']},
       {date:'2026-03-29', title:'เปิดตัวครั้งแรก',
-       items:['เปิดตัว Crypto Academy ครั้งแรก','สร้างโครงสร้างการศึกษาหลายภาษาหลัก','จัดตั้งขั้นตอนบทเรียนพื้นฐาน','เตรียมโครงสร้างเริ่มต้นของหน้าหลัก / บทเรียน / อภิธานศัพท์ / Source Library']}
+       items:['เปิดตัว Coin ProofPath ครั้งแรก','สร้างโครงสร้างการศึกษาหลายภาษาหลัก','จัดตั้งขั้นตอนบทเรียนพื้นฐาน','เตรียมโครงสร้างเริ่มต้นของหน้าหลัก / บทเรียน / อภิธานศัพท์ / Source Library']}
     ],
     id:[
       {date:'2026-04-04', title:'Struktur Pencarian Berbasis Koin Diperluas',
@@ -63,7 +63,7 @@
       {date:'2026-03-30', title:'Alur Pembelajaran Pemula Disempurnakan',
        items:['Struktur pembelajaran berfokus pemula ditingkatkan','Alur pelajaran disempurnakan agar lebih mudah dipahami','Organisasi konten yang lebih ramah pemula ditambahkan','Arah pendidikan diperjelas untuk pengguna yang lebih luas']},
       {date:'2026-03-29', title:'Peluncuran Awal',
-       items:['Crypto Academy diluncurkan pertama kali','Struktur pendidikan multibahasa inti dibuat','Alur pelajaran dasar ditetapkan','Struktur awal Beranda / Pelajaran / Glosarium / Source Library disiapkan']}
+       items:['Coin ProofPath diluncurkan pertama kali','Struktur pendidikan multibahasa inti dibuat','Alur pelajaran dasar ditetapkan','Struktur awal Beranda / Pelajaran / Glosarium / Source Library disiapkan']}
     ],
     pt:[
       {date:'2026-04-04', title:'Estrutura de Pesquisa por Moeda Expandida',
@@ -79,7 +79,7 @@
       {date:'2026-03-30', title:'Fluxo de Aprendizado para Iniciantes Aprimorado',
        items:['Estrutura de aprendizado focada em iniciantes melhorada','Fluxo de lições refinado para compreensão mais fácil','Organização de conteúdo mais amigável para iniciantes adicionada','Direção educacional esclarecida para públicos mais amplos']},
       {date:'2026-03-29', title:'Lançamento Inicial',
-       items:['Lançamento inicial do Crypto Academy','Estrutura educacional multilíngue principal criada','Fluxo básico de lições estabelecido','Estrutura inicial de Início / Lições / Glossário / Source Library preparada']}
+       items:['Lançamento inicial do Coin ProofPath','Estrutura educacional multilíngue principal criada','Fluxo básico de lições estabelecido','Estrutura inicial de Início / Lições / Glossário / Source Library preparada']}
     ],
     tr:[
       {date:'2026-04-04', title:'Coin Odaklı Arama Yapısı Genişletildi',
@@ -95,7 +95,7 @@
       {date:'2026-03-30', title:'Başlangıç Öğrenme Akışı Geliştirildi',
        items:['Yeni başlayan odaklı öğrenme yapısı iyileştirildi','Daha kolay anlama için ders akışı geliştirildi','Daha başlangıç dostu içerik organizasyonu eklendi','Daha geniş kullanıcılar için eğitim yönü netleştirildi']},
       {date:'2026-03-29', title:'İlk Lansman',
-       items:['Crypto Academy ilk lansmanı','Temel çok dilli eğitim yapısı oluşturuldu','Temel ders akışı kuruldu','Ana Sayfa / Dersler / Sözlük / Kaynak Kütüphanesi ilk yapısı hazırlandı']}
+       items:['Coin ProofPath ilk lansmanı','Temel çok dilli eğitim yapısı oluşturuldu','Temel ders akışı kuruldu','Ana Sayfa / Dersler / Sözlük / Kaynak Kütüphanesi ilk yapısı hazırlandı']}
     ],
     ar:[
       {date:'2026-04-04', title:'توسيع هيكل البحث المرتبط بالعملات',
@@ -127,7 +127,7 @@
       {date:'2026-03-30', title:'Tinh chỉnh Luồng Học tập cho Người mới',
        items:['Cải thiện cấu trúc học tập tập trung vào người mới','Tinh chỉnh luồng bài học để dễ hiểu hơn','Thêm tổ chức nội dung thân thiện hơn với người mới','Làm rõ hướng giáo dục cho nhiều người dùng hơn']},
       {date:'2026-03-29', title:'Ra mắt Lần đầu',
-       items:['Ra mắt Crypto Academy lần đầu','Tạo cấu trúc giáo dục đa ngôn ngữ cốt lõi','Thiết lập luồng bài học cơ bản','Chuẩn bị cấu trúc ban đầu của Trang chủ / Bài học / Từ điển / Thư viện Nguồn']}
+       items:['Ra mắt Coin ProofPath lần đầu','Tạo cấu trúc giáo dục đa ngôn ngữ cốt lõi','Thiết lập luồng bài học cơ bản','Chuẩn bị cấu trúc ban đầu của Trang chủ / Bài học / Từ điển / Thư viện Nguồn']}
     ],
     es:[
       {date:'2026-04-04', title:'Estructura de Búsqueda por Moneda Expandida',
@@ -143,7 +143,7 @@
       {date:'2026-03-30', title:'Flujo de Aprendizaje para Principiantes Refinado',
        items:['Estructura de aprendizaje centrada en principiantes mejorada','Flujo de lecciones refinado para una comprensión más fácil','Organización de contenido más amigable para principiantes añadida','Dirección educativa aclarada para usuarios más amplios']},
       {date:'2026-03-29', title:'Lanzamiento Inicial',
-       items:['Lanzamiento inicial de Crypto Academy','Estructura educativa multilingüe principal creada','Flujo básico de lecciones establecido','Estructura inicial de Inicio / Lecciones / Glosario / Source Library preparada']}
+       items:['Lanzamiento inicial de Coin ProofPath','Estructura educativa multilingüe principal creada','Flujo básico de lecciones establecido','Estructura inicial de Inicio / Lecciones / Glosario / Source Library preparada']}
     ]
   };
   var updateEntry20260406 = {
@@ -334,7 +334,7 @@
       date:'2026-03-29',
       title:'Kaddamarwar farko',
       items:[
-        'An fara Crypto Academy',
+        'An fara Coin ProofPath',
         'An gina babban tsarin ilimi mai harsuna da yawa',
         'An kafa ainihin tafiyar darussa',
         'An shirya tsarin farko na Home, Lessons, Glossary, da Source Library'

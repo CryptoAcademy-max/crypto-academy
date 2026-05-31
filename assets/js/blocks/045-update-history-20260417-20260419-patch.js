@@ -8,7 +8,7 @@
 
   function baseLang(lang){
     var value = lang || (typeof currentLang === "string" && currentLang ? currentLang : "en");
-    return value === "br" ? "pt" : value;
+    return value === "pt-br" ? "br" : value;
   }
 
   var UPDATE_PACK = {
@@ -1173,6 +1173,373 @@
           "Wannan sabuntawar ta mayar da hankali kan sa shafin ya fi saurin fahimta tare da saukaka sake gano kayan da ake bukata daga baya."
         ]
       }
+    },
+    "2026-05-31":{
+      en:{
+        date:"2026-05-31",
+        title:"Search, FAQ, and Safety Learning Flow Improved",
+        items:[
+          "Separated representative coin results from general coin results.",
+          "Representative coin cards now appear only for exact representative coin searches, while general coins appear as compact explanation cards.",
+          "Improved search result relevance so results better match the entered keyword.",
+          "Fixed overlapping search input text and stabilized the search input flow.",
+          "Expanded FAQ content and connected FAQ items to search results.",
+          "Improved Safety menu items so key safety topics appear in search results.",
+          "Refined supporting sections and review flow for Lessons 8-14.",
+          "Improved multilingual display for search results and key labels based on the current language.",
+          "Optimized search performance across coins, lessons, glossary, FAQ, and safety items."
+        ]
+      },
+      ko:{
+        date:"2026-05-31",
+        title:"검색·FAQ·안전 학습 흐름 개선",
+        items:[
+          "대표 코인과 일반 코인 검색 결과 구조를 분리했습니다.",
+          "대표 코인 검색 시에는 대표 코인 카드가 표시되고, 일반 코인 검색 시에는 간단한 설명 카드가 표시되도록 개선했습니다.",
+          "검색 결과가 입력한 키워드와 더 직접적으로 연결되도록 정렬과 표시 방식을 조정했습니다.",
+          "검색창 글자 겹침 문제를 해결하고 입력 흐름을 안정화했습니다.",
+          "FAQ 항목을 보강하고 검색창에서 자주 묻는 질문이 함께 검색되도록 연결했습니다.",
+          "안전 메뉴의 핵심 항목이 검색 결과에 연결되도록 개선했습니다.",
+          "Lesson 8~14 중급자 강의의 보조 섹션과 확인 흐름을 정리했습니다.",
+          "다국어 환경에서 검색 결과와 주요 라벨이 현재 언어에 맞게 표시되도록 개선했습니다.",
+          "검색 성능을 최적화해 코인, 강의, 용어, FAQ, 안전 항목 검색 속도를 개선했습니다."
+        ]
+      },
+      th:{
+        date:"2026-05-31",
+        title:"ปรับปรุงการค้นหา FAQ และเส้นทางการเรียนรู้ความปลอดภัย",
+        items:[
+          "แยกโครงสร้างผลลัพธ์ของเหรียญตัวแทนออกจากเหรียญทั่วไป",
+          "การ์ดเหรียญตัวแทนจะแสดงเฉพาะเมื่อค้นหาตรงกับเหรียญตัวแทน ส่วนเหรียญทั่วไปจะแสดงเป็นการ์ดคำอธิบายแบบกะทัดรัด",
+          "ปรับความเกี่ยวข้องของผลการค้นหาให้ตรงกับคำค้นมากขึ้น",
+          "แก้ปัญหาข้อความซ้อนในช่องค้นหาและทำให้การพิมพ์ค้นหามีเสถียรมากขึ้น",
+          "ขยายเนื้อหา FAQ และเชื่อมรายการ FAQ เข้ากับผลการค้นหา",
+          "ปรับรายการในเมนู Safety เพื่อให้หัวข้อความปลอดภัยหลักปรากฏในผลการค้นหา",
+          "ปรับส่วนสนับสนุนและลำดับการทบทวนของ Lessons 8-14",
+          "ปรับการแสดงผลหลายภาษาให้ผลการค้นหาและป้ายหลักตรงกับภาษาปัจจุบัน",
+          "ปรับประสิทธิภาพการค้นหาสำหรับเหรียญ บทเรียน คำศัพท์ FAQ และหัวข้อความปลอดภัย"
+        ]
+      },
+      id:{
+        date:"2026-05-31",
+        title:"Alur Pencarian, FAQ, dan Pembelajaran Keamanan Ditingkatkan",
+        items:[
+          "Memisahkan struktur hasil pencarian coin representatif dan coin umum.",
+          "Kartu coin representatif kini muncul hanya untuk pencarian coin representatif yang tepat, sedangkan coin umum tampil sebagai kartu penjelasan ringkas.",
+          "Relevansi hasil pencarian ditingkatkan agar lebih sesuai dengan kata kunci yang dimasukkan.",
+          "Masalah teks yang bertumpuk di kolom pencarian diperbaiki dan alur input dibuat lebih stabil.",
+          "Konten FAQ diperluas dan item FAQ dihubungkan ke hasil pencarian.",
+          "Item menu Safety ditingkatkan agar topik keamanan utama muncul di hasil pencarian.",
+          "Bagian pendukung dan alur tinjauan untuk Lessons 8-14 dirapikan.",
+          "Tampilan multibahasa untuk hasil pencarian dan label utama diperbaiki berdasarkan bahasa saat ini.",
+          "Performa pencarian dioptimalkan untuk coin, lessons, glossary, FAQ, dan item safety."
+        ]
+      },
+      pt:{
+        date:"2026-05-31",
+        title:"Fluxo de busca, FAQ e aprendizagem de segurança melhorado",
+        items:[
+          "A estrutura de resultados de moedas representativas foi separada dos resultados de moedas gerais.",
+          "Cards de moedas representativas agora aparecem apenas em buscas exatas por moedas representativas, enquanto moedas gerais aparecem como cards compactos de explicação.",
+          "A relevância dos resultados de busca foi melhorada para corresponder melhor à palavra-chave digitada.",
+          "O texto sobreposto no campo de busca foi corrigido e o fluxo de entrada foi estabilizado.",
+          "O conteúdo de FAQ foi ampliado e os itens de FAQ foram conectados aos resultados de busca.",
+          "Os itens do menu Safety foram melhorados para que tópicos importantes de segurança apareçam nos resultados.",
+          "As seções de apoio e o fluxo de revisão das Lessons 8-14 foram refinados.",
+          "A exibição multilíngue de resultados de busca e labels principais foi melhorada conforme o idioma atual.",
+          "A performance da busca foi otimizada para moedas, lessons, glossary, FAQ e itens de safety."
+        ]
+      },
+      br:{
+        date:"2026-05-31",
+        title:"Fluxo de busca, FAQ e aprendizagem de segurança aprimorado",
+        items:[
+          "A estrutura de resultados de moedas representativas foi separada dos resultados de moedas gerais.",
+          "Cards de moedas representativas agora aparecem apenas em buscas exatas por moedas representativas, enquanto moedas gerais aparecem como cards compactos de explicação.",
+          "A relevância dos resultados de busca foi aprimorada para corresponder melhor à palavra-chave digitada.",
+          "O texto sobreposto no campo de busca foi corrigido e o fluxo de entrada foi estabilizado.",
+          "O conteúdo de FAQ foi ampliado e os itens de FAQ foram conectados aos resultados de busca.",
+          "Os itens do menu Safety foram aprimorados para que tópicos importantes de segurança apareçam nos resultados.",
+          "As seções de apoio e o fluxo de revisão das Lessons 8-14 foram refinados.",
+          "A exibição multilíngue de resultados de busca e labels principais foi aprimorada conforme o idioma atual.",
+          "A performance da busca foi otimizada para moedas, lessons, glossary, FAQ e itens de safety."
+        ]
+      },
+      tr:{
+        date:"2026-05-31",
+        title:"Arama, SSS ve güvenlik öğrenme akışı iyileştirildi",
+        items:[
+          "Temsilci coin sonuçları ile genel coin sonuçlarının yapısı ayrıldı.",
+          "Temsilci coin kartları artık yalnızca temsilci coin için tam eşleşen aramalarda görünür; genel coinler ise kompakt açıklama kartları olarak gösterilir.",
+          "Arama sonuçlarının girilen anahtar kelimeyle daha doğrudan eşleşmesi için sıralama ve gösterim iyileştirildi.",
+          "Arama alanındaki metin çakışması düzeltildi ve giriş akışı daha stabil hale getirildi.",
+          "SSS içeriği genişletildi ve SSS öğeleri arama sonuçlarına bağlandı.",
+          "Safety menüsündeki temel güvenlik konularının arama sonuçlarında görünmesi iyileştirildi.",
+          "Lessons 8-14 için destek bölümleri ve gözden geçirme akışı düzenlendi.",
+          "Arama sonuçları ve ana etiketlerin mevcut dile göre gösterimi iyileştirildi.",
+          "Coin, lessons, glossary, SSS ve safety öğeleri için arama performansı optimize edildi."
+        ]
+      },
+      es:{
+        date:"2026-05-31",
+        title:"Se mejoró el flujo de búsqueda, FAQ y aprendizaje de seguridad",
+        items:[
+          "Se separó la estructura de resultados de monedas representativas y monedas generales.",
+          "Las tarjetas de monedas representativas ahora aparecen solo en búsquedas exactas de monedas representativas, mientras que las monedas generales se muestran como tarjetas compactas de explicación.",
+          "Se mejoró la relevancia de los resultados para que coincidan mejor con la palabra clave ingresada.",
+          "Se corrigió el texto superpuesto en el campo de búsqueda y se estabilizó el flujo de entrada.",
+          "Se amplió el contenido de FAQ y se conectaron los elementos de FAQ con los resultados de búsqueda.",
+          "Se mejoraron los elementos del menú Safety para que los temas clave de seguridad aparezcan en los resultados.",
+          "Se refinaron las secciones de apoyo y el flujo de revisión para Lessons 8-14.",
+          "Se mejoró la visualización multilingüe de resultados y etiquetas principales según el idioma actual.",
+          "Se optimizó el rendimiento de búsqueda para monedas, lessons, glossary, FAQ y elementos de safety."
+        ]
+      },
+      ar:{
+        date:"2026-05-31",
+        title:"تحسين البحث والأسئلة الشائعة ومسار تعلم الأمان",
+        items:[
+          "تم فصل بنية نتائج العملات التمثيلية عن نتائج العملات العامة.",
+          "تظهر بطاقات العملات التمثيلية الآن فقط عند البحث المطابق تمامًا، بينما تظهر العملات العامة كبطاقات شرح مختصرة.",
+          "تم تحسين صلة نتائج البحث بحيث تطابق الكلمة المدخلة بشكل أوضح.",
+          "تم إصلاح تداخل نص حقل البحث وتحسين استقرار تدفق الإدخال.",
+          "تم توسيع محتوى FAQ وربط عناصر FAQ بنتائج البحث.",
+          "تم تحسين عناصر قائمة Safety حتى تظهر موضوعات الأمان الأساسية في نتائج البحث.",
+          "تم تنظيم الأقسام الداعمة وتدفق المراجعة في Lessons 8-14.",
+          "تم تحسين العرض متعدد اللغات لنتائج البحث والتسميات الرئيسية وفق اللغة الحالية.",
+          "تم تحسين أداء البحث عبر العملات وlessons وglossary وFAQ وعناصر safety."
+        ]
+      },
+      vi:{
+        date:"2026-05-31",
+        title:"Cải thiện luồng tìm kiếm, FAQ và học an toàn",
+        items:[
+          "Đã tách cấu trúc kết quả coin đại diện và coin thông thường.",
+          "Thẻ coin đại diện chỉ xuất hiện khi tìm kiếm khớp chính xác, còn coin thông thường hiển thị dưới dạng thẻ giải thích gọn.",
+          "Đã cải thiện độ liên quan của kết quả tìm kiếm để khớp trực tiếp hơn với từ khóa nhập vào.",
+          "Đã sửa lỗi chữ chồng trong ô tìm kiếm và ổn định luồng nhập liệu.",
+          "Đã mở rộng nội dung FAQ và kết nối các mục FAQ với kết quả tìm kiếm.",
+          "Đã cải thiện các mục Safety để chủ đề an toàn quan trọng xuất hiện trong kết quả tìm kiếm.",
+          "Đã tinh chỉnh các phần hỗ trợ và luồng ôn lại cho Lessons 8-14.",
+          "Đã cải thiện hiển thị đa ngôn ngữ cho kết quả tìm kiếm và nhãn chính theo ngôn ngữ hiện tại.",
+          "Đã tối ưu hiệu suất tìm kiếm cho coin, lessons, glossary, FAQ và mục safety."
+        ]
+      },
+      ha:{
+        date:"2026-05-31",
+        title:"An inganta bincike, FAQ, da tafiyar koyon tsaro",
+        items:[
+          "An raba tsarin sakamakon representative coins da sakamakon general coins.",
+          "Katunan representative coin yanzu suna bayyana ne kawai idan bincike ya dace da coin din kai tsaye, yayin da general coins ke bayyana a matsayin gajerun katunan bayani.",
+          "An inganta dacewar sakamakon bincike domin ya fi bin kalmar da aka shigar.",
+          "An gyara matsalar rubutu da ke cakudewa a akwatin bincike kuma an daidaita tafiyar shigarwa.",
+          "An fadada abun cikin FAQ kuma an hada FAQ items da sakamakon bincike.",
+          "An inganta abubuwan menu na Safety domin muhimman batutuwan tsaro su bayyana a sakamakon bincike.",
+          "An tsara sassan taimako da hanyar dubawa ga Lessons 8-14.",
+          "An inganta nuna sakamakon bincike da manyan labels bisa harshen da ake amfani da shi.",
+          "An hanzarta bincike a coins, lessons, glossary, FAQ, da safety items."
+        ]
+      }
+    },
+    "2026-05-22":{
+      en:{
+        date:"2026-05-22",
+        title:"Intermediate Roadmap and Stability Update",
+        items:[
+          "The Intermediate Roadmap has been added to Coin ProofPath for Lessons 8-14.",
+          "Lessons 8-14 now cover exchange and wallet strategy, network and fee comparison, stablecoins, DeFi, NFT and token project evaluation, bridges, multichain risks, and verification routines.",
+          "The homepage roadmap experience was improved with a consistent beginner and intermediate card structure.",
+          "Roadmap card titles were shortened, spacing was improved, and clipped text or awkward wrapping was reduced.",
+          "Related resource cards were fixed so labels, titles, descriptions, and links display separately.",
+          "Coin ProofPath branding was applied more consistently across the site.",
+          "About / Mission, Partner, Pitch Deck, and support entry points were strengthened.",
+          "Buy Me a Coffee support links were connected where appropriate.",
+          "Search placeholders, result labels, categories, and suggestions now follow the selected language more reliably.",
+          "Multilingual UI coverage was expanded across major pages and labels.",
+          "Visitor display and key site functions were stabilized.",
+          "This update focuses on making Coin ProofPath a more structured and stable crypto safety guide from beginner to intermediate levels."
+        ]
+      },
+      ko:{
+        date:"2026-05-22",
+        title:"중급자 로드맵과 사이트 안정화 업데이트",
+        items:[
+          "Coin ProofPath에 중급자 로드맵 8~14강이 새롭게 반영되었습니다.",
+          "8~14강에서는 거래소와 지갑 활용, 네트워크와 수수료 비교, 스테이블코인, DeFi, NFT와 토큰 프로젝트, 브리지와 멀티체인, 정보 검증 루틴까지 단계적으로 학습할 수 있습니다.",
+          "홈 화면의 초보자 로드맵과 중급자 로드맵 카드 UI를 같은 흐름으로 정리했습니다.",
+          "카드 제목과 설명을 더 짧고 읽기 쉽게 조정하고, 잘못된 줄바꿈과 글자 잘림 문제를 개선했습니다.",
+          "관련 자료 영역에서 라벨, 제목, 설명, 링크가 붙어 보이던 문제를 정리했습니다.",
+          "Coin ProofPath 브랜드 표기를 사이트 전반에 더 일관되게 적용했습니다.",
+          "About / Mission, Partner, Pitch Deck, 후원 진입 구조를 보강했습니다.",
+          "Buy Me a Coffee 후원 링크를 필요한 위치에 연결했습니다.",
+          "검색 placeholder, 결과 라벨, 분류명, 추천 결과가 선택한 언어를 더 안정적으로 따르도록 정리했습니다.",
+          "주요 페이지와 라벨의 다국어 UI 적용 범위를 확장했습니다.",
+          "방문자 표시와 주요 사이트 기능을 안정화했습니다.",
+          "이번 업데이트는 초보자에서 중급자까지 이어지는 무료 크립토 안전 학습 흐름을 더 체계적이고 안정적으로 만드는 데 초점을 두었습니다."
+        ]
+      },
+      th:{
+        date:"2026-05-22",
+        title:"อัปเดตแผนการเรียนระดับกลางและความเสถียรของไซต์",
+        items:[
+          "เพิ่มแผนการเรียนระดับกลาง Lessons 8-14 ใน Coin ProofPath แล้ว",
+          "Lessons 8-14 ครอบคลุมการใช้ exchange และ wallet, การเปรียบเทียบ network และ fee, stablecoin, DeFi, NFT, การประเมิน token project, bridge, multichain และ verification routine",
+          "ปรับประสบการณ์ roadmap หน้าแรกให้การ์ด beginner และ intermediate ใช้โครงสร้างที่สอดคล้องกันมากขึ้น",
+          "ทำให้ชื่อการ์ดสั้นลง อ่านง่ายขึ้น และลดปัญหาข้อความถูกตัดหรือขึ้นบรรทัดแปลก",
+          "แก้ related resource cards ให้ label, title, description และ link แยกกันชัดเจน",
+          "ปรับใช้แบรนด์ Coin ProofPath ให้สม่ำเสมอขึ้นทั่วทั้งไซต์",
+          "เสริมหน้า About / Mission, Partner, Pitch Deck และช่องทาง support",
+          "เชื่อมลิงก์ Buy Me a Coffee ในตำแหน่งที่เหมาะสม",
+          "ปรับ placeholder การค้นหา ป้ายผลลัพธ์ หมวดหมู่ และผลลัพธ์แนะนำให้เปลี่ยนตามภาษาที่เลือกได้ดีขึ้น",
+          "ขยายการรองรับ UI หลายภาษาในหน้าหลักและป้ายกำกับสำคัญ",
+          "ปรับเสถียรภาพของ visitor display และฟังก์ชันหลักของไซต์",
+          "อัปเดตนี้มุ่งทำให้ Coin ProofPath เป็นคู่มือความปลอดภัย crypto ที่มีโครงสร้างและเสถียรมากขึ้น ตั้งแต่ระดับเริ่มต้นถึงระดับกลาง"
+        ]
+      },
+      id:{
+        date:"2026-05-22",
+        title:"Pembaruan Roadmap Menengah dan Stabilitas Situs",
+        items:[
+          "Roadmap Menengah untuk Lessons 8-14 telah ditambahkan ke Coin ProofPath.",
+          "Lessons 8-14 kini membahas strategi exchange dan wallet, perbandingan network dan fee, stablecoin, DeFi, NFT dan evaluasi token project, bridge, multichain, serta rutinitas verifikasi.",
+          "Pengalaman roadmap di beranda diperbaiki dengan struktur kartu beginner dan intermediate yang lebih konsisten.",
+          "Judul kartu roadmap dipersingkat, jarak diperbaiki, dan teks yang terpotong atau berpindah baris dengan aneh dikurangi.",
+          "Kartu related resources diperbaiki agar label, judul, deskripsi, dan link tampil terpisah.",
+          "Brand Coin ProofPath diterapkan lebih konsisten di seluruh situs.",
+          "Halaman About / Mission, Partner, Pitch Deck, dan jalur dukungan diperkuat.",
+          "Link Buy Me a Coffee dihubungkan di tempat yang sesuai.",
+          "Placeholder pencarian, label hasil, kategori, dan saran kini mengikuti bahasa yang dipilih dengan lebih baik.",
+          "Cakupan UI multibahasa diperluas di halaman dan label utama.",
+          "Tampilan visitor dan fungsi utama situs distabilkan.",
+          "Pembaruan ini berfokus menjadikan Coin ProofPath panduan keamanan crypto yang lebih terstruktur dan stabil dari level beginner ke intermediate."
+        ]
+      },
+      pt:{
+        date:"2026-05-22",
+        title:"Atualização do Roteiro Intermediário e de Estabilidade",
+        items:[
+          "O Roteiro Intermediário para as Lessons 8-14 foi adicionado ao Coin ProofPath.",
+          "As Lessons 8-14 agora cobrem estratégia de exchange e carteira, comparação de network e fee, stablecoins, DeFi, NFT e avaliação de token projects, bridges, multichain e rotinas de verificação.",
+          "A experiência de roadmap na página inicial foi melhorada com uma estrutura de cartões beginner e intermediate mais consistente.",
+          "Os títulos dos cartões foram encurtados, o espaçamento foi melhorado e textos cortados ou quebras de linha estranhas foram reduzidos.",
+          "Os cartões de related resources foram corrigidos para que label, título, descrição e link apareçam separados.",
+          "A marca Coin ProofPath foi aplicada de forma mais consistente em todo o site.",
+          "As páginas About / Mission, Partner, Pitch Deck e pontos de support foram reforçados.",
+          "Links Buy Me a Coffee foram conectados onde fazia sentido.",
+          "Placeholders de busca, rótulos de resultados, categorias e sugestões agora seguem melhor o idioma selecionado.",
+          "A cobertura de UI multilíngue foi expandida nas principais páginas e labels.",
+          "O visitor display e funções principais do site foram estabilizados.",
+          "Esta atualização foca em tornar o Coin ProofPath um guia de segurança crypto mais estruturado e estável do nível beginner ao intermediate."
+        ]
+      },
+      br:{
+        date:"2026-05-22",
+        title:"Atualização do Roteiro Intermediário e de Estabilidade",
+        items:[
+          "O Roteiro Intermediário para as Lessons 8-14 foi adicionado ao Coin ProofPath.",
+          "As Lessons 8-14 agora cobrem estratégia de exchange e carteira, comparação de network e fee, stablecoins, DeFi, NFT e avaliação de token projects, bridges, multichain e rotinas de verificação.",
+          "A experiência de roadmap na página inicial foi melhorada com uma estrutura de cards beginner e intermediate mais consistente.",
+          "Os títulos dos cards foram encurtados, o espaçamento foi melhorado e textos cortados ou quebras de linha estranhas foram reduzidos.",
+          "Os cards de related resources foram corrigidos para que label, título, descrição e link apareçam separados.",
+          "A marca Coin ProofPath foi aplicada de forma mais consistente em todo o site.",
+          "As páginas About / Mission, Partner, Pitch Deck e pontos de support foram reforçados.",
+          "Links Buy Me a Coffee foram conectados onde fazia sentido.",
+          "Placeholders de busca, rótulos de resultados, categorias e sugestões agora seguem melhor o idioma selecionado.",
+          "A cobertura de UI multilíngue foi expandida nas principais páginas e labels.",
+          "O visitor display e funções principais do site foram estabilizados.",
+          "Esta atualização foca em tornar o Coin ProofPath um guia de segurança cripto mais estruturado e estável do nível beginner ao intermediate."
+        ]
+      },
+      tr:{
+        date:"2026-05-22",
+        title:"Orta Seviye Yol Haritası ve Stabilite Güncellemesi",
+        items:[
+          "Coin ProofPath'e Lessons 8-14 için Orta Seviye Yol Haritası eklendi.",
+          "Lessons 8-14 artık exchange ve wallet stratejisi, network ve fee karşılaştırması, stablecoin, DeFi, NFT ve token project değerlendirmesi, bridge, multichain riskleri ve doğrulama rutinlerini kapsıyor.",
+          "Ana sayfa roadmap deneyimi, beginner ve intermediate kartlarının daha tutarlı bir yapıya sahip olması için iyileştirildi.",
+          "Roadmap kart başlıkları kısaltıldı, boşluklar iyileştirildi ve kırpılan metin ya da garip satır kırılmaları azaltıldı.",
+          "Related resource kartları, label, başlık, açıklama ve link ayrı görünecek şekilde düzeltildi.",
+          "Coin ProofPath markası site genelinde daha tutarlı uygulandı.",
+          "About / Mission, Partner, Pitch Deck ve support girişleri güçlendirildi.",
+          "Buy Me a Coffee destek linkleri uygun yerlere bağlandı.",
+          "Arama placeholder'ları, sonuç etiketleri, kategoriler ve öneriler artık seçilen dili daha güvenilir izliyor.",
+          "Çok dilli UI kapsamı ana sayfalar ve önemli etiketlerde genişletildi.",
+          "Visitor display ve temel site işlevleri stabilize edildi.",
+          "Bu güncelleme, Coin ProofPath'i beginner seviyeden intermediate seviyeye kadar daha düzenli ve stabil bir crypto safety guide haline getirmeye odaklanır."
+        ]
+      },
+      es:{
+        date:"2026-05-22",
+        title:"Actualización de Roadmap Intermedio y Estabilidad",
+        items:[
+          "Se agregó el Roadmap Intermedio para Lessons 8-14 en Coin ProofPath.",
+          "Lessons 8-14 ahora cubren estrategia de exchange y wallet, comparación de network y fee, stablecoins, DeFi, NFT y evaluación de token projects, bridges, multichain y rutinas de verificación.",
+          "La experiencia de roadmap en la portada se mejoró con una estructura más consistente para tarjetas beginner e intermediate.",
+          "Los títulos de las tarjetas se acortaron, el espaciado mejoró y se redujeron textos cortados o saltos de línea incómodos.",
+          "Las tarjetas de related resources se corrigieron para mostrar label, título, descripción y link por separado.",
+          "La marca Coin ProofPath se aplicó de forma más consistente en todo el sitio.",
+          "Se reforzaron About / Mission, Partner, Pitch Deck y los puntos de support.",
+          "Los enlaces Buy Me a Coffee se conectaron donde correspondía.",
+          "Los placeholders de búsqueda, etiquetas de resultados, categorías y sugerencias ahora siguen mejor el idioma seleccionado.",
+          "Se amplió la cobertura de UI multilingüe en páginas y etiquetas principales.",
+          "Se estabilizaron el visitor display y funciones clave del sitio.",
+          "Esta actualización se centra en hacer de Coin ProofPath una guía de seguridad crypto más estructurada y estable desde beginner hasta intermediate."
+        ]
+      },
+      ar:{
+        date:"2026-05-22",
+        title:"تحديث خارطة الطريق المتوسطة واستقرار الموقع",
+        items:[
+          "تمت إضافة خارطة الطريق المتوسطة Lessons 8-14 إلى Coin ProofPath.",
+          "تغطي Lessons 8-14 الآن استراتيجية exchange وwallet، مقارنة network وfee، stablecoins، DeFi، NFT وتقييم token projects، bridges، multichain وروتينات التحقق.",
+          "تم تحسين تجربة roadmap في الصفحة الرئيسية ببنية بطاقات أكثر اتساقًا بين beginner وintermediate.",
+          "تم تقصير عناوين البطاقات، وتحسين المسافات، وتقليل النصوص المقطوعة أو فواصل الأسطر المزعجة.",
+          "تم إصلاح related resource cards بحيث تظهر label والعنوان والوصف والرابط بشكل منفصل.",
+          "تم تطبيق علامة Coin ProofPath بشكل أكثر اتساقًا عبر الموقع.",
+          "تم تعزيز صفحات About / Mission وPartner وPitch Deck ومداخل support.",
+          "تم ربط روابط Buy Me a Coffee في الأماكن المناسبة.",
+          "تم تحسين عناصر البحث مثل النص التلميحي وتصنيفات النتائج والفئات والاقتراحات لتتبع اللغة المختارة.",
+          "تم توسيع تغطية واجهة المستخدم متعددة اللغات في الصفحات والملصقات الرئيسية.",
+          "تم تثبيت visitor display والوظائف الأساسية للموقع.",
+          "يركز هذا التحديث على جعل Coin ProofPath دليلًا أكثر تنظيمًا واستقرارًا لتعلم أمان crypto من beginner إلى intermediate."
+        ]
+      },
+      vi:{
+        date:"2026-05-22",
+        title:"Cập nhật Lộ trình Trung cấp và Độ ổn định",
+        items:[
+          "Lộ trình Trung cấp cho Lessons 8-14 đã được thêm vào Coin ProofPath.",
+          "Lessons 8-14 hiện bao gồm chiến lược exchange và wallet, so sánh network và fee, stablecoin, DeFi, NFT và đánh giá token project, bridge, multichain và thói quen xác minh.",
+          "Trải nghiệm roadmap trên trang chủ đã được cải thiện với cấu trúc thẻ beginner và intermediate nhất quán hơn.",
+          "Tiêu đề thẻ roadmap được rút ngắn, khoảng cách được cải thiện và giảm tình trạng chữ bị cắt hoặc xuống dòng khó đọc.",
+          "Các thẻ related resources đã được sửa để label, tiêu đề, mô tả và link hiển thị tách biệt.",
+          "Thương hiệu Coin ProofPath được áp dụng nhất quán hơn trên toàn site.",
+          "Các trang About / Mission, Partner, Pitch Deck và điểm vào support được củng cố.",
+          "Liên kết Buy Me a Coffee được kết nối ở vị trí phù hợp.",
+          "Placeholder tìm kiếm, nhãn kết quả, danh mục và gợi ý nay bám sát ngôn ngữ đã chọn hơn.",
+          "Phạm vi UI đa ngôn ngữ được mở rộng trên các trang và nhãn chính.",
+          "Visitor display và các chức năng chính của site đã được ổn định.",
+          "Bản cập nhật này tập trung làm cho Coin ProofPath trở thành hướng dẫn an toàn crypto có cấu trúc và ổn định hơn từ beginner đến intermediate."
+        ]
+      },
+      ha:{
+        date:"2026-05-22",
+        title:"Sabunta Hanyar Koyo ta Tsakiya da Daidaiton Shafi",
+        items:[
+          "An kara Hanyar Koyo ta Tsakiya don Lessons 8-14 a Coin ProofPath.",
+          "Lessons 8-14 yanzu suna rufe dabarun exchange da wallet, kwatanta network da fee, stablecoins, DeFi, NFT da kimanta token projects, bridges, multichain, da hanyoyin tabbatarwa.",
+          "An inganta kwarewar roadmap a shafin gida tare da tsarin katunan beginner da intermediate da ya fi daidaito.",
+          "An takaita taken katunan roadmap, an inganta tazara, kuma an rage yankewar rubutu ko rabuwar layi mara kyau.",
+          "An gyara katunan related resources domin label, title, description, da link su bayyana a rabe.",
+          "An daidaita amfani da alamar Coin ProofPath a fadin shafin.",
+          "An karfafa About / Mission, Partner, Pitch Deck, da hanyoyin support.",
+          "An hada links na Buy Me a Coffee a wuraren da suka dace.",
+          "An daidaita placeholder na bincike, alamun sakamako, rukuni, da shawarwari su fi bin harshen da aka zaba.",
+          "An fadada tallafin UI na harsuna da yawa a manyan shafuka da labels.",
+          "An daidaita visitor display da manyan ayyukan shafin.",
+          "Wannan sabuntawar ta mayar da hankali kan sa Coin ProofPath ya zama jagorar tsaron crypto mai tsari da kwanciyar hankali daga beginner zuwa intermediate."
+        ]
+      }
     }
   };
   UPDATE_PACK["2026-04-17"].br = UPDATE_PACK["2026-04-17"].pt;
@@ -1204,9 +1571,11 @@
         && entry.date !== "2026-05-03"
         && entry.date !== "2026-05-05"
         && entry.date !== "2026-05-07"
-        && entry.date !== "2026-05-09";
+        && entry.date !== "2026-05-09"
+        && entry.date !== "2026-05-22"
+        && entry.date !== "2026-05-31";
     });
-    ["2026-04-17","2026-04-18","2026-04-19","2026-04-25","2026-04-27","2026-04-29","2026-05-01","2026-05-03","2026-05-05","2026-05-07","2026-05-09"].forEach(function(date){
+    ["2026-04-17","2026-04-18","2026-04-19","2026-04-25","2026-04-27","2026-04-29","2026-05-01","2026-05-03","2026-05-05","2026-05-07","2026-05-09","2026-05-22","2026-05-31"].forEach(function(date){
       var pack = UPDATE_PACK[date][targetLang] || UPDATE_PACK[date].en;
       list.unshift(clone(pack));
     });

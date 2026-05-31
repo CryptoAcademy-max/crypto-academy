@@ -88,7 +88,7 @@
           shareSummary:'Quick Summaries',
           homeChecklists:'Quick Checklists',
           freePdf:'Free PDFs Worth Saving',
-          ebook:'Crypto Academy eBook'
+          ebook:'Coin ProofPath eBook'
         },
         itemBodies:{
           glossary:'Quickly review the crypto terms beginners confuse most often.',
@@ -148,7 +148,7 @@
           shareSummary:'핵심 요약',
           homeChecklists:'빠른 체크리스트',
           freePdf:'저장해두면 좋은 무료 PDF',
-          ebook:'크립토 아카데미 전자책'
+          ebook:'코인 프루프패스 전자책'
         },
         itemBodies:{
           glossary:'초보자가 가장 자주 헷갈리는 용어를 빠르게 정리합니다.',
@@ -208,7 +208,7 @@
           shareSummary:'สรุปสั้น',
           homeChecklists:'เช็กลิสต์ด่วน',
           freePdf:'PDF ฟรีที่ควรเก็บไว้',
-          ebook:'Crypto Academy eBook'
+          ebook:'Coin ProofPath eBook'
         },
         itemBodies:{
           glossary:'ทบทวนคำศัพท์คริปโตที่มือใหม่มักสับสนได้อย่างรวดเร็ว',
@@ -268,7 +268,7 @@
           shareSummary:'Ringkasan Cepat',
           homeChecklists:'Checklist Cepat',
           freePdf:'PDF Gratis yang Layak Disimpan',
-          ebook:'Crypto Academy eBook'
+          ebook:'Coin ProofPath eBook'
         },
         itemBodies:{
           glossary:'Tinjau cepat istilah crypto yang paling sering membingungkan pemula.',
@@ -328,7 +328,7 @@
           shareSummary:'Resumos Rapidos',
           homeChecklists:'Checklists Rapidos',
           freePdf:'PDFs Gratuitos que Valem Guardar',
-          ebook:'Crypto Academy eBook'
+          ebook:'Coin ProofPath eBook'
         },
         itemBodies:{
           glossary:'Revise rapidamente os termos de crypto que mais confundem iniciantes.',
@@ -388,7 +388,7 @@
           shareSummary:'Hizli Ozetler',
           homeChecklists:'Hizli Checklistler',
           freePdf:'Kaydetmeye Deger Ucretsiz PDFler',
-          ebook:'Crypto Academy eBook'
+          ebook:'Coin ProofPath eBook'
         },
         itemBodies:{
           glossary:'Yeni baslayanlarin en cok karistirdigi kripto terimlerini hizlica gozden gecirin.',
@@ -448,7 +448,7 @@
           shareSummary:'Resumenes Rapidos',
           homeChecklists:'Checklists Rapidos',
           freePdf:'PDF Gratis que Vale la Pena Guardar',
-          ebook:'Crypto Academy eBook'
+          ebook:'Coin ProofPath eBook'
         },
         itemBodies:{
           glossary:'Revisa rapido los terminos de crypto que mas confunden a los principiantes.',
@@ -508,7 +508,7 @@
           shareSummary:'ملخصات سريعة',
           homeChecklists:'قوائم سريعة',
           freePdf:'ملفات PDF مجانية تستحق الحفظ',
-          ebook:'Crypto Academy eBook'
+          ebook:'Coin ProofPath eBook'
         },
         itemBodies:{
           glossary:'راجع بسرعة مصطلحات الكريبتو التي تربك المبتدئين غالبا.',
@@ -568,7 +568,7 @@
           shareSummary:'Tom Tat Nhanh',
           homeChecklists:'Checklist Nhanh',
           freePdf:'PDF Mien Phi Dang De Luu Lai',
-          ebook:'Crypto Academy eBook'
+          ebook:'Coin ProofPath eBook'
         },
         itemBodies:{
           glossary:'Xem nhanh cac thuat ngu crypto ma nguoi moi thuong hay nham lan.',
@@ -628,7 +628,7 @@
           shareSummary:'Takaitattun Bayani',
           homeChecklists:'Checklist na Sauri',
           freePdf:'PDF na Kyauta da Ya Kamata a Ajiye',
-          ebook:'Crypto Academy eBook'
+          ebook:'Coin ProofPath eBook'
         },
         itemBodies:{
           glossary:'Ka sake duba kalmomin crypto da suka fi rikitar da masu farawa da sauri.',
