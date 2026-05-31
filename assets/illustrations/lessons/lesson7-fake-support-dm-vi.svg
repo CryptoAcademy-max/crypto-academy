@@ -1,0 +1,25 @@
+<svg width="1000" height="420" viewBox="0 0 1000 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1000" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FAFD"/>
+      <stop offset="1" stop-color="#F8F1E7"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20" y="-20" width="1040" height="560" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#182A45" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+  <rect width="1000" height="420" rx="32" fill="url(#bg)"/>
+  <rect x="54" y="42" width="892" height="336" rx="28" fill="#FFFFFF" stroke="#E1E8F1" stroke-width="2"/>
+  <rect x="54" y="42" width="892" height="56" rx="28" fill="#F4F7FB"/>
+  <text x="92" y="78" fill="#233146" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800">DM hỗ trợ giả</text>
+  <rect x="92" y="126" width="570" height="68" rx="20" fill="#EEF4FB"/><text x="122" y="153" fill="#37557A" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800">Trông như hỗ trợ</text><text x="122" y="177" fill="#223045" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">Chúng tôi thấy lỗi ví. Hãy kết nối ngay.</text>
+  <rect x="92" y="210" width="620" height="78" rx="20" fill="#FFF2F0"/><text x="122" y="238" fill="#9B4334" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800">Yêu cầu khẩn</text><text x="122" y="264" fill="#5A2B26" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">Để bảo vệ tiền, xác minh bằng từ khôi phục.</text>
+  <rect x="92" y="304" width="570" height="54" rx="18" fill="#EEF4FB"/><text x="122" y="337" fill="#223045" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700">Dùng link này và hoàn tất trong 5 phút.</text>
+  <g font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" text-anchor="middle">
+    <rect x="742" y="126" width="148" height="42" rx="14" fill="#FFF4E8"/><text x="816" y="153" fill="#8A5E16">Gấp gáp</text>
+    <rect x="742" y="178" width="148" height="42" rx="14" fill="#FFF0ED"/><text x="816" y="205" fill="#9B4334">Yêu cầu seed</text>
+    <rect x="742" y="230" width="148" height="42" rx="14" fill="#EEF3FF"/><text x="816" y="257" fill="#365A87">Link ví</text>
+    <rect x="742" y="282" width="148" height="42" rx="14" fill="#EEF5EE"/><text x="816" y="309" fill="#2D6B49">DM trước</text>
+  </g>
+  <text x="742" y="354" fill="#5C6D81" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">Hỗ trợ thật không hỏi</text><text x="742" y="374" fill="#5C6D81" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">từ khôi phục qua DM.</text>
+</svg>

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+  <title id="title">Never enter these into random pages</title>
+  <desc id="desc">An original warning panel showing sensitive items that should not be typed into unknown pages.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fbf5f2"/>
+      <stop offset="1" stop-color="#f6ebe7"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#18324d" flood-opacity=".10"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="640" rx="28" fill="#eef4fb"/>
+  <g filter="url(#shadow)" transform="translate(86 86)">
+    <rect width="1028" height="468" rx="28" fill="url(#bg)" stroke="#ead3cc"/>
+    <circle cx="514" cy="70" r="32" fill="#944334"/>
+    <path d="M494 50l40 40M534 50l-40 40" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
+    <g fill="#fff" stroke="#edd9d4">
+      <rect x="42" y="136" width="214" height="272" rx="24"/>
+      <rect x="290" y="136" width="214" height="272" rx="24"/>
+      <rect x="538" y="136" width="214" height="272" rx="24"/>
+      <rect x="786" y="136" width="214" height="272" rx="24"/>
+    </g>
+    <g>
+      <g transform="translate(42 136)">
+        <circle cx="107" cy="64" r="28" fill="#fcf0ed" stroke="#e8c8c0"/>
+        <rect x="60" y="116" width="94" height="12" rx="6" fill="#7d4650" opacity=".84"/>
+        <rect x="42" y="148" width="130" height="84" rx="18" fill="#fbf3f1" stroke="#edd9d4"/>
+        <rect x="54" y="164" width="48" height="12" rx="6" fill="#d7bec4"/>
+        <rect x="110" y="164" width="48" height="12" rx="6" fill="#d7bec4"/>
+        <rect x="54" y="184" width="48" height="12" rx="6" fill="#d7bec4"/>
+        <rect x="110" y="184" width="48" height="12" rx="6" fill="#d7bec4"/>
+      </g>
+      <g transform="translate(290 136)">
+        <circle cx="107" cy="64" r="28" fill="#fcf0ed" stroke="#e8c8c0"/>
+        <path d="M96 75h22M100 63h14M102 51h10" stroke="#944334" stroke-width="5" stroke-linecap="round"/>
+        <rect x="60" y="116" width="94" height="12" rx="6" fill="#7d4650" opacity=".84"/>
+        <rect x="46" y="152" width="122" height="18" rx="9" fill="#fbf3f1" stroke="#edd9d4"/>
+        <rect x="46" y="182" width="122" height="18" rx="9" fill="#fbf3f1" stroke="#edd9d4"/>
+        <rect x="46" y="212" width="122" height="18" rx="9" fill="#fbf3f1" stroke="#edd9d4"/>
+      </g>
+      <g transform="translate(538 136)">
+        <circle cx="107" cy="64" r="28" fill="#fcf0ed" stroke="#e8c8c0"/>
+        <rect x="89" y="50" width="36" height="24" rx="6" fill="none" stroke="#944334" stroke-width="5"/>
+        <path d="M96 50v-8a11 11 0 0 1 22 0v8" fill="none" stroke="#944334" stroke-width="5" stroke-linecap="round"/>
+        <rect x="60" y="116" width="94" height="12" rx="6" fill="#7d4650" opacity=".84"/>
+        <rect x="52" y="156" width="110" height="58" rx="16" fill="#fff4e2" stroke="#e9d4ac"/>
+        <path d="M76 185h62" stroke="#8e6f2d" stroke-width="6" stroke-linecap="round"/>
+      </g>
+      <g transform="translate(786 136)">
+        <circle cx="107" cy="64" r="28" fill="#fcf0ed" stroke="#e8c8c0"/>
+        <path d="M88 58h38M96 74h22" stroke="#944334" stroke-width="5" stroke-linecap="round"/>
+        <rect x="60" y="116" width="94" height="12" rx="6" fill="#7d4650" opacity=".84"/>
+        <rect x="46" y="152" width="122" height="66" rx="18" fill="#fbf3f1" stroke="#edd9d4"/>
+        <circle cx="68" cy="185" r="8" fill="#e8c8c0"/>
+        <rect x="84" y="178" width="62" height="12" rx="6" fill="#d7bec4"/>
+      </g>
+    </g>
+    <circle cx="149" cy="176" r="18" fill="#944334"/><path d="M138 165l22 22M160 165l-22 22" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="397" cy="176" r="18" fill="#944334"/><path d="M386 165l22 22M408 165l-22 22" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="645" cy="176" r="18" fill="#944334"/><path d="M634 165l22 22M656 165l-22 22" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="893" cy="176" r="18" fill="#944334"/><path d="M882 165l22 22M904 165l-22 22" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>

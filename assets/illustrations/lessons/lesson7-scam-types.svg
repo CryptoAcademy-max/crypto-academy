@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Scam type warning grid</title>
+  <desc id="desc">An original grid of warning cards representing common crypto scam types.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f9fbfd"/>
+      <stop offset="1" stop-color="#edf4fb"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#18324d" flood-opacity=".10"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="720" rx="28" fill="url(#bg)"/>
+  <g filter="url(#shadow)" transform="translate(86 90)">
+    <g fill="#fff" stroke="#d7e3ee">
+      <rect x="0" y="0" width="224" height="164" rx="24"/>
+      <rect x="268" y="0" width="224" height="164" rx="24"/>
+      <rect x="536" y="0" width="224" height="164" rx="24"/>
+      <rect x="804" y="0" width="224" height="164" rx="24"/>
+      <rect x="0" y="196" width="224" height="164" rx="24"/>
+      <rect x="268" y="196" width="224" height="164" rx="24"/>
+      <rect x="536" y="196" width="224" height="164" rx="24"/>
+      <rect x="804" y="196" width="224" height="164" rx="24"/>
+    </g>
+    <g>
+      <circle cx="112" cy="52" r="24" fill="#8e6f2d"/><path d="M98 60h28M112 46v28" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+      <rect x="44" y="102" width="136" height="14" rx="7" fill="#355b83" opacity=".88"/><rect x="58" y="128" width="108" height="10" rx="5" fill="#9bb2c8"/>
+      <circle cx="380" cy="52" r="24" fill="#2f6e51"/><path d="M370 52h20M374 44v16M386 44v16" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+      <rect x="312" y="102" width="136" height="14" rx="7" fill="#355b83" opacity=".88"/><rect x="326" y="128" width="108" height="10" rx="5" fill="#9bb2c8"/>
+      <circle cx="648" cy="52" r="24" fill="#944334"/><path d="M636 64l12-24 12 24" fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/><circle cx="648" cy="68" r="3.5" fill="#fff"/>
+      <rect x="580" y="102" width="136" height="14" rx="7" fill="#355b83" opacity=".88"/><rect x="594" y="128" width="108" height="10" rx="5" fill="#9bb2c8"/>
+      <circle cx="916" cy="52" r="24" fill="#4f4a87"/><rect x="900" y="42" width="32" height="20" rx="5" fill="none" stroke="#fff" stroke-width="5"/><path d="M907 42v-6a9 9 0 0 1 18 0v6" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+      <rect x="848" y="102" width="136" height="14" rx="7" fill="#355b83" opacity=".88"/><rect x="862" y="128" width="108" height="10" rx="5" fill="#9bb2c8"/>
+
+      <circle cx="112" cy="248" r="24" fill="#7b5a1f"/><path d="M94 244h36M98 257h28" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+      <rect x="44" y="298" width="136" height="14" rx="7" fill="#355b83" opacity=".88"/><rect x="58" y="324" width="108" height="10" rx="5" fill="#9bb2c8"/>
+      <circle cx="380" cy="248" r="24" fill="#315f88"/><rect x="364" y="234" width="32" height="28" rx="5" fill="none" stroke="#fff" stroke-width="5"/><path d="M372 240h16M372 248h16M372 256h10" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+      <rect x="312" y="298" width="136" height="14" rx="7" fill="#355b83" opacity=".88"/><rect x="326" y="324" width="108" height="10" rx="5" fill="#9bb2c8"/>
+      <circle cx="648" cy="248" r="24" fill="#7d4650"/><path d="M632 248h32M648 232v32" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+      <rect x="580" y="298" width="136" height="14" rx="7" fill="#355b83" opacity=".88"/><rect x="594" y="324" width="108" height="10" rx="5" fill="#9bb2c8"/>
+      <circle cx="916" cy="248" r="24" fill="#2f6e51"/><path d="M900 248l16-14 16 14-16 14z" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round"/>
+      <rect x="848" y="298" width="136" height="14" rx="7" fill="#355b83" opacity=".88"/><rect x="862" y="324" width="108" height="10" rx="5" fill="#9bb2c8"/>
+    </g>
+  </g>
+</svg>

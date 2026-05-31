@@ -1,0 +1,20 @@
+<svg width="1000" height="420" viewBox="0 0 1000 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1000" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FAFD"/>
+      <stop offset="1" stop-color="#F8F1E7"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20" y="-20" width="1040" height="560" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#182A45" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+  <rect width="1000" height="420" rx="32" fill="url(#bg)"/>
+  <text x="48" y="58" fill="#233146" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800">Cek domain penuh, bukan hanya tampilan</text>
+  <rect x="48" y="90" width="416" height="286" rx="24" fill="#FFFFFF" stroke="#DDE6EF" stroke-width="2"/><rect x="48" y="90" width="416" height="52" rx="24" fill="#F4F7FB"/><text x="82" y="124" fill="#2E6D4A" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800">Contoh aman</text>
+  <rect x="82" y="168" width="348" height="46" rx="14" fill="#EEF7F0"/><circle cx="108" cy="191" r="8" fill="#2D6B49"/><text x="128" y="197" fill="#26445B" font-family="IBM Plex Mono, monospace" font-size="16" font-weight="700">https://vault.example.com</text>
+  <rect x="82" y="236" width="348" height="92" rx="18" fill="#FBFCFE" stroke="#E3EAF2" stroke-width="2"/><text x="110" y="274" fill="#223045" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">Akses akun</text><rect x="110" y="292" width="292" height="22" rx="8" fill="#FFFFFF" stroke="#E1E8F1"/><text x="110" y="354" fill="#5C6C80" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">Dibuka dari link resmi tersimpan</text>
+  <rect x="536" y="90" width="416" height="286" rx="24" fill="#FFFFFF" stroke="#E8D8D5" stroke-width="2"/><rect x="536" y="90" width="416" height="52" rx="24" fill="#FBF1EF"/><text x="570" y="124" fill="#9B4334" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800">Contoh mencurigakan</text>
+  <rect x="570" y="168" width="348" height="46" rx="14" fill="#FFF2F0"/><circle cx="596" cy="191" r="8" fill="#9B4334"/><text x="616" y="197" fill="#8A3731" font-family="IBM Plex Mono, monospace" font-size="16" font-weight="700">https://va1lt-example.co</text>
+  <path d="M858 158L858 136" stroke="#9B4334" stroke-width="4" stroke-linecap="round"/><path d="M858 136L846 148" stroke="#9B4334" stroke-width="4" stroke-linecap="round"/><path d="M858 136L870 148" stroke="#9B4334" stroke-width="4" stroke-linecap="round"/>
+  <rect x="570" y="236" width="348" height="92" rx="18" fill="#FBFCFE" stroke="#E3EAF2" stroke-width="2"/><text x="598" y="274" fill="#223045" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">Akses akun</text><rect x="598" y="292" width="292" height="22" rx="8" fill="#FFFFFF" stroke="#E1E8F1"/><text x="598" y="354" fill="#8A3731" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">Tampak mirip, domain salah</text>
+</svg>
