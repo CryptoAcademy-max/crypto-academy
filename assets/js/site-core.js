@@ -99,7 +99,8 @@
     'blocks/100-search-coin-description-placeholder-final-20260527.js',
     'blocks/101-search-result-relevance-structure-20260528.js',
     'blocks/102-faq-expansion-search-20260529.js',
-    'blocks/103-menu-navigation-performance-20260601.js'
+    'blocks/103-menu-navigation-performance-20260601.js',
+    'blocks/104-home-seo-route-polish-20260601.js'
   ];
 
   for (var i = 0; i < blocks.length; i++) {
